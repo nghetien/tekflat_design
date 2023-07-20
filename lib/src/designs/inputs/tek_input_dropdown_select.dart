@@ -329,7 +329,7 @@ class _TekInputDropdownSelectState<T> extends State<TekInputDropdownSelect<T>>
   List<Widget> _generateMenuChildren() {
     return [
       Padding(
-        padding: EdgeInsets.all(TekPaddings().p8).copyWith(top: TekPaddings().p4),
+        padding: EdgeInsets.all(TekSpacings().p8).copyWith(top: TekSpacings().p4),
         child: TekInput(
           focusNode: _searchFocusNode,
           controller: _searchController,
@@ -376,10 +376,10 @@ class _TekInputDropdownSelectState<T> extends State<TekInputDropdownSelect<T>>
 
   Widget _getPrefixIcon() {
     final Widget prefixIcon = Padding(
-      padding: EdgeInsets.all(TekPaddings().p8),
+      padding: EdgeInsets.all(TekSpacings().p8),
       child: Wrap(
-        runSpacing: TekPaddings().p8,
-        spacing: TekPaddings().p8,
+        runSpacing: TekSpacings().p8,
+        spacing: TekSpacings().p8,
         children: _menuChildrenSelected.map(
           (item) {
             return TekDynamicTag(

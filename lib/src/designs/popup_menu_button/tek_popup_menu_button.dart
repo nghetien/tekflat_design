@@ -85,7 +85,7 @@ class TekPopupMenuButton<T> extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
       ),
-      padding: padding ?? EdgeInsets.all(TekPaddings().p8),
+      padding: padding ?? EdgeInsets.all(TekSpacings().p8),
       child: child,
     );
   }
@@ -104,7 +104,7 @@ class TekPopupMenuButton<T> extends StatelessWidget {
           contentPadding: EdgeInsets.zero,
           dense: true,
           minLeadingWidth: 0,
-          horizontalTitleGap: TekPaddings().p12,
+          horizontalTitleGap: TekSpacings().p12,
           leading: item.icon != null
               ? !iconIsRight
                   ? Icon(

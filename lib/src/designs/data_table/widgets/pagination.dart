@@ -71,8 +71,8 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
     return LayoutBuilder(
       builder: (_, constrains) => Container(
         padding: EdgeInsets.symmetric(
-          horizontal: TekPaddings().p8,
-          vertical: TekPaddings().p4 / 2,
+          horizontal: TekSpacings().p8,
+          vertical: TekSpacings().p4 / 2,
         ),
         width: double.infinity,
         decoration: BoxDecoration(
@@ -95,7 +95,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
                         _nextPageLeft(),
                         _pageNumberWidget(),
                         _nextPageRight(),
-                        HSpace.p14,
+                        TekHSpace.p14,
                         _dropdownItemsPerPage(),
                       ],
                     ),
@@ -146,7 +146,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
     required VoidCallback onPressed,
   }) =>
       Container(
-        padding: EdgeInsets.symmetric(horizontal: TekPaddings().p4),
+        padding: EdgeInsets.symmetric(horizontal: TekSpacings().p4),
         child: TekButton(
           height: sizePageNumber,
           width: sizePageNumber,
@@ -228,7 +228,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
           child: TekInputDropdown<int>(
             width: 75.scaleSize,
             controller: _itemPerPageValueController,
-            contentPadding: EdgeInsets.symmetric(horizontal: TekPaddings().p4),
+            contentPadding: EdgeInsets.symmetric(horizontal: TekSpacings().p4),
             menuChildren: [
               for (final item in pagination.listItemsPerPage)
                 TekInputDropdownItemModel<int>(
@@ -245,7 +245,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
         if (TekResponsiveConfig().screenDevice.isDesktop)
           Flexible(
             child: Padding(
-              padding: EdgeInsets.only(left: TekPaddings().p8),
+              padding: EdgeInsets.only(left: TekSpacings().p8),
               child: Text(
                 widget.paginationOption.customizeItemPerPage,
                 style: const TextStyle(

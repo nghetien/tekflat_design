@@ -163,7 +163,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
           ),
         ),
         child: Container(
-          margin: EdgeInsets.all(TekPaddings().p4),
+          margin: EdgeInsets.all(TekSpacings().p4),
           decoration: BoxDecoration(
             border: Border(
               right: BorderSide(width: TekBorders.thick, color: TekColors().primary),

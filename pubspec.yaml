@@ -15,7 +15,7 @@ dependencies:
   logger: ^1.4.0
   cached_network_image: ^3.2.3
   pull_to_refresh: ^2.0.0
-  mask_text_input_formatter: ^2.4.0
+  mask_text_input_formatter: ^2.5.0
   shimmer: ^3.0.0
   flutter_dotenv: ^5.1.0
   flutter_form_builder: ^9.0.0

@@ -76,6 +76,7 @@ class TekColors {
   static const Color red = Colors.redAccent;
   static const Color yellow = Color(0xFFFFA000);
   static const Color blueLight = Colors.lightBlue;
+  static const Color blue =  Color(0xFF1990FF);
   static const Color green = Color(0xFF4AB178);
   static const Color pink = Color(0xFFc41d7f);
 

@@ -1,11 +1,11 @@
 part of '../styles.dart';
 
-class TekPaddings {
-  TekPaddings._privateConstructor();
+class TekSpacings {
+  TekSpacings._privateConstructor();
 
-  static final TekPaddings _instance = TekPaddings._privateConstructor();
+  static final TekSpacings _instance = TekSpacings._privateConstructor();
 
-  factory TekPaddings() => _instance;
+  factory TekSpacings() => _instance;
 
   double _scale = 1;
 
@@ -17,13 +17,15 @@ class TekPaddings {
 
   double _mainPadding = 14;
 
-  double get mainPadding => _mainPadding * _scale;
+  double get mainPadding => _mainPadding * scale;
 
   void setMainPadding(double value) => _mainPadding = value;
 
   /// ----------------------------------------------------------------------------------------------
 
   double get p4 => 4 * _scale;
+
+  double get p6 => 6 * _scale;
 
   double get p8 => 8 * _scale;
 

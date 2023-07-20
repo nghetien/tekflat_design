@@ -6,6 +6,7 @@ enum TekButtonGDType {
   customize,
 }
 
+@Deprecated("Dùng nút khác thay thế")
 class TekButtonGD extends StatelessWidget {
   const TekButtonGD({
     Key? key,

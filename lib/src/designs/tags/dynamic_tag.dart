@@ -39,8 +39,8 @@ class TekDynamicTag extends StatelessWidget {
       height: height,
       padding: padding ??
           EdgeInsets.symmetric(
-            horizontal: TekPaddings().p8,
-            vertical: TekPaddings().p4,
+            horizontal: TekSpacings().p8,
+            vertical: TekSpacings().p4,
           ),
       decoration: BoxDecoration(
         color: backgroundColor ?? TekColors().greyOpacity01,
@@ -53,7 +53,7 @@ class TekDynamicTag extends StatelessWidget {
           Flexible(
             child: content != null ? content! : Text(textContent ?? ''),
           ),
-          HSpace.p8,
+          TekHSpace.p8,
           Container(
             padding: iconPadding ?? EdgeInsets.all(2.scaleSize),
             decoration: BoxDecoration(

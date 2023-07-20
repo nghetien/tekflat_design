@@ -156,7 +156,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
               )
             : Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(horizontal: TekPaddings().p8),
+                padding: EdgeInsets.symmetric(horizontal: TekSpacings().p8),
                 child: Text(
                   widget.column.name,
                   textAlign: TextAlign.center,
@@ -189,7 +189,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
       child: Stack(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(bottom: TekPaddings().p8),
+            padding: EdgeInsets.only(bottom: TekSpacings().p8),
             child: Icon(
               Icons.arrow_drop_up_rounded,
               size: TekIconSizes().s24,
@@ -200,7 +200,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: TekPaddings().p8),
+            padding: EdgeInsets.only(top: TekSpacings().p8),
             child: Icon(
               Icons.arrow_drop_down_rounded,
               size: TekIconSizes().s24,
@@ -243,7 +243,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
       ],
       builder: (context, controller, child) {
         return Padding(
-          padding: EdgeInsets.only(right: TekPaddings().p8),
+          padding: EdgeInsets.only(right: TekSpacings().p8),
           child: TekButtonGD(
             onPressed: () => _handleChangeShowMenu(!_menuController.isOpen),
             type: TekButtonGDType.customize,

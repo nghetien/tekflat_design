@@ -64,7 +64,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
     }
     if (column.customizeItemWidget != null) {
       return Padding(
-        padding: rowOption.paddingOfRowItem ?? EdgeInsets.all(TekPaddings().p4),
+        padding: rowOption.paddingOfRowItem ?? EdgeInsets.all(TekSpacings().p4),
         child: column.customizeItemWidget!(
           context,
           (rowData as dynamic).toJson()[column.key],
@@ -77,7 +77,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
       );
     }
     return Container(
-      padding: rowOption.paddingOfRowItem ?? EdgeInsets.all(TekPaddings().p4),
+      padding: rowOption.paddingOfRowItem ?? EdgeInsets.all(TekSpacings().p4),
       alignment: column.defaultTextAlignment ?? Alignment.center,
       child: _defaultRowItem(
         value: (rowData as dynamic).toJson()[column.key],

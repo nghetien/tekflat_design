@@ -98,8 +98,8 @@ class TekTags {
         ),
         padding: padding ??
             EdgeInsets.symmetric(
-              horizontal: TekPaddings().p8,
-              vertical: TekPaddings().p4,
+              horizontal: TekSpacings().p8,
+              vertical: TekSpacings().p4,
             ),
         child: Text(
           value,

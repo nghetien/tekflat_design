@@ -430,7 +430,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     return [
       if (widget.onSearchMenuChildren != null)
         Padding(
-          padding: EdgeInsets.all(TekPaddings().p8).copyWith(top: TekPaddings().p4),
+          padding: EdgeInsets.all(TekSpacings().p8).copyWith(top: TekSpacings().p4),
           child: TekInput(
             focusNode: _searchFocusNode,
             controller: _searchController,
@@ -467,15 +467,15 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                   ? ListView.separated(
                       controller: ScrollController(),
                       itemCount: _menuChildren.length,
-                      separatorBuilder: (BuildContext context, int index) => VSpace.p4,
+                      separatorBuilder: (BuildContext context, int index) => TekVSpace.p4,
                       itemBuilder: (context, index) {
                         if (_menuChildren.isEmpty) return const SizedBox.shrink();
                         final TekInputTypeAheadDropdownItemModel<T> item = _menuChildren[index];
                         return TekButton(
                           width: double.infinity,
-                          padding: EdgeInsets.all(TekPaddings().p8).copyWith(
-                            top: TekPaddings().p4,
-                            bottom: TekPaddings().p4,
+                          padding: EdgeInsets.all(TekSpacings().p8).copyWith(
+                            top: TekSpacings().p4,
+                            bottom: TekSpacings().p4,
                           ),
                           onPressed: () => _handleSelectItem(index),
                           alignment: Alignment.centerLeft,
@@ -511,7 +511,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                             size: TekIconSizes().s24,
                             color: TekColors.grey,
                           ),
-                          VSpace.mainSpace,
+                          TekVSpace.mainSpace,
                           const Text('No data'),
                         ],
                       ),
@@ -546,10 +546,10 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     if (widget.isSelectOne) return widget.prefixIcon;
     if (_selectedItems.isEmpty) return null;
     final Widget prefixIcon = Padding(
-      padding: EdgeInsets.all(TekPaddings().p8),
+      padding: EdgeInsets.all(TekSpacings().p8),
       child: Wrap(
-        runSpacing: TekPaddings().p8,
-        spacing: TekPaddings().p8,
+        runSpacing: TekSpacings().p8,
+        spacing: TekSpacings().p8,
         children: _selectedItems.keys.map(
           (key) {
             return TekDynamicTag(

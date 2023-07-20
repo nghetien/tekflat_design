@@ -79,7 +79,7 @@ class TekDialogs {
         child: Container(
           width: width ?? widthDefault,
           height: height ?? heightDefault,
-          padding: padding ?? EdgeInsets.all(TekPaddings().mainPadding),
+          padding: padding ?? EdgeInsets.all(TekSpacings().mainPadding),
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).cardColor,
             shape: shape,
@@ -107,13 +107,13 @@ class TekDialogs {
                             color: TekColors().primary,
                           ),
                         ),
-                  VSpace.mainSpace,
+                  TekVSpace.mainSpace,
                   const TekDivider(),
-                  VSpace.p4,
+                  TekVSpace.p4,
                   Expanded(child: content),
                   if (showFooter)
                     Padding(
-                      padding: EdgeInsets.only(top: TekPaddings().p4),
+                      padding: EdgeInsets.only(top: TekSpacings().p4),
                       child: customizeFooter ??
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -127,7 +127,7 @@ class TekDialogs {
                                 text: customizeCancelText ?? 'Cancel',
                                 textColor: TekColors().primary,
                               ),
-                              HSpace.mainSpace,
+                              TekHSpace.mainSpace,
                               TekButton(
                                 onPressed: () {
                                   onOkPressed?.call().then((value) {
@@ -188,7 +188,7 @@ class TekDialogs {
           children: <Widget>[
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(TekPaddings().p12),
+              padding: EdgeInsets.all(TekSpacings().p12),
               decoration: BoxDecoration(
                 color: type == TekDialogType.delete
                     ? TekColors.red
@@ -211,7 +211,7 @@ class TekDialogs {
                     color: Colors.white,
                     size: TekIconSizes().s24,
                   ),
-                  VSpace.p8,
+                  TekVSpace.p8,
                   customTitle ??
                       Text(
                         title ?? '',
@@ -221,26 +221,26 @@ class TekDialogs {
                 ],
               ),
             ),
-            VSpace.p12,
+            TekVSpace.p12,
             customContent ??
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: TekPaddings().p12),
+                  padding: EdgeInsets.symmetric(horizontal: TekSpacings().p12),
                   child: Text(
                     content ?? '',
                     textAlign: TextAlign.center,
                     style: TekTextStyles.body,
                   ),
                 ),
-            VSpace.p12,
+            TekVSpace.p12,
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: TekPaddings().p12),
+              padding: EdgeInsets.symmetric(horizontal: TekSpacings().p12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   if (type != TekDialogType.info)
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(right: TekPaddings().p12),
+                        padding: EdgeInsets.only(right: TekSpacings().p12),
                         child: TekButton(
                           onPressed: () {
                             if (onClickButtonLeft != null) {
@@ -277,7 +277,7 @@ class TekDialogs {
                 ],
               ),
             ),
-            VSpace.p12,
+            TekVSpace.p12,
           ],
         ),
       );

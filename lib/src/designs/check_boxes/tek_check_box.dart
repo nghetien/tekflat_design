@@ -40,7 +40,7 @@ class TekCheckBox extends StatelessWidget {
           shape: type.style.shape,
           side: BorderSide(width: TekBorders.med, color: TekColors().primary),
         ),
-        HSpace(space ?? TekPaddings().p8),
+        TekHSpace(space ?? TekSpacings().p8),
         titleWidget ??
             Text(
               title ?? '',

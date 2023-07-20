@@ -70,7 +70,7 @@ class TekLoadingWidgetState extends State<TekLoadingWidget> with SingleTickerPro
             ),
           ),
         ),
-        VSpace.p14,
+        TekVSpace.p14,
         Text(
           _defaultLoadingText,
           style: TekTextStyles.titleMedium.copyWith(

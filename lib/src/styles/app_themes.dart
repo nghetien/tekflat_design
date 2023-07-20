@@ -38,8 +38,8 @@ class TekThemes {
       fillColor: TekColors.white,
       suffixIconColor: TekColors.black,
       contentPadding: EdgeInsets.symmetric(
-        horizontal: TekPaddings().p8,
-        vertical: TekPaddings().p12,
+        horizontal: TekSpacings().p8,
+        vertical: TekSpacings().p12,
       ),
       // contentPadding: EdgeInsets.zero,
       enabledBorder: OutlineInputBorder(
@@ -126,6 +126,24 @@ class TekThemes {
         side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
       ),
     ),
+    datePickerTheme: DatePickerThemeData(
+      headerBackgroundColor: TekColors().bgSecondaryThemeLight,
+      // màu bên phải date picker
+      backgroundColor: TekColors().bgSecondaryThemeLight,
+      // màu chọn ngày
+      headerForegroundColor: TekColors.black,
+      // màu chữ
+      surfaceTintColor: TekColors().bgSecondaryThemeLight,
+      rangePickerShape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      dayStyle: TekTextStyles.body,
+    ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
@@ -173,8 +191,8 @@ class TekThemes {
       fillColor: TekColors().bgPrimaryThemeDark,
       suffixIconColor: TekColors.white,
       contentPadding: EdgeInsets.symmetric(
-        horizontal: TekPaddings().p8,
-        vertical: TekPaddings().p12,
+        horizontal: TekSpacings().p8,
+        vertical: TekSpacings().p12,
       ),
       // contentPadding: EdgeInsets.zero,
       enabledBorder: OutlineInputBorder(
@@ -262,6 +280,24 @@ class TekThemes {
         borderRadius: TekCorners().mainCornerBorder,
         side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
       ),
+    ),
+    datePickerTheme: DatePickerThemeData(
+      headerBackgroundColor: TekColors().bgSecondaryThemeDark,
+      // màu bên phải date picker
+      backgroundColor: TekColors().bgSecondaryThemeDark,
+      // màu chọn ngày
+      headerForegroundColor: TekColors.white,
+      // màu chữ
+      surfaceTintColor: TekColors().bgSecondaryThemeDark,
+      rangePickerShape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      dayStyle: TekTextStyles.body,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
