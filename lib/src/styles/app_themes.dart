@@ -45,14 +45,14 @@ class TekThemes {
       enabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors.greyOpacity04,
           width: TekBorders.thin,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors.greyOpacity04,
           width: TekBorders.thin,
         ),
       ),
@@ -111,7 +111,7 @@ class TekThemes {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity02, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity02, width: TekBorders.thin),
       ),
     ),
     menuTheme: MenuThemeData(
@@ -123,7 +123,7 @@ class TekThemes {
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
     ),
     datePickerTheme: DatePickerThemeData(
@@ -136,11 +136,11 @@ class TekThemes {
       surfaceTintColor: TekColors().bgSecondaryThemeLight,
       rangePickerShape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
       dayStyle: TekTextStyles.body,
     ),
@@ -205,7 +205,7 @@ class TekThemes {
       disabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors.greyOpacity04,
           width: TekBorders.thin,
         ),
       ),
@@ -266,7 +266,7 @@ class TekThemes {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity02, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity02, width: TekBorders.thin),
       ),
     ),
     menuTheme: MenuThemeData(
@@ -278,7 +278,7 @@ class TekThemes {
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
     ),
     datePickerTheme: DatePickerThemeData(
@@ -291,11 +291,11 @@ class TekThemes {
       surfaceTintColor: TekColors().bgSecondaryThemeDark,
       rangePickerShape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: TekCorners().mainCornerBorder,
-        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+        side: BorderSide(color: TekColors.greyOpacity01, width: TekBorders.thin),
       ),
       dayStyle: TekTextStyles.body,
     ),

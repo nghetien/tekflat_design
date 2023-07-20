@@ -30,7 +30,7 @@ class TekLineDash extends StatelessWidget {
                 width: dashWidth,
                 height: dashHeight,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: color ?? TekColors().greyOpacity04),
+                  decoration: BoxDecoration(color: color ?? TekColors.greyOpacity04),
                 ),
               );
             },

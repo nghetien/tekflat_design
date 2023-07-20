@@ -20,14 +20,14 @@ class TekDataTableFixedColumnWidget<T> extends StatelessWidget {
     if (type == TekFixedColumn.left) {
       return Border(
         right: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors.greyOpacity04,
           width: TekBorders.thin,
         ),
       );
     } else {
       return Border(
         left: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors.greyOpacity04,
           width: TekBorders.thin,
         ),
       );

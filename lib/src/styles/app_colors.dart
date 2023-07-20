@@ -80,13 +80,13 @@ class TekColors {
   static const Color green = Color(0xFF4AB178);
   static const Color pink = Color(0xFFc41d7f);
 
-  final Color greyOpacity01 = grey.withOpacity(0.1);
-  final Color greyOpacity02 = grey.withOpacity(0.2);
-  final Color greyOpacity04 = grey.withOpacity(0.4);
-  final Color greyOpacity06 = grey.withOpacity(0.6);
-  final Color greyOpacity08 = grey.withOpacity(0.8);
+  static final Color greyOpacity01 = grey.withOpacity(0.1);
+  static final Color greyOpacity02 = grey.withOpacity(0.2);
+  static final Color greyOpacity04 = grey.withOpacity(0.4);
+  static final Color greyOpacity06 = grey.withOpacity(0.6);
+  static final Color greyOpacity08 = grey.withOpacity(0.8);
 
-  final Color greenOpacity01 = green.withOpacity(0.1);
+  static final Color greenOpacity01 = green.withOpacity(0.1);
 
   Color get primaryOpacity01 => primary.withOpacity(0.1);
   Color get primaryOpacity02 => primary.withOpacity(0.2);

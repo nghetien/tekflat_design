@@ -44,7 +44,7 @@ class TekNetworkImage extends StatelessWidget {
           width: width ?? size.size,
           height: height ?? size.size,
           decoration: BoxDecoration(
-            color: TekColors().greyOpacity04,
+            color: TekColors.greyOpacity04,
             border: Border.all(
               width: borderWidth ?? TekBorders.thin,
               color: borderColor ?? TekColors().primary,
@@ -62,7 +62,7 @@ class TekNetworkImage extends StatelessWidget {
           width: width ?? size.size,
           height: height ?? size.size,
           decoration: BoxDecoration(
-            color: TekColors().greyOpacity01,
+            color: TekColors.greyOpacity01,
             border: Border.all(
               width: borderWidth ?? TekBorders.thin,
               color: borderColor ?? TekColors().primary,

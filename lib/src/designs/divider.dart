@@ -21,7 +21,7 @@ class TekDivider extends StatelessWidget {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: color ?? TekColors().greyOpacity01,
+          color: color ?? TekColors.greyOpacity01,
           borderRadius: borderRadius ?? TekCorners.cornerBorder8,
           border: border,
         ),

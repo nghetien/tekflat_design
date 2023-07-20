@@ -79,9 +79,9 @@ class TekDataTableContentWidgetState<T> extends State<TekDataTableContentWidget<
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(width: TekBorders.thin, color: TekColors().greyOpacity04),
-                right: BorderSide(width: 0, color: TekColors().greyOpacity04),
-                left: BorderSide(width: 0, color: TekColors().greyOpacity04),
+                bottom: BorderSide(width: TekBorders.thin, color: TekColors.greyOpacity04),
+                right: BorderSide(width: 0, color: TekColors.greyOpacity04),
+                left: BorderSide(width: 0, color: TekColors.greyOpacity04),
               ),
             ),
             child: widget.topContent!(widget.controller.initTableColumns,
@@ -93,8 +93,8 @@ class TekDataTableContentWidgetState<T> extends State<TekDataTableContentWidget<
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border(
-                right: BorderSide(width: 0, color: TekColors().greyOpacity04),
-                left: BorderSide(width: 0, color: TekColors().greyOpacity04),
+                right: BorderSide(width: 0, color: TekColors.greyOpacity04),
+                left: BorderSide(width: 0, color: TekColors.greyOpacity04),
               ),
             ),
             child: widget.bottomContent!(widget.controller.initTableColumns,
@@ -126,8 +126,8 @@ class TekDataTableContentWidgetState<T> extends State<TekDataTableContentWidget<
           return Container(
             decoration: BoxDecoration(
               border: Border(
-                right: BorderSide(width: 0, color: TekColors().greyOpacity01),
-                left: BorderSide(width: 0, color: TekColors().greyOpacity01),
+                right: BorderSide(width: 0, color: TekColors.greyOpacity01),
+                left: BorderSide(width: 0, color: TekColors.greyOpacity01),
               ),
             ),
             child: TekDataTableRowWidget<T>(

@@ -173,11 +173,11 @@ class TekVerticalScrollWidgetState extends State<TekVerticalScrollWidget> {
               color: context.theme.colorScheme.onBackground,
               border: Border(
                 left: BorderSide(
-                  color: TekColors().greyOpacity04,
+                  color: TekColors.greyOpacity04,
                   width: 0,
                 ),
                 right: BorderSide(
-                  color: TekColors().greyOpacity04,
+                  color: TekColors.greyOpacity04,
                   width: 0,
                 ),
               ),
@@ -202,7 +202,7 @@ class TekVerticalScrollWidgetState extends State<TekVerticalScrollWidget> {
                         width: _scrollWidth,
                         height: _scrollHeight,
                         decoration: BoxDecoration(
-                          color: TekColors().greyOpacity04,
+                          color: TekColors.greyOpacity04,
                           borderRadius: TekCorners.cornerBorder11,
                         ),
                       ),

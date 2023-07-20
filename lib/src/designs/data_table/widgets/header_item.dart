@@ -104,7 +104,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
           border: Border(
             right: widget.index < widget.lengthOfColumn - 1
                 ? BorderSide(
-                    color: TekColors().greyOpacity04,
+                    color: TekColors.greyOpacity04,
                     width: TekBorders.thin,
                   )
                 : BorderSide.none,
