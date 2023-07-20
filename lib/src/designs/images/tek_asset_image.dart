@@ -3,7 +3,7 @@ part of 'images.dart';
 class TekAssetImage extends StatelessWidget {
   const TekAssetImage({
     Key? key,
-    this.size = TekImageSize.medium,
+    this.size = TekImageSize.normal,
     this.path,
     this.width,
     this.height,

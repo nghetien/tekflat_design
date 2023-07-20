@@ -65,7 +65,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
         (element) {
           dynamic elementId = (element as dynamic).toJson()['id'];
           return elementId != null &&
-              TekDynamicExtension.canParseToInt(elementId) &&
+              TekDynamicExtension.ableParseToInt(elementId) &&
               TekDynamicExtension.isPositiveNumber(elementId);
         },
       ),

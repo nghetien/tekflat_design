@@ -3,7 +3,7 @@ part of 'images.dart';
 class TekNetworkImage extends StatelessWidget {
   const TekNetworkImage({
     Key? key,
-    this.size = TekImageSize.medium,
+    this.size = TekImageSize.normal,
     required this.path,
     this.width,
     this.height,
