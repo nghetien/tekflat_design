@@ -123,7 +123,7 @@ class TekDialogs {
                                   onCancelPressed?.call();
                                   context.popNavigator();
                                 },
-                                size: TekButtonSize.large,
+                                size: TekButtonSize.medium,
                                 text: customizeCancelText ?? 'Cancel',
                                 textColor: TekColors().primary,
                               ),
@@ -135,7 +135,7 @@ class TekDialogs {
                                   });
                                 },
                                 type: TekButtonType.primary,
-                                size: TekButtonSize.large,
+                                size: TekButtonSize.medium,
                                 text: customizeOkText ?? 'Ok',
                               ),
                             ],
@@ -250,7 +250,7 @@ class TekDialogs {
                             }
                           },
                           type: TekButtonType.none,
-                          size: TekButtonSize.large,
+                          size: TekButtonSize.medium,
                           text: buttonCancel ?? 'Cancel',
                           textColor: TekColors.white,
                           background: TekColors.grey,
@@ -259,7 +259,7 @@ class TekDialogs {
                     ),
                   Expanded(
                     child: TekButton(
-                      size: TekButtonSize.large,
+                      size: TekButtonSize.medium,
                       type: TekButtonType.primary,
                       onPressed: () {
                         onClickButtonRight?.call().then((value) {

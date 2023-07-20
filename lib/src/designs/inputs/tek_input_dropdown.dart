@@ -20,7 +20,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.name,
     this.haveSearch = false,
     this.filterOption,
-    required this.menuChildren,
+    this.menuChildren = const [],
     this.onSelected,
     this.offset,
     this.maxHeightPopup,
@@ -231,6 +231,16 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     setState(() {});
   }
 
+  TekButtonSize get _getSizeDropdownItem{
+    if(widget.size == TekInputSize.medium){
+      return TekButtonSize.medium;
+    }
+    if(widget.size == TekInputSize.large){
+      return TekButtonSize.large;
+    }
+    return TekButtonSize.medium;
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -247,14 +257,14 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               Size(
                 widget.minWidthPopup ?? width,
                 widget.minHeightPopup ??
-                    _menuChildren.length * TekButtonSize.large.height + 11.scaleSize,
+                    _menuChildren.length * _getSizeDropdownItem.height + 11.scaleSize,
               ),
             ),
             maximumSize: MaterialStateProperty.all(
               Size(
                 widget.maxWidthPopup ?? width,
                 widget.maxHeightPopup ??
-                    _menuChildren.length * TekButtonSize.large.height + 11.scaleSize,
+                    _menuChildren.length * _getSizeDropdownItem.height + 11.scaleSize,
               ),
             ),
             visualDensity: VisualDensity.comfortable,
@@ -263,7 +273,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
             (item) {
               return TekButton(
                 width: double.infinity,
-                size: TekButtonSize.large,
+                size: _getSizeDropdownItem,
                 onPressed: () {
                   _currentSelected = item;
                   _controller.text = item.label;
@@ -275,7 +285,8 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
                   borderRadius: BorderRadius.all(Radius.circular(0)),
                 ),
                 background: Colors.transparent,
-                child: item.child != null ? item.child!(item.value, item.label) : Text(item.label),
+                text: item.child == null ? item.label : null,
+                child: item.child != null ? item.child!(item.value, item.label) : null,
               );
             },
           ).toList(),

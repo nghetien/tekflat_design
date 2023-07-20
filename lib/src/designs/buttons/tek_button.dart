@@ -1,29 +1,29 @@
 part of 'buttons.dart';
 
 enum TekButtonSize {
-  large(42),
-  medium(35),
-  small(26);
+  large(48),
+  medium(40),
+  small(32);
 
   const TekButtonSize(this.height);
 
   final double height;
 
   static double getPaddingVertical(TekButtonSize? size) {
-    if (size == null) return TekSpacings().p8;
+    if (size == null) return 8;
     return 0;
   }
 
   static double getSpaceLoading(TekButtonSize? size) {
     switch (size) {
       case TekButtonSize.large:
-        return TekSpacings().p6;
+        return 6;
       case TekButtonSize.medium:
-        return TekSpacings().p4;
+        return 4;
       case TekButtonSize.small:
-        return TekSpacings().p4;
+        return 2;
       default:
-        return TekSpacings().p4;
+        return 2;
     }
   }
 
@@ -50,6 +50,19 @@ enum TekButtonSize {
         return TekIconSizes().s14;
       default:
         return TekIconSizes().s18;
+    }
+  }
+
+  static TextStyle getTextStyle(TekButtonSize? size) {
+    switch (size) {
+      case TekButtonSize.large:
+        return TekTextStyles.titleMedium;
+      case TekButtonSize.medium:
+        return TekTextStyles.body;
+      case TekButtonSize.small:
+        return TekTextStyles.label;
+      default:
+        return TekTextStyles.body;
     }
   }
 }
@@ -346,7 +359,7 @@ class TekButton extends StatelessWidget {
         textAlign: TextAlign.center,
         maxLines: maxLines,
         style: textStyle ??
-            TekTextStyles.body.copyWith(
+            TekButtonSize.getTextStyle(size).copyWith(
               color: type.getTextColor(
                 context,
                 disabled: disabled,

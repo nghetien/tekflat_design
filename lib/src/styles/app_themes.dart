@@ -29,8 +29,8 @@ class TekThemes {
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
       titleTextStyle: TekTextStyles.titleLarge.copyWith(color: TekColors.white),
     ),
-    textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: TekColors.black,
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: TekColors().primary,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
@@ -127,11 +127,11 @@ class TekThemes {
       ),
     ),
     datePickerTheme: DatePickerThemeData(
-      headerBackgroundColor: TekColors().bgSecondaryThemeLight,
+      headerBackgroundColor: TekColors().primary,
       // màu bên phải date picker
       backgroundColor: TekColors().bgSecondaryThemeLight,
       // màu chọn ngày
-      headerForegroundColor: TekColors.black,
+      headerForegroundColor: TekColors.white,
       // màu chữ
       surfaceTintColor: TekColors().bgSecondaryThemeLight,
       rangePickerShape: RoundedRectangleBorder(
@@ -282,7 +282,7 @@ class TekThemes {
       ),
     ),
     datePickerTheme: DatePickerThemeData(
-      headerBackgroundColor: TekColors().bgSecondaryThemeDark,
+      headerBackgroundColor: TekColors().primary,
       // màu bên phải date picker
       backgroundColor: TekColors().bgSecondaryThemeDark,
       // màu chọn ngày

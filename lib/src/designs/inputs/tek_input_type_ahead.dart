@@ -322,6 +322,16 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     setState(() {});
   }
 
+  TekButtonSize get _getSizeDropdownItem {
+    if (widget.size == TekInputSize.medium) {
+      return TekButtonSize.medium;
+    }
+    if (widget.size == TekInputSize.large) {
+      return TekButtonSize.large;
+    }
+    return TekButtonSize.medium;
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -434,7 +444,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
           child: TekInput(
             focusNode: _searchFocusNode,
             controller: _searchController,
-            size: widget.size ?? TekInputSize.large,
+            size: TekInputSize.medium,
             prefixIcon: widget.prefixIconSearch ?? const Icon(Icons.search),
             hintText: widget.hintTextSearch,
             onChanged: (_) => _listenOnChangeInput(),
@@ -477,6 +487,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                             top: TekSpacings().p4,
                             bottom: TekSpacings().p4,
                           ),
+                          size: _getSizeDropdownItem,
                           onPressed: () => _handleSelectItem(index),
                           alignment: Alignment.centerLeft,
                           shape: const RoundedRectangleBorder(
@@ -484,6 +495,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                           ),
                           background: Colors.transparent,
                           child: Row(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               item.child != null

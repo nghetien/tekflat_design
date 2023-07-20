@@ -11,24 +11,24 @@ enum TekInputSize {
     switch (this) {
       case TekInputSize.large:
         return TekInputStyle(
-          height: 42,
+          height: 48,
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
-            vertical: 14.5,
+            vertical: 16,
           ),
-          textStyle: TekTextStyles.body,
-          hintStyle: TekTextStyles.body,
+          textStyle: TekTextStyles.titleMedium,
+          hintStyle: TekTextStyles.titleMedium,
           maxLines: 1,
         );
       case TekInputSize.medium:
         return TekInputStyle(
-          height: 35,
+          height: 40,
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
-            vertical: 12.5,
+            vertical: 13.5,
           ),
-          textStyle: TekTextStyles.label,
-          hintStyle: TekTextStyles.label,
+          textStyle: TekTextStyles.body,
+          hintStyle: TekTextStyles.body,
           maxLines: 1,
         );
       case TekInputSize.areaSmall:
