@@ -9,7 +9,7 @@ class TekVSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(height: size);
 
-  static TekVSpace get mainSpace => TekVSpace(TekSpacings().mainPadding);
+  static TekVSpace get mainSpace => TekVSpace(TekSpacings().mainSpacing);
 
   static TekVSpace get p4 => TekVSpace(TekSpacings().p4);
 
@@ -34,7 +34,7 @@ class TekHSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SizedBox(width: size);
 
-  static TekHSpace get mainSpace => TekHSpace(TekSpacings().mainPadding);
+  static TekHSpace get mainSpace => TekHSpace(TekSpacings().mainSpacing);
 
   static TekHSpace get p4 => TekHSpace(TekSpacings().p4);
 

@@ -55,7 +55,7 @@ class TekExpansion extends StatelessWidget {
         leading: leading,
         trailing: trailing,
         expandedCrossAxisAlignment: expandedCrossAxisAlignment,
-        childrenPadding: childrenPadding ?? EdgeInsets.all(TekSpacings().mainPadding),
+        childrenPadding: childrenPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
         collapsedTextColor: collapsedTextColor,
         collapsedIconColor: collapsedIconColor,
         shape: RoundedRectangleBorder(

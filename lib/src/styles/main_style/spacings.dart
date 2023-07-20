@@ -15,11 +15,11 @@ class TekSpacings {
 
   /// ----------------------------------------------------------------------------------------------
 
-  double _mainPadding = 14;
+  double _mainSpacing = 14;
 
-  double get mainPadding => _mainPadding * scale;
+  double get mainSpacing => _mainSpacing * scale;
 
-  void setMainPadding(double value) => _mainPadding = value;
+  void setMainPadding(double value) => _mainSpacing = value;
 
   /// ----------------------------------------------------------------------------------------------
 

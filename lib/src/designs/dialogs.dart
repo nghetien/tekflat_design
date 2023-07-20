@@ -79,7 +79,7 @@ class TekDialogs {
         child: Container(
           width: width ?? widthDefault,
           height: height ?? heightDefault,
-          padding: padding ?? EdgeInsets.all(TekSpacings().mainPadding),
+          padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).cardColor,
             shape: shape,

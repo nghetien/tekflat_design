@@ -83,7 +83,7 @@ class TekListView<T> extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainPadding,
+                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainSpacing,
                     ),
                     child: itemBuilder(context, startIndex + i, itemsInRow[i]),
                   ),
@@ -92,7 +92,7 @@ class TekListView<T> extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainPadding,
+                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainSpacing,
                     ),
                     child: const SizedBox.shrink(),
                   ),

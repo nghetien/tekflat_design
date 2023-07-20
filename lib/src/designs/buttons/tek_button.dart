@@ -308,7 +308,7 @@ class TekButton extends StatelessWidget {
           child: Container(
             padding: padding ??
                 EdgeInsets.symmetric(
-                  horizontal: TekSpacings().mainPadding,
+                  horizontal: TekSpacings().mainSpacing,
                   vertical:  TekButtonSize.getPaddingVertical(size),
                 ),
             child: _getContent(context),

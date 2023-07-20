@@ -17,7 +17,7 @@ part 'main_style/fonts.dart';
 
 part 'main_style/icon_sizes.dart';
 
-part 'main_style/paddings.dart';
+part 'main_style/spacings.dart';
 
 part 'main_style/shadows.dart';
 
