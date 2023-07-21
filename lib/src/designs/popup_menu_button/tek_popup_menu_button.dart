@@ -61,7 +61,7 @@ class TekPopupMenuButton<T> extends StatelessWidget {
       }
       menuItems.add(
         PopupMenuDivider(
-          height: 2.scaleSize,
+          height: 2.scaleSpacing,
         ),
       );
     }
@@ -110,7 +110,7 @@ class TekPopupMenuButton<T> extends StatelessWidget {
                   ? Icon(
                       item.icon,
                       color: iconItemColor,
-                      size: iconItemSize ?? 26.scaleSize,
+                      size: iconItemSize ?? 26.scaleIconSize,
                     )
                   : null
               : null,
@@ -119,7 +119,7 @@ class TekPopupMenuButton<T> extends StatelessWidget {
                   ? Icon(
                       item.icon,
                       color: iconItemColor,
-                      size: iconItemSize ?? 26.scaleSize,
+                      size: iconItemSize ?? 26.scaleIconSize,
                     )
                   : null
               : null,

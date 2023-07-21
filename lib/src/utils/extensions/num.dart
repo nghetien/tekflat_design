@@ -1,7 +1,11 @@
-import 'package:tekflat_design/src/responsive/responsive.dart';
+import 'package:tekflat_design/src/styles/styles.dart';
 
 extension TekNumEx on num {
-  double get scaleSize => TekResponsiveConfig().scale * this;
+  double get scaleFontSize => this * TekFontSizes().scale;
+
+  double get scaleIconSize => this * TekIconSizes().scale;
+
+  double get scaleSpacing => this * TekSpacings().scale;
 
   /// Example:
   /// 1.0 -> 1

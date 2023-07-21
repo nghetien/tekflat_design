@@ -1,69 +1,120 @@
 part of 'inputs.dart';
 
 enum TekInputSize {
+  extraLarge,
   large,
   medium,
   areaSmall,
   areaMedium,
   areaLarge;
 
-  TekInputStyle get style {
+  double get height {
     switch (this) {
+      case TekInputSize.extraLarge:
+        return 56;
       case TekInputSize.large:
-        return TekInputStyle(
-          height: 48,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 16,
-          ),
-          textStyle: TekTextStyles.titleMedium,
-          hintStyle: TekTextStyles.titleMedium,
-          maxLines: 1,
+        return 48;
+      case TekInputSize.medium:
+        return 40;
+      case TekInputSize.areaSmall:
+        return 60;
+      case TekInputSize.areaMedium:
+        return 80;
+      case TekInputSize.areaLarge:
+        return 100;
+      default:
+        return 48;
+    }
+  }
+
+  EdgeInsets get padding {
+    switch (this) {
+      case TekInputSize.extraLarge:
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: TekPlatform.isWeb ? 20.scaleSpacing : 16.scaleSpacing,
+        );
+      case TekInputSize.large:
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: TekPlatform.isWeb ? 16.scaleSpacing : 12.scaleSpacing,
         );
       case TekInputSize.medium:
-        return TekInputStyle(
-          height: 40,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 13.5,
-          ),
-          textStyle: TekTextStyles.body,
-          hintStyle: TekTextStyles.body,
-          maxLines: 1,
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: TekPlatform.isWeb ? 13.5.scaleSpacing : 9.5.scaleSpacing,
         );
       case TekInputSize.areaSmall:
-        return TekInputStyle(
-          height: 60,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 13,
-          ),
-          textStyle: TekTextStyles.body,
-          hintStyle: TekTextStyles.body,
-          maxLines: 2,
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: 12.scaleSpacing,
         );
       case TekInputSize.areaMedium:
-        return TekInputStyle(
-          height: 80,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 12.5,
-          ),
-          textStyle: TekTextStyles.body,
-          hintStyle: TekTextStyles.body,
-          maxLines: 3,
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: 12.scaleSpacing,
         );
       case TekInputSize.areaLarge:
-        return TekInputStyle(
-          height: 100,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 12,
-          ),
-          textStyle: TekTextStyles.body,
-          hintStyle: TekTextStyles.body,
-          maxLines: 4,
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: 12.scaleSpacing,
         );
+      default:
+        return EdgeInsets.symmetric(
+          horizontal: 12.scaleSpacing,
+          vertical: 12.scaleSpacing,
+        );
+    }
+  }
+
+  TextStyle get textStyle {
+    switch (this) {
+      case TekInputSize.extraLarge:
+        return TekTextStyles.titleMedium;
+      case TekInputSize.large:
+        return TekTextStyles.body;
+      case TekInputSize.medium:
+        return TekTextStyles.body;
+      case TekInputSize.areaSmall:
+        return TekTextStyles.body;
+      case TekInputSize.areaMedium:
+        return TekTextStyles.body;
+      case TekInputSize.areaLarge:
+        return TekTextStyles.body;
+    }
+  }
+
+  TextStyle get hintStyle {
+    switch (this) {
+      case TekInputSize.extraLarge:
+        return TekTextStyles.titleMedium;
+      case TekInputSize.large:
+        return TekTextStyles.body;
+      case TekInputSize.medium:
+        return TekTextStyles.body;
+      case TekInputSize.areaSmall:
+        return TekTextStyles.body;
+      case TekInputSize.areaMedium:
+        return TekTextStyles.body;
+      case TekInputSize.areaLarge:
+        return TekTextStyles.body;
+    }
+  }
+
+  int get maxLines {
+    switch (this) {
+      case TekInputSize.extraLarge:
+        return 1;
+      case TekInputSize.large:
+        return 1;
+      case TekInputSize.medium:
+        return 1;
+      case TekInputSize.areaSmall:
+        return 2;
+      case TekInputSize.areaMedium:
+        return 3;
+      case TekInputSize.areaLarge:
+        return 4;
     }
   }
 }
@@ -89,7 +140,7 @@ class TekInput extends StatelessWidget {
     Key? key,
     this.keyFormState,
     this.name,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.initialValue,
     this.controller,
@@ -134,11 +185,14 @@ class TekInput extends StatelessWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.prefixIconConstraints,
+    this.suffixIconConstraints,
+    this.ableFixIconConstraints = false,
   }) : super(key: key);
 
   final GlobalKey? keyFormState;
   final String? name;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -183,36 +237,29 @@ class TekInput extends StatelessWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final BoxConstraints? suffixIconConstraints;
+  final BoxConstraints? prefixIconConstraints;
+  final bool ableFixIconConstraints;
 
-  EdgeInsets _getPaddingContent() {
+  EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
-    final EdgeInsets padding = size?.style.padding ?? TekInputSize.large.style.padding;
-    if (prefixIcon != null && suffixIcon != null) {
-      return EdgeInsets.fromLTRB(0, padding.top, 0, padding.bottom);
-    }
-    if (prefixIcon != null) {
-      return EdgeInsets.fromLTRB(0, padding.top, padding.right, padding.bottom);
-    }
-    if (suffixIcon != null) {
-      return EdgeInsets.fromLTRB(padding.left, padding.top, 0, padding.bottom);
-    }
-    return padding;
+    return size.padding;
   }
 
   @override
   Widget build(BuildContext context) => SizedBox(
         width: width,
-    child: FormBuilderTextField(
+        child: FormBuilderTextField(
           key: keyFormState,
           controller: controller,
           focusNode: focusNode,
           initialValue: initialValue,
-          style: textStyle ?? size?.style.textStyle,
+          style: textStyle ?? size.textStyle,
           textAlign: textAlign,
           textInputAction: textInputAction,
           textAlignVertical: textAlignVertical,
           keyboardType: keyboardType,
-          maxLines: maxLines ?? size?.style.maxLines,
+          maxLines: maxLines ?? size.maxLines,
           minLines: minLines,
           maxLength: maxLength,
           enabled: enabled,
@@ -227,13 +274,14 @@ class TekInput extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           onSaved: onSaved,
           decoration: tekInputDecoration(
-            context,
+            context: context,
+            size: size,
             enabled: enabled,
             isDense: isDense,
             filled: filled,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
-            contentPadding: _getPaddingContent(),
+            contentPadding: _paddingContent,
             focusedBorder: focusedBorder,
             enabledBorder: enabledBorder,
             disabledBorder: disabledBorder,
@@ -246,10 +294,13 @@ class TekInput extends StatelessWidget {
             floatingLabelStyle: floatingLabelStyle,
             floatingLabelBehavior: floatingLabelBehavior,
             hintText: hintText,
-            hintStyle: hintStyle ?? size?.style.hintStyle,
+            hintStyle: hintStyle ?? size.hintStyle,
             errorText: errorText,
             errorMaxLines: errorMaxLines,
             errorStyle: errorStyle,
+            prefixIconConstraints: prefixIconConstraints,
+            suffixIconConstraints: suffixIconConstraints,
+            ableFixIconConstraints: ableFixIconConstraints,
           ),
           name: name ?? '',
         ),

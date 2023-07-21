@@ -55,7 +55,7 @@ class TekDynamicTag extends StatelessWidget {
           ),
           TekHSpace.p8,
           Container(
-            padding: iconPadding ?? EdgeInsets.all(2.scaleSize),
+            padding: iconPadding ?? EdgeInsets.all(2.scaleSpacing),
             decoration: BoxDecoration(
               color: backgroundColorIcon ?? TekColors.greyOpacity04,
               shape: BoxShape.circle,

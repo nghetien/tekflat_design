@@ -37,11 +37,6 @@ class TekThemes {
       isDense: true,
       fillColor: TekColors.white,
       suffixIconColor: TekColors.black,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: TekSpacings().p8,
-        vertical: TekSpacings().p12,
-      ),
-      // contentPadding: EdgeInsets.zero,
       enabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
@@ -190,11 +185,6 @@ class TekThemes {
       isDense: true,
       fillColor: TekColors().bgPrimaryThemeDark,
       suffixIconColor: TekColors.white,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: TekSpacings().p8,
-        vertical: TekSpacings().p12,
-      ),
-      // contentPadding: EdgeInsets.zero,
       enabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(

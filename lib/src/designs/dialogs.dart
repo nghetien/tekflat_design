@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:tekflat_design/src/styles/styles.dart';
 import 'package:tekflat_design/src/utils/utils.dart';
@@ -28,7 +26,6 @@ class TekDialogs {
     BorderRadiusGeometry? borderRadius,
     required Widget content,
   }) {
-    final widthDefault = min<double>(context.widthScreen, 420.scaleSize);
     return showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -36,7 +33,7 @@ class TekDialogs {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         child: Container(
-          width: width ?? widthDefault,
+          width: width,
           height: height,
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).cardColor,
@@ -68,8 +65,6 @@ class TekDialogs {
     bool showFooter = true,
     Widget? customizeFooter,
   }) {
-    final widthDefault = min<double>(context.widthScreen, 420.scaleSize);
-    final heightDefault = min<double>(context.heightScreen, 500.scaleSize);
     return showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -77,8 +72,8 @@ class TekDialogs {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         child: Container(
-          width: width ?? widthDefault,
-          height: height ?? heightDefault,
+          width: width,
+          height: height,
           padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).cardColor,
@@ -93,7 +88,7 @@ class TekDialogs {
                   onPressedToTitle == null
                       ? TekTypography(
                           text: title,
-                          type: TekTypographyType.h5,
+                          type: TekTypographyType.level5,
                           color: TekColors().primary,
                         )
                       : TekButtonGD(
@@ -103,7 +98,7 @@ class TekDialogs {
                           },
                           child: TekTypography(
                             text: title,
-                            type: TekTypographyType.h5,
+                            type: TekTypographyType.level5,
                             color: TekColors().primary,
                           ),
                         ),
@@ -194,7 +189,7 @@ class TekDialogs {
                     ? TekColors.red
                     : type == TekDialogType.warning
                         ? TekColors.yellow
-                        : TekColors.blueLight,
+                        : TekColors.blue,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(TekCorners().mainCorners),
                   topRight: Radius.circular(TekCorners().mainCorners),
@@ -271,7 +266,7 @@ class TekDialogs {
                           ? TekColors.red
                           : type == TekDialogType.warning
                               ? TekColors.yellow
-                              : TekColors.blueLight,
+                              : TekColors.blue,
                     ),
                   ),
                 ],

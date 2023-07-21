@@ -8,14 +8,14 @@ class TekColors {
   factory TekColors() => _instance;
 
   /// Default color
-  static const Color $primary = Color(0xFF806DFF);
-  static const Color $primaryLight = Color(0xFF9F54FC);
-  static const Color $primaryDark = Color(0xFF6F58FF);
+  static const Color _defaultPrimary = Color(0xFF806DFF);
+  static const Color _defaultPrimaryLight = Color(0xFF9F54FC);
+  static const Color _defaultPrimaryDark = Color(0xFF6F58FF);
 
   /// The color of the app.
-  Color _primary = $primary;
-  Color _primaryLight = $primaryLight;
-  Color _primaryDark = $primaryDark;
+  Color _primary = _defaultPrimary;
+  Color _primaryLight = _defaultPrimaryLight;
+  Color _primaryDark = _defaultPrimaryDark;
 
   Color get primary => _primary;
 
@@ -34,15 +34,15 @@ class TekColors {
   }
 
   /// The background color of the app.
-  static const Color $bgPrimaryThemeDark = Color(0xFF1F1D2C);
-  static const Color $bgSecondaryThemeDark = Color(0xFF262837);
-  static const Color $bgPrimaryThemeLight = Color(0xFFF0F2F5);
-  static const Color $bgSecondaryThemeLight = white;
+  static const Color _defaultBgPrimaryThemeDark = Color(0xFF1F1D2C);
+  static const Color _defaultBgSecondaryThemeDark = Color(0xFF262837);
+  static const Color _defaultBgPrimaryThemeLight = Color(0xFFF0F2F5);
+  static const Color _defaultBgSecondaryThemeLight = white;
 
-  Color _bgPrimaryThemeDark = $bgPrimaryThemeDark;
-  Color _bgSecondaryThemeDark = $bgSecondaryThemeDark;
-  Color _bgPrimaryThemeLight = $bgPrimaryThemeLight;
-  Color _bgSecondaryThemeLight = $bgSecondaryThemeLight;
+  Color _bgPrimaryThemeDark = _defaultBgPrimaryThemeDark;
+  Color _bgSecondaryThemeDark = _defaultBgSecondaryThemeDark;
+  Color _bgPrimaryThemeLight = _defaultBgPrimaryThemeLight;
+  Color _bgSecondaryThemeLight = _defaultBgSecondaryThemeLight;
 
   Color get bgPrimaryThemeDark => _bgPrimaryThemeDark;
 
@@ -73,11 +73,10 @@ class TekColors {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color grey = Color(0xFFAAB3AC);
-  static const Color red = Colors.redAccent;
-  static const Color yellow = Color(0xFFFFA000);
-  static const Color blueLight = Colors.lightBlue;
+  static const Color red = Color(0xFFDA4343);
+  static const Color yellow = Color(0xFFFFA940);
   static const Color blue =  Color(0xFF1990FF);
-  static const Color green = Color(0xFF4AB178);
+  static const Color green = Color(0xFF30CD60);
   static const Color pink = Color(0xFFc41d7f);
 
   static final Color greyOpacity01 = grey.withOpacity(0.1);

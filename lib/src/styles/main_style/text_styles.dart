@@ -1,11 +1,7 @@
 part of '../styles.dart';
 
 class TekTextStyles {
-  TekTextStyles._privateConstructor();
-
-  static final TekTextStyles _instance = TekTextStyles._privateConstructor();
-
-  factory TekTextStyles() => _instance;
+  TekTextStyles._();
 
   static final TextStyle body = TextStyle(
     fontFamily: TekFonts().body,
@@ -42,7 +38,7 @@ class TekTextStyles {
     overflow: TextOverflow.ellipsis,
   );
 
-static final TextStyle display = TextStyle(
+  static final TextStyle display = TextStyle(
     fontFamily: TekFonts().display,
     letterSpacing: 0,
     fontSize: TekFontSizes().s36,

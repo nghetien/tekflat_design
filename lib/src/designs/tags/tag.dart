@@ -64,7 +64,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.blueLight,
+        color: TekColors.blue,
       );
 
   static Widget draft(

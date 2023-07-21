@@ -14,7 +14,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     Key? key,
     this.name,
     this.isSelectOne = true,
-    required this.onSelected,
+    this.onSelected,
     required this.initMenuChildren,
     required this.onLoadingMenuChildren,
     required this.onRefreshMenuChildren,
@@ -32,7 +32,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     required this.minHeightPopup,
     this.maxWidthPopup,
     this.minWidthPopup,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.initialValue,
     this.controller,
@@ -78,11 +78,13 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.maxLinesDropdownItem,
   }) : super(key: key);
 
   final String? name;
   final bool isSelectOne;
-  final Function(TekInputTypeAheadDropdownItemModel<T>, List<TekInputTypeAheadDropdownItemModel<T>>)
+  final Function(
+          TekInputTypeAheadDropdownItemModel<T>, List<TekInputTypeAheadDropdownItemModel<T>>)?
       onSelected;
   final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function() initMenuChildren;
   final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function() onLoadingMenuChildren;
@@ -101,7 +103,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
   final double minHeightPopup;
   final double? maxWidthPopup;
   final double? minWidthPopup;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -147,6 +149,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final int? maxLinesDropdownItem;
 
   @override
   State<TekInputTypeAhead<T>> createState() => TekInputTypeAheadState<T>();
@@ -298,7 +301,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
         );
       }
     }
-    widget.onSelected.call(
+    widget.onSelected?.call(
       _menuChildren[index],
       widget.isSelectOne ? [] : _selectedItems.values.toList(),
     );
@@ -307,7 +310,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
   }
 
   void _handleRemoveItem(String key) {
-    widget.onSelected.call(
+    widget.onSelected?.call(
       _selectedItems[key]!,
       _selectedItems.values.toList(),
     );
@@ -411,6 +414,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
+              ableFixIconConstraints: true,
             );
           },
         );
@@ -419,7 +423,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
   }
 
   BoxConstraints _getBoxConstraints() {
-    final double defaultHeight = 100.scaleSize;
+    const double defaultHeight = 100;
     double minHeight = _menuChildren.isEmpty ? defaultHeight : widget.minHeightPopup;
     double? maxHeight = widget.maxHeightPopup;
     double minWidth = widget.minWidthPopup ?? _widthPopupMenu;
@@ -444,8 +448,14 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
           child: TekInput(
             focusNode: _searchFocusNode,
             controller: _searchController,
-            size: TekInputSize.medium,
-            prefixIcon: widget.prefixIconSearch ?? const Icon(Icons.search),
+            size: widget.size,
+            prefixIcon: Padding(
+              padding: EdgeInsets.only(
+                left: TekSpacings().p12,
+                right: TekSpacings().p8,
+              ),
+              child: widget.prefixIconSearch ?? const Icon(Icons.search),
+            ),
             hintText: widget.hintTextSearch,
             onChanged: (_) => _listenOnChangeInput(),
           ),
@@ -483,10 +493,6 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                         final TekInputTypeAheadDropdownItemModel<T> item = _menuChildren[index];
                         return TekButton(
                           width: double.infinity,
-                          padding: EdgeInsets.all(TekSpacings().p8).copyWith(
-                            top: TekSpacings().p4,
-                            bottom: TekSpacings().p4,
-                          ),
                           size: _getSizeDropdownItem,
                           onPressed: () => _handleSelectItem(index),
                           alignment: Alignment.centerLeft,
@@ -494,14 +500,18 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                             borderRadius: BorderRadius.all(Radius.circular(0)),
                           ),
                           background: Colors.transparent,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               item.child != null
                                   ? Expanded(child: item.child!(item.value, item.label))
                                   : Flexible(
-                                      child: Text(item.label),
+                                      child: Text(
+                                        item.label,
+                                        maxLines: widget.maxLinesDropdownItem,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
                               if (_isSelected(index))
                                 widget.iconSelected ??
@@ -544,11 +554,17 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
           _menuController.open();
         }
       },
-      child: RotationTransition(
-        turns: _rotateAnimation,
-        child: Icon(
-          Icons.expand_more_rounded,
-          size: TekIconSizes().s24,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: TekSpacings().p8,
+          right: TekSpacings().p8,
+        ),
+        child: RotationTransition(
+          turns: _rotateAnimation,
+          child: Icon(
+            Icons.expand_more_rounded,
+            size: TekIconSizes().s24,
+          ),
         ),
       ),
     );

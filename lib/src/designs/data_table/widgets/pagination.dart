@@ -19,7 +19,7 @@ class TekDataTablePaginationWidget<T> extends StatefulWidget {
 class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWidget> {
   TekDataTablePagination get pagination => widget.controller.pagination;
 
-  static final sizePageNumber = 25.scaleSize;
+  static const double sizePageNumber = 25;
   static const int threeDotFlagNumber = 0;
 
   void _handleChangeDataPageNumber(int pageNumber) {
@@ -152,7 +152,6 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
           width: sizePageNumber,
           size: TekButtonSize.medium,
           onPressed: onPressed,
-          padding: EdgeInsets.zero,
           text: number > 0 ? number.toString() : '...',
           textStyle: TextStyle(
             color: number == pagination.currentPage ? TekColors().primary : TekColors.white,
@@ -226,7 +225,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
         SizedBox(
           height: sizePageNumber + 2,
           child: TekInputDropdown<int>(
-            width: 75.scaleSize,
+            width: 75,
             controller: _itemPerPageValueController,
             contentPadding: EdgeInsets.symmetric(horizontal: TekSpacings().p4),
             menuChildren: [

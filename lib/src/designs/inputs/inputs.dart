@@ -22,6 +22,6 @@ part 'tek_input.dart';
 part 'tek_input_date_time.dart';
 part 'tek_input_decoration.dart';
 part 'tek_input_dropdown.dart';
-part 'tek_input_dropdown_select.dart';
+part 'tek_input_dropdown_search.dart';
 part 'tek_input_password.dart';
 part 'tek_input_type_ahead.dart';

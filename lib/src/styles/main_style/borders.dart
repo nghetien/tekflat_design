@@ -1,11 +1,7 @@
 part of '../styles.dart';
 
 class TekBorders {
-  TekBorders._privateConstructor();
-
-  static final TekBorders _instance = TekBorders._privateConstructor();
-
-  factory TekBorders() => _instance;
+  TekBorders._();
 
   /// ----------------------------------------------------------------------------------------------
 

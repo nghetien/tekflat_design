@@ -1,40 +1,32 @@
-import 'package:tekflat_design/src/utils/utils.dart';
 import 'package:tekflat_design/src/styles/styles.dart';
 import 'package:flutter/material.dart';
 
 enum TekTypographyType {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6;
+  level1,
+  level2,
+  level3,
+  level4,
+  level5;
 
   TextStyle get textStyle {
     switch (this) {
-      case TekTypographyType.h1:
+      case TekTypographyType.level1:
         return TekTextStyles.display.copyWith(
           fontWeight: FontWeight.w500,
         );
-      case TekTypographyType.h2:
-        return TekTextStyles.headline.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 30.scaleSize,
-        );
-      case TekTypographyType.h3:
+      case TekTypographyType.level2:
         return TekTextStyles.headline.copyWith(
           fontWeight: FontWeight.w500,
         );
-      case TekTypographyType.h4:
+      case TekTypographyType.level3:
         return TekTextStyles.titleLarge.copyWith(
           fontWeight: FontWeight.w500,
-          fontSize: TekFontSizes().s20,
         );
-      case TekTypographyType.h5:
+      case TekTypographyType.level4:
         return TekTextStyles.titleMedium.copyWith(
           fontWeight: FontWeight.w500,
         );
-      case TekTypographyType.h6:
+      case TekTypographyType.level5:
         return TekTextStyles.body.copyWith(
           fontWeight: FontWeight.w500,
         );

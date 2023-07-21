@@ -17,7 +17,7 @@ class TekToast {
         msg: msg,
         toastLength: toastLength ?? Toast.LENGTH_SHORT,
         gravity: gravity ?? ToastGravity.TOP,
-        timeInSecForIosWeb: timeInSecForIosWeb ?? 1,
+        timeInSecForIosWeb: timeInSecForIosWeb ?? 2,
         backgroundColor: backgroundColor,
         webBgColor: '#${backgroundColor.value.toRadixString(16).substring(2, 8)}',
         textColor: textColor,
@@ -65,7 +65,7 @@ class TekToast {
   }) =>
       toast(
         msg: msg,
-        backgroundColor: TekColors.blueLight,
+        backgroundColor: TekColors.blue,
         textColor: textColor,
         gravity: gravity,
         toastLength: toastLength,

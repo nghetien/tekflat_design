@@ -270,7 +270,6 @@ class CustomPopupMenuButtonState<T> extends State<CustomPopupMenuButton<T>> {
         type: TekButtonType.primary,
         shape: TekOutlineBorder.none,
         background: widget.backgroundIconColor,
-        padding: widget.iconPadding,
         hoverColor: widget.hoverColor,
         onPressed: widget.enabled ? showButtonMenu : () {},
         child: widget.icon,

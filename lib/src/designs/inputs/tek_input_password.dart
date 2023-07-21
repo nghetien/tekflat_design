@@ -6,7 +6,7 @@ class TekInputPassword extends StatefulWidget {
     this.name,
     this.iconPasswordColor,
     this.iconPasswordSize,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.initialValue,
     this.controller,
@@ -55,7 +55,7 @@ class TekInputPassword extends StatefulWidget {
   final String? name;
   final double? iconPasswordSize;
   final Color? iconPasswordColor;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;

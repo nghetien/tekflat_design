@@ -77,7 +77,7 @@ class TekLoadingWidgetState extends State<TekLoadingWidget> with SingleTickerPro
             color: TekColors().primary,
             fontWeight: FontWeight.w600,
             letterSpacing: 2,
-            fontSize: 17.scaleSize,
+            fontSize: 17,
           ),
         ),
       ],

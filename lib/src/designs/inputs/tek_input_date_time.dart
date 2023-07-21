@@ -19,7 +19,7 @@ class TekInputDateTime extends StatefulWidget {
     this.lastDate,
     this.currentDate,
     this.initialTime,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.controller,
     this.focusNode,
@@ -76,7 +76,7 @@ class TekInputDateTime extends StatefulWidget {
   final DateTime? lastDate;
   final DateTime? currentDate;
   final TimeOfDay? initialTime;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -361,7 +361,21 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
         errorText: widget.errorText,
         errorMaxLines: widget.errorMaxLines,
         errorStyle: widget.errorStyle,
+        ableFixIconConstraints: true,
       );
+
+  double get _iconSize {
+    switch (widget.size) {
+      case TekInputSize.extraLarge:
+        return TekIconSizes().s24;
+      case TekInputSize.large:
+        return TekIconSizes().s20;
+      case TekInputSize.medium:
+        return TekIconSizes().s20;
+      default:
+        return TekIconSizes().s20;
+    }
+  }
 
   Widget _getIcon() {
     IconData iconData = Icons.calendar_today_rounded;
@@ -377,9 +391,15 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     }
     return InkWell(
       onTap: () => _onSelectDate(),
-      child: Icon(
-        iconData,
-        size: TekIconSizes().s20,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: TekSpacings().p12,
+          right: TekSpacings().p8,
+        ),
+        child: Icon(
+          iconData,
+          size: _iconSize,
+        ),
       ),
     );
   }

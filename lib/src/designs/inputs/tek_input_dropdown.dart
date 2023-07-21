@@ -27,7 +27,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.minHeightPopup,
     this.maxWidthPopup,
     this.minWidthPopup,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.initialValue,
     this.controller,
@@ -89,7 +89,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   final double? minHeightPopup;
   final double? maxWidthPopup;
   final double? minWidthPopup;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -238,6 +238,9 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     if(widget.size == TekInputSize.large){
       return TekButtonSize.large;
     }
+    if(widget.size == TekInputSize.extraLarge){
+      return TekButtonSize.extraLarge;
+    }
     return TekButtonSize.medium;
   }
 
@@ -256,15 +259,13 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
             minimumSize: MaterialStateProperty.all(
               Size(
                 widget.minWidthPopup ?? width,
-                widget.minHeightPopup ??
-                    _menuChildren.length * _getSizeDropdownItem.height + 11.scaleSize,
+                widget.minHeightPopup ?? _menuChildren.length * _getSizeDropdownItem.height + 11,
               ),
             ),
             maximumSize: MaterialStateProperty.all(
               Size(
                 widget.maxWidthPopup ?? width,
-                widget.maxHeightPopup ??
-                    _menuChildren.length * _getSizeDropdownItem.height + 11.scaleSize,
+                widget.maxHeightPopup ?? _menuChildren.length * _getSizeDropdownItem.height + 11,
               ),
             ),
             visualDensity: VisualDensity.comfortable,
@@ -280,6 +281,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
                   widget.onSelected?.call(item);
                   _menuController.close();
                 },
+                mainAxisAlignment: MainAxisAlignment.start,
                 alignment: Alignment.centerLeft,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(0)),
@@ -339,6 +341,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
+              ableFixIconConstraints: true,
             );
           },
         );
@@ -355,11 +358,17 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
           _menuController.open();
         }
       },
-      child: RotationTransition(
-        turns: _rotateAnimation,
-        child: Icon(
-          Icons.expand_more_rounded,
-          size: TekIconSizes().s24,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: TekSpacings().p8,
+          right: TekSpacings().p8,
+        ),
+        child: RotationTransition(
+          turns: _rotateAnimation,
+          child: Icon(
+            Icons.expand_more_rounded,
+            size: TekIconSizes().s24,
+          ),
         ),
       ),
     );

@@ -100,8 +100,7 @@ class TekCheckBoxForm extends StatelessWidget {
           color: enabled ? TekColors().primary : TekColors.grey,
         ),
         onReset: () => onChanged!(false),
-        decoration: tekInputDecoration(
-          context,
+        decoration: const InputDecoration(
           contentPadding: EdgeInsets.zero,
           border: InputBorder.none,
           enabledBorder: InputBorder.none,

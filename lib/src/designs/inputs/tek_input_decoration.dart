@@ -1,7 +1,8 @@
 part of 'inputs.dart';
 
-InputDecoration tekInputDecoration(
-  BuildContext context, {
+InputDecoration tekInputDecoration({
+  required BuildContext context,
+  required TekInputSize size,
   bool? enabled,
   bool? isDense,
   bool? filled,
@@ -25,6 +26,9 @@ InputDecoration tekInputDecoration(
   int? errorMaxLines,
   TextStyle? errorStyle,
   InputBorder? border,
+  BoxConstraints? suffixIconConstraints,
+  BoxConstraints? prefixIconConstraints,
+  bool ableFixIconConstraints = false,
 }) =>
     InputDecoration(
       isDense: isDense,
@@ -51,4 +55,14 @@ InputDecoration tekInputDecoration(
       errorMaxLines: errorMaxLines,
       errorStyle: errorStyle,
       border: border,
+      suffixIconConstraints: ableFixIconConstraints
+          ? BoxConstraints(
+              maxHeight: size.height,
+            )
+          : null,
+      prefixIconConstraints: ableFixIconConstraints
+          ? BoxConstraints(
+              maxHeight: size.height,
+            )
+          : null,
     );

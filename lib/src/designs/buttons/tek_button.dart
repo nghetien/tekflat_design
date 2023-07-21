@@ -1,82 +1,77 @@
 part of 'buttons.dart';
 
 enum TekButtonSize {
-  large(48),
-  medium(40),
-  small(32);
+  extraLarge,
+  large,
+  medium,
+  small;
 
-  const TekButtonSize(this.height);
+  const TekButtonSize();
 
-  final double height;
-
-  static double getPaddingVertical(TekButtonSize? size) {
-    if (size == null) return 8;
-    return 0;
-  }
-
-  static double getSpaceLoading(TekButtonSize? size) {
-    switch (size) {
-      case TekButtonSize.large:
-        return 6;
-      case TekButtonSize.medium:
-        return 4;
-      case TekButtonSize.small:
-        return 2;
-      default:
-        return 2;
+  double get height {
+    switch (this) {
+      case extraLarge:
+        return 56;
+      case large:
+        return 48;
+      case medium:
+        return 40;
+      case small:
+        return 32;
     }
   }
 
-  static double getSizeLoading(TekButtonSize? size) {
-    switch (size) {
-      case TekButtonSize.large:
-        return 16;
-      case TekButtonSize.medium:
-        return 14;
-      case TekButtonSize.small:
-        return 12;
-      default:
-        return 14;
+  double get spacing {
+    switch (this) {
+      case extraLarge:
+        return 6.scaleSpacing;
+      case large:
+        return 5.scaleSpacing;
+      case medium:
+        return 4.scaleSpacing;
+      case small:
+        return 2.scaleSpacing;
     }
   }
 
-  static double getIconSize(TekButtonSize? size) {
-    switch (size) {
-      case TekButtonSize.large:
-        return TekIconSizes().s20;
-      case TekButtonSize.medium:
-        return TekIconSizes().s18;
-      case TekButtonSize.small:
-        return TekIconSizes().s14;
-      default:
-        return TekIconSizes().s18;
+  double get loadingSize {
+    switch (this) {
+      case extraLarge:
+        return 14.scaleFontSize;
+      case large:
+        return 13.scaleFontSize;
+      case medium:
+        return 12.scaleFontSize;
+      case small:
+        return 10.scaleFontSize;
     }
   }
 
-  static TextStyle getTextStyle(TekButtonSize? size) {
-    switch (size) {
-      case TekButtonSize.large:
+  double get iconSize {
+    switch (this) {
+      case extraLarge:
+        return 20.scaleFontSize;
+      case large:
+        return 18.scaleFontSize;
+      case medium:
+        return 18.scaleFontSize;
+      case small:
+        return 14.scaleFontSize;
+    }
+  }
+
+  TextStyle get textStyle {
+    switch (this) {
+      case extraLarge:
         return TekTextStyles.titleMedium;
-      case TekButtonSize.medium:
+      case large:
         return TekTextStyles.body;
-      case TekButtonSize.small:
+      case medium:
+        return TekTextStyles.body;
+      case small:
         return TekTextStyles.label;
-      default:
-        return TekTextStyles.body;
     }
   }
-}
-
-class TekButtonTypeStyle {
-  final Color? backgroundColor;
-  final Color? textColor;
-  final OutlinedBorder? outlinedBorder;
-
-  const TekButtonTypeStyle({
-    this.backgroundColor,
-    this.textColor,
-    this.outlinedBorder,
-  });
 }
 
 enum TekButtonType {
@@ -90,85 +85,132 @@ enum TekButtonType {
   themeGhost,
   none;
 
-  Color? getTextColor(
-    BuildContext context, {
+  Color? getTextColor({
+    required BuildContext context,
+    Color? customizeColor,
     bool disabled = false,
     bool loading = false,
-    Color? textColor,
   }) {
-    return (disabled || loading)
-        ? (textColor ?? style(context: context).textColor)?.withOpacity(0.4)
-        : (textColor ?? style(context: context).textColor);
-  }
-
-  TekButtonTypeStyle style({BuildContext? context}) {
+    if (customizeColor != null) {
+      return (disabled || loading) ? customizeColor.withOpacity(0.4) : customizeColor;
+    }
+    late Color? textColor;
     switch (this) {
       case TekButtonType.primary:
-        return TekButtonTypeStyle(
-          backgroundColor: TekColors().primary,
-          textColor: Colors.white,
-          outlinedBorder: null,
-        );
+        textColor = TekColors.white;
+        break;
       case TekButtonType.outline:
-        return TekButtonTypeStyle(
-          backgroundColor: Colors.transparent,
-          textColor: context?.theme.textTheme.bodyMedium?.color ?? TekColors.grey,
-          outlinedBorder: RoundedRectangleBorder(
-            side: BorderSide(
-              color: context?.theme.textTheme.bodyMedium?.color ?? TekColors.grey,
-              width: TekBorders.thin,
-            ),
-            borderRadius: TekCorners().mainCornerBorder,
+        textColor = context.theme.textTheme.titleMedium?.color ?? TekColors.grey;
+        break;
+      case TekButtonType.danger:
+        textColor = TekColors.white;
+        break;
+      case TekButtonType.warning:
+        textColor = TekColors.white;
+        break;
+      case TekButtonType.success:
+        textColor = TekColors.white;
+        break;
+      case TekButtonType.info:
+        textColor = TekColors.white;
+        break;
+      case TekButtonType.none:
+        textColor = context.theme.textTheme.titleMedium?.color;
+        break;
+      case TekButtonType.ghost:
+        textColor = TekColors.grey;
+        break;
+      case TekButtonType.themeGhost:
+        textColor = TekColors().primary;
+        break;
+    }
+    return (disabled || loading) ? textColor?.withOpacity(0.4) : textColor;
+  }
+
+  Color? getBackgroundColor({
+    required BuildContext context,
+    bool disabled = false,
+    bool loading = false,
+    Color? customizeColor,
+  }) {
+    if (customizeColor != null) {
+      return (disabled || loading) ? customizeColor.withOpacity(0.4) : customizeColor;
+    }
+    late Color backgroundColor;
+    switch (this) {
+      case TekButtonType.primary:
+        backgroundColor = TekColors().primary;
+        break;
+      case TekButtonType.outline:
+        backgroundColor = Colors.transparent;
+        break;
+      case TekButtonType.danger:
+        backgroundColor = TekColors.red;
+        break;
+      case TekButtonType.warning:
+        backgroundColor = TekColors.yellow;
+        break;
+      case TekButtonType.success:
+        backgroundColor = TekColors.green;
+        break;
+      case TekButtonType.info:
+        backgroundColor = TekColors.blue;
+        break;
+      case TekButtonType.none:
+        backgroundColor = Colors.transparent;
+        break;
+      case TekButtonType.ghost:
+        backgroundColor = Colors.transparent;
+        break;
+      case TekButtonType.themeGhost:
+        backgroundColor = context.theme.colorScheme.background;
+        break;
+    }
+    return (disabled || loading)
+        ? backgroundColor == Colors.transparent
+            ? TekColors.greyOpacity01
+            : backgroundColor.withOpacity(0.4)
+        : backgroundColor;
+  }
+
+  OutlinedBorder? getOutlinedBorder({
+    required BuildContext context,
+    bool disabled = false,
+    bool loading = false,
+  }) {
+    switch (this) {
+      case TekButtonType.primary:
+        return null;
+      case TekButtonType.outline:
+        final borderSizeColor = context.theme.textTheme.titleMedium?.color ?? TekColors.grey;
+        return RoundedRectangleBorder(
+          side: BorderSide(
+            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderSizeColor,
+            width: TekBorders.thin,
           ),
+          borderRadius: TekCorners().mainCornerBorder,
         );
       case TekButtonType.danger:
-        return const TekButtonTypeStyle(
-          backgroundColor: TekColors.red,
-          textColor: Colors.white,
-          outlinedBorder: null,
-        );
+        return null;
       case TekButtonType.warning:
-        return const TekButtonTypeStyle(
-          backgroundColor: TekColors.yellow,
-          textColor: Colors.white,
-          outlinedBorder: null,
-        );
+        return null;
       case TekButtonType.success:
-        return const TekButtonTypeStyle(
-          backgroundColor: TekColors.green,
-          textColor: Colors.white,
-          outlinedBorder: null,
-        );
+        return null;
       case TekButtonType.info:
-        return const TekButtonTypeStyle(
-          backgroundColor: TekColors.blueLight,
-          textColor: TekColors.white,
-          outlinedBorder: null,
-        );
+        return null;
       case TekButtonType.none:
-        return TekButtonTypeStyle(
-          backgroundColor: Colors.transparent,
-          textColor: context?.theme.textTheme.bodyMedium?.color,
-          outlinedBorder: null,
-        );
+        return null;
       case TekButtonType.ghost:
-        return TekButtonTypeStyle(
-          backgroundColor: Colors.transparent,
-          textColor: TekColors.grey,
-          outlinedBorder: RoundedRectangleBorder(
-            side: const BorderSide(
-              color: TekColors.grey,
-              width: TekBorders.thin,
-            ),
-            borderRadius: TekCorners().mainCornerBorder,
+        const borderSizeColor = TekColors.grey;
+        return RoundedRectangleBorder(
+          side: BorderSide(
+            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderSizeColor,
+            width: TekBorders.thin,
           ),
+          borderRadius: TekCorners().mainCornerBorder,
         );
       case TekButtonType.themeGhost:
-        return TekButtonTypeStyle(
-          backgroundColor: context?.theme.inputDecorationTheme.fillColor,
-          textColor: TekColors().primary,
-          outlinedBorder: null,
-        );
+        return null;
     }
   }
 }
@@ -178,7 +220,7 @@ class TekButton extends StatelessWidget {
     Key? key,
 
     /// Button
-    this.size,
+    this.size = TekButtonSize.medium,
     this.type = TekButtonType.none,
 
     /// Action
@@ -204,7 +246,7 @@ class TekButton extends StatelessWidget {
     this.padding,
     this.background,
     this.hoverColor,
-    this.shadowColor = Colors.transparent,
+    this.shadowColor,
     this.elevation,
     this.boxShadow,
     this.splashFactory,
@@ -212,15 +254,17 @@ class TekButton extends StatelessWidget {
     this.textColor,
     this.fontSize,
     this.textStyle,
-    this.textAlign = TextAlign.center,
-    this.maxLines = 4,
+    this.textAlign,
+    this.maxLines = 1,
     this.alignment,
     this.iconColor,
     this.iconSize,
+    this.mainAxisAlignment,
+    this.spaceBetweenIconAndText,
   }) : super(key: key);
 
   /// Button
-  final TekButtonSize? size;
+  final TekButtonSize size;
   final TekButtonType type;
 
   /// Action
@@ -246,7 +290,7 @@ class TekButton extends StatelessWidget {
   final EdgeInsets? padding;
   final Color? background;
   final Color? hoverColor;
-  final Color shadowColor;
+  final Color? shadowColor;
   final double? elevation;
   final InteractiveInkFeatureFactory? splashFactory;
   final List<BoxShadow>? boxShadow;
@@ -254,18 +298,21 @@ class TekButton extends StatelessWidget {
   final Color? textColor;
   final double? fontSize;
   final TextStyle? textStyle;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final int maxLines;
   final AlignmentGeometry? alignment;
   final double? iconSize;
   final Color? iconColor;
+  final MainAxisAlignment? mainAxisAlignment;
+  final double? spaceBetweenIconAndText;
 
   @override
   Widget build(BuildContext context) => Container(
         padding: EdgeInsets.zero,
         margin: EdgeInsets.zero,
-        height: height ?? size?.height,
+        height: height ?? size.height,
         width: width,
+        alignment: Alignment.center,
         decoration: BoxDecoration(boxShadow: boxShadow),
         child: ElevatedButton(
           key: key,
@@ -279,25 +326,20 @@ class TekButton extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             alignment: alignment,
-            backgroundColor: (disabled || loading)
-                ? (background ?? type.style().backgroundColor)?.withOpacity(0.4)
-                : (background ?? type.style().backgroundColor),
+            backgroundColor: type.getBackgroundColor(
+              context: context,
+              disabled: disabled,
+              loading: loading,
+              customizeColor: background,
+            ),
             shape: shape ??
-                type.style(context: context).outlinedBorder?.copyWith(
-                      side: BorderSide(
-                        color: ((disabled || loading)
-                                ? type
-                                    .style(context: context)
-                                    .outlinedBorder
-                                    ?.side
-                                    .color
-                                    .withOpacity(0)
-                                : type.style(context: context).outlinedBorder?.side.color) ??
-                            Colors.transparent,
-                      ),
-                    ),
+                type.getOutlinedBorder(
+                  context: context,
+                  disabled: disabled,
+                  loading: loading,
+                ),
             padding: EdgeInsets.zero,
-            shadowColor: shadowColor,
+            shadowColor: shadowColor ?? Colors.transparent,
             elevation: elevation ?? 0,
             minimumSize: Size.zero,
             foregroundColor: hoverColor,
@@ -305,13 +347,15 @@ class TekButton extends StatelessWidget {
             enabledMouseCursor:
                 (disabled || loading) ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
           ),
-          child: Container(
-            padding: padding ??
-                EdgeInsets.symmetric(
-                  horizontal: TekSpacings().mainSpacing,
-                  vertical:  TekButtonSize.getPaddingVertical(size),
-                ),
-            child: _getContent(context),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: padding ?? EdgeInsets.symmetric(horizontal: TekSpacings().p14),
+                child: _getContent(context),
+              )
+            ],
           ),
         ),
       );
@@ -319,28 +363,29 @@ class TekButton extends StatelessWidget {
   Widget? _getIcon(BuildContext context) {
     if (loading) {
       return SizedBox(
-        height: TekButtonSize.getSizeLoading(size),
-        width: TekButtonSize.getSizeLoading(size),
+        height: size.loadingSize,
+        width: size.loadingSize,
         child: CircularProgressIndicator(
           strokeWidth: TekBorders.thin,
           color: type.getTextColor(
-            context,
+            context: context,
             disabled: disabled,
             loading: loading,
-            textColor: textColor,
+            customizeColor: textColor,
           ),
         ),
       );
     } else if (iconData != null) {
       return Icon(
         iconData,
-        size: iconSize ?? TekButtonSize.getIconSize(size),
-        color: iconColor ?? type.getTextColor(
-          context,
-          disabled: disabled,
-          loading: loading,
-          textColor: textColor,
-        ),
+        size: iconSize ?? size.iconSize,
+        color: iconColor ??
+            type.getTextColor(
+              context: context,
+              disabled: disabled,
+              loading: loading,
+              customizeColor: textColor,
+            ),
       );
     } else if (icon != null) {
       return icon;
@@ -356,16 +401,18 @@ class TekButton extends StatelessWidget {
     } else if (text != null) {
       content = Text(
         text!,
-        textAlign: TextAlign.center,
+        textAlign: textAlign ?? TextAlign.center,
         maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
         style: textStyle ??
-            TekButtonSize.getTextStyle(size).copyWith(
-              color: type.getTextColor(
-                context,
-                disabled: disabled,
-                loading: loading,
-                textColor: textColor,
-              ),
+            size.textStyle.copyWith(
+              color: textColor ??
+                  type.getTextColor(
+                    context: context,
+                    disabled: disabled,
+                    loading: loading,
+                    customizeColor: textColor,
+                  ),
               height: 0,
               fontSize: fontSize,
             ),
@@ -375,22 +422,22 @@ class TekButton extends StatelessWidget {
     final Widget? icon = _getIcon(context);
     if (iconIsRight) {
       return Row(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
         children: [
-          if (content != null) content,
-          if (icon != null) TekHSpace(TekButtonSize.getSpaceLoading(size)),
+          if (content != null) Flexible(child: content),
+          if (icon != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
           if (icon != null) icon,
         ],
       );
     }
     return Row(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
         if (icon != null) icon,
-        if (icon != null) TekHSpace(TekButtonSize.getSpaceLoading(size)),
-        if (content != null) content,
+        if (icon != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
+        if (content != null) Flexible(child: content),
       ],
     );
   }

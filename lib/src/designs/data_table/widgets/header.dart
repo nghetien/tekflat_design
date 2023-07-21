@@ -16,7 +16,7 @@ class TekDataTableHeaderWidget<T> extends StatefulWidget {
   final TekDataTableHeaderOption headerOption;
   final TekDataTableCheckBoxOption<T> checkBoxOption;
 
-  static final double defaultHeightHeader = 40.scaleSize;
+  static const double defaultHeightHeader = 40;
 
   @override
   State<TekDataTableHeaderWidget<T>> createState() => _TekDataTableHeaderWidgetState<T>();

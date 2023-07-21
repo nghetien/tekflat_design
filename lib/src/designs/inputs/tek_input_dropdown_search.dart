@@ -19,7 +19,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
     this.minHeightPopup,
     this.maxWidthPopup,
     this.minWidthPopup,
-    this.size,
+    this.size = TekInputSize.medium,
     this.width,
     this.initialValue,
     this.controller,
@@ -63,6 +63,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.maxLinesDropdownItem,
   }) : super(key: key);
 
   final String? name;
@@ -82,7 +83,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
   final double? minHeightPopup;
   final double? maxWidthPopup;
   final double? minWidthPopup;
-  final TekInputSize? size;
+  final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -102,7 +103,6 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
   final AutovalidateMode? autoValidateMode;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
-
   final ValueTransformer<List<TekInputDropdownItemModel<T>>?>? valueTransformer;
   final ValueChanged<String?>? onChanged;
   final GestureTapCallback? onTap;
@@ -127,6 +127,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final int? maxLinesDropdownItem;
 
   @override
   State<TekInputDropdownSearch<T>> createState() => _TekInputDropdownSearchState<T>();
@@ -244,6 +245,9 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
     if (widget.size == TekInputSize.large) {
       return TekButtonSize.large;
     }
+    if (widget.size == TekInputSize.extraLarge) {
+      return TekButtonSize.extraLarge;
+    }
     return TekButtonSize.medium;
   }
 
@@ -263,18 +267,14 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               Size(
                 widget.minWidthPopup ?? width,
                 widget.minHeightPopup ??
-                    _menuChildren.length * _getSizeDropdownItem.height +
-                        24.scaleSize +
-                        (widget.size ?? TekInputSize.medium).style.height,
+                    _menuChildren.length * _getSizeDropdownItem.height + 24 + widget.size.height,
               ),
             ),
             maximumSize: MaterialStateProperty.all(
               Size(
                 widget.maxWidthPopup ?? width,
                 widget.maxHeightPopup ??
-                    _menuChildren.length * _getSizeDropdownItem.height +
-                        24.scaleSize +
-                        (widget.size ?? TekInputSize.medium).style.height,
+                    _menuChildren.length * _getSizeDropdownItem.height + 24 + widget.size.height,
               ),
             ),
             visualDensity: VisualDensity.comfortable,
@@ -330,6 +330,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
+              ableFixIconConstraints: true,
             );
           },
         );
@@ -344,9 +345,16 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
         child: TekInput(
           focusNode: _searchFocusNode,
           controller: _searchController,
-          size: TekInputSize.medium,
-          prefixIcon: widget.prefixIconSearch ?? const Icon(Icons.search),
+          size: widget.size,
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(
+              left: TekSpacings().p12,
+              right: TekSpacings().p8,
+            ),
+            child: widget.prefixIconSearch ?? const Icon(Icons.search),
+          ),
           hintText: widget.hintTextSearch,
+          ableFixIconConstraints: true,
         ),
       ),
       ..._menuChildren.map(
@@ -363,15 +371,19 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
             background: isSelected
                 ? widget.backgroundColorSelected ?? TekColors.greenOpacity01
                 : Colors.transparent,
+            mainAxisAlignment: MainAxisAlignment.start,
             child: Row(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                item.child != null
-                    ? item.child!(item.value, item.label)
-                    : Flexible(
-                        child: Text(item.label),
-                      ),
+                Flexible(
+                  child: item.child != null
+                      ? item.child!(item.value, item.label)
+                      : Text(
+                          item.label,
+                          maxLines: widget.maxLinesDropdownItem,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                ),
                 if (isSelected)
                   widget.iconSelected ??
                       const Icon(
@@ -420,11 +432,17 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
           _menuController.open();
         }
       },
-      child: RotationTransition(
-        turns: _rotateAnimation,
-        child: Icon(
-          Icons.expand_more_rounded,
-          size: TekIconSizes().s24,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: TekSpacings().p8,
+          right: TekSpacings().p8,
+        ),
+        child: RotationTransition(
+          turns: _rotateAnimation,
+          child: Icon(
+            Icons.expand_more_rounded,
+            size: TekIconSizes().s24,
+          ),
         ),
       ),
     );
