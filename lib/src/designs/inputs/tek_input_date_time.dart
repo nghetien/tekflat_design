@@ -361,7 +361,6 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
         errorText: widget.errorText,
         errorMaxLines: widget.errorMaxLines,
         errorStyle: widget.errorStyle,
-        ableFixIconConstraints: true,
       );
 
   double get _iconSize {
@@ -391,15 +390,9 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     }
     return InkWell(
       onTap: () => _onSelectDate(),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: TekSpacings().p12,
-          right: TekSpacings().p8,
-        ),
-        child: Icon(
-          iconData,
-          size: _iconSize,
-        ),
+      child: Icon(
+        iconData,
+        size: _iconSize,
       ),
     );
   }

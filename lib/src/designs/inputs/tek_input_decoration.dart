@@ -26,9 +26,8 @@ InputDecoration tekInputDecoration({
   int? errorMaxLines,
   TextStyle? errorStyle,
   InputBorder? border,
-  BoxConstraints? suffixIconConstraints,
-  BoxConstraints? prefixIconConstraints,
-  bool ableFixIconConstraints = false,
+  bool ableSuffixIconConstraints = true,
+  bool ablePrefixIconConstraints = true,
 }) =>
     InputDecoration(
       isDense: isDense,
@@ -37,8 +36,24 @@ InputDecoration tekInputDecoration({
           ? context.theme.inputDecorationTheme.disabledBorder?.borderSide.color
           : fillColor,
       hoverColor: hoverColor,
-      prefixIcon: prefixIcon,
-      suffixIcon: suffixIcon,
+      prefixIcon: ablePrefixIconConstraints
+          ? Padding(
+              padding: EdgeInsets.only(
+                right: TekSpacings().p8,
+                left: TekSpacings().p12,
+              ),
+              child: prefixIcon,
+            )
+          : prefixIcon,
+      suffixIcon: ableSuffixIconConstraints
+          ? Padding(
+              padding: EdgeInsets.only(
+                right: TekSpacings().p12,
+                left: TekSpacings().p8,
+              ),
+              child: suffixIcon,
+            )
+          : suffixIcon,
       contentPadding: contentPadding,
       enabledBorder: enabledBorder,
       focusedBorder: focusedBorder,
@@ -55,12 +70,12 @@ InputDecoration tekInputDecoration({
       errorMaxLines: errorMaxLines,
       errorStyle: errorStyle,
       border: border,
-      suffixIconConstraints: ableFixIconConstraints
+      suffixIconConstraints: ableSuffixIconConstraints
           ? BoxConstraints(
               maxHeight: size.height,
             )
           : null,
-      prefixIconConstraints: ableFixIconConstraints
+      prefixIconConstraints: ablePrefixIconConstraints
           ? BoxConstraints(
               maxHeight: size.height,
             )

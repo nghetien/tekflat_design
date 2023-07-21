@@ -261,6 +261,7 @@ class TekButton extends StatelessWidget {
     this.iconSize,
     this.mainAxisAlignment,
     this.spaceBetweenIconAndText,
+    this.fontWeight,
   }) : super(key: key);
 
   /// Button
@@ -305,6 +306,7 @@ class TekButton extends StatelessWidget {
   final Color? iconColor;
   final MainAxisAlignment? mainAxisAlignment;
   final double? spaceBetweenIconAndText;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -415,6 +417,7 @@ class TekButton extends StatelessWidget {
                   ),
               height: 0,
               fontSize: fontSize,
+              fontWeight: fontWeight,
             ),
       );
     }

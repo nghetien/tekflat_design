@@ -10,12 +10,6 @@ class TekLoadingWidget extends StatefulWidget {
 class TekLoadingWidgetState extends State<TekLoadingWidget> with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
 
-  static String _defaultLoadingText = 'Loading...';
-
-  static void setDefaultLoadingText(String text) => _defaultLoadingText = text;
-
-  static get defaultLoadingText => _defaultLoadingText;
-
   @override
   void initState() {
     super.initState();
@@ -72,7 +66,7 @@ class TekLoadingWidgetState extends State<TekLoadingWidget> with SingleTickerPro
         ),
         TekVSpace.p14,
         Text(
-          _defaultLoadingText,
+          TekLoading().defaultLoadingText,
           style: TekTextStyles.titleMedium.copyWith(
             color: TekColors().primary,
             fontWeight: FontWeight.w600,

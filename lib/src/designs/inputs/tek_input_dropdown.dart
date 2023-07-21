@@ -341,7 +341,6 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
-              ableFixIconConstraints: true,
             );
           },
         );
@@ -358,17 +357,11 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
           _menuController.open();
         }
       },
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: TekSpacings().p8,
-          right: TekSpacings().p8,
-        ),
-        child: RotationTransition(
-          turns: _rotateAnimation,
-          child: Icon(
-            Icons.expand_more_rounded,
-            size: TekIconSizes().s24,
-          ),
+      child: RotationTransition(
+        turns: _rotateAnimation,
+        child: Icon(
+          Icons.expand_more_rounded,
+          size: TekIconSizes().s24,
         ),
       ),
     );

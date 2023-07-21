@@ -330,7 +330,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
-              ableFixIconConstraints: true,
+              ablePrefixIconConstraints: false,
             );
           },
         );
@@ -346,15 +346,8 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
           focusNode: _searchFocusNode,
           controller: _searchController,
           size: widget.size,
-          prefixIcon: Padding(
-            padding: EdgeInsets.only(
-              left: TekSpacings().p12,
-              right: TekSpacings().p8,
-            ),
-            child: widget.prefixIconSearch ?? const Icon(Icons.search),
-          ),
+          prefixIcon: widget.prefixIconSearch ?? const Icon(Icons.search),
           hintText: widget.hintTextSearch,
-          ableFixIconConstraints: true,
         ),
       ),
       ..._menuChildren.map(
@@ -398,7 +391,8 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
     ];
   }
 
-  Widget _getPrefixIcon() {
+  Widget? _getPrefixIcon() {
+    if(_menuChildrenSelected.isEmpty) return null;
     final Widget prefixIcon = Padding(
       padding: EdgeInsets.all(TekSpacings().p8),
       child: Wrap(
@@ -432,17 +426,11 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
           _menuController.open();
         }
       },
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: TekSpacings().p8,
-          right: TekSpacings().p8,
-        ),
-        child: RotationTransition(
-          turns: _rotateAnimation,
-          child: Icon(
-            Icons.expand_more_rounded,
-            size: TekIconSizes().s24,
-          ),
+      child: RotationTransition(
+        turns: _rotateAnimation,
+        child: Icon(
+          Icons.expand_more_rounded,
+          size: TekIconSizes().s24,
         ),
       ),
     );

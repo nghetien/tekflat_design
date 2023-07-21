@@ -185,9 +185,8 @@ class TekInput extends StatelessWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
-    this.prefixIconConstraints,
-    this.suffixIconConstraints,
-    this.ableFixIconConstraints = false,
+    this.ablePrefixIconConstraints = true,
+    this.ableSuffixIconConstraints = true,
   }) : super(key: key);
 
   final GlobalKey? keyFormState;
@@ -237,9 +236,8 @@ class TekInput extends StatelessWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
-  final BoxConstraints? suffixIconConstraints;
-  final BoxConstraints? prefixIconConstraints;
-  final bool ableFixIconConstraints;
+  final bool ableSuffixIconConstraints;
+  final bool ablePrefixIconConstraints;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -298,9 +296,8 @@ class TekInput extends StatelessWidget {
             errorText: errorText,
             errorMaxLines: errorMaxLines,
             errorStyle: errorStyle,
-            prefixIconConstraints: prefixIconConstraints,
-            suffixIconConstraints: suffixIconConstraints,
-            ableFixIconConstraints: ableFixIconConstraints,
+            ableSuffixIconConstraints: ableSuffixIconConstraints,
+            ablePrefixIconConstraints: ablePrefixIconConstraints,
           ),
           name: name ?? '',
         ),
