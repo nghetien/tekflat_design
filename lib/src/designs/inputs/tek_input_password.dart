@@ -29,6 +29,7 @@ class TekInputPassword extends StatefulWidget {
     this.onTap,
     this.onEditingComplete,
     this.onSaved,
+    this.onSubmitted,
     this.isDense,
     this.filled,
     this.prefixIcon,
@@ -78,6 +79,7 @@ class TekInputPassword extends StatefulWidget {
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
+  final ValueChanged<String?>? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final Widget? prefixIcon;
@@ -149,6 +151,7 @@ class _TekInputPasswordState extends State<TekInputPassword> {
         onTap: widget.onTap,
         onEditingComplete: widget.onEditingComplete,
         onSaved: widget.onSaved,
+        onSubmitted: widget.onSubmitted,
         isDense: widget.isDense,
         filled: widget.filled,
         prefixIcon: widget.prefixIcon,

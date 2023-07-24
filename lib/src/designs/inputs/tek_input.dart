@@ -164,6 +164,7 @@ class TekInput extends StatelessWidget {
     this.onTap,
     this.onEditingComplete,
     this.onSaved,
+    this.onSubmitted,
     this.isDense,
     this.filled,
     this.prefixIcon,
@@ -215,6 +216,7 @@ class TekInput extends StatelessWidget {
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
+  final ValueChanged<String?>? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final Widget? prefixIcon;
@@ -271,6 +273,7 @@ class TekInput extends StatelessWidget {
           onTap: onTap,
           onEditingComplete: onEditingComplete,
           onSaved: onSaved,
+          onSubmitted: onSubmitted,
           decoration: tekInputDecoration(
             context: context,
             size: size,

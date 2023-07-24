@@ -52,6 +52,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.onTap,
     this.onEditingComplete,
     this.onSaved,
+    this.onSubmitted,
     this.isDense,
     this.filled,
     this.prefixIcon,
@@ -114,6 +115,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
+  final ValueChanged<String?>? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final Widget? prefixIcon;
@@ -320,6 +322,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               onTap: widget.onTap,
               onEditingComplete: widget.onEditingComplete,
               onSaved: widget.onSaved,
+              onSubmitted: widget.onSubmitted,
               isDense: widget.isDense,
               filled: widget.filled,
               prefixIcon: widget.prefixIcon,

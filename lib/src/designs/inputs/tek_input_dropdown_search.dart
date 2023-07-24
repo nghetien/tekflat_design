@@ -44,6 +44,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
     this.onTap,
     this.onEditingComplete,
     this.onSaved,
+    this.onSubmitted,
     this.isDense,
     this.filled,
     this.contentPadding,
@@ -108,6 +109,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
+  final ValueChanged<String?>? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final EdgeInsets? contentPadding;
@@ -309,6 +311,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               onTap: widget.onTap,
               onEditingComplete: widget.onEditingComplete,
               onSaved: widget.onSaved,
+              onSubmitted: widget.onSubmitted,
               isDense: widget.isDense,
               filled: widget.filled,
               prefixIcon: _getPrefixIcon(),
