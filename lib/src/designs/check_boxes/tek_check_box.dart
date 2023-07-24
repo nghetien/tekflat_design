@@ -12,6 +12,9 @@ class TekCheckBox extends StatelessWidget {
     this.titleWidget,
     this.title,
     this.textStyle,
+    this.side,
+    this.borderWidth,
+    this.mainColor,
   })  : assert((title == null && titleWidget != null) || (title != null && titleWidget == null),
             'each of title and titleWidget must be null'),
         super(key: key);
@@ -25,6 +28,9 @@ class TekCheckBox extends StatelessWidget {
   final Widget? titleWidget;
   final String? title;
   final TextStyle? textStyle;
+  final BorderSide? side;
+  final double? borderWidth;
+  final Color? mainColor;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +44,11 @@ class TekCheckBox extends StatelessWidget {
           activeColor: activeColor ?? type.style.activeColor,
           checkColor: checkColor ?? type.style.checkColor,
           shape: type.style.shape,
-          side: BorderSide(width: TekBorders.med, color: TekColors().primary),
+          side: side ??
+              BorderSide(
+                width: borderWidth ?? context.theme.checkboxTheme.side!.width,
+                color: mainColor ?? context.theme.checkboxTheme.side!.color,
+              ),
         ),
         TekHSpace(space ?? TekSpacings().p8),
         titleWidget ??
@@ -46,7 +56,7 @@ class TekCheckBox extends StatelessWidget {
               title ?? '',
               style: textStyle ??
                   TekTextStyles.body.copyWith(
-                    color: value ? activeColor ?? TekColors().primary : null,
+                    color: value ? activeColor ?? TekColors().primary : mainColor,
                   ),
             ),
       ],

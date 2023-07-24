@@ -44,69 +44,66 @@ class TekCheckBoxForm extends StatelessWidget {
   const TekCheckBoxForm({
     Key? key,
     this.name = '',
-    this.title,
-    this.titleText,
-    this.titleTextStyle,
-    this.titleTextFontWeight,
-    this.contentPadding = EdgeInsets.zero,
-    this.titleTextColor,
     this.type = TekCheckBoxType.check,
     this.initValue = false,
-    this.selected = false,
-    this.onChanged,
     this.activeColor,
     this.checkColor,
+    this.space,
+    this.titleWidget,
+    this.title,
+    this.textStyle,
+    this.validator,
     this.valueTransformer,
-    this.enabled = true,
-  }) : super(key: key);
+    this.onChanged,
+    this.onReset,
+    this.onSaved,
+    this.side,
+    this.borderWidth,
+    this.mainColor,
+  })  : assert((title == null && titleWidget != null) || (title != null && titleWidget == null),
+            'each of title and titleWidget must be null'),
+        super(key: key);
 
   final String name;
-  final Widget? title;
-  final String? titleText;
-  final TextStyle? titleTextStyle;
-  final FontWeight? titleTextFontWeight;
-  final Color? titleTextColor;
-  final EdgeInsets contentPadding;
   final TekCheckBoxType type;
   final bool initValue;
-  final bool selected;
-  final ValueChanged<bool?>? onChanged;
   final Color? activeColor;
   final Color? checkColor;
-  final ValueTransformer? valueTransformer;
-  final bool enabled;
+  final double? space;
+  final Widget? titleWidget;
+  final String? title;
+  final TextStyle? textStyle;
+  final String? Function(bool?)? validator;
+  final dynamic Function(bool?)? valueTransformer;
+  final Function(bool?)? onChanged;
+  final Function()? onReset;
+  final Function(bool?)? onSaved;
+  final BorderSide? side;
+  final double? borderWidth;
+  final Color? mainColor;
 
   @override
-  Widget build(BuildContext context) => FormBuilderCheckbox(
+  Widget build(BuildContext context) => FormBuilderField<bool>(
         name: name,
-        title: title ??
-            Text(
-              titleText ?? '',
-              style: titleTextStyle ??
-                  TekTextStyles.body.copyWith(
-                    color: titleTextColor,
-                    fontWeight: titleTextFontWeight,
-                  ),
-            ),
-        contentPadding: contentPadding,
         initialValue: initValue,
-        selected: selected,
-        onChanged: onChanged,
-        activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.grey,
-        checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.grey,
-        shape: type.style.shape,
-        side: BorderSide(
-          width: TekBorders.med,
-          color: enabled ? TekColors().primary : TekColors.grey,
-        ),
-        onReset: () => onChanged!(false),
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.zero,
-          border: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          fillColor: Colors.transparent,
-        ),
         valueTransformer: valueTransformer,
-        enabled: enabled,
+        validator: validator,
+        onSaved: onSaved,
+        onChanged: onChanged,
+        onReset: onReset,
+        builder: (state) => TekCheckBox(
+          value: state.value ?? false,
+          onChanged: state.didChange,
+          activeColor: activeColor,
+          checkColor: checkColor,
+          space: space,
+          titleWidget: titleWidget,
+          title: title,
+          textStyle: textStyle,
+          type: type,
+          side: side,
+          borderWidth: borderWidth,
+          mainColor: mainColor,
+        ),
       );
 }

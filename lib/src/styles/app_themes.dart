@@ -87,8 +87,9 @@ class TekThemes {
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(TekColors().primary),
       checkColor: MaterialStateProperty.all(TekColors().primary),
-      side: BorderSide(width: TekBorders.med, color: TekColors().primary),
+      side: const BorderSide(width: TekBorders.thin, color: TekColors.black),
       splashRadius: 0,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -236,9 +237,10 @@ class TekThemes {
     dialogBackgroundColor: TekColors().bgSecondaryThemeDark,
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(TekColors().primary),
-      checkColor: MaterialStateProperty.all(TekColors().primary),
-      side: BorderSide(width: TekBorders.med, color: TekColors().primary),
+      checkColor: MaterialStateProperty.all(TekColors.black),
+      side: const BorderSide(width: TekBorders.thin, color: TekColors.white),
       splashRadius: 0,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
