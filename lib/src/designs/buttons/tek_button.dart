@@ -262,6 +262,7 @@ class TekButton extends StatelessWidget {
     this.mainAxisAlignment,
     this.spaceBetweenIconAndText,
     this.fontWeight,
+    this.mainAxisSize,
   }) : super(key: key);
 
   /// Button
@@ -307,6 +308,7 @@ class TekButton extends StatelessWidget {
   final MainAxisAlignment? mainAxisAlignment;
   final double? spaceBetweenIconAndText;
   final FontWeight? fontWeight;
+  final MainAxisSize? mainAxisSize;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -425,6 +427,7 @@ class TekButton extends StatelessWidget {
     final Widget? icon = _getIcon(context);
     if (iconIsRight) {
       return Row(
+        mainAxisSize: mainAxisSize ?? MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
         children: [
@@ -435,6 +438,7 @@ class TekButton extends StatelessWidget {
       );
     }
     return Row(
+      mainAxisSize: mainAxisSize ?? MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [

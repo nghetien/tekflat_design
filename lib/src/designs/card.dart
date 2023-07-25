@@ -13,6 +13,7 @@ class TekCard extends StatelessWidget {
     this.backgroundColor,
     this.borderRadius,
     this.border,
+    this.boxShadow,
   }) : super(key: key);
 
   final Widget child;
@@ -23,6 +24,7 @@ class TekCard extends StatelessWidget {
   final Color? backgroundColor;
   final BorderRadius? borderRadius;
   final BoxBorder? border;
+  final List<BoxShadow>? boxShadow;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -38,6 +40,7 @@ class TekCard extends StatelessWidget {
                 color: Colors.transparent,
                 width: 0,
               ),
+          boxShadow: boxShadow,
         ),
         child: child,
       );

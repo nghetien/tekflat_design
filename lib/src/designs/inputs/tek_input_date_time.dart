@@ -98,7 +98,7 @@ class TekInputDateTime extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
   final ValueTransformer<String?>? valueTransformer;
-  final ValueChanged<String?>? onChanged;
+  final ValueChanged<DateTime?>? onChanged;
   final GestureTapCallback? onTap;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
@@ -313,7 +313,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
   }
 
   void _onChanged(String? value) {
-    widget.onChanged?.call(value);
+    widget.onChanged?.call(value?.toDateTimeWithFormat(_getDateTimeValidator()));
   }
 
   @override
