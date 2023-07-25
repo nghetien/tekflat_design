@@ -64,6 +64,7 @@ class TekDialogs {
     required Widget content,
     bool showFooter = true,
     Widget? customizeFooter,
+    MainAxisSize? mainAxisSize,
   }) {
     return showDialog<T>(
       context: context,
@@ -83,6 +84,7 @@ class TekDialogs {
           child: Stack(
             children: <Widget>[
               Column(
+                mainAxisSize: mainAxisSize ?? MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   onPressedToTitle == null
@@ -105,7 +107,7 @@ class TekDialogs {
                   TekVSpace.mainSpace,
                   const TekDivider(),
                   TekVSpace.p4,
-                  Expanded(child: content),
+                  content,
                   if (showFooter)
                     Padding(
                       padding: EdgeInsets.only(top: TekSpacings().p4),
@@ -121,6 +123,7 @@ class TekDialogs {
                                 size: TekButtonSize.medium,
                                 text: customizeCancelText ?? 'Cancel',
                                 textColor: TekColors().primary,
+                                mainAxisSize: MainAxisSize.min,
                               ),
                               TekHSpace.mainSpace,
                               TekButton(
@@ -132,6 +135,7 @@ class TekDialogs {
                                 type: TekButtonType.primary,
                                 size: TekButtonSize.medium,
                                 text: customizeOkText ?? 'Ok',
+                                mainAxisSize: MainAxisSize.min,
                               ),
                             ],
                           ),
