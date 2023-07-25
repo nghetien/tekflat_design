@@ -315,8 +315,8 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               validator: widget.validator,
               inputFormatters: widget.inputFormatters,
               valueTransformer: (value) {
-                if (_currentSelected == null) return widget.valueTransformer?.call(null);
-                return widget.valueTransformer?.call(_currentSelected);
+                if (widget.valueTransformer != null) return widget.valueTransformer?.call(_currentSelected);
+                return _currentSelected?.value;
               },
               onChanged: widget.onChanged,
               onTap: widget.onTap,

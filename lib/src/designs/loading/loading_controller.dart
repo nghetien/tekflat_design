@@ -57,7 +57,10 @@ class TekLoadingController {
     _markNeedsBuild();
   }
 
-  Future<T?> openAndDismissLoading<T>(AsyncValueGetter<T?> callback) async {
+  Future<T?> openAndDismissLoading<T>(
+    AsyncValueGetter<T?> callback, {
+    Function(dynamic)? onError,
+  }) async {
     try {
       show();
       final T? result = await callback();
@@ -65,6 +68,7 @@ class TekLoadingController {
       return result;
     } catch (e) {
       TekLogger.debugLog('openAndDismissLoading: $e');
+      if (onError != null) onError(e);
       dismiss();
     }
     return null;

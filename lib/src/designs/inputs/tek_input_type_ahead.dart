@@ -384,11 +384,17 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
               inputFormatters: widget.inputFormatters,
               valueTransformer: (value) {
                 if (widget.isSelectOne) {
-                  if (_selectedItem == null) return widget.valueTransformer?.call(null);
-                  return widget.valueTransformer?.call([_selectedItem!.value]);
+                  if (widget.valueTransformer != null) {
+                    return widget.valueTransformer?.call(
+                      _selectedItem != null ? [_selectedItem!.value] : null,
+                    );
+                  }
+                  return _selectedItem?.value.value;
                 } else {
-                  if (_selectedItems.isEmpty) return widget.valueTransformer?.call(null);
-                  return widget.valueTransformer?.call(_selectedItems.values.toList());
+                  if (widget.valueTransformer != null) {
+                    return widget.valueTransformer?.call(_selectedItems.values.toList());
+                  }
+                  return _selectedItems.values.map((e) => e.value).toList();
                 }
               },
               onChanged: widget.onChanged,

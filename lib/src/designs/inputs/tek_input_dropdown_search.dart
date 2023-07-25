@@ -305,7 +305,8 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               validator: widget.validator,
               inputFormatters: widget.inputFormatters,
               valueTransformer: (value) {
-                return widget.valueTransformer?.call(_menuChildrenSelected);
+                if (widget.valueTransformer != null) return widget.valueTransformer?.call(_menuChildrenSelected);
+                return _menuChildrenSelected.map((e) => e.value).toList();
               },
               onChanged: widget.onChanged,
               onTap: widget.onTap,
