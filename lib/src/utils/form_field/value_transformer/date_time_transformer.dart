@@ -5,9 +5,10 @@ class TekDateTimeTransformer {
   const TekDateTimeTransformer._();
 
   static DateTime? parse(
-    String value, {
+    String? value, {
     String? formatter,
   }) {
+    if(value == null || value.isEmpty) return null;
     try {
       if (formatter != null) return DateFormat(formatter).parse(value);
       return DateTime.parse(value);

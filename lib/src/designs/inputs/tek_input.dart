@@ -188,6 +188,7 @@ class TekInput extends StatelessWidget {
     this.errorStyle,
     this.ablePrefixIconConstraints = true,
     this.ableSuffixIconConstraints = true,
+    this.readOnly = false,
   }) : super(key: key);
 
   final GlobalKey? keyFormState;
@@ -240,6 +241,7 @@ class TekInput extends StatelessWidget {
   final TextStyle? errorStyle;
   final bool ableSuffixIconConstraints;
   final bool ablePrefixIconConstraints;
+  final bool readOnly;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -274,6 +276,7 @@ class TekInput extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           onSaved: onSaved,
           onSubmitted: onSubmitted,
+          readOnly: readOnly,
           decoration: tekInputDecoration(
             context: context,
             size: size,

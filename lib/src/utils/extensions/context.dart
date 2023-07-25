@@ -13,19 +13,35 @@ extension TekContextEx on BuildContext {
 
   double get heightScreen => MediaQuery.of(this).size.height;
 
-  void popNavigator<T extends Object?>([T? result]) =>
+  void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 
-  void popUntilNavigator(RoutePredicate predicate) =>
-      Navigator.of(this, rootNavigator: true).popUntil(predicate);
+  void popNavigator<T extends Object?>() => Navigator.pop<T>(this);
+
+  void popUntilNavigator({
+    required RoutePredicate predicate,
+    bool rootNavigator = false,
+  }) =>
+      Navigator.of(
+        this,
+        rootNavigator: rootNavigator,
+      ).popUntil(predicate);
 
   Future<T?> pushNavigator<T extends Object?>({
     required Widget page,
+    RouteSettings? settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+    bool allowSnapshotting = true,
+    bool rootNavigator = false,
   }) =>
-      Navigator.push<T>(
-        this,
-        MaterialPageRoute(builder: (context) => page),
+      Navigator.of(this, rootNavigator: rootNavigator).push<T>(
+        MaterialPageRoute(
+          builder: (context) => page,
+          settings: settings,
+          fullscreenDialog: fullscreenDialog,
+          maintainState: maintainState,
+          allowSnapshotting: allowSnapshotting,
+        ),
       );
-
-  void pop<T extends Object?>() => Navigator.pop<T>(this);
 }

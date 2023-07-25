@@ -37,22 +37,26 @@ InputDecoration tekInputDecoration({
           : fillColor,
       hoverColor: hoverColor,
       prefixIcon: ablePrefixIconConstraints
-          ? Padding(
-              padding: EdgeInsets.only(
-                right: TekSpacings().p8,
-                left: TekSpacings().p12,
-              ),
-              child: prefixIcon,
-            )
+          ? prefixIcon != null
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    right: TekSpacings().p8,
+                    left: TekSpacings().p12,
+                  ),
+                  child: prefixIcon,
+                )
+              : null
           : prefixIcon,
       suffixIcon: ableSuffixIconConstraints
-          ? Padding(
-              padding: EdgeInsets.only(
-                right: TekSpacings().p12,
-                left: TekSpacings().p8,
-              ),
-              child: suffixIcon,
-            )
+          ? suffixIcon != null
+              ? Padding(
+                  padding: EdgeInsets.only(
+                    right: TekSpacings().p12,
+                    left: TekSpacings().p8,
+                  ),
+                  child: suffixIcon,
+                )
+              : null
           : suffixIcon,
       contentPadding: contentPadding,
       enabledBorder: enabledBorder,

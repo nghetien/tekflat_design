@@ -418,6 +418,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
               ablePrefixIconConstraints: false,
+              readOnly: true,
             );
           },
         );

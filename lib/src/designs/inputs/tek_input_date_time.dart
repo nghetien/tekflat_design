@@ -65,6 +65,7 @@ class TekInputDateTime extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.readOnly = false,
   }) : super(key: key);
 
   final String? name;
@@ -123,6 +124,7 @@ class TekInputDateTime extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final bool readOnly;
 
   @override
   State<TekInputDateTime> createState() => TekInputDateTimeState();
@@ -364,6 +366,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
         errorText: widget.errorText,
         errorMaxLines: widget.errorMaxLines,
         errorStyle: widget.errorStyle,
+        readOnly: widget.autoOpenSelectDate,
       );
 
   double get _iconSize {

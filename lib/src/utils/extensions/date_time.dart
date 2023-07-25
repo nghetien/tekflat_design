@@ -27,4 +27,6 @@ extension TekDateTimeEx on DateTime {
   String get dateTimeStr => DateFormat('dd/MM/yyyy HH:mm').format(this);
 
   String get dayOfMonthOfYear => DateFormat.yMMMEd().format(this);
+
+  String customFormat(String format) => DateFormat(format).format(this);
 }

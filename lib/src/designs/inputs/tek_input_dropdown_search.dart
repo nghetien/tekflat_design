@@ -334,6 +334,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               errorMaxLines: widget.errorMaxLines,
               errorStyle: widget.errorStyle,
               ablePrefixIconConstraints: false,
+              readOnly: true,
             );
           },
         );
