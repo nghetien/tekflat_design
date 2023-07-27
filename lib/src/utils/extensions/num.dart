@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:tekflat_design/src/styles/styles.dart';
 
 extension TekNumEx on num {
@@ -20,5 +21,10 @@ extension TekNumEx on num {
         "",
       ),
     );
+  }
+
+  String get truncateNumberToString {
+    final f = NumberFormat("###,###.###", "tr_TR");
+    return f.format(this).replaceAll(',', '*').replaceAll('.', ',').replaceAll('*', '.');
   }
 }

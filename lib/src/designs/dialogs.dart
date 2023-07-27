@@ -54,7 +54,9 @@ class TekDialogs {
     Color? color,
     BoxShape shape = BoxShape.rectangle,
     BorderRadiusGeometry? borderRadius,
-    EdgeInsets? padding,
+    EdgeInsets? headerPadding,
+    EdgeInsets? contentPadding,
+    EdgeInsets? footerPadding,
     required String title,
     VoidCallback? onPressedToTitle,
     String? customizeOkText,
@@ -75,7 +77,6 @@ class TekDialogs {
         child: Container(
           width: width,
           height: height,
-          padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
           decoration: BoxDecoration(
             color: color ?? Theme.of(context).cardColor,
             shape: shape,
@@ -87,30 +88,44 @@ class TekDialogs {
                 mainAxisSize: mainAxisSize ?? MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  onPressedToTitle == null
-                      ? TekTypography(
-                          text: title,
-                          type: TekTypographyType.level5,
-                          color: TekColors().primary,
-                        )
-                      : TekButtonGD(
-                          type: TekButtonGDType.customize,
-                          onPressed: () {
-                            onPressedToTitle();
-                          },
-                          child: TekTypography(
+                  Padding(
+                    padding: headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
+                    child: onPressedToTitle == null
+                        ? TekTypography(
                             text: title,
                             type: TekTypographyType.level5,
                             color: TekColors().primary,
+                          )
+                        : TekButtonGD(
+                            type: TekButtonGDType.customize,
+                            onPressed: () {
+                              onPressedToTitle();
+                            },
+                            child: TekTypography(
+                              text: title,
+                              type: TekTypographyType.level5,
+                              color: TekColors().primary,
+                            ),
                           ),
-                        ),
-                  TekVSpace.mainSpace,
-                  const TekDivider(),
+                  ),
+                  Padding(
+                    padding: headerPadding ??
+                        EdgeInsets.symmetric(horizontal: TekSpacings().mainSpacing),
+                    child: const TekDivider(),
+                  ),
                   TekVSpace.p4,
-                  content,
+                  Padding(
+                    padding: contentPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
+                    child: content,
+                  ),
                   if (showFooter)
                     Padding(
-                      padding: EdgeInsets.only(top: TekSpacings().p4),
+                      padding: EdgeInsets.only(
+                        top: TekSpacings().p4,
+                        bottom: (footerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).bottom,
+                        right: (footerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).right,
+                        left: (footerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).left,
+                      ),
                       child: customizeFooter ??
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -143,8 +158,8 @@ class TekDialogs {
                 ],
               ),
               Positioned(
-                top: 0,
-                right: 0,
+                top: (headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).top,
+                right: (headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).right,
                 child: TekButtonGD(
                   type: TekButtonGDType.icon,
                   onPressed: () {

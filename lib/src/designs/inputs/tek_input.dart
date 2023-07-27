@@ -190,7 +190,13 @@ class TekInput extends StatelessWidget {
     this.ablePrefixIconConstraints = true,
     this.ableSuffixIconConstraints = true,
     this.readOnly = false,
-  }) : super(key: key);
+  })  : assert(
+          (initialValue == null && controller == null) ||
+              (initialValue != null && controller == null) ||
+              (initialValue == null && controller != null),
+          'Cannot provide both a controller and a initial value',
+        ),
+        super(key: key);
 
   final GlobalKey? keyFormState;
   final String? name;
