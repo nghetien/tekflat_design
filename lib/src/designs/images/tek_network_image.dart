@@ -14,6 +14,7 @@ class TekNetworkImage extends StatelessWidget {
     this.boxFit = BoxFit.cover,
     this.assetPathWhenError,
     this.imageProviderWhenError,
+    this.childOnError,
   }) : super(key: key);
 
   final TekImageSize size;
@@ -27,6 +28,7 @@ class TekNetworkImage extends StatelessWidget {
   final BoxFit boxFit;
   final String? assetPathWhenError;
   final ImageProvider? imageProviderWhenError;
+  final Widget? childOnError;
 
   Widget _error() => assetPathWhenError != null
       ? TekAssetImage(
@@ -40,7 +42,7 @@ class TekNetworkImage extends StatelessWidget {
           boxFit: boxFit,
           imageProvider: imageProviderWhenError,
         )
-      : Container(
+      : childOnError ?? Container(
           width: width ?? size.size,
           height: height ?? size.size,
           decoration: BoxDecoration(

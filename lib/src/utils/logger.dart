@@ -6,9 +6,6 @@ class TekLogger {
   static final _logger = l.Logger(
     printer: l.PrettyPrinter(
       methodCount: 0,
-      printEmojis: false,
-      printTime: false,
-      lineLength: 150,
       colors: true,
     ),
   );

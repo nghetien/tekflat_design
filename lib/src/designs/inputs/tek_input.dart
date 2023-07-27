@@ -87,7 +87,7 @@ enum TekInputSize {
   TextStyle get hintStyle {
     switch (this) {
       case TekInputSize.extraLarge:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles.body;
       case TekInputSize.large:
         return TekTextStyles.body;
       case TekInputSize.medium:
@@ -162,6 +162,7 @@ class TekInput extends StatelessWidget {
     this.valueTransformer,
     this.onChanged,
     this.onTap,
+    this.onTapOutside,
     this.onEditingComplete,
     this.onSaved,
     this.onSubmitted,
@@ -215,6 +216,7 @@ class TekInput extends StatelessWidget {
   final ValueTransformer<String?>? valueTransformer;
   final ValueChanged<String?>? onChanged;
   final GestureTapCallback? onTap;
+  final Function(PointerDownEvent)? onTapOutside;
   final VoidCallback? onEditingComplete;
   final FormFieldSetter? onSaved;
   final ValueChanged<String?>? onSubmitted;
@@ -273,6 +275,7 @@ class TekInput extends StatelessWidget {
           valueTransformer: valueTransformer,
           onChanged: onChanged,
           onTap: onTap,
+          onTapOutside: onTapOutside,
           onEditingComplete: onEditingComplete,
           onSaved: onSaved,
           onSubmitted: onSubmitted,
