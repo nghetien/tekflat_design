@@ -231,13 +231,14 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
             menuChildren: [
               for (final item in pagination.listItemsPerPage)
                 TekInputDropdownItemModel<int>(
+                  keyValue: item.toString(),
                   value: item,
                   label: item.toString(),
                 ),
             ],
-            onSelected: (item) {
-              _itemPerPageValueController.text = item.value.toString();
-              _handleChangeItemPerPage(item.value);
+            onSelected: (item, _) {
+              _itemPerPageValueController.text = item.toString();
+              _handleChangeItemPerPage(item);
             },
           ),
         ),

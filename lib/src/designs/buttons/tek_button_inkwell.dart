@@ -5,7 +5,7 @@ class TekButtonInkwell extends StatelessWidget {
     Key? key,
     this.text,
     this.child,
-    required this.onPressed,
+    this.onPressed,
     this.textColor,
     this.textFontSize,
     this.textFontWeight,
@@ -13,7 +13,7 @@ class TekButtonInkwell extends StatelessWidget {
 
   final String? text;
   final Widget? child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color? textColor;
   final double? textFontSize;
   final FontWeight? textFontWeight;

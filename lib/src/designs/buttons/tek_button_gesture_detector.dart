@@ -13,7 +13,7 @@ class TekButtonGD extends StatelessWidget {
     required this.type,
     this.text,
     this.child,
-    required this.onPressed,
+    this.onPressed,
     this.textColor,
     this.textFontSize,
     this.textFontWeight,
@@ -27,7 +27,7 @@ class TekButtonGD extends StatelessWidget {
   final TekButtonGDType type;
   final String? text;
   final Widget? child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color? textColor;
   final double? textFontSize;
   final FontWeight? textFontWeight;

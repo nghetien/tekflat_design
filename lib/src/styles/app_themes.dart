@@ -78,7 +78,14 @@ class TekThemes {
     ),
     cardTheme: CardTheme(color: TekColors().cardThemeLight),
     cardColor: TekColors().cardThemeLight,
-    bottomSheetTheme: BottomSheetThemeData(backgroundColor: TekColors().bgPrimaryThemeLight),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: TekColors().bgSecondaryThemeLight,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: TekCorners().mainCornerRadius,
+        ),
+      ),
+    ),
     iconTheme: const IconThemeData(color: TekColors.black),
     textTheme: TextTheme(
       titleMedium: TekTextStyles.body.copyWith(color: TekColors.black),
@@ -228,7 +235,14 @@ class TekThemes {
     cardTheme: CardTheme(color: TekColors().cardThemeDark),
     cardColor: TekColors().cardThemeDark,
     canvasColor: TekColors().bgSecondaryThemeDark,
-    bottomSheetTheme: BottomSheetThemeData(backgroundColor: TekColors().bgPrimaryThemeDark),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: TekColors().bgSecondaryThemeDark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: TekCorners().mainCornerRadius,
+        ),
+      ),
+    ),
     iconTheme: const IconThemeData(color: TekColors.white),
     textTheme: TextTheme(
       titleMedium: TekTextStyles.body.copyWith(color: TekColors.white),

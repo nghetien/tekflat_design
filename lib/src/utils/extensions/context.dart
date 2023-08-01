@@ -16,7 +16,7 @@ extension TekContextEx on BuildContext {
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 
-  void popNavigator<T extends Object?>() => Navigator.pop<T>(this);
+  void popNavigator<T extends Object?>([T? result]) => Navigator.pop<T>(this, result);
 
   void popUntilNavigator({
     required RoutePredicate predicate,

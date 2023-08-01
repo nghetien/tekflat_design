@@ -9,21 +9,24 @@ enum TekInputDateTimeType {
 class TekInputDateTime extends StatefulWidget {
   const TekInputDateTime({
     Key? key,
-    this.name,
-    this.type = TekInputDateTimeType.date,
-    this.autoOpenSelectDate = true,
+    this.name = '',
     this.initialValue,
-    this.onDateChanged,
-    this.initialDate,
-    this.firstDate,
-    this.lastDate,
-    this.currentDate,
-    this.initialTime,
+    this.focusNodeForm,
+    this.enabled = true,
+    this.autoValidateMode,
+    this.restorationId,
+    this.validator,
+    this.valueTransformer,
+    this.onSaved,
+    this.onDateTimeChanged,
+    this.onReset,
+
+    /// Text Field
+    this.type = TekInputDateTimeType.date,
     this.size = TekInputSize.medium,
     this.width,
     this.controller,
     this.focusNode,
-    this.onFocusChange,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
     this.textInputAction,
@@ -31,18 +34,13 @@ class TekInputDateTime extends StatefulWidget {
     this.maxLines = 1,
     this.minLines,
     this.maxLength,
-    this.enabled = true,
     this.obscureText = false,
-    this.scrollPadding,
     this.cursorColor,
-    this.autoValidateMode,
-    this.validator,
     this.inputFormatters,
-    this.valueTransformer,
-    this.onChanged,
     this.onTap,
+    this.onTapOutside,
+    this.onChanged,
     this.onEditingComplete,
-    this.onSaved,
     this.onSubmitted,
     this.isDense,
     this.filled,
@@ -66,43 +64,49 @@ class TekInputDateTime extends StatefulWidget {
     this.errorMaxLines,
     this.errorStyle,
     this.readOnly = false,
+
+    /// Date Time Picker
+    this.autoOpenSelectDate = true,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.currentDatePicker,
+    this.initialTime,
   }) : super(key: key);
 
-  final String? name;
-  final TekInputDateTimeType type;
-  final bool autoOpenSelectDate;
+  final String name;
   final DateTime? initialValue;
-  final Function(DateTime?)? onDateChanged;
-  final DateTime? initialDate;
-  final DateTime? firstDate;
-  final DateTime? lastDate;
-  final DateTime? currentDate;
-  final TimeOfDay? initialTime;
+  final FocusNode? focusNodeForm;
+  final bool enabled;
+  final AutovalidateMode? autoValidateMode;
+  final String? restorationId;
+  final String? Function(DateTime?)? validator;
+  final dynamic Function(DateTime?)? valueTransformer;
+  final Function(DateTime?)? onSaved;
+  final Function(DateTime?)? onDateTimeChanged;
+  final Function()? onReset;
+
+  /// Text Field
+  final TekInputDateTimeType type;
   final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final Function(bool)? onFocusChange;
   final TextAlign textAlign;
-  final TextInputAction? textInputAction;
   final TextAlignVertical? textAlignVertical;
+  final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final int maxLines;
   final int? minLines;
   final int? maxLength;
-  final bool enabled;
   final bool obscureText;
-  final EdgeInsets? scrollPadding;
   final Color? cursorColor;
-  final AutovalidateMode? autoValidateMode;
-  final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
-  final ValueTransformer<String?>? valueTransformer;
-  final ValueChanged<DateTime?>? onChanged;
-  final GestureTapCallback? onTap;
-  final VoidCallback? onEditingComplete;
-  final FormFieldSetter? onSaved;
-  final ValueChanged<String?>? onSubmitted;
+  final ValueChanged<String?>? onChanged;
+  final Function()? onTap;
+  final Function(PointerDownEvent)? onTapOutside;
+  final Function()? onEditingComplete;
+  final Function(String?)? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final Widget? prefixIcon;
@@ -126,50 +130,61 @@ class TekInputDateTime extends StatefulWidget {
   final TextStyle? errorStyle;
   final bool readOnly;
 
+  /// Date Time Picker
+  final bool autoOpenSelectDate;
+  final DateTime? initialDate;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
+  final DateTime? currentDatePicker;
+  final TimeOfDay? initialTime;
+
   @override
   State<TekInputDateTime> createState() => TekInputDateTimeState();
 }
 
 class TekInputDateTimeState extends State<TekInputDateTime> {
+  late TextEditingController _controller;
+
   bool _isShowSelectDate = false;
 
   void setIsShowSelectDate(bool value) => _isShowSelectDate = value;
 
-  late FocusNode _focusNode;
-  late TextEditingController _controller;
-
-  void _onFocusChange() {
-    if (widget.autoOpenSelectDate && _focusNode.hasFocus) {
-      FocusManager.instance.primaryFocus?.unfocus();
-      if (_isShowSelectDate) return;
-      _onSelectDate();
-    }
-    widget.onFocusChange?.call(_focusNode.hasFocus);
+  DateTime get _initialDate {
+    DateTime date = widget.initialDate ?? DateTime.now();
+    if (_controller.text.isEmpty) return date;
+    final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
+    if (convertFromText != null) return convertFromText;
+    return date;
   }
 
-  void resetCurrentData(DateTime? value) {
-    if (value == null) {
-      _controller.clear();
-      return;
+  DateTime get _firstDate {
+    DateTime date = widget.firstDate ?? DateTime(DateTime.now().year - 15);
+    if (_controller.text.isEmpty) return date;
+    final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
+    if (convertFromText != null) {
+      if (convertFromText.isBefore(date)) return DateTime(convertFromText.year - 15);
     }
-    switch (widget.type) {
-      case TekInputDateTimeType.date:
-        _controller.text = value.dateStr;
-        break;
-      case TekInputDateTimeType.time:
-        _controller.text = value.timeStr;
-        break;
-      case TekInputDateTimeType.dateTime:
-        _controller.text = value.dateTimeStr;
-        break;
+    return date;
+  }
+
+  DateTime get _lastDate {
+    DateTime date = widget.lastDate ?? DateTime(DateTime.now().year + 15);
+    if (_controller.text.isEmpty) return date;
+    final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
+    if (convertFromText != null) {
+      if (convertFromText.isAfter(date)) return DateTime(convertFromText.year + 15);
     }
+    return date;
+  }
+
+  DateTime? get _currentDatePicker {
+    if (_controller.text.isEmpty) return widget.currentDatePicker;
+    return _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
   }
 
   @override
   void initState() {
     super.initState();
-    _focusNode = widget.focusNode ?? FocusNode();
-    _focusNode.addListener(_onFocusChange);
     _controller = widget.controller ?? TextEditingController();
     try {
       if (widget.initialValue != null) {
@@ -190,12 +205,6 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     }
   }
 
-  @override
-  void dispose() {
-    _focusNode.removeListener(_onFocusChange);
-    super.dispose();
-  }
-
   TextInputFormatter _getFormatter() {
     switch (widget.type) {
       case TekInputDateTimeType.date:
@@ -204,25 +213,6 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
         return TekDateTimeFormatter().timeInputFormatter;
       case TekInputDateTimeType.dateTime:
         return TekDateTimeFormatter().dateTimeInputFormatter;
-    }
-  }
-
-  FormFieldValidator<String> _getValidator() {
-    switch (widget.type) {
-      case TekInputDateTimeType.date:
-        return TekFormValidator.dateTime(
-          errorText: TekFormValidatorMessageError().dateTime,
-          validator: _getDateTimeValidator(),
-        );
-      case TekInputDateTimeType.time:
-        return TekFormValidator.timeOfDay(
-          errorText: TekFormValidatorMessageError().timeOfDay,
-        );
-      case TekInputDateTimeType.dateTime:
-        return TekFormValidator.dateTime(
-          errorText: TekFormValidatorMessageError().dateTime,
-          validator: _getDateTimeValidator(),
-        );
     }
   }
 
@@ -237,17 +227,29 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     }
   }
 
-  void _onSelectDate() async {
+  void _onFocusChange({
+    bool? hasFocus,
+    required FormFieldState<DateTime> state,
+  }) {
+    if (hasFocus == null || hasFocus == false) return;
+    if (widget.autoOpenSelectDate) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      if (_isShowSelectDate) return;
+      _onSelectDate(state);
+    }
+  }
+
+  void _onSelectDate(FormFieldState<DateTime> state) async {
     setIsShowSelectDate(true);
     DateTime? date;
     switch (widget.type) {
       case TekInputDateTimeType.date:
         date = await showDatePicker(
           context: context,
-          initialDate: widget.initialDate ?? DateTime.now(),
-          firstDate: widget.firstDate ?? DateTime(DateTime.now().year - 5),
-          lastDate: widget.lastDate ?? DateTime(DateTime.now().year + 5),
-          currentDate: widget.currentDate,
+          initialDate: _initialDate,
+          firstDate: _firstDate,
+          lastDate: _lastDate,
+          currentDate: _currentDatePicker,
         );
         break;
       case TekInputDateTimeType.time:
@@ -265,10 +267,10 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
       case TekInputDateTimeType.dateTime:
         await showDatePicker(
           context: context,
-          initialDate: widget.initialDate ?? DateTime.now(),
-          firstDate: widget.firstDate ?? DateTime(DateTime.now().year - 5),
-          lastDate: widget.lastDate ?? DateTime(DateTime.now().year + 5),
-          currentDate: widget.currentDate,
+          initialDate: _initialDate,
+          firstDate: _firstDate,
+          lastDate: _lastDate,
+          currentDate: _currentDatePicker,
         ).then(
               (dateResult) async {
             date = dateResult;
@@ -303,7 +305,8 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
       );
     }
     FocusManager.instance.primaryFocus?.unfocus();
-    widget.onDateChanged?.call(
+    state.didChange(date);
+    widget.onDateTimeChanged?.call(
       date ??
           _controller.text.toDateTimeWithFormat(
             _getDateTimeValidator(),
@@ -312,61 +315,104 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     setIsShowSelectDate(false);
   }
 
-  void _onChanged(String? value) {
-    widget.onChanged?.call(value?.toDateTimeWithFormat(_getDateTimeValidator()));
+  void _onDateTimeChanged(DateTime? dateTime) {
+    widget.onDateTimeChanged?.call(dateTime);
+    if (dateTime != null) {
+      _controller.text = DateFormat(_getDateTimeValidator()).format(dateTime);
+    }
+  }
+
+  void _onReset() {
+    _controller.text = '';
+    widget.onReset?.call();
+  }
+
+  void _onChange({
+    String? dateTimeString,
+    required FormFieldState<DateTime> state,
+  }) {
+    if (widget.autoOpenSelectDate) return;
+    if (dateTimeString?.length == 10) {
+      final convertDate = dateTimeString?.toDateTimeWithFormat(_getDateTimeValidator());
+      if (convertDate == null) {
+        state.didChange(null);
+        widget.onDateTimeChanged?.call(null);
+        state.validate();
+      } else {
+        state.didChange(convertDate);
+        widget.onDateTimeChanged?.call(convertDate);
+      }
+    }
   }
 
   @override
-  Widget build(BuildContext context) => TekInput(
+  Widget build(BuildContext context) => FormBuilderField<DateTime>(
         name: widget.name,
-        size: widget.size,
-        width: widget.width,
-        controller: _controller,
-        focusNode: _focusNode,
-        textAlign: widget.textAlign,
-        textAlignVertical: widget.textAlignVertical,
-        textInputAction: widget.textInputAction,
-        keyboardType: widget.keyboardType,
-        maxLines: widget.maxLines,
-        minLines: widget.minLines,
-        maxLength: widget.maxLength,
+        initialValue: widget.initialValue,
+        focusNode: widget.focusNodeForm,
         enabled: widget.enabled,
-        obscureText: widget.obscureText,
-        cursorColor: widget.cursorColor,
-        autoValidateMode: widget.autoValidateMode,
-        validator: widget.validator ?? FormBuilderValidators.compose([_getValidator()]),
-        inputFormatters: widget.inputFormatters ?? [_getFormatter()],
-        valueTransformer: (value) {
-          if (value == null || value.isEmpty) return null;
-          return value.toDateTimeWithFormat(_getDateTimeValidator());
-        },
-        onChanged: _onChanged,
-        onTap: widget.onTap,
-        onEditingComplete: widget.onEditingComplete,
+        autovalidateMode: widget.autoValidateMode,
+        restorationId: widget.restorationId,
+        validator: widget.validator,
+        valueTransformer: widget.valueTransformer,
         onSaved: widget.onSaved,
-        onSubmitted: widget.onSubmitted,
-        isDense: widget.isDense,
-        filled: widget.filled,
-        prefixIcon: widget.prefixIcon,
-        suffixIcon: widget.suffixIcon ?? _getIcon(),
-        contentPadding: widget.contentPadding,
-        focusedBorder: widget.focusedBorder,
-        enabledBorder: widget.enabledBorder,
-        disabledBorder: widget.disabledBorder,
-        errorBorder: widget.errorBorder,
-        focusedErrorBorder: widget.focusedErrorBorder,
-        fillColor: widget.fillColor,
-        hoverColor: widget.hoverColor,
-        labelText: widget.labelText,
-        labelStyle: widget.labelStyle,
-        floatingLabelStyle: widget.floatingLabelStyle,
-        floatingLabelBehavior: widget.floatingLabelBehavior,
-        hintText: _getHintText(),
-        hintStyle: widget.hintStyle,
-        errorText: widget.errorText,
-        errorMaxLines: widget.errorMaxLines,
-        errorStyle: widget.errorStyle,
-        readOnly: widget.autoOpenSelectDate,
+        onChanged: _onDateTimeChanged,
+        onReset: _onReset,
+        builder: (FormFieldState<DateTime> state) {
+          return Focus(
+            onFocusChange: (hasFocus) => _onFocusChange(
+              hasFocus: hasFocus,
+              state: state,
+            ),
+            child: TekTextField(
+              size: widget.size,
+              width: widget.width,
+              controller: _controller,
+              focusNode: widget.focusNode,
+              textAlign: widget.textAlign,
+              textAlignVertical: widget.textAlignVertical,
+              textInputAction: widget.textInputAction,
+              keyboardType: widget.autoOpenSelectDate ? widget.keyboardType : TextInputType.number,
+              maxLines: widget.maxLines,
+              minLines: widget.minLines,
+              maxLength: widget.maxLength,
+              enabled: widget.enabled,
+              obscureText: widget.obscureText,
+              cursorColor: widget.cursorColor,
+              inputFormatters: widget.inputFormatters ?? [_getFormatter()],
+              onChanged: (text) => _onChange(
+                state: state,
+                dateTimeString: text,
+              ),
+              onTap: widget.onTap,
+              onTapOutside: widget.onTapOutside,
+              onEditingComplete: widget.onEditingComplete,
+              onSubmitted: widget.onSubmitted,
+              isDense: widget.isDense,
+              filled: widget.filled,
+              prefixIcon: widget.prefixIcon,
+              suffixIcon: widget.suffixIcon ?? _getIcon(state),
+              contentPadding: widget.contentPadding,
+              focusedBorder: widget.focusedBorder,
+              enabledBorder: widget.enabledBorder,
+              disabledBorder: widget.disabledBorder,
+              errorBorder: widget.errorBorder,
+              focusedErrorBorder: widget.focusedErrorBorder,
+              fillColor: widget.fillColor,
+              hoverColor: widget.hoverColor,
+              labelText: widget.labelText,
+              labelStyle: widget.labelStyle,
+              floatingLabelStyle: widget.floatingLabelStyle,
+              floatingLabelBehavior: widget.floatingLabelBehavior,
+              hintText: _getHintText(),
+              hintStyle: widget.hintStyle,
+              errorText: widget.errorText ?? state.errorText,
+              errorMaxLines: widget.errorMaxLines,
+              errorStyle: widget.errorStyle,
+              readOnly: widget.autoOpenSelectDate,
+            ),
+          );
+        },
       );
 
   double get _iconSize {
@@ -382,22 +428,42 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     }
   }
 
-  Widget _getIcon() {
-    IconData iconData = Icons.calendar_today_rounded;
-    switch (widget.type) {
-      case TekInputDateTimeType.date:
-        iconData = Icons.calendar_today_rounded;
-        break;
-      case TekInputDateTimeType.time:
-        iconData = Icons.watch_later_rounded;
-        break;
-      case TekInputDateTimeType.dateTime:
-        iconData = Icons.calendar_month_rounded;
+  Widget _getIcon(FormFieldState<DateTime> state) {
+    if (state.value == null) {
+      IconData iconData = Icons.calendar_today_rounded;
+      switch (widget.type) {
+        case TekInputDateTimeType.date:
+          iconData = Icons.calendar_today_rounded;
+          break;
+        case TekInputDateTimeType.time:
+          iconData = Icons.watch_later_rounded;
+          break;
+        case TekInputDateTimeType.dateTime:
+          iconData = Icons.calendar_month_rounded;
+      }
+      return widget.autoOpenSelectDate
+          ? Icon(
+              iconData,
+              size: _iconSize,
+            )
+          : InkWell(
+              onTap: () => _onSelectDate(state),
+              child: Icon(
+                iconData,
+                size: _iconSize,
+              ),
+            );
     }
     return InkWell(
-      onTap: () => _onSelectDate(),
+      onTap: () {
+        state.didChange(null);
+        _controller.clear();
+        widget.onDateTimeChanged?.call(null);
+        FocusManager.instance.primaryFocus?.unfocus();
+        setState(() {});
+      },
       child: Icon(
-        iconData,
+        Icons.cancel_rounded,
         size: _iconSize,
       ),
     );

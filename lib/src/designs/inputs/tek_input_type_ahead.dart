@@ -1,43 +1,32 @@
 part of 'inputs.dart';
 
-class TekInputTypeAheadDropdownItemModel<T> extends TekInputDropdownItemModel<T> {
-  const TekInputTypeAheadDropdownItemModel({
-    required super.keyValue,
-    required super.value,
-    required super.label,
-    super.child,
-  });
-}
-
 class TekInputTypeAhead<T> extends StatefulWidget {
   const TekInputTypeAhead({
     Key? key,
-    this.name,
-    this.isSelectOne = true,
+
+    /// Type
+    this.type = TekInputDropdownType.single,
+    this.closeAfterSelect = false,
+
+    /// Form
+    this.name = '',
+    this.initialValues = const [],
+    this.focusNodeForm,
+    this.enabled = true,
+    this.autoValidateMode,
+    this.restorationId,
+    this.validator,
+    this.valueTransformer,
+    this.onSaved,
+    this.onDropdownChanged,
+    this.onReset,
     this.onSelected,
-    required this.initMenuChildren,
-    required this.onLoadingMenuChildren,
-    required this.onRefreshMenuChildren,
-    this.onSearchMenuChildren,
-    this.reloadMenuChildrenEachOpen = false,
-    this.closeDropdownAfterSelect = true,
-    this.searchController,
-    this.tagsAbleScroll = false,
-    this.hintTextSearch = 'Search',
-    this.prefixIconSearch,
-    this.backgroundColorSelected,
-    this.iconSelected,
-    this.offset,
-    this.maxHeightPopup,
-    required this.minHeightPopup,
-    this.maxWidthPopup,
-    this.minWidthPopup,
+
+    /// Text Field
     this.size = TekInputSize.medium,
     this.width,
-    this.initialValue,
     this.controller,
     this.focusNode,
-    this.onFocusChange,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
     this.textInputAction,
@@ -45,18 +34,13 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     this.maxLines = 1,
     this.minLines,
     this.maxLength,
-    this.enabled = true,
     this.obscureText = false,
-    this.scrollPadding,
     this.cursorColor,
-    this.autoValidateMode,
-    this.validator,
     this.inputFormatters,
-    this.valueTransformer,
-    this.onChanged,
     this.onTap,
+    this.onTapOutside,
+    this.onChanged,
     this.onEditingComplete,
-    this.onSaved,
     this.onSubmitted,
     this.isDense,
     this.filled,
@@ -79,57 +63,62 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
-    this.maxLinesDropdownItem,
+    this.readOnly = false,
+
+    /// Dropdown
+    this.offset,
+    this.maxHeightPopup,
+    this.maxWidthPopup,
+    required this.minHeightPopup,
+    this.minWidthPopup,
+    this.tagsAbleScroll = false,
+    this.hintTextSearch,
+
+    /// Action
+    this.onSearchMenuChildren,
+    this.onRefreshMenuChildren,
+    this.onLoadingMenuChildren,
+    this.initMenuChildren,
   }) : super(key: key);
 
-  final String? name;
-  final bool isSelectOne;
-  final Function(
-          TekInputTypeAheadDropdownItemModel<T>, List<TekInputTypeAheadDropdownItemModel<T>>)?
-      onSelected;
-  final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function() initMenuChildren;
-  final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function() onLoadingMenuChildren;
-  final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function() onRefreshMenuChildren;
-  final Future<List<TekInputTypeAheadDropdownItemModel<T>>> Function(String)? onSearchMenuChildren;
-  final bool reloadMenuChildrenEachOpen;
-  final bool closeDropdownAfterSelect;
-  final bool tagsAbleScroll;
-  final TextEditingController? searchController;
-  final String hintTextSearch;
-  final Widget? prefixIconSearch;
-  final Color? backgroundColorSelected;
-  final Widget? iconSelected;
-  final Offset? offset;
-  final double? maxHeightPopup;
-  final double minHeightPopup;
-  final double? maxWidthPopup;
-  final double? minWidthPopup;
+  /// Type
+  final TekInputDropdownType type;
+  final bool closeAfterSelect;
+
+  /// Form
+  final String name;
+  final List<String> initialValues;
+  final FocusNode? focusNodeForm;
+  final bool enabled;
+  final AutovalidateMode? autoValidateMode;
+  final String? restorationId;
+  final String? Function(dynamic)? validator;
+  final dynamic Function(dynamic)? valueTransformer;
+  final Function(dynamic)? onSaved;
+  final Function(dynamic)? onDropdownChanged;
+  final Function()? onReset;
+  final Function(T, List<T>)? onSelected;
+
+  /// Text Field
   final TekInputSize size;
   final double? width;
   final TextEditingController? controller;
   final FocusNode? focusNode;
-  final Function(bool)? onFocusChange;
-  final List<TekInputTypeAheadDropdownItemModel<T>>? initialValue;
   final TextAlign textAlign;
-  final TextInputAction? textInputAction;
   final TextAlignVertical? textAlignVertical;
+  final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final int maxLines;
   final int? minLines;
   final int? maxLength;
-  final bool enabled;
   final bool obscureText;
-  final EdgeInsets? scrollPadding;
   final Color? cursorColor;
-  final AutovalidateMode? autoValidateMode;
-  final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
-  final ValueTransformer<List<TekInputTypeAheadDropdownItemModel<T>>?>? valueTransformer;
   final ValueChanged<String?>? onChanged;
-  final GestureTapCallback? onTap;
-  final VoidCallback? onEditingComplete;
-  final FormFieldSetter? onSaved;
-  final ValueChanged<String?>? onSubmitted;
+  final Function()? onTap;
+  final Function(PointerDownEvent)? onTapOutside;
+  final Function()? onEditingComplete;
+  final Function(String?)? onSubmitted;
   final bool? isDense;
   final bool? filled;
   final Widget? prefixIcon;
@@ -151,7 +140,22 @@ class TekInputTypeAhead<T> extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
-  final int? maxLinesDropdownItem;
+  final bool readOnly;
+
+  /// Dropdown
+  final Offset? offset;
+  final double? maxHeightPopup;
+  final double minHeightPopup;
+  final double? maxWidthPopup;
+  final double? minWidthPopup;
+  final bool tagsAbleScroll;
+  final String? hintTextSearch;
+
+  /// Action
+  final Future<List<TekInputDropdownItemModel<T>>> Function()? initMenuChildren;
+  final Future<List<TekInputDropdownItemModel<T>>> Function()? onLoadingMenuChildren;
+  final Future<List<TekInputDropdownItemModel<T>>> Function()? onRefreshMenuChildren;
+  final Future<List<TekInputDropdownItemModel<T>>> Function(String)? onSearchMenuChildren;
 
   @override
   State<TekInputTypeAhead<T>> createState() => TekInputTypeAheadState<T>();
@@ -159,23 +163,51 @@ class TekInputTypeAhead<T> extends StatefulWidget {
 
 class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     with SingleTickerProviderStateMixin {
-  final GlobalKey<FormBuilderFieldState> _key = GlobalKey<FormBuilderFieldState>();
-  final MenuController _menuController = MenuController();
-  final FocusNode _searchFocusNode = FocusNode();
-  final TekLoadingController _loading = TekLoadingController();
-  final RefreshController _refreshController = RefreshController();
-  late final FocusNode _focusNode;
-  late final TextEditingController _searchController;
+  /// Animation
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
-  List<TekInputTypeAheadDropdownItemModel<T>> _menuChildren = [];
-  late double _widthPopupMenu;
-  final TekDebounce _debounce = TekDebounce(milliseconds: 500);
-  late final ScrollController _scrollController;
-  late final TextEditingController _textEditingController;
 
-  MapEntry<String, TekInputTypeAheadDropdownItemModel<T>>? _selectedItem;
-  final Map<String, TekInputTypeAheadDropdownItemModel<T>> _selectedItems = {};
+  /// width
+  late double _widthPopupMenu;
+
+  /// Values
+  List<TekInputDropdownItemModel<T>> _menuChildren = [];
+
+  void _setMenuChildren(List<TekInputDropdownItemModel<T>> menuChildren) =>
+      setState(() => _menuChildren = menuChildren);
+
+  void _addAllMenuChildren(List<TekInputDropdownItemModel<T>> menuChildren) =>
+      setState(() => _menuChildren.addAll(menuChildren));
+
+  TekInputDropdownItemModel<T>? _initValueTypeSingle;
+
+  List<TekInputDropdownItemModel<T>>? _initValueTypeMultiple;
+
+  /// Input & Focus
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
+  final TextEditingController _searchController = TextEditingController();
+
+  /// Dropdown, Loading, Refresh
+  final MenuController _menuController = MenuController();
+  final TekLoadingController _loading = TekLoadingController();
+  final RefreshController _refreshController = RefreshController();
+
+  /// Debounce
+  final TekDebounce _debounce = TekDebounce(milliseconds: 500);
+
+  TekButtonSize get _getSizeDropdownItem {
+    if (widget.size == TekInputSize.medium) {
+      return TekButtonSize.medium;
+    }
+    if (widget.size == TekInputSize.large) {
+      return TekButtonSize.large;
+    }
+    if (widget.size == TekInputSize.extraLarge) {
+      return TekButtonSize.extraLarge;
+    }
+    return TekButtonSize.medium;
+  }
 
   @override
   void initState() {
@@ -190,77 +222,39 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
         curve: Curves.easeInOut,
       ),
     );
-    _focusNode = widget.focusNode ?? FocusNode();
-    _focusNode.addListener(_onFocusChange);
-    _searchController = widget.searchController ?? TextEditingController();
-    if (widget.tagsAbleScroll) _scrollController = ScrollController();
-    _textEditingController = widget.controller ?? TextEditingController();
-    if (widget.initialValue != null && widget.initialValue!.isNotEmpty) {
-      if (widget.isSelectOne) {
-        _textEditingController.text = widget.initialValue!.first.label;
-        _selectedItem = MapEntry(widget.initialValue!.first.keyValue!, widget.initialValue!.first);
-      } else {
-        _selectedItems
-            .addAll(Map.fromEntries(widget.initialValue!.map((e) => MapEntry(e.keyValue!, e))));
-      }
-    }
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => widget.initMenuChildren().then((value) => setState(() => _menuChildren = value)),
+      (_) {
+        _loading.openAndDismissLoading(
+          () async {
+            final result = await widget.initMenuChildren?.call();
+            _menuChildren = result ?? [];
+            if (widget.type.isSingle) {
+              if (widget.initialValues.isNotEmpty) {
+                _initValueTypeSingle = _menuChildren.firstWhereOrNull(
+                  (element) => element.keyValue == widget.initialValues.first,
+                );
+                _controller.text = _initValueTypeSingle?.label ?? '';
+              }
+            } else {
+              final filter = _menuChildren
+                  .where(
+                    (element) => widget.initialValues.contains(element.keyValue),
+                  )
+                  .toList();
+              if (filter.isNotEmpty) _initValueTypeMultiple = filter;
+            }
+            setState(() {});
+          },
+        );
+      },
     );
   }
 
   @override
   void dispose() {
-    _focusNode.removeListener(_onFocusChange);
+    _animationController.dispose();
     super.dispose();
   }
-
-  void resetCurrentData(List<String> values) {
-    if (values.isEmpty) {
-      _selectedItem = null;
-      _selectedItems.clear();
-      _textEditingController.clear();
-      return;
-    }
-    if (widget.isSelectOne) {
-      final find = _menuChildren.firstWhereOrNull((element) => element.keyValue == values.first);
-      if (find != null) {
-        _selectedItem = MapEntry(values.first, find);
-        _textEditingController.text = _selectedItem!.value.label;
-      }
-    } else {
-      try {
-        _selectedItems.clear();
-        _selectedItems.addAll(Map.fromEntries(_menuChildren
-            .where((element) => values.contains(element.keyValue))
-            .map((e) => MapEntry(e.keyValue!, e))));
-        _textEditingController.text = _selectedItems.values.map((e) => e.label).join(', ');
-      } catch (e) {
-        TekLogger.errorLog('TekInputTypeAhead resetCurrentData $e');
-      }
-    }
-  }
-
-  void _onFocusChange() {
-    if (_focusNode.hasFocus) {
-      FocusManager.instance.primaryFocus?.unfocus();
-      _menuController.open();
-      if (!_searchFocusNode.hasPrimaryFocus) _searchFocusNode.requestFocus();
-    }
-    widget.onFocusChange?.call(_focusNode.hasFocus);
-  }
-
-  void _listenOnChangeInput() => _debounce.run(
-        () {
-          if (widget.onSearchMenuChildren != null) _loading.show();
-          widget.onSearchMenuChildren?.call(_searchController.text).then(
-            (value) {
-              setState(() => _menuChildren = value);
-              _loading.dismiss();
-            },
-          );
-        },
-      );
 
   void _setPopupIsOpen(bool value) {
     if (value) {
@@ -270,165 +264,270 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     }
   }
 
-  bool _isSelected(int index) => widget.isSelectOne
-      ? _selectedItem?.key == _menuChildren[index].keyValue
-      : _selectedItems[_menuChildren[index].keyValue] != null;
-
-  void _handleSelectItem(int index) {
-    final TekInputTypeAheadDropdownItemModel<T> item = _menuChildren[index];
-    if (widget.isSelectOne) {
-      if (_selectedItem?.key != _menuChildren[index].keyValue) {
-        _textEditingController.text = item.label;
-        _selectedItem = MapEntry(
-          _menuChildren[index].keyValue!,
-          _menuChildren[index],
-        );
-        _key.currentState!.setValue(item.label);
-      } else {
-        _selectedItem = null;
-        _textEditingController.clear();
-        _key.currentState!.setValue(null);
-      }
-    } else {
-      if (_selectedItems[_menuChildren[index].keyValue] != null) {
-        _selectedItems.remove(_menuChildren[index].keyValue);
-      } else {
-        _selectedItems[_menuChildren[index].keyValue!] = _menuChildren[index];
-      }
-      if (_selectedItems.isEmpty) {
-        _key.currentState!.setValue(null);
-      } else {
-        _key.currentState!.setValue(
-          _selectedItems.values.map<String>((value) => value.keyValue ?? '').toList(),
-        );
-      }
-    }
-    widget.onSelected?.call(
-      _menuChildren[index],
-      widget.isSelectOne ? [] : _selectedItems.values.toList(),
-    );
-    if (widget.closeDropdownAfterSelect) _menuController.close();
-    setState(() {});
+  void _onFocusChange<ValueType>({
+    bool? hasFocus,
+    required FormFieldState<ValueType> state,
+  }) {
+    if (hasFocus == null || hasFocus == false) return;
+    FocusManager.instance.primaryFocus?.unfocus();
+    if (_menuController.isOpen) return;
+    _menuController.open();
   }
 
-  void _handleRemoveItem(String key) {
-    widget.onSelected?.call(
-      _selectedItems[key]!,
-      _selectedItems.values.toList(),
-    );
-    if (_selectedItems.isEmpty) {
-      _key.currentState!.setValue(null);
-    } else {
-      _key.currentState!.setValue(
-        _selectedItems.values.map<String>((value) => value.keyValue ?? '').toList(),
-      );
+  void _handleSelectItem<ValueType>({
+    required FormFieldState<ValueType> state,
+    required TekInputDropdownItemModel<T> item,
+  }) {
+    try {
+      if (widget.type.isSingle) {
+        state.didChange(item as ValueType);
+        _controller.text = item.label;
+        _menuController.close();
+        widget.onSelected?.call(item.value, [item.value]);
+      } else {
+        final List<TekInputDropdownItemModel<T>> currentValueMultiple =
+            state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+        final index = currentValueMultiple.indexWhere(
+          (element) => element.keyValue == item.keyValue,
+        );
+        if (index == -1) {
+          currentValueMultiple.add(item);
+        } else {
+          currentValueMultiple.removeAt(index);
+        }
+        state.didChange(currentValueMultiple as ValueType);
+        if (widget.closeAfterSelect) _menuController.close();
+        widget.onSelected?.call(item.value, currentValueMultiple.map((e) => e.value).toList());
+        setState(() {});
+      }
+    } catch (e) {
+      TekLogger.errorLog("TekInputDropdown handleSelectItem error : $e");
     }
-    _selectedItems.remove(key);
-    setState(() {});
   }
 
-  TekButtonSize get _getSizeDropdownItem {
-    if (widget.size == TekInputSize.medium) {
-      return TekButtonSize.medium;
+  void _handleRemoveItem<ValueType>({
+    required FormFieldState<ValueType> state,
+    required TekInputDropdownItemModel<T> item,
+  }) {
+    try {
+      final List<TekInputDropdownItemModel<T>> currentValueMultiple =
+          state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+      currentValueMultiple.remove(item);
+      state.didChange(currentValueMultiple as ValueType);
+      widget.onSelected?.call(item.value, currentValueMultiple.map((e) => e.value).toList());
+      setState(() {});
+    } catch (e) {
+      TekLogger.errorLog("TekInputDropdown handleRemoveItem error : $e");
     }
-    if (widget.size == TekInputSize.large) {
-      return TekButtonSize.large;
-    }
-    return TekButtonSize.medium;
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (_, constraints) {
-        _widthPopupMenu = widget.width ?? constraints.maxWidth;
-        return MenuAnchor(
-          onOpen: () {
-            _setPopupIsOpen(true);
-            if (widget.reloadMenuChildrenEachOpen) {
-              _loading.show();
-              widget.initMenuChildren().then(
-                (value) {
-                  _loading.dismiss();
-                  setState(() => _menuChildren = value);
-                },
-              );
-            }
-          },
-          onClose: () => _setPopupIsOpen(false),
-          crossAxisUnconstrained: false,
-          controller: _menuController,
-          alignmentOffset: widget.offset ?? const Offset(0, 10),
-          style: const MenuStyle(visualDensity: VisualDensity.comfortable),
-          menuChildren: _generateMenuChildren(),
-          builder: (context, controller, child) {
-            return TekInput(
-              keyFormState: _key,
-              name: widget.name,
-              size: widget.size,
-              width: widget.width,
-              controller: _textEditingController,
-              focusNode: _focusNode,
-              textAlign: widget.textAlign,
-              textAlignVertical: widget.textAlignVertical,
-              textInputAction: widget.textInputAction,
-              keyboardType: widget.keyboardType,
-              maxLines: widget.maxLines,
-              minLines: widget.minLines,
-              maxLength: widget.maxLength,
-              enabled: widget.enabled,
-              obscureText: widget.obscureText,
-              cursorColor: widget.cursorColor,
-              autoValidateMode: widget.autoValidateMode,
-              validator: widget.validator,
-              inputFormatters: widget.inputFormatters,
-              valueTransformer: (value) {
-                if (widget.isSelectOne) {
-                  if (widget.valueTransformer != null) {
-                    return widget.valueTransformer?.call(
-                      _selectedItem != null ? [_selectedItem!.value] : null,
-                    );
-                  }
-                  return _selectedItem?.value.value;
-                } else {
-                  if (widget.valueTransformer != null) {
-                    return widget.valueTransformer?.call(_selectedItems.values.toList());
-                  }
-                  return _selectedItems.values.map((e) => e.value).toList();
-                }
+    if (widget.type.isSingle) {
+      return _buildDropdownButton<TekInputDropdownItemModel<T>?>(
+        initialValue: _initValueTypeSingle,
+      );
+    }
+    return _buildDropdownButton<List<TekInputDropdownItemModel<T>>?>(
+      initialValue: _initValueTypeMultiple,
+    );
+  }
+
+  Widget _buildDropdownButton<ValueType>({
+    ValueType? initialValue,
+  }) {
+    return FormBuilderField<ValueType>(
+      name: widget.name,
+      initialValue: initialValue,
+      focusNode: widget.focusNodeForm,
+      enabled: widget.enabled,
+      autovalidateMode: widget.autoValidateMode,
+      restorationId: widget.restorationId,
+      validator: widget.validator,
+      valueTransformer: widget.valueTransformer,
+      onSaved: widget.onSaved,
+      onChanged: widget.onDropdownChanged,
+      onReset: widget.onReset,
+      builder: (FormFieldState<ValueType> state) {
+        return LayoutBuilder(
+          builder: (_, constraints) {
+            _widthPopupMenu = widget.width ?? constraints.maxWidth;
+            return MenuAnchor(
+              onOpen: () => _setPopupIsOpen(true),
+              onClose: () => _setPopupIsOpen(false),
+              crossAxisUnconstrained: false,
+              controller: _menuController,
+              alignmentOffset: widget.offset ?? const Offset(0, 10),
+              style: const MenuStyle(visualDensity: VisualDensity.comfortable),
+              menuChildren: _generateMenuChildren(state),
+              builder: (context, controller, child) {
+                return Focus(
+                  onFocusChange: (hasFocus) => _onFocusChange<ValueType>(
+                    hasFocus: hasFocus,
+                    state: state,
+                  ),
+                  child: TekInput(
+                    size: widget.size,
+                    width: widget.width,
+                    controller: _controller,
+                    focusNode: widget.focusNode,
+                    textAlign: widget.textAlign,
+                    textAlignVertical: widget.textAlignVertical,
+                    textInputAction: widget.textInputAction,
+                    keyboardType: widget.keyboardType,
+                    maxLines: widget.maxLines,
+                    minLines: widget.minLines,
+                    maxLength: widget.maxLength,
+                    enabled: widget.enabled,
+                    obscureText: widget.obscureText,
+                    cursorColor: widget.cursorColor,
+                    inputFormatters: widget.inputFormatters,
+                    onChanged: widget.onChanged,
+                    onTap: widget.onTap,
+                    onTapOutside: widget.onTapOutside,
+                    onEditingComplete: widget.onEditingComplete,
+                    onSubmitted: widget.onSubmitted,
+                    isDense: widget.isDense,
+                    filled: widget.filled,
+                    prefixIcon: _getPrefixIcon(state),
+                    suffixIcon: _getSuffixIcon(state),
+                    contentPadding: widget.contentPadding,
+                    focusedBorder: widget.focusedBorder,
+                    enabledBorder: widget.enabledBorder,
+                    disabledBorder: widget.disabledBorder,
+                    errorBorder: widget.errorBorder,
+                    focusedErrorBorder: widget.focusedErrorBorder,
+                    fillColor: widget.fillColor,
+                    hoverColor: widget.hoverColor,
+                    labelText: widget.labelText,
+                    labelStyle: widget.labelStyle,
+                    floatingLabelStyle: widget.floatingLabelStyle,
+                    floatingLabelBehavior: widget.floatingLabelBehavior,
+                    hintText: widget.type.isSingle ? widget.hintText : null,
+                    hintStyle: widget.hintStyle,
+                    errorText: widget.errorText ?? state.errorText,
+                    errorMaxLines: widget.errorMaxLines,
+                    errorStyle: widget.errorStyle,
+                    readOnly: true,
+                    ablePrefixIconConstraints: !widget.type.isMulti,
+                  ),
+                );
               },
-              onChanged: widget.onChanged,
-              onTap: widget.onTap,
-              onEditingComplete: widget.onEditingComplete,
-              onSaved: widget.onSaved,
-              onSubmitted: widget.onSubmitted,
-              isDense: widget.isDense,
-              filled: widget.filled,
-              prefixIcon: _getPrefixIcon(),
-              suffixIcon: _getSuffixIcon(),
-              contentPadding: widget.contentPadding,
-              focusedBorder: widget.focusedBorder,
-              enabledBorder: widget.enabledBorder,
-              disabledBorder: widget.disabledBorder,
-              errorBorder: widget.errorBorder,
-              focusedErrorBorder: widget.focusedErrorBorder,
-              fillColor: widget.fillColor,
-              hoverColor: widget.hoverColor,
-              labelText: widget.labelText,
-              labelStyle: widget.labelStyle,
-              floatingLabelStyle: widget.floatingLabelStyle,
-              floatingLabelBehavior: widget.floatingLabelBehavior,
-              hintText: widget.hintText,
-              hintStyle: widget.hintStyle,
-              errorText: widget.errorText,
-              errorMaxLines: widget.errorMaxLines,
-              errorStyle: widget.errorStyle,
-              ablePrefixIconConstraints: false,
-              readOnly: true,
             );
           },
         );
       },
+    );
+  }
+
+  Color _getItemColor<ValueType>({
+    required TekInputDropdownItemModel<T> item,
+    required FormFieldState<ValueType> state,
+  }) {
+    try {
+      if (widget.type.isSingle) {
+        final dataState = state.value as TekInputDropdownItemModel<T>?;
+        if (item.keyValue != dataState?.keyValue) return Colors.transparent;
+        return TekColors().primaryOpacity01;
+      }
+      final List<TekInputDropdownItemModel<T>> currentValueMultiple =
+          state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+      final filter = currentValueMultiple.firstWhereOrNull((e) => e.keyValue == item.keyValue);
+      if (filter == null) return Colors.transparent;
+      return TekColors().primaryOpacity01;
+    } catch (e) {
+      TekLogger.errorLog("TekInputDropdown getItemColor error : $e");
+      return Colors.transparent;
+    }
+  }
+
+  Widget _getSuffixIcon<ValueType>(FormFieldState<ValueType> state) {
+    if (state.value != null) {
+      return TekButtonInkwell(
+        onPressed: () {
+          state.didChange(null);
+          _controller.clear();
+          widget.onDropdownChanged?.call(null);
+          FocusManager.instance.primaryFocus?.unfocus();
+          _menuController.close();
+          setState(() {});
+        },
+        child: RotationTransition(
+          turns: _rotateAnimation,
+          child: Icon(
+            Icons.cancel_rounded,
+            size: TekIconSizes().s20,
+          ),
+        ),
+      );
+    }
+    return RotationTransition(
+      turns: _rotateAnimation,
+      child: Icon(
+        Icons.expand_more_rounded,
+        size: TekIconSizes().s24,
+      ),
+    );
+  }
+
+  final _scrollController = ScrollController();
+
+  Widget? _getPrefixIcon<ValueType>(FormFieldState<ValueType> state) {
+    if (widget.type.isSingle) return widget.prefixIcon;
+    try {
+      final selectedItems = state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+      if (selectedItems.isEmpty) return null;
+      final Widget prefixIcon = Padding(
+        padding: EdgeInsets.all(TekSpacings().p8),
+        child: Wrap(
+          runSpacing: TekSpacings().p8,
+          spacing: TekSpacings().p8,
+          children: selectedItems.map(
+            (item) {
+              return TekDynamicTag(
+                textContent: item.label,
+                whenClose: () => _handleRemoveItem(item: item, state: state),
+              );
+            },
+          ).toList(),
+        ),
+      );
+      if (widget.tagsAbleScroll) {
+        return TekWrapScrollHorizontal(
+          controller: _scrollController,
+          child: prefixIcon,
+        );
+      }
+      return prefixIcon;
+    } catch (e) {
+      TekLogger.errorLog("TekInputDropdown getPrefixIcon error : $e");
+      return null;
+    }
+  }
+
+  Widget? _getDropdownItem<ValueType>({
+    required TekInputDropdownItemModel<T> item,
+    required FormFieldState<ValueType> state,
+  }) {
+    if (item.child != null) return item.child!(item.value, item.label);
+    if (widget.type.isSingle) return null;
+    final filter = (state.value as List<TekInputDropdownItemModel<T>>? ?? [])
+        .firstWhereOrNull((e) => e.keyValue == item.keyValue);
+    if (filter == null) return null;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text(
+            item.label,
+          ),
+        ),
+        Icon(
+          Icons.check_rounded,
+          color: TekColors().primary,
+        )
+      ],
     );
   }
 
@@ -450,7 +549,37 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     );
   }
 
-  List<Widget> _generateMenuChildren() {
+  void _listenOnChangeInput() => _debounce.run(
+        () async {
+          if (widget.onSearchMenuChildren != null) _loading.show();
+          final result = await widget.onSearchMenuChildren?.call(_searchController.text);
+          _setMenuChildren(result ?? []);
+          _loading.dismiss();
+        },
+      );
+
+  void _onRefresh() {
+    _searchController.clear();
+    if (widget.onRefreshMenuChildren == null) return _refreshController.refreshCompleted();
+    widget.onRefreshMenuChildren?.call().then(
+      (value) {
+        _refreshController.refreshCompleted();
+        _setMenuChildren(value);
+      },
+    );
+  }
+
+  void _onLoading() {
+    if (widget.onLoadingMenuChildren == null) return _refreshController.loadComplete();
+    widget.onLoadingMenuChildren?.call().then(
+      (value) {
+        _refreshController.loadComplete();
+        _addAllMenuChildren(value);
+      },
+    );
+  }
+
+  List<Widget> _generateMenuChildren<ValueType>(FormFieldState<ValueType> state) {
     return [
       if (widget.onSearchMenuChildren != null)
         Padding(
@@ -459,7 +588,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
             focusNode: _searchFocusNode,
             controller: _searchController,
             size: widget.size,
-            prefixIcon: widget.prefixIconSearch ?? const Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
             hintText: widget.hintTextSearch,
             onChanged: (_) => _listenOnChangeInput(),
           ),
@@ -472,126 +601,59 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
             behavior: TekScrollBehavior(),
             child: TekRefresher(
               controller: _refreshController,
-              onRefresh: () {
-                _searchController.clear();
-                widget.onRefreshMenuChildren().then(
-                  (value) {
-                    _refreshController.refreshCompleted();
-                    setState(() => _menuChildren = value);
-                  },
-                );
-              },
-              onLoading: () => widget.onLoadingMenuChildren().then(
-                (value) {
-                  _refreshController.loadComplete();
-                  setState(() => _menuChildren.addAll(value));
-                },
-              ),
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
               child: _menuChildren.isNotEmpty
                   ? ListView.separated(
                       controller: ScrollController(),
                       itemCount: _menuChildren.length,
                       separatorBuilder: (BuildContext context, int index) => TekVSpace.p4,
                       itemBuilder: (context, index) {
-                        if (_menuChildren.isEmpty) return const SizedBox.shrink();
-                        final TekInputTypeAheadDropdownItemModel<T> item = _menuChildren[index];
+                        final TekInputDropdownItemModel<T> item = _menuChildren[index];
                         return TekButton(
                           width: double.infinity,
                           size: _getSizeDropdownItem,
-                          onPressed: () => _handleSelectItem(index),
+                          onPressed: () => _handleSelectItem(
+                            state: state,
+                            item: item,
+                          ),
+                          mainAxisAlignment: MainAxisAlignment.start,
                           alignment: Alignment.centerLeft,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(0)),
                           ),
-                          background: Colors.transparent,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              item.child != null
-                                  ? Expanded(child: item.child!(item.value, item.label))
-                                  : Flexible(
-                                      child: Text(
-                                        item.label,
-                                        maxLines: widget.maxLinesDropdownItem,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                              if (_isSelected(index))
-                                widget.iconSelected ??
-                                    const Icon(
-                                      Icons.check,
-                                      color: TekColors.green,
-                                    )
-                            ],
+                          background: _getItemColor(
+                            item: item,
+                            state: state,
+                          ),
+                          text: item.child == null ? item.label : null,
+                          child: _getDropdownItem(
+                            state: state,
+                            item: item,
                           ),
                         );
                       },
                     )
-                  : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.not_interested_rounded,
-                            size: TekIconSizes().s24,
-                            color: TekColors.grey,
+                  : _loading.statusLoading
+                      ? const SizedBox.shrink()
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.not_interested_rounded,
+                                size: TekIconSizes().s24,
+                                color: TekColors.grey,
+                              ),
+                              TekVSpace.mainSpace,
+                              const Text('No data'),
+                            ],
                           ),
-                          TekVSpace.mainSpace,
-                          const Text('No data'),
-                        ],
-                      ),
-                    ),
+                        ),
             ),
           ),
         ),
       ),
     ];
-  }
-
-  Widget _getSuffixIcon() {
-    return InkWell(
-      onTap: () {
-        if (_menuController.isOpen) {
-          _menuController.close();
-        } else {
-          _menuController.open();
-        }
-      },
-      child: RotationTransition(
-        turns: _rotateAnimation,
-        child: Icon(
-          Icons.expand_more_rounded,
-          size: TekIconSizes().s24,
-        ),
-      ),
-    );
-  }
-
-  Widget? _getPrefixIcon() {
-    if (widget.isSelectOne) return widget.prefixIcon;
-    if (_selectedItems.isEmpty) return null;
-    final Widget prefixIcon = Padding(
-      padding: EdgeInsets.all(TekSpacings().p8),
-      child: Wrap(
-        runSpacing: TekSpacings().p8,
-        spacing: TekSpacings().p8,
-        children: _selectedItems.keys.map(
-          (key) {
-            return TekDynamicTag(
-              textContent: _selectedItems[key]?.label,
-              whenClose: () => _handleRemoveItem(key),
-            );
-          },
-        ).toList(),
-      ),
-    );
-    if (widget.tagsAbleScroll) {
-      return TekWrapScrollHorizontal(
-        controller: _scrollController,
-        child: prefixIcon,
-      );
-    }
-    return prefixIcon;
   }
 }

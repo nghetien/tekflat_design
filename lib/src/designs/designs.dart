@@ -1,4 +1,5 @@
 export 'badge.dart';
+export 'bottom_sheet/bottom_sheet.dart';
 export 'buttons/buttons.dart';
 export 'card.dart';
 export 'check_boxes/check_boxes.dart';
