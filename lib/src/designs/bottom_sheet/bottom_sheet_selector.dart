@@ -241,7 +241,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: TekColors().primaryOpacity01,
+              color: TekColors.greyOpacity01,
               width: TekBorders.med,
             ),
           ),

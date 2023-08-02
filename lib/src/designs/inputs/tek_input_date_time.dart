@@ -132,10 +132,10 @@ class TekInputDateTime extends StatefulWidget {
 
   /// Date Time Picker
   final bool autoOpenSelectDate;
-  final DateTime? initialDate;
-  final DateTime? firstDate;
-  final DateTime? lastDate;
-  final DateTime? currentDatePicker;
+  final DateTime? Function()? initialDate;
+  final DateTime? Function()? firstDate;
+  final DateTime? Function()? lastDate;
+  final DateTime? Function()? currentDatePicker;
   final TimeOfDay? initialTime;
 
   @override
@@ -150,7 +150,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
   void setIsShowSelectDate(bool value) => _isShowSelectDate = value;
 
   DateTime get _initialDate {
-    DateTime date = widget.initialDate ?? DateTime.now();
+    DateTime date = widget.initialDate?.call() ?? DateTime.now();
     if (_controller.text.isEmpty) return date;
     final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
     if (convertFromText != null) return convertFromText;
@@ -158,7 +158,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
   }
 
   DateTime get _firstDate {
-    DateTime date = widget.firstDate ?? DateTime(DateTime.now().year - 15);
+    DateTime date = widget.firstDate?.call() ?? DateTime(DateTime.now().year - 15);
     if (_controller.text.isEmpty) return date;
     final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
     if (convertFromText != null) {
@@ -168,7 +168,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
   }
 
   DateTime get _lastDate {
-    DateTime date = widget.lastDate ?? DateTime(DateTime.now().year + 15);
+    DateTime date = widget.lastDate?.call() ?? DateTime(DateTime.now().year + 15);
     if (_controller.text.isEmpty) return date;
     final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
     if (convertFromText != null) {
@@ -178,7 +178,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
   }
 
   DateTime? get _currentDatePicker {
-    if (_controller.text.isEmpty) return widget.currentDatePicker;
+    if (_controller.text.isEmpty) return widget.currentDatePicker?.call();
     return _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
   }
 

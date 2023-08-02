@@ -157,7 +157,19 @@ class TekNetworkImageForm extends StatelessWidget {
                 boxFit: boxFit,
                 imageProvider: imageProvider,
               ),
-              errorWidget: (_, __, ___) => _error(),
+              errorWidget: (_, __, ___) => _error(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error_rounded,
+                      size: 40.scaleIconSize,
+                      color: TekColors.grey,
+                    ),
+                  ],
+                ),
+              ),
               progressIndicatorBuilder: (_, __, ___) => _loading(context),
             ),
           );
