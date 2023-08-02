@@ -325,6 +325,20 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     }
   }
 
+  void _onDropdownChanged<ValueType>(ValueType? value){
+    widget.onDropdownChanged?.call(value);
+    try{
+      if(widget.type.isSingle){
+        final convertValue = value as TekInputDropdownItemModel<T>?;
+        if(convertValue != null){
+          _controller.text = convertValue.label;
+        }
+      }
+    }catch(e){
+      TekLogger.errorLog("TekInputDropdown onDropdownChanged error : $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.type.isSingle) {
@@ -350,7 +364,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
       validator: widget.validator,
       valueTransformer: widget.valueTransformer,
       onSaved: widget.onSaved,
-      onChanged: widget.onDropdownChanged,
+      onChanged: _onDropdownChanged,
       onReset: widget.onReset,
       builder: (FormFieldState<ValueType> state) {
         return LayoutBuilder(
