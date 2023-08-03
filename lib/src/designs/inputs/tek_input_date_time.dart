@@ -151,9 +151,14 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
 
   DateTime get _initialDate {
     DateTime date = widget.initialDate?.call() ?? DateTime.now();
-    if (_controller.text.isEmpty) return date;
-    final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
-    if (convertFromText != null) return convertFromText;
+    if (_controller.text.isNotEmpty){
+      final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
+      if (convertFromText != null) {
+        date = convertFromText;
+      }
+    }
+    if(date.isBefore(_firstDate)) return _firstDate;
+    if(date.isAfter(_lastDate)) return _lastDate;
     return date;
   }
 
@@ -303,9 +308,9 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
       _controller.selection = TextSelection.fromPosition(
         TextPosition(offset: _controller.text.length),
       );
+      state.didChange(date);
     }
     FocusManager.instance.primaryFocus?.unfocus();
-    state.didChange(date);
     widget.onDateTimeChanged?.call(
       date ??
           _controller.text.toDateTimeWithFormat(

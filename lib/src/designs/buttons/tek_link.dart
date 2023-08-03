@@ -48,6 +48,7 @@ class TekLink extends StatelessWidget {
     this.textSize,
     this.textColor,
     this.iconIsRight = false,
+    this.fontWeight,
   });
 
   /// Size
@@ -77,6 +78,7 @@ class TekLink extends StatelessWidget {
   final Color? textColor;
   final double? textSize;
   final bool iconIsRight;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +129,7 @@ class TekLink extends StatelessWidget {
             sizeTextStyle.copyWith(
               color: disabled ? context.theme.disabledColor : textColor ?? type.getColor(context),
               height: 0,
+              fontWeight: fontWeight,
             ),
       );
     }

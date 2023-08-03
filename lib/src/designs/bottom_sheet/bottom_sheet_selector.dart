@@ -45,10 +45,10 @@ class TekBottomSheetSelectorWidget<T> extends StatefulWidget {
   final String? title;
   final TekBottomSheetSelectorType type;
   final List<String> initSelected;
-  final Future<List<TekBottomSheetSelectorModel<T>>> Function()? initMenuChildren;
-  final Future<List<TekBottomSheetSelectorModel<T>>> Function()? onLoadingMenuChildren;
-  final Future<List<TekBottomSheetSelectorModel<T>>> Function()? onRefreshMenuChildren;
-  final Future<List<TekBottomSheetSelectorModel<T>>> Function(
+  final Future<List<TekBottomSheetSelectorModel<T>>?> Function()? initMenuChildren;
+  final Future<List<TekBottomSheetSelectorModel<T>>?> Function()? onLoadingMenuChildren;
+  final Future<List<TekBottomSheetSelectorModel<T>>?> Function()? onRefreshMenuChildren;
+  final Future<List<TekBottomSheetSelectorModel<T>>?> Function(
     String?,
     List<T>,
   )? onSearchMenuChildren;
@@ -108,6 +108,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
           _loadingController.openAndDismissLoading(
             () async {
               final result = await widget.initMenuChildren!();
+              if (result == null || result.isEmpty) return;
               _menuChildren = result;
               if (widget.type == TekBottomSheetSelectorType.single) {
                 if (widget.initSelected.isNotEmpty) {
@@ -297,6 +298,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         widget.onRefreshMenuChildren?.call().then(
           (value) {
             _refreshController.refreshCompleted();
+            if (value == null || value.isEmpty) return;
             _setMenuChildren(value);
           },
         );
@@ -305,6 +307,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         widget.onLoadingMenuChildren?.call().then(
           (value) {
             _refreshController.loadComplete();
+            if (value == null || value.isEmpty) return;
             _addAllMenuChildren(value);
           },
         );

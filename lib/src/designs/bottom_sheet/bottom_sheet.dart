@@ -99,10 +99,10 @@ class TekBottomSheet {
     // selector
     TekBottomSheetSelectorType? type,
     List<String>? initSelected,
-    Future<List<TekBottomSheetSelectorModel<T>>> Function()? initMenuChildren,
-    Future<List<TekBottomSheetSelectorModel<T>>> Function()? onLoadingMenuChildren,
-    Future<List<TekBottomSheetSelectorModel<T>>> Function()? onRefreshMenuChildren,
-    Future<List<TekBottomSheetSelectorModel<T>>> Function(
+    Future<List<TekBottomSheetSelectorModel<T>>?> Function()? initMenuChildren,
+    Future<List<TekBottomSheetSelectorModel<T>>?> Function()? onLoadingMenuChildren,
+    Future<List<TekBottomSheetSelectorModel<T>>?> Function()? onRefreshMenuChildren,
+    Future<List<TekBottomSheetSelectorModel<T>>?> Function(
       String?,
       List<T>,
     )? onSearchMenuChildren,

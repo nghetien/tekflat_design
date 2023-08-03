@@ -213,7 +213,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
       _key.currentState!.setValue(null);
     } else {
       _key.currentState!.setValue(
-        _menuChildrenSelected.map((e) => e.keyValue ?? '').toList().join(','),
+        _menuChildrenSelected.map((e) => e.keyValue).toList().join(','),
       );
     }
     widget.onSelected?.call(
@@ -230,7 +230,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
       _key.currentState!.setValue(null);
     } else {
       _key.currentState!.setValue(
-        _menuChildrenSelected.map((e) => e.keyValue ?? '').toList().join(','),
+        _menuChildrenSelected.map((e) => e.keyValue).toList().join(','),
       );
     }
     widget.onSelected?.call(
