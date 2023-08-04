@@ -60,6 +60,7 @@ class TekCheckBoxForm extends StatelessWidget {
     this.side,
     this.borderWidth,
     this.mainColor,
+    this.enabled = true,
   })  : assert((title == null && titleWidget != null) || (title != null && titleWidget == null),
             'each of title and titleWidget must be null'),
         super(key: key);
@@ -81,6 +82,7 @@ class TekCheckBoxForm extends StatelessWidget {
   final BorderSide? side;
   final double? borderWidth;
   final Color? mainColor;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) => FormBuilderField<bool>(
@@ -91,6 +93,7 @@ class TekCheckBoxForm extends StatelessWidget {
         onSaved: onSaved,
         onChanged: onChanged,
         onReset: onReset,
+        enabled: enabled,
         builder: (state) => TekCheckBox(
           value: state.value ?? false,
           onChanged: state.didChange,
@@ -104,6 +107,7 @@ class TekCheckBoxForm extends StatelessWidget {
           side: side,
           borderWidth: borderWidth,
           mainColor: mainColor,
+          enabled: enabled,
         ),
       );
 }
