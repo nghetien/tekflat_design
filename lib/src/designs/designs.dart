@@ -23,3 +23,4 @@ export 'tags/tags.dart';
 export 'toast.dart';
 export 'typography.dart';
 export 'wrap_scroll_horizontal.dart';
+export 'skeleton/skeleton.dart';

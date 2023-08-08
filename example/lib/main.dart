@@ -40,7 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TekCard(child: SizedBox(width: 100, height: 100, child: Text("Hello"))),
+            TekSkeleton(
+              active: true,
+              direction: TekSkeletonDirection.ltr,
+              title: const TekSkeletonTitleProps(
+                width: 200,
+              ),
+              avatar: TekSkeletonAvatarProps(
+                shape: TekSkeletonShape.circle,
+                size: TekSpacings().p32 * 1.4,
+              ),
+              paragraph: TekSkeletonParagraphProps(
+                rows: 6,
+                widths: [500, 600, 400, 450, 500, 500],
+              ),
+            ),
           ],
         ),
       ),
