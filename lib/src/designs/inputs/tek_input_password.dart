@@ -51,6 +51,7 @@ class TekInputPassword extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.onTapOutside,
   }) : super(key: key);
 
   final String? name;
@@ -101,6 +102,7 @@ class TekInputPassword extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final Function(PointerDownEvent)? onTapOutside;
 
   @override
   State<TekInputPassword> createState() => _TekInputPasswordState();
@@ -149,6 +151,7 @@ class _TekInputPasswordState extends State<TekInputPassword> {
         valueTransformer: widget.valueTransformer,
         onChanged: widget.onChanged,
         onTap: widget.onTap,
+        onTapOutside: widget.onTapOutside,
         onEditingComplete: widget.onEditingComplete,
         onSaved: widget.onSaved,
         onSubmitted: widget.onSubmitted,

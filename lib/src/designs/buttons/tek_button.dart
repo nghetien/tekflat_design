@@ -26,11 +26,11 @@ enum TekButtonSize {
       case extraLarge:
         return 12.scaleSpacing;
       case large:
-        return 12.scaleSpacing;
-      case medium:
         return 10.scaleSpacing;
-      case small:
+      case medium:
         return 8.scaleSpacing;
+      case small:
+        return 6.scaleSpacing;
     }
   }
 
@@ -70,6 +70,19 @@ enum TekButtonSize {
         return TekTextStyles.body;
       case small:
         return TekTextStyles.label;
+    }
+  }
+
+  EdgeInsets get padding {
+    switch (this) {
+      case extraLarge:
+        return EdgeInsets.symmetric(horizontal: 20.scaleSpacing);
+      case large:
+        return EdgeInsets.symmetric(horizontal: 18.scaleSpacing);
+      case medium:
+        return EdgeInsets.symmetric(horizontal: 16.scaleSpacing);
+      case small:
+        return EdgeInsets.symmetric(horizontal: 14.scaleSpacing);
     }
   }
 }
@@ -427,7 +440,7 @@ class TekButton extends StatelessWidget {
                 (disabled || loading) ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
           ),
           child: Padding(
-            padding: padding ?? EdgeInsets.symmetric(horizontal: TekSpacings().p14),
+            padding: padding ?? size.padding,
             child: _getContent(context),
           ),
         ),
