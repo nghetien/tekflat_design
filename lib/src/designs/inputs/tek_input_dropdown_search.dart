@@ -369,6 +369,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
             background: isSelected
                 ? widget.backgroundColorSelected ?? TekColors.greenOpacity01
                 : Colors.transparent,
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

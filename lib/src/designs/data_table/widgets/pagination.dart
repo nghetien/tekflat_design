@@ -19,7 +19,6 @@ class TekDataTablePaginationWidget<T> extends StatefulWidget {
 class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWidget> {
   TekDataTablePagination get pagination => widget.controller.pagination;
 
-  static const double sizePageNumber = 25;
   static const int threeDotFlagNumber = 0;
 
   void _handleChangeDataPageNumber(int pageNumber) {
@@ -148,11 +147,11 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
       Container(
         padding: EdgeInsets.symmetric(horizontal: TekSpacings().p4),
         child: TekButton(
-          height: sizePageNumber,
-          width: sizePageNumber,
-          size: TekButtonSize.medium,
+          height: 25,
+          size: TekButtonSize.small,
           onPressed: onPressed,
           text: number > 0 ? number.toString() : '...',
+          padding: EdgeInsets.symmetric(horizontal: TekSpacings().p8),
           textStyle: TextStyle(
             color: number == pagination.currentPage ? TekColors().primary : TekColors.white,
           ),
@@ -213,21 +212,23 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
     );
   }
 
-  final _itemPerPageValueController = TextEditingController();
-
   Widget _dropdownItemsPerPage() {
-    _itemPerPageValueController.text = pagination.itemsPerPage.toString();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          height: sizePageNumber + 2,
           child: TekInputDropdown<int>(
             width: 75,
-            controller: _itemPerPageValueController,
-            contentPadding: EdgeInsets.symmetric(horizontal: TekSpacings().p4),
+            initialValues: [
+              pagination.itemsPerPage.toString(),
+            ],
+            contentPadding: EdgeInsets.only(
+              left: TekSpacings().p8,
+              top: TekSpacings().p4,
+              bottom: TekSpacings().p4,
+            ),
             menuChildren: [
               for (final item in pagination.listItemsPerPage)
                 TekInputDropdownItemModel<int>(
@@ -237,9 +238,9 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
                 ),
             ],
             onSelected: (item, _) {
-              _itemPerPageValueController.text = item.toString();
               _handleChangeItemPerPage(item);
             },
+            ableClearValue: false,
           ),
         ),
         if (TekResponsiveConfig().screenDevice.isDesktop)

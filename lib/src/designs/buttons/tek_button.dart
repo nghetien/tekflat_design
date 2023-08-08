@@ -24,13 +24,13 @@ enum TekButtonSize {
   double get spacing {
     switch (this) {
       case extraLarge:
-        return 6.scaleSpacing;
+        return 12.scaleSpacing;
       case large:
-        return 5.scaleSpacing;
+        return 12.scaleSpacing;
       case medium:
-        return 4.scaleSpacing;
+        return 10.scaleSpacing;
       case small:
-        return 2.scaleSpacing;
+        return 8.scaleSpacing;
     }
   }
 
@@ -100,7 +100,7 @@ enum TekButtonType {
         textColor = TekColors.white;
         break;
       case TekButtonType.outline:
-        textColor = context.theme.textTheme.titleMedium?.color ?? TekColors.grey;
+        textColor = TekColors().primary;
         break;
       case TekButtonType.danger:
         textColor = TekColors.white;
@@ -173,44 +173,111 @@ enum TekButtonType {
         : backgroundColor;
   }
 
+  RoundedRectangleBorder getOutlinedBorderDefault({
+    bool disabled = false,
+    bool loading = false,
+    Color? borderColor,
+    BorderRadius? borderRadius,
+    double? borderWidth,
+  }) {
+    return RoundedRectangleBorder(
+      side: BorderSide(
+        color: (disabled || loading)
+            ? borderColor?.withOpacity(0.4) ?? Colors.transparent
+            : borderColor ?? Colors.transparent,
+        width: borderWidth ?? 0,
+      ),
+      borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
+    );
+  }
+
   OutlinedBorder? getOutlinedBorder({
     required BuildContext context,
     bool disabled = false,
     bool loading = false,
+    Color? borderColor,
+    BorderRadius? borderRadius,
+    double? borderWidth,
   }) {
     switch (this) {
       case TekButtonType.primary:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.outline:
-        final borderSizeColor = context.theme.textTheme.titleMedium?.color ?? TekColors.grey;
+        final borderSizeColor = TekColors().primary;
         return RoundedRectangleBorder(
           side: BorderSide(
-            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderSizeColor,
-            width: TekBorders.thin,
+            color: (disabled || loading)
+                ? borderSizeColor.withOpacity(0.4)
+                : borderColor ?? borderSizeColor,
+            width: borderWidth ?? TekBorders.thin,
           ),
-          borderRadius: TekCorners().mainCornerBorder,
+          borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
         );
       case TekButtonType.danger:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.warning:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.success:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.info:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.none:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
       case TekButtonType.ghost:
         const borderSizeColor = TekColors.grey;
         return RoundedRectangleBorder(
           side: BorderSide(
-            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderSizeColor,
-            width: TekBorders.thin,
+            color: (disabled || loading)
+                ? borderSizeColor.withOpacity(0.4)
+                : borderColor ?? borderSizeColor,
+            width: borderWidth ?? TekBorders.thin,
           ),
-          borderRadius: TekCorners().mainCornerBorder,
+          borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
         );
       case TekButtonType.themeGhost:
-        return null;
+        return getOutlinedBorderDefault(
+          disabled: disabled,
+          loading: loading,
+          borderColor: borderColor,
+          borderRadius: borderRadius,
+          borderWidth: borderWidth,
+        );
     }
   }
 }
@@ -263,6 +330,9 @@ class TekButton extends StatelessWidget {
     this.spaceBetweenIconAndText,
     this.fontWeight,
     this.mainAxisSize,
+    this.borderColor,
+    this.borderRadius,
+    this.borderWidth,
   }) : super(key: key);
 
   /// Button
@@ -309,6 +379,9 @@ class TekButton extends StatelessWidget {
   final double? spaceBetweenIconAndText;
   final FontWeight? fontWeight;
   final MainAxisSize? mainAxisSize;
+  final Color? borderColor;
+  final double? borderWidth;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -316,7 +389,6 @@ class TekButton extends StatelessWidget {
         margin: EdgeInsets.zero,
         height: height ?? size.height,
         width: width,
-        alignment: Alignment.center,
         decoration: BoxDecoration(boxShadow: boxShadow),
         child: ElevatedButton(
           key: key,
@@ -341,6 +413,9 @@ class TekButton extends StatelessWidget {
                   context: context,
                   disabled: disabled,
                   loading: loading,
+                  borderColor: borderColor,
+                  borderRadius: borderRadius,
+                  borderWidth: borderWidth,
                 ),
             padding: EdgeInsets.zero,
             shadowColor: shadowColor ?? Colors.transparent,
@@ -351,15 +426,9 @@ class TekButton extends StatelessWidget {
             enabledMouseCursor:
                 (disabled || loading) ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: padding ?? EdgeInsets.symmetric(horizontal: TekSpacings().p14),
-                child: _getContent(context),
-              )
-            ],
+          child: Padding(
+            padding: padding ?? EdgeInsets.symmetric(horizontal: TekSpacings().p14),
+            child: _getContent(context),
           ),
         ),
       );
@@ -427,23 +496,23 @@ class TekButton extends StatelessWidget {
     final Widget? icon = _getIcon(context);
     if (iconIsRight) {
       return Row(
-        mainAxisSize: mainAxisSize ?? MainAxisSize.max,
+        mainAxisSize: mainAxisSize ?? MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
         children: [
           if (content != null) Flexible(child: content),
-          if (icon != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
+          if (icon != null && content != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
           if (icon != null) icon,
         ],
       );
     }
     return Row(
-      mainAxisSize: mainAxisSize ?? MainAxisSize.max,
+      mainAxisSize: mainAxisSize ?? MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
       children: [
         if (icon != null) icon,
-        if (icon != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
+        if (icon != null && content != null) TekHSpace(spaceBetweenIconAndText ?? size.spacing),
         if (content != null) Flexible(child: content),
       ],
     );

@@ -51,11 +51,21 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
     if (mounted) setState(() {});
   }
 
-  void _handleInitState() {
+  void _handleInitState({
+    bool needToInitPagination = false,
+  }) {
     assert(
       widget.tableColumns.map((e) => e.key).toSet().length == widget.tableColumns.length,
       'Mỗi key của từng cột phải khác nhau',
     );
+    if (needToInitPagination) {
+      _webDataTableController.initPagination(
+        currentPage: _paginationOption.currentPage,
+        itemsPerPage: _paginationOption.itemsPerPage,
+        listItemsPerPage: _paginationOption.listItemsPerPage,
+        numberNextPage: _paginationOption.numberNextPage,
+      );
+    }
     _webDataTableController.initDataTable(
       initTableColumns: widget.tableColumns,
       additionColumns: widget.additionColumns,
@@ -102,7 +112,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
     _columnOption = widget.columnOption ?? const TekDataTableColumnOption();
     _paginationOption = widget.paginationOption ?? const TekDataTablePaginationOption();
     _checkBoxOption = widget.checkBoxOption ?? const TekDataTableCheckBoxOption();
-    _handleInitState();
+    _handleInitState(needToInitPagination: true);
     _webDataTableController.addListener(_handleSetState);
     super.initState();
   }
@@ -110,10 +120,18 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
   @override
   void didUpdateWidget(covariant TekDataTable<T> oldWidget) {
     if (widget.controller != oldWidget.controller) {
+      _webDataTableController.removeListener(_handleSetState);
       _webDataTableController = widget.controller;
+      _handleInitState(needToInitPagination: true);
+      _webDataTableController.addListener(_handleSetState);
     }
     if ((widget.tableColumns != oldWidget.tableColumns) ||
         (widget.tableColumns.length != oldWidget.tableColumns.length)) {
+      _handleInitState();
+      setState(() {});
+    }
+    if (widget.additionColumns != oldWidget.additionColumns) {
+      _webDataTableController.additionColumns = widget.additionColumns;
       _handleInitState();
       setState(() {});
     }

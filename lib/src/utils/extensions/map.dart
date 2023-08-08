@@ -3,4 +3,7 @@ extension TekMapStringToDynamicEx on Map<String, dynamic> {
     ..removeWhere(
       (key, value) => value == null || (value is String && value.isEmpty),
     );
+
+  Map<String, dynamic> addValue({required String key, required String value}) =>
+      this..addAll({key: value});
 }

@@ -155,6 +155,7 @@ class _TekButtonDropdownState extends State<TekButtonDropdown>
                 alignment: widget.alignment,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
                       child: widget.titleButton,
@@ -204,6 +205,7 @@ class _TekButtonDropdownState extends State<TekButtonDropdown>
                   textAlign: widget.textAlign,
                   maxLines: widget.maxLines,
                   alignment: widget.alignment,
+                  mainAxisSize: MainAxisSize.max,
                   child: widget.children[index].child,
                 );
         }

@@ -7,6 +7,10 @@ class TekDataTablePaginationOption {
     this.isShowPagination = true,
     this.enableItemPerPage = true,
     this.borderRadius,
+    this.listItemsPerPage,
+    this.itemsPerPage,
+    this.numberNextPage,
+    this.currentPage,
   });
 
   final String customizeItemPerPage;
@@ -14,4 +18,8 @@ class TekDataTablePaginationOption {
   final bool isShowPagination;
   final bool enableItemPerPage;
   final Radius? borderRadius;
+  final List<int>? listItemsPerPage;
+  final int? itemsPerPage;
+  final int? numberNextPage;
+  final int? currentPage;
 }

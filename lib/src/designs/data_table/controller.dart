@@ -135,6 +135,8 @@ class TekDataTableController<T> extends ChangeNotifier {
     return widget + TekBorders.thin; // + 1 TekBorders.thin
   }
 
+  bool get isWidthColumnLargeThanWidthTable => _state.isWidthColumnLargeThanWidthTable;
+
   bool get isLoading => _state.isLoading;
 
   Map<int, T> get dataSelected => _state.dataSelected;
@@ -282,49 +284,109 @@ class TekDataTableController<T> extends ChangeNotifier {
       _state.mapKeyToWidthOfEachColumnContent[element.key] = element.width!;
       cloneWidthOfAllColumns -= element.width!;
     }
-    for (var element in tableColumnsContentWithFlex) {
-      if (cloneWidthOfAllColumns <= 0) {
+
+    if (isWidthColumnLargeThanWidthTable) {
+      for (var element in tableColumnsContentWithFlex) {
+        if (cloneWidthOfAllColumns <= 0) {
+          assert(
+            false,
+            'Tổng độ rộng của các cột được set minWidth và maxWidth phải nhỏ hơn độ dài của màn hình (nếu trong danh sách cột có cột set mặc định hoặc flex)',
+          );
+          return;
+        }
+        _state.mapKeyToWidthOfEachColumnContent[element.key] = element.minWidth!;
+        cloneWidthOfAllColumns -= element.minWidth!;
+      }
+      return;
+    }
+
+    _calculateWidthOfEachColumn(
+      tableColumns: tableColumnsContentWithFlex,
+      widthOfAllColumns: cloneWidthOfAllColumns,
+      sumOfAllFlex: sumOfAllFlex,
+    );
+  }
+
+  void _calculateWidthOfEachColumn({
+    required List<DataTableColumn<T>> tableColumns,
+    required double widthOfAllColumns,
+    required int sumOfAllFlex,
+  }) {
+    if (tableColumns.isEmpty) return;
+    final List<DataTableColumn<T>> columnsRemove = [];
+    double widthAllColumns = widthOfAllColumns;
+    int flexAllColumns = sumOfAllFlex;
+    double aFlex = widthAllColumns / flexAllColumns;
+    for (int index = 0; index < tableColumns.length; index++) {
+      if (widthOfAllColumns <= 0) {
         assert(
           false,
           'Tổng độ rộng của các cột được set minWidth và maxWidth phải nhỏ hơn độ dài của màn hình (nếu trong danh sách cột có cột set mặc định hoặc flex)',
         );
         return;
       }
-      final double preCalculatedWidth = cloneWidthOfAllColumns * (element.flex ?? 1) / sumOfAllFlex;
+      final DataTableColumn<T> element = tableColumns[index];
+      final double flexOfColumn = (element.flex ?? 1) * aFlex;
       if (element.maxWidth != null && element.minWidth != null) {
-        final double width = preCalculatedWidth.clamp(element.minWidth!, element.maxWidth!);
-        _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
-        if (preCalculatedWidth != width) {
-          cloneWidthOfAllColumns -= width;
-          sumOfAllFlex -= element.flex ?? 1;
+        final double width = flexOfColumn.clamp(element.minWidth!, element.maxWidth!);
+        if (flexOfColumn != width) {
+          _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          widthAllColumns -= width;
+          flexAllColumns -= element.flex ?? 1;
+          columnsRemove.add(element);
+        } else {
+          if (columnsRemove.isEmpty) {
+            _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          }
         }
       } else if (element.minWidth != null && element.maxWidth == null) {
-        final double width = max(preCalculatedWidth, element.minWidth!);
-        _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
-        if (preCalculatedWidth != width) {
-          cloneWidthOfAllColumns -= width;
-          sumOfAllFlex -= element.flex ?? 1;
+        final double width = max(flexOfColumn, element.minWidth!);
+        if (flexOfColumn != width) {
+          _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          widthAllColumns -= width;
+          flexAllColumns -= element.flex ?? 1;
+          columnsRemove.add(element);
+        } else {
+          if (columnsRemove.isEmpty) {
+            _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          }
         }
       } else if (element.maxWidth != null && element.minWidth == null) {
-        final double width = min(preCalculatedWidth, element.maxWidth!);
-        _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
-        if (preCalculatedWidth != width) {
-          cloneWidthOfAllColumns -= width;
-          sumOfAllFlex -= element.flex ?? 1;
+        final double width = min(flexOfColumn, element.maxWidth!);
+        if (flexOfColumn != width) {
+          _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          widthAllColumns -= width;
+          flexAllColumns -= element.flex ?? 1;
+          columnsRemove.add(element);
+        } else {
+          if (columnsRemove.isEmpty) {
+            _state.mapKeyToWidthOfEachColumnContent[element.key] = width;
+          }
         }
       } else {
-        _state.mapKeyToWidthOfEachColumnContent[element.key] = preCalculatedWidth;
+        if (columnsRemove.isEmpty) {
+          _state.mapKeyToWidthOfEachColumnContent[element.key] = flexOfColumn;
+        }
       }
+    }
+    if (columnsRemove.isNotEmpty) {
+      _calculateWidthOfEachColumn(
+        tableColumns: tableColumns.where((element) => !columnsRemove.contains(element)).toList(),
+        widthOfAllColumns: widthAllColumns,
+        sumOfAllFlex: flexAllColumns,
+      );
     }
   }
 
   void setWidthOfColumnsContent(double value) {
     final double? widthOfAllContent = getWidthOfColumn(tableColumnsContent);
+    _state.isWidthColumnLargeThanWidthTable = false;
     if (widthOfAllContent == null) {
       _state.widthOfColumnsContent = value;
     } else if (widthOfAllContent <= value) {
       _state.widthOfColumnsContent = value;
     } else {
+      _state.isWidthColumnLargeThanWidthTable = true;
       _state.widthOfColumnsContent = widthOfAllContent;
     }
   }

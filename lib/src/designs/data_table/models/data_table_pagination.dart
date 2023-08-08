@@ -9,9 +9,9 @@ class TekDataTablePagination {
       case TekScreenDevice.mobile:
         return 1;
       case TekScreenDevice.tablet:
-        return 3;
+        return 2;
       case TekScreenDevice.desktop:
-        return 4;
+        return 3;
     }
   }
 
@@ -48,7 +48,6 @@ class TekDataTablePagination {
 
   /// logic
   void calculatePagination() {
-    numberNextPage = getNumberNextPage;
     excessStart = currentPage - numberNextPage <= 0 ? numberNextPage - (currentPage - 1) : 0;
     excessEnd = currentPage + numberNextPage >= pageNumber
         ? numberNextPage - (pageNumber - currentPage)

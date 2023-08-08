@@ -101,6 +101,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.minHeightPopup,
     this.minWidthPopup,
     this.tagsAbleScroll = false,
+    this.ableClearValue = true,
   }) : super(key: key);
 
   /// MenuData
@@ -174,6 +175,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   final double? maxWidthPopup;
   final double? minWidthPopup;
   final bool tagsAbleScroll;
+  final bool ableClearValue;
 
   @override
   State<TekInputDropdown<T>> createState() => TekInputDropdownState<T>();
@@ -411,6 +413,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
                       item: item,
                       state: state,
                     ),
+                    mainAxisSize: MainAxisSize.max,
                     text: item.child == null ? item.label : null,
                     child: _getDropdownItem(
                       state: state,
@@ -501,7 +504,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
   }
 
   Widget _getSuffixIcon<ValueType>(FormFieldState<ValueType> state) {
-    if (state.value != null) {
+    if (state.value != null && widget.ableClearValue) {
       return TekButtonInkwell(
         onPressed: () {
           state.didChange(null);

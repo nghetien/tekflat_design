@@ -9,6 +9,7 @@ class TekTags {
     EdgeInsetsGeometry? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
+    bool isOutlined = false,
   }) =>
       tag(
         value,
@@ -17,6 +18,7 @@ class TekTags {
         borderRadius: borderRadius,
         textStyle: textStyle,
         color: TekColors.green,
+        isOutlined: isOutlined,
       );
 
   static Widget failure(
@@ -25,6 +27,7 @@ class TekTags {
     EdgeInsetsGeometry? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
+    bool isOutlined = false,
   }) =>
       tag(
         value,
@@ -33,6 +36,7 @@ class TekTags {
         borderRadius: borderRadius,
         textStyle: textStyle,
         color: TekColors.red,
+        isOutlined: isOutlined,
       );
 
   static Widget warning(
@@ -41,6 +45,7 @@ class TekTags {
     EdgeInsetsGeometry? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
+    bool isOutlined = false,
   }) =>
       tag(
         value,
@@ -49,6 +54,7 @@ class TekTags {
         borderRadius: borderRadius,
         textStyle: textStyle,
         color: TekColors.yellow,
+        isOutlined: isOutlined,
       );
 
   static Widget info(
@@ -57,6 +63,7 @@ class TekTags {
     EdgeInsetsGeometry? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
+    bool isOutlined = false,
   }) =>
       tag(
         value,
@@ -65,6 +72,7 @@ class TekTags {
         borderRadius: borderRadius,
         textStyle: textStyle,
         color: TekColors.blue,
+        isOutlined: isOutlined,
       );
 
   static Widget draft(
@@ -73,6 +81,7 @@ class TekTags {
     EdgeInsetsGeometry? padding,
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
+    bool isOutlined = false,
   }) =>
       tag(
         value,
@@ -81,6 +90,7 @@ class TekTags {
         borderRadius: borderRadius,
         textStyle: textStyle,
         color: TekColors.grey,
+        isOutlined: isOutlined,
       );
 
   static Widget tag(
@@ -90,25 +100,51 @@ class TekTags {
     BorderRadiusGeometry? borderRadius,
     TextStyle? textStyle,
     Color? color,
+    bool isOutlined = false,
   }) =>
-      Container(
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
-        ),
-        padding: padding ??
-            EdgeInsets.symmetric(
-              horizontal: TekSpacings().p8,
-              vertical: TekSpacings().p4,
-            ),
-        child: Text(
-          value,
-          style: textStyle ??
-              TekTextStyles.body.copyWith(
-                color: TekColors.white,
-                height: 0,
+      !isOutlined
+          ? Container(
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
               ),
-          textAlign: TextAlign.center,
-        ),
-      );
+              padding: padding ??
+                  EdgeInsets.symmetric(
+                    horizontal: 6.scaleSpacing,
+                    vertical: 2.scaleSpacing,
+                  ),
+              child: Text(
+                value,
+                style: textStyle ??
+                    TekTextStyles.label.copyWith(
+                      color: TekColors.white,
+                      height: 0,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          : Container(
+              decoration: BoxDecoration(
+                color: color?.withOpacity(0.1),
+                borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
+                border: Border.all(
+                  color: color ?? TekColors.grey,
+                  width: TekBorders.thin,
+                ),
+              ),
+              padding: padding ??
+                  EdgeInsets.symmetric(
+                    horizontal: 6.scaleSpacing,
+                    vertical: 2.scaleSpacing,
+                  ),
+              child: Text(
+                value,
+                style: textStyle ??
+                    TekTextStyles.label.copyWith(
+                      color: color,
+                      height: 0,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            );
 }

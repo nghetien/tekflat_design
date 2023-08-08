@@ -39,6 +39,7 @@ class DataTableColumn<T> {
     this.isShowFilter = false,
     this.customizeFilter,
     this.defaultTextAlignment,
+    this.defaultTextMaxLines,
   });
 
   final String key;
@@ -56,4 +57,5 @@ class DataTableColumn<T> {
   final bool isShowFilter;
   final TekFilterHeaderItem<T>? customizeFilter;
   final AlignmentGeometry? defaultTextAlignment;
+  final int? defaultTextMaxLines;
 }

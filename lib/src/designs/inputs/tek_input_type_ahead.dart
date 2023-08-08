@@ -626,6 +626,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                             item: item,
                             state: state,
                           ),
+                          mainAxisSize: MainAxisSize.max,
                           text: item.child == null ? item.label : null,
                           child: _getDropdownItem(
                             state: state,

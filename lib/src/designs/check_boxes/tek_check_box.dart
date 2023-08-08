@@ -36,33 +36,36 @@ class TekCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Checkbox(
-          value: value,
-          onChanged: onChanged,
-          activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.grey,
-          checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.grey,
-          shape: type.style.shape,
-          side: side ??
-              BorderSide(
-                width: borderWidth ?? context.theme.checkboxTheme.side!.width,
-                color:
-                    enabled ? mainColor ?? context.theme.checkboxTheme.side!.color : TekColors.grey,
+    return TekButtonInkwell(
+      onPressed: enabled ? () => onChanged?.call(!value) : null,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Checkbox(
+            value: value,
+            onChanged: onChanged,
+            activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.grey,
+            checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.grey,
+            shape: type.style.shape,
+            side: side ??
+                BorderSide(
+                  width: borderWidth ?? context.theme.checkboxTheme.side!.width,
+                  color:
+                      enabled ? mainColor ?? context.theme.checkboxTheme.side!.color : TekColors.grey,
+                ),
+          ),
+          TekHSpace(space ?? TekSpacings().p8),
+          titleWidget ??
+              Text(
+                title ?? '',
+                style: textStyle ??
+                    TekTextStyles.body.copyWith(
+                      color: value ? activeColor ?? TekColors().primary : mainColor,
+                    ),
               ),
-        ),
-        TekHSpace(space ?? TekSpacings().p8),
-        titleWidget ??
-            Text(
-              title ?? '',
-              style: textStyle ??
-                  TekTextStyles.body.copyWith(
-                    color: value ? activeColor ?? TekColors().primary : mainColor,
-                  ),
-            ),
-      ],
+        ],
+      ),
     );
   }
 }

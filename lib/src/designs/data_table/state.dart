@@ -17,6 +17,7 @@ class DataTableState<T> {
   late Map<int, T> dataSelected; // Sử dụng khi DataTableAdditionColumn là checkbox
 
   double? widthOfColumnsContent;
+  bool isWidthColumnLargeThanWidthTable = false;
   List<DataTableColumn<T>> tableColumnsContent = [];
   List<DataTableColumn<T>> fixedColumnsLeft = [];
   List<DataTableColumn<T>> fixedColumnsRight = [];

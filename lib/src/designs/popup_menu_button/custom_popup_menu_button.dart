@@ -268,6 +268,7 @@ class CustomPopupMenuButtonState<T> extends State<CustomPopupMenuButton<T>> {
       message: widget.tooltip ?? MaterialLocalizations.of(context).showMenuTooltip,
       child: TekButton(
         type: TekButtonType.primary,
+        size: TekButtonSize.large,
         shape: TekOutlineBorder.none,
         background: widget.backgroundIconColor,
         hoverColor: widget.hoverColor,
