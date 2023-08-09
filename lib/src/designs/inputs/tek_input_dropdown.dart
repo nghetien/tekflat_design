@@ -102,6 +102,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.minWidthPopup,
     this.tagsAbleScroll = false,
     this.ableClearValue = true,
+    this.dropdownItemMaxLines = 1,
   }) : super(key: key);
 
   /// MenuData
@@ -176,6 +177,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   final double? minWidthPopup;
   final bool tagsAbleScroll;
   final bool ableClearValue;
+  final int dropdownItemMaxLines;
 
   @override
   State<TekInputDropdown<T>> createState() => TekInputDropdownState<T>();
@@ -415,6 +417,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
                     ),
                     mainAxisSize: MainAxisSize.max,
                     text: item.child == null ? item.label : null,
+                    maxLines: widget.dropdownItemMaxLines,
                     child: _getDropdownItem(
                       state: state,
                       item: item,
@@ -583,6 +586,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
         Expanded(
           child: Text(
             item.label,
+            maxLines: widget.dropdownItemMaxLines,
           ),
         ),
         Icon(
