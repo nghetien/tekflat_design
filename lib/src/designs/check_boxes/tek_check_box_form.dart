@@ -1,45 +1,5 @@
 part of 'check_boxes.dart';
 
-class TekCheckBoxStyle {
-  final Color activeColor;
-  final Color checkColor;
-  final OutlinedBorder shape;
-
-  const TekCheckBoxStyle({
-    required this.checkColor,
-    required this.activeColor,
-    required this.shape,
-  });
-}
-
-enum TekCheckBoxType {
-  radio,
-  check;
-
-  bool get isRadio => this == TekCheckBoxType.radio;
-
-  bool get isCheck => this == TekCheckBoxType.check;
-
-  TekCheckBoxStyle get style {
-    switch (this) {
-      case TekCheckBoxType.radio:
-        return TekCheckBoxStyle(
-          activeColor: TekColors().primary,
-          checkColor: TekColors().primary,
-          shape: const CircleBorder(),
-        );
-      case TekCheckBoxType.check:
-        return TekCheckBoxStyle(
-          activeColor: TekColors().primary,
-          checkColor: TekColors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: TekCorners.cornerBorder3,
-          ),
-        );
-    }
-  }
-}
-
 class TekCheckBoxForm extends StatelessWidget {
   const TekCheckBoxForm({
     Key? key,
@@ -96,7 +56,7 @@ class TekCheckBoxForm extends StatelessWidget {
         enabled: enabled,
         builder: (state) => TekCheckBox(
           value: state.value ?? false,
-          onChanged: state.didChange,
+          onChanged: state.setValue,
           activeColor: activeColor,
           checkColor: checkColor,
           space: space,

@@ -7,5 +7,3 @@ import 'package:tekflat_design/tekflat_design.dart';
 part 'tek_check_box_form.dart';
 
 part 'tek_check_box.dart';
-
-part 'tek_group_check_box.dart';

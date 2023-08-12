@@ -53,7 +53,6 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
 
   void _handleChangeItemPerPage(int? itemPerPage) {
     if (itemPerPage == null) return;
-    if (itemPerPage == pagination.itemsPerPage) return;
     widget.controller.setCurrentPage(1);
     widget.controller.setItemsPerPage(itemPerPage);
     widget.controller.setPageNumber(widget.controller.calculatePageNumber(itemPerPage));
@@ -221,9 +220,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
         SizedBox(
           child: TekInputDropdown<int>(
             width: 75,
-            initialValues: [
-              pagination.itemsPerPage.toString(),
-            ],
+            valueSingle: pagination.itemsPerPage.toString(),
             contentPadding: EdgeInsets.only(
               left: TekSpacings().p8,
               top: TekSpacings().p4,
@@ -237,7 +234,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
                   label: item.toString(),
                 ),
             ],
-            onSelected: (item, _) {
+            onChangedSingle: (item) {
               _handleChangeItemPerPage(item);
             },
             ableClearValue: false,

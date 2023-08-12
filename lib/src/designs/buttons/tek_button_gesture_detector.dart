@@ -1,15 +1,8 @@
 part of 'buttons.dart';
 
-enum TekButtonGDType {
-  icon,
-  text,
-  customize,
-}
-
 class TekButtonGD extends StatelessWidget {
   const TekButtonGD({
     Key? key,
-    required this.type,
     this.text,
     this.child,
     this.onPressed,
@@ -21,9 +14,14 @@ class TekButtonGD extends StatelessWidget {
     this.color,
     this.icon,
     this.cursor = SystemMouseCursors.click,
+    this.maxLines,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment,
+    this.mainAxisSize,
+    this.spacing,
+    this.iconFirst = true,
   }) : super(key: key);
 
-  final TekButtonGDType type;
   final String? text;
   final Widget? child;
   final VoidCallback? onPressed;
@@ -35,6 +33,12 @@ class TekButtonGD extends StatelessWidget {
   final Color? color;
   final Widget? icon;
   final MouseCursor cursor;
+  final int? maxLines;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final MainAxisSize? mainAxisSize;
+  final double? spacing;
+  final bool iconFirst;
 
   @override
   Widget build(BuildContext context) {
@@ -47,31 +51,63 @@ class TekButtonGD extends StatelessWidget {
     );
   }
 
+  Widget? _getIcon() {
+    return iconData != null
+        ? Icon(
+            iconData,
+            size: size,
+            color: color,
+          )
+        : icon;
+  }
+
+  Widget? _getText() {
+    return Text(
+      text ?? "",
+      style: TekTextStyles.body.copyWith(
+        color: textColor,
+        fontSize: textFontSize,
+        fontWeight: textFontWeight,
+        height: 0,
+      ),
+      maxLines: maxLines,
+    );
+  }
+
   Widget _getChild() {
-    const Widget defaultWidget = SizedBox.shrink();
-    switch (type) {
-      case TekButtonGDType.icon:
-        return iconData != null
-            ? Icon(
-                iconData,
-                size: size,
-                color: color,
-              )
-            : icon ?? defaultWidget;
-      case TekButtonGDType.text:
-        return Text(
-          text ?? "",
-          style: TekTextStyles.body.copyWith(
-            color: textColor,
-            fontSize: textFontSize,
-            fontWeight: textFontWeight,
-            height: 0,
-          ),
-        );
-      case TekButtonGDType.customize:
-        return child ?? defaultWidget;
-      default:
-        return defaultWidget;
+    if (child != null) return child!;
+    if (text != null && iconData == null && icon == null) return _getText()!;
+    if (text == null && iconData != null && icon == null) return _getIcon()!;
+    if (text == null && iconData == null && icon != null) return icon!;
+    final textChild = _getText();
+    final iconChild = _getIcon();
+    if (iconFirst) {
+      Row(
+        mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+        mainAxisSize: mainAxisSize ?? MainAxisSize.min,
+        children: [
+          if (iconChild != null) _getIcon()!,
+          if (iconChild != null && textChild != null)
+            SizedBox(
+              width: spacing ?? TekSpacings().mainSpacing,
+            ),
+          if (textChild != null) _getText()!,
+        ],
+      );
     }
+    return Row(
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.center,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
+      mainAxisSize: mainAxisSize ?? MainAxisSize.min,
+      children: [
+        if (textChild != null) _getText()!,
+        if (textChild != null && iconChild != null)
+          SizedBox(
+            width: spacing ?? TekSpacings().mainSpacing,
+          ),
+        if (iconChild != null) _getIcon()!,
+      ],
+    );
   }
 }

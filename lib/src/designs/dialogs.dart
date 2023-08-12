@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tekflat_design/src/styles/styles.dart';
 import 'package:tekflat_design/src/utils/utils.dart';
@@ -15,6 +17,14 @@ enum TekDialogType {
 
 class TekDialogs {
   const TekDialogs._();
+
+  static void _popAfterCancel(BuildContext context) {
+    if (TekPlatform.isWeb) {
+      context.popRootNavigator();
+    } else {
+      context.popNavigator();
+    }
+  }
 
   static Future<T?> defaultDialog<T>(
     BuildContext context, {
@@ -61,12 +71,13 @@ class TekDialogs {
     VoidCallback? onPressedToTitle,
     String? customizeOkText,
     String? customizeCancelText,
-    Future<bool> Function()? onOkPressed,
+    Future<bool?> Function()? onOkPressed,
     VoidCallback? onCancelPressed,
     required Widget content,
     bool showFooter = true,
     Widget? customizeFooter,
     MainAxisSize? mainAxisSize,
+    bool contentExpanded = false,
   }) {
     return showDialog<T>(
       context: context,
@@ -97,7 +108,6 @@ class TekDialogs {
                             color: TekColors().primary,
                           )
                         : TekButtonGD(
-                            type: TekButtonGDType.customize,
                             onPressed: () {
                               onPressedToTitle();
                             },
@@ -114,10 +124,21 @@ class TekDialogs {
                     child: const TekDivider(),
                   ),
                   TekVSpace.p4,
-                  Padding(
-                    padding: contentPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
-                    child: content,
-                  ),
+                  contentExpanded
+                      ? Expanded(
+                          child: Padding(
+                            padding: contentPadding ??
+                                EdgeInsets.all(TekSpacings().mainSpacing)
+                                    .copyWith(top: TekSpacings().p4),
+                            child: content,
+                          ),
+                        )
+                      : Padding(
+                          padding: contentPadding ??
+                              EdgeInsets.all(TekSpacings().mainSpacing)
+                                  .copyWith(top: TekSpacings().p4),
+                          child: content,
+                        ),
                   if (showFooter)
                     Padding(
                       padding: EdgeInsets.only(
@@ -133,7 +154,7 @@ class TekDialogs {
                               TekButton(
                                 onPressed: () {
                                   onCancelPressed?.call();
-                                  context.popNavigator();
+                                  _popAfterCancel(context);
                                 },
                                 size: TekButtonSize.medium,
                                 text: customizeCancelText ?? 'Cancel',
@@ -144,7 +165,7 @@ class TekDialogs {
                               TekButton(
                                 onPressed: () {
                                   onOkPressed?.call().then((value) {
-                                    if (value) context.popNavigator();
+                                    if (value == true) _popAfterCancel(context);
                                   });
                                 },
                                 type: TekButtonType.primary,
@@ -161,10 +182,9 @@ class TekDialogs {
                 top: (headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).top,
                 right: (headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing)).right,
                 child: TekButtonGD(
-                  type: TekButtonGDType.icon,
                   onPressed: () {
                     onCancelPressed?.call();
-                    context.popNavigator();
+                    _popAfterCancel(context);
                   },
                   icon: Icon(
                     Icons.close_rounded,
@@ -183,7 +203,7 @@ class TekDialogs {
   static Future<T?> optionDialog<T>(
     BuildContext context, {
     required TekDialogType type,
-    Future<bool> Function()? onClickButtonRight,
+    Future<bool?> Function()? onClickButtonRight,
     VoidCallback? onClickButtonLeft,
     String? title,
     Widget? customTitle,
@@ -195,7 +215,7 @@ class TekDialogs {
   }) =>
       defaultDialog<T>(
         context,
-        width: width,
+        width: width ?? min<double>(context.widthScreen, 420),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -260,14 +280,22 @@ class TekDialogs {
                             if (onClickButtonLeft != null) {
                               onClickButtonLeft();
                             } else {
-                              context.popNavigator();
+                              _popAfterCancel(context);
                             }
                           },
-                          type: TekButtonType.none,
+                          type: TekButtonType.outline,
                           size: TekButtonSize.medium,
                           text: buttonCancel ?? 'Cancel',
-                          textColor: TekColors.white,
-                          background: TekColors.grey,
+                          borderColor: type == TekDialogType.delete
+                              ? TekColors.red
+                              : type == TekDialogType.warning
+                                  ? TekColors.yellow
+                                  : TekColors.blue,
+                          textColor: type == TekDialogType.delete
+                              ? TekColors.red
+                              : type == TekDialogType.warning
+                                  ? TekColors.yellow
+                                  : TekColors.blue,
                         ),
                       ),
                     ),
@@ -276,9 +304,11 @@ class TekDialogs {
                       size: TekButtonSize.medium,
                       type: TekButtonType.primary,
                       onPressed: () {
-                        onClickButtonRight?.call().then((value) {
-                          if (value) context.popNavigator();
-                        });
+                        onClickButtonRight?.call().then(
+                          (value) {
+                            if (value == true) _popAfterCancel(context);
+                          },
+                        );
                       },
                       text: buttonText ?? 'OK',
                       background: type == TekDialogType.delete

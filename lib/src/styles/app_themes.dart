@@ -94,7 +94,7 @@ class TekThemes {
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(TekColors().primary),
       checkColor: MaterialStateProperty.all(TekColors().primary),
-      side: const BorderSide(width: TekBorders.thin, color: TekColors.black),
+      side: const BorderSide(width: TekBorders.med, color: TekColors.grey),
       splashRadius: 0,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
@@ -252,7 +252,7 @@ class TekThemes {
     checkboxTheme: CheckboxThemeData(
       fillColor: MaterialStateProperty.all(TekColors().primary),
       checkColor: MaterialStateProperty.all(TekColors.black),
-      side: const BorderSide(width: TekBorders.thin, color: TekColors.white),
+      side: const BorderSide(width: TekBorders.med, color: TekColors.grey),
       splashRadius: 0,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),

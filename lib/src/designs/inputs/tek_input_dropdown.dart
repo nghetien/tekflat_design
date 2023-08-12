@@ -37,19 +37,11 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.type = TekInputDropdownType.single,
     this.closeAfterSelect = false,
 
-    /// Form
-    this.name = '',
-    this.initialValues = const [],
-    this.focusNodeForm,
-    this.enabled = true,
-    this.autoValidateMode,
-    this.restorationId,
-    this.validator,
-    this.valueTransformer,
-    this.onSaved,
-    this.onDropdownChanged,
-    this.onReset,
-    this.onSelected,
+    /// Value & Action
+    this.valueSingle,
+    this.valueMultiple,
+    this.onChangedSingle,
+    this.onChangedMultiple,
 
     /// Text Field
     this.size = TekInputSize.medium,
@@ -68,7 +60,6 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.inputFormatters,
     this.onTap,
     this.onTapOutside,
-    this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
     this.isDense,
@@ -103,6 +94,10 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.tagsAbleScroll = false,
     this.ableClearValue = true,
     this.dropdownItemMaxLines = 1,
+    this.didChangeFormSingle,
+    this.didChangeFormMultiple,
+    this.enabled = true,
+    this.streamController,
   }) : super(key: key);
 
   /// MenuData
@@ -112,19 +107,11 @@ class TekInputDropdown<T> extends StatefulWidget {
   final TekInputDropdownType type;
   final bool closeAfterSelect;
 
-  /// Form
-  final String name;
-  final List<String> initialValues;
-  final FocusNode? focusNodeForm;
-  final bool enabled;
-  final AutovalidateMode? autoValidateMode;
-  final String? restorationId;
-  final String? Function(dynamic)? validator;
-  final dynamic Function(dynamic)? valueTransformer;
-  final Function(dynamic)? onSaved;
-  final Function(dynamic)? onDropdownChanged;
-  final Function()? onReset;
-  final Function(T, List<T>)? onSelected;
+  /// Value & Action
+  final String? valueSingle;
+  final List<String>? valueMultiple;
+  final Function(T)? onChangedSingle;
+  final Function(T?, List<T>)? onChangedMultiple;
 
   /// Text Field
   final TekInputSize size;
@@ -141,7 +128,6 @@ class TekInputDropdown<T> extends StatefulWidget {
   final bool obscureText;
   final Color? cursorColor;
   final List<TextInputFormatter>? inputFormatters;
-  final ValueChanged<String?>? onChanged;
   final Function()? onTap;
   final Function(PointerDownEvent)? onTapOutside;
   final Function()? onEditingComplete;
@@ -178,6 +164,10 @@ class TekInputDropdown<T> extends StatefulWidget {
   final bool tagsAbleScroll;
   final bool ableClearValue;
   final int dropdownItemMaxLines;
+  final Function(TekInputDropdownItemModel<T>?)? didChangeFormSingle;
+  final Function(List<TekInputDropdownItemModel<T>>?)? didChangeFormMultiple;
+  final bool enabled;
+  final StreamController<TekInputDropdownStreamState<T>>? streamController;
 
   @override
   State<TekInputDropdown<T>> createState() => TekInputDropdownState<T>();
@@ -188,16 +178,17 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
   /// Animation
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
+  StreamSubscription<TekInputDropdownStreamState<T>>? _listenerStreamState;
 
   /// Values
   late List<TekInputDropdownItemModel<T>> _menuChildren;
 
-  TekInputDropdownItemModel<T>? _initValueTypeSingle;
+  String? _valueSingle;
 
-  List<TekInputDropdownItemModel<T>>? _initValueTypeMultiple;
+  List<String>? _valueMultiple;
 
   /// Input
-  late final TextEditingController _controller;
+  final TextEditingController _controller = TextEditingController();
 
   /// Dropdown
   final MenuController _menuController = MenuController();
@@ -215,6 +206,37 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     return TekButtonSize.medium;
   }
 
+  bool get _ableClearValue {
+    if (!widget.enabled) return false;
+    return widget.ableClearValue;
+  }
+
+  TekInputDropdownItemModel<T>? get fromSingleKey {
+    return _menuChildren.firstWhereOrNull((element) => element.keyValue == _valueSingle);
+  }
+
+  List<TekInputDropdownItemModel<T>>? get fromMultipleKey {
+    if (_valueMultiple == null) return null;
+    if (_valueMultiple!.isEmpty) return [];
+    return _menuChildren.where((element) => _valueMultiple!.contains(element.keyValue)).toList();
+  }
+
+  void _listenStream(TekInputDropdownStreamState<T> event) {
+    if (widget.type.isSingle) {
+      if (event.valueSingle?.keyValue != _valueSingle) {
+        _setValue(
+          valueSingle: event.valueSingle,
+        );
+      }
+    } else {
+      if (!TekEqual.isEqual(event.valueMultiple?.map((e) => e.keyValue).toList(), _valueMultiple)) {
+        _setValue(
+          valueMultiple: event.valueMultiple,
+        );
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -229,39 +251,99 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
       ),
     );
 
+    _valueSingle = widget.valueSingle;
+    _valueMultiple = widget.valueMultiple;
     _menuChildren = widget.menuChildren;
-    if (widget.type.isSingle) {
-      if (widget.initialValues.isNotEmpty) {
-        _initValueTypeSingle = widget.menuChildren.firstWhereOrNull(
-          (element) => element.keyValue == widget.initialValues.first,
-        );
-        _controller = TextEditingController(text: _initValueTypeSingle?.label);
-      } else {
-        _controller = TextEditingController();
-      }
-    } else {
-      final filter = widget.menuChildren
-          .where(
-            (element) => widget.initialValues.contains(element.keyValue),
-          )
-          .toList();
-      if (filter.isNotEmpty) _initValueTypeMultiple = filter;
-      _controller = TextEditingController();
-    }
+    _setValue(
+      valueSingle: fromSingleKey,
+      valueMultiple: fromMultipleKey,
+      callOnChanged: false,
+      callSetState: false,
+      isInitTime: true,
+    );
+    _listenerStreamState = widget.streamController?.stream.listen(_listenStream);
   }
 
   @override
-  void didUpdateWidget(TekInputDropdown<T> oldWidget) {
+  void didUpdateWidget(covariant TekInputDropdown<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.menuChildren != oldWidget.menuChildren) {
       setState(() => _menuChildren = widget.menuChildren);
+    }
+    if (widget.type.isSingle) {
+      if (_valueSingle != widget.valueSingle) {
+        _valueSingle = widget.valueSingle;
+        _setValue(
+          valueSingle: fromSingleKey,
+          isInitTime: true,
+          callOnChanged: false,
+        );
+      }
+    } else {
+      if (!TekEqual.isEqual(widget.valueMultiple, _valueMultiple)) {
+        _valueMultiple = widget.valueMultiple;
+        _setValue(
+          valueMultiple: fromMultipleKey,
+          isInitTime: true,
+          callOnChanged: false,
+        );
+      }
     }
   }
 
   @override
   void dispose() {
+    _listenerStreamState?.cancel();
     _animationController.dispose();
     super.dispose();
+  }
+
+  void _setValue({
+    TekInputDropdownItemModel<T>? valueSingle,
+    List<TekInputDropdownItemModel<T>>? valueMultiple,
+    bool isInitTime = false,
+    bool callOnChanged = true,
+    bool callSetState = true,
+  }) {
+    if (widget.type.isSingle) {
+      if (valueSingle != null) {
+        _valueSingle = valueSingle.keyValue;
+        _controller.text = valueSingle.label;
+      } else {
+        _valueSingle = null;
+        _controller.clear();
+      }
+      if (callSetState) {
+        widget.didChangeFormSingle?.call(valueSingle);
+        setState(() {});
+      }
+      if (!isInitTime) _menuController.close();
+    } else {
+      if (valueMultiple != null) {
+        _valueMultiple = valueMultiple.map((e) => e.keyValue).toList();
+      } else {
+        _valueMultiple = null;
+      }
+      if (callSetState) {
+        widget.didChangeFormMultiple?.call(valueMultiple);
+        setState(() {});
+      }
+      if (widget.closeAfterSelect) if (!isInitTime) _menuController.close();
+    }
+    if (callOnChanged) {
+      if (widget.type.isSingle) {
+        if (valueSingle != null) {
+          widget.onChangedSingle?.call(valueSingle.value);
+        }
+      } else {
+        if (valueMultiple != null) {
+          widget.onChangedMultiple?.call(
+            valueSingle?.value,
+            valueMultiple.map((e) => e.value).toList(),
+          );
+        }
+      }
+    }
   }
 
   void _setPopupIsOpen(bool value) {
@@ -272,29 +354,15 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     }
   }
 
-  void _onFocusChange<ValueType>({
-    bool? hasFocus,
-    required FormFieldState<ValueType> state,
-  }) {
-    if (hasFocus == null || hasFocus == false) return;
-    FocusManager.instance.primaryFocus?.unfocus();
-    if (_menuController.isOpen) return;
-    _menuController.open();
-  }
-
-  void _handleSelectItem<ValueType>({
-    required FormFieldState<ValueType> state,
+  void _handleSelectItem({
     required TekInputDropdownItemModel<T> item,
   }) {
     try {
       if (widget.type.isSingle) {
-        state.didChange(item as ValueType);
-        _controller.text = item.label;
-        _menuController.close();
-        widget.onSelected?.call(item.value, [item.value]);
+        _setValue(valueSingle: item);
       } else {
-        final List<TekInputDropdownItemModel<T>> currentValueMultiple =
-            state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+        FocusManager.instance.primaryFocus?.unfocus();
+        final List<TekInputDropdownItemModel<T>> currentValueMultiple = fromMultipleKey ?? [];
         final index = currentValueMultiple.indexWhere(
           (element) => element.keyValue == item.keyValue,
         );
@@ -303,181 +371,131 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
         } else {
           currentValueMultiple.removeAt(index);
         }
-        state.didChange(currentValueMultiple as ValueType);
-        if (widget.closeAfterSelect) _menuController.close();
-        widget.onSelected?.call(item.value, currentValueMultiple.map((e) => e.value).toList());
-        setState(() {});
+        _setValue(
+          valueSingle: item,
+          valueMultiple: currentValueMultiple,
+        );
       }
     } catch (e) {
       TekLogger.errorLog("TekInputDropdown handleSelectItem error : $e");
     }
   }
 
-  void _handleRemoveItem<ValueType>({
-    required FormFieldState<ValueType> state,
+  void _handleRemoveItem({
     required TekInputDropdownItemModel<T> item,
   }) {
     try {
-      final List<TekInputDropdownItemModel<T>> currentValueMultiple =
-          state.value as List<TekInputDropdownItemModel<T>>? ?? [];
-      currentValueMultiple.remove(item);
-      state.didChange(currentValueMultiple as ValueType);
-      widget.onSelected?.call(item.value, currentValueMultiple.map((e) => e.value).toList());
-      setState(() {});
+      final List<TekInputDropdownItemModel<T>> currentValueMultiple = fromMultipleKey ?? [];
+      currentValueMultiple.removeWhere((element) => element.keyValue == item.keyValue);
+      _setValue(valueMultiple: currentValueMultiple);
     } catch (e) {
       TekLogger.errorLog("TekInputDropdown handleRemoveItem error : $e");
     }
   }
 
-  void _onDropdownChanged<ValueType>(ValueType? value){
-    widget.onDropdownChanged?.call(value);
-    try{
-      if(widget.type.isSingle){
-        final convertValue = value as TekInputDropdownItemModel<T>?;
-        if(convertValue != null){
-          _controller.text = convertValue.label;
-        }
-      }
-    }catch(e){
-      TekLogger.errorLog("TekInputDropdown onDropdownChanged error : $e");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (widget.type.isSingle) {
-      return _buildDropdownButton<TekInputDropdownItemModel<T>?>(
-        initialValue: _initValueTypeSingle,
-      );
-    }
-    return _buildDropdownButton<List<TekInputDropdownItemModel<T>>?>(
-      initialValue: _initValueTypeMultiple,
-    );
+    return _buildDropdownButton();
   }
 
-  Widget _buildDropdownButton<ValueType>({
-    ValueType? initialValue,
-  }) {
-    return FormBuilderField<ValueType>(
-      name: widget.name,
-      initialValue: initialValue,
-      focusNode: widget.focusNodeForm,
-      enabled: widget.enabled,
-      autovalidateMode: widget.autoValidateMode,
-      restorationId: widget.restorationId,
-      validator: widget.validator,
-      valueTransformer: widget.valueTransformer,
-      onSaved: widget.onSaved,
-      onChanged: _onDropdownChanged,
-      onReset: widget.onReset,
-      builder: (FormFieldState<ValueType> state) {
-        return LayoutBuilder(
-          builder: (_, constraints) {
-            final width = widget.width ?? constraints.maxWidth;
-            return MenuAnchor(
-              onOpen: () => _setPopupIsOpen(true),
-              onClose: () => _setPopupIsOpen(false),
-              crossAxisUnconstrained: false,
-              controller: _menuController,
-              alignmentOffset: widget.offset ?? const Offset(0, 10),
-              style: MenuStyle(
-                minimumSize: MaterialStateProperty.all(
-                  Size(
-                    widget.minWidthPopup ?? width,
-                    widget.minHeightPopup ??
-                        _menuChildren.length * _getSizeDropdownItem.height + 11,
-                  ),
-                ),
-                maximumSize: MaterialStateProperty.all(
-                  Size(
-                    widget.maxWidthPopup ?? width,
-                    widget.maxHeightPopup ??
-                        _menuChildren.length * _getSizeDropdownItem.height + 11,
-                  ),
-                ),
-                visualDensity: VisualDensity.comfortable,
+  Widget _buildDropdownButton() {
+    return LayoutBuilder(
+      builder: (_, constraints) {
+        final width = widget.width ?? constraints.maxWidth;
+        return MenuAnchor(
+          onOpen: () => _setPopupIsOpen(true),
+          onClose: () => _setPopupIsOpen(false),
+          crossAxisUnconstrained: false,
+          controller: _menuController,
+          alignmentOffset: widget.offset ?? const Offset(0, 10),
+          style: MenuStyle(
+            minimumSize: MaterialStateProperty.all(
+              Size(
+                widget.minWidthPopup ?? width,
+                widget.minHeightPopup ?? _menuChildren.length * _getSizeDropdownItem.height + 11,
               ),
-              menuChildren: _menuChildren.map(
-                (item) {
-                  return TekButton(
-                    width: double.infinity,
-                    size: _getSizeDropdownItem,
-                    onPressed: () => _handleSelectItem(
-                      state: state,
-                      item: item,
-                    ),
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    alignment: Alignment.centerLeft,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(0)),
-                    ),
-                    background: _getItemColor(
-                      item: item,
-                      state: state,
-                    ),
-                    mainAxisSize: MainAxisSize.max,
-                    text: item.child == null ? item.label : null,
-                    maxLines: widget.dropdownItemMaxLines,
-                    child: _getDropdownItem(
-                      state: state,
-                      item: item,
-                    ),
-                  );
-                },
-              ).toList(),
-              builder: (context, controller, child) {
-                return Focus(
-                  onFocusChange: (hasFocus) => _onFocusChange<ValueType>(
-                    hasFocus: hasFocus,
-                    state: state,
-                  ),
-                  child: TekInput(
-                    size: widget.size,
-                    width: widget.width,
-                    controller: _controller,
-                    focusNode: widget.focusNode,
-                    textAlign: widget.textAlign,
-                    textAlignVertical: widget.textAlignVertical,
-                    textInputAction: widget.textInputAction,
-                    keyboardType: widget.keyboardType,
-                    maxLines: widget.maxLines,
-                    minLines: widget.minLines,
-                    maxLength: widget.maxLength,
-                    enabled: widget.enabled,
-                    obscureText: widget.obscureText,
-                    cursorColor: widget.cursorColor,
-                    inputFormatters: widget.inputFormatters,
-                    onChanged: widget.onChanged,
-                    onTap: widget.onTap,
-                    onTapOutside: widget.onTapOutside,
-                    onEditingComplete: widget.onEditingComplete,
-                    onSubmitted: widget.onSubmitted,
-                    isDense: widget.isDense,
-                    filled: widget.filled,
-                    prefixIcon: _getPrefixIcon(state),
-                    suffixIcon: _getSuffixIcon(state),
-                    contentPadding: widget.contentPadding,
-                    focusedBorder: widget.focusedBorder,
-                    enabledBorder: widget.enabledBorder,
-                    disabledBorder: widget.disabledBorder,
-                    errorBorder: widget.errorBorder,
-                    focusedErrorBorder: widget.focusedErrorBorder,
-                    fillColor: widget.fillColor,
-                    hoverColor: widget.hoverColor,
-                    labelText: widget.labelText,
-                    labelStyle: widget.labelStyle,
-                    floatingLabelStyle: widget.floatingLabelStyle,
-                    floatingLabelBehavior: widget.floatingLabelBehavior,
-                    hintText: widget.type.isSingle ? widget.hintText : null,
-                    hintStyle: widget.hintStyle,
-                    errorText: widget.errorText ?? state.errorText,
-                    errorMaxLines: widget.errorMaxLines,
-                    errorStyle: widget.errorStyle,
-                    readOnly: true,
-                    ablePrefixIconConstraints: !widget.type.isMulti,
-                  ),
-                );
+            ),
+            maximumSize: MaterialStateProperty.all(
+              Size(
+                widget.maxWidthPopup ?? width,
+                widget.maxHeightPopup ?? _menuChildren.length * _getSizeDropdownItem.height + 11,
+              ),
+            ),
+            visualDensity: VisualDensity.comfortable,
+          ),
+          menuChildren: _menuChildren.map(
+            (item) {
+              return TekButton(
+                width: double.infinity,
+                size: _getSizeDropdownItem,
+                onPressed: () => _handleSelectItem(
+                  item: item,
+                ),
+                mainAxisAlignment: MainAxisAlignment.start,
+                alignment: Alignment.centerLeft,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                background: _getItemColor(
+                  item: item,
+                ),
+                mainAxisSize: MainAxisSize.max,
+                text: item.child == null ? item.label : null,
+                maxLines: widget.dropdownItemMaxLines,
+                child: _getDropdownItem(
+                  item: item,
+                ),
+              );
+            },
+          ).toList(),
+          builder: (context, controller, child) {
+            return TekTextField(
+              size: widget.size,
+              width: widget.width,
+              controller: _controller,
+              focusNode: widget.focusNode,
+              textAlign: widget.textAlign,
+              textAlignVertical: widget.textAlignVertical,
+              textInputAction: widget.textInputAction,
+              keyboardType: widget.keyboardType,
+              maxLines: widget.maxLines,
+              minLines: widget.minLines,
+              maxLength: widget.maxLength,
+              enabled: widget.enabled,
+              obscureText: widget.obscureText,
+              cursorColor: widget.cursorColor,
+              inputFormatters: widget.inputFormatters,
+              onTap: () {
+                if (!widget.enabled) return;
+                _menuController.open();
+                widget.onTap?.call();
               },
+              onTapOutside: widget.onTapOutside,
+              onEditingComplete: widget.onEditingComplete,
+              onSubmitted: widget.onSubmitted,
+              isDense: widget.isDense,
+              filled: widget.filled,
+              prefixIcon: _getPrefixIcon(),
+              suffixIcon: _getSuffixIcon(),
+              contentPadding: widget.contentPadding,
+              focusedBorder: widget.focusedBorder,
+              enabledBorder: widget.enabledBorder,
+              disabledBorder: widget.disabledBorder,
+              errorBorder: widget.errorBorder,
+              focusedErrorBorder: widget.focusedErrorBorder,
+              fillColor: widget.fillColor,
+              hoverColor: widget.hoverColor,
+              labelText: widget.labelText,
+              labelStyle: widget.labelStyle,
+              floatingLabelStyle: widget.floatingLabelStyle,
+              floatingLabelBehavior: widget.floatingLabelBehavior,
+              hintText: widget.type.isSingle ? widget.hintText : null,
+              hintStyle: widget.hintStyle,
+              errorText: widget.errorText,
+              errorMaxLines: widget.errorMaxLines,
+              errorStyle: widget.errorStyle,
+              readOnly: true,
+              ablePrefixIconConstraints: !widget.type.isMulti,
             );
           },
         );
@@ -485,38 +503,32 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     );
   }
 
-  Color _getItemColor<ValueType>({
+  Color _getItemColor({
     required TekInputDropdownItemModel<T> item,
-    required FormFieldState<ValueType> state,
   }) {
     try {
       if (widget.type.isSingle) {
-        final dataState = state.value as TekInputDropdownItemModel<T>?;
+        final dataState = fromSingleKey;
         if (item.keyValue != dataState?.keyValue) return Colors.transparent;
         return TekColors().primaryOpacity01;
+      } else {
+        final List<TekInputDropdownItemModel<T>> currentValueMultiple = fromMultipleKey ?? [];
+        final filter = currentValueMultiple.firstWhereOrNull((e) => e.keyValue == item.keyValue);
+        if (filter == null) return Colors.transparent;
+        return TekColors().primaryOpacity01;
       }
-      final List<TekInputDropdownItemModel<T>> currentValueMultiple =
-          state.value as List<TekInputDropdownItemModel<T>>? ?? [];
-      final filter = currentValueMultiple.firstWhereOrNull((e) => e.keyValue == item.keyValue);
-      if (filter == null) return Colors.transparent;
-      return TekColors().primaryOpacity01;
     } catch (e) {
       TekLogger.errorLog("TekInputDropdown getItemColor error : $e");
       return Colors.transparent;
     }
   }
 
-  Widget _getSuffixIcon<ValueType>(FormFieldState<ValueType> state) {
-    if (state.value != null && widget.ableClearValue) {
+  Widget _getSuffixIcon() {
+    if (((widget.type.isSingle && _valueSingle != null) ||
+            (widget.type.isMulti && _valueMultiple != null && _valueMultiple!.isNotEmpty)) &&
+        _ableClearValue) {
       return TekButtonInkwell(
-        onPressed: () {
-          state.didChange(null);
-          _controller.clear();
-          widget.onDropdownChanged?.call(null);
-          FocusManager.instance.primaryFocus?.unfocus();
-          _menuController.close();
-          setState(() {});
-        },
+        onPressed: () => _setValue(valueSingle: null, valueMultiple: null),
         child: RotationTransition(
           turns: _rotateAnimation,
           child: Icon(
@@ -537,10 +549,10 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
 
   final _scrollController = ScrollController();
 
-  Widget? _getPrefixIcon<ValueType>(FormFieldState<ValueType> state) {
+  Widget? _getPrefixIcon() {
     if (widget.type.isSingle) return widget.prefixIcon;
     try {
-      final selectedItems = state.value as List<TekInputDropdownItemModel<T>>? ?? [];
+      final selectedItems = fromMultipleKey ?? [];
       if (selectedItems.isEmpty) return null;
       final Widget prefixIcon = Padding(
         padding: EdgeInsets.all(TekSpacings().p8),
@@ -551,7 +563,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
             (item) {
               return TekDynamicTag(
                 textContent: item.label,
-                whenClose: () => _handleRemoveItem(item: item, state: state),
+                whenClose: () => _handleRemoveItem(item: item),
               );
             },
           ).toList(),
@@ -570,14 +582,12 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     }
   }
 
-  Widget? _getDropdownItem<ValueType>({
+  Widget? _getDropdownItem({
     required TekInputDropdownItemModel<T> item,
-    required FormFieldState<ValueType> state,
   }) {
     if (item.child != null) return item.child!(item.value, item.label);
     if (widget.type.isSingle) return null;
-    final filter = (state.value as List<TekInputDropdownItemModel<T>>? ?? [])
-        .firstWhereOrNull((e) => e.keyValue == item.keyValue);
+    final filter = (fromMultipleKey ?? []).firstWhereOrNull((e) => e.keyValue == item.keyValue);
     if (filter == null) return null;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,

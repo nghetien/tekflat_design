@@ -1,7 +1,7 @@
 part of 'inputs.dart';
 
-class TekInputTypeAhead<T> extends StatefulWidget {
-  const TekInputTypeAhead({
+class TekInputTypeAheadForm<T> extends StatefulWidget {
+  const TekInputTypeAheadForm({
     Key? key,
 
     /// Type
@@ -10,7 +10,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
 
     /// Form
     this.name = '',
-    this.initialValues = const [],
+    this.initialValues,
     this.focusNodeForm,
     this.enabled = true,
     this.autoValidateMode,
@@ -64,6 +64,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
     this.errorMaxLines,
     this.errorStyle,
     this.readOnly = false,
+    this.ableClearValue = true,
 
     /// Dropdown
     this.offset,
@@ -87,7 +88,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
 
   /// Form
   final String name;
-  final List<String> initialValues;
+  final List<TekInputDropdownItemModel<T>>? initialValues;
   final FocusNode? focusNodeForm;
   final bool enabled;
   final AutovalidateMode? autoValidateMode;
@@ -141,6 +142,7 @@ class TekInputTypeAhead<T> extends StatefulWidget {
   final int? errorMaxLines;
   final TextStyle? errorStyle;
   final bool readOnly;
+  final bool ableClearValue;
 
   /// Dropdown
   final Offset? offset;
@@ -158,10 +160,10 @@ class TekInputTypeAhead<T> extends StatefulWidget {
   final Future<List<TekInputDropdownItemModel<T>>> Function(String)? onSearchMenuChildren;
 
   @override
-  State<TekInputTypeAhead<T>> createState() => TekInputTypeAheadState<T>();
+  State<TekInputTypeAheadForm<T>> createState() => TekInputTypeAheadFormState<T>();
 }
 
-class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
+class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
     with SingleTickerProviderStateMixin {
   /// Animation
   late AnimationController _animationController;
@@ -209,6 +211,11 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     return TekButtonSize.medium;
   }
 
+  bool get _ableClearValue {
+    if (!widget.enabled) return false;
+    return widget.ableClearValue;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -222,28 +229,25 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
         curve: Curves.easeInOut,
       ),
     );
+
+    /// Lấy init theo model nếu init theo key null
+    if (widget.initialValues != null && widget.initialValues!.isNotEmpty) {
+      if (widget.type.isSingle) {
+        _initValueTypeSingle = widget.initialValues!.first;
+        _controller.text = _initValueTypeSingle?.label ?? '';
+      } else {
+        _initValueTypeMultiple = widget.initialValues;
+      }
+    }
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         _loading.openAndDismissLoading(
           () async {
             final result = await widget.initMenuChildren?.call();
-            _menuChildren = result ?? [];
-            if (widget.type.isSingle) {
-              if (widget.initialValues.isNotEmpty) {
-                _initValueTypeSingle = _menuChildren.firstWhereOrNull(
-                  (element) => element.keyValue == widget.initialValues.first,
-                );
-                _controller.text = _initValueTypeSingle?.label ?? '';
-              }
-            } else {
-              final filter = _menuChildren
-                  .where(
-                    (element) => widget.initialValues.contains(element.keyValue),
-                  )
-                  .toList();
-              if (filter.isNotEmpty) _initValueTypeMultiple = filter;
-            }
-            setState(() {});
+            setState(() {
+              _menuChildren = result ?? [];
+            });
           },
         );
       },
@@ -269,7 +273,6 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     required FormFieldState<ValueType> state,
   }) {
     if (hasFocus == null || hasFocus == false) return;
-    FocusManager.instance.primaryFocus?.unfocus();
     if (_menuController.isOpen) return;
     _menuController.open();
   }
@@ -280,11 +283,13 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
   }) {
     try {
       if (widget.type.isSingle) {
-        state.didChange(item as ValueType);
-        _controller.text = item.label;
+        FocusManager.instance.primaryFocus?.unfocus();
         _menuController.close();
+        _controller.text = item.label;
+        state.didChange(item as ValueType);
         widget.onSelected?.call(item.value, [item.value]);
       } else {
+        FocusManager.instance.primaryFocus?.unfocus();
         final List<TekInputDropdownItemModel<T>> currentValueMultiple =
             state.value as List<TekInputDropdownItemModel<T>>? ?? [];
         final index = currentValueMultiple.indexWhere(
@@ -321,6 +326,22 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
     }
   }
 
+  void _onDropdownChanged<ValueType>(ValueType? value) {
+    widget.onDropdownChanged?.call(value);
+    try {
+      if (widget.type.isSingle) {
+        final convertValue = value as TekInputDropdownItemModel<T>?;
+        if (convertValue != null) {
+          _controller.text = convertValue.label;
+        } else {
+          _controller.clear();
+        }
+      }
+    } catch (e) {
+      TekLogger.errorLog("TekInputDropdown onDropdownChanged error : $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.type.isSingle) {
@@ -346,7 +367,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
       validator: widget.validator,
       valueTransformer: widget.valueTransformer,
       onSaved: widget.onSaved,
-      onChanged: widget.onDropdownChanged,
+      onChanged: _onDropdownChanged,
       onReset: widget.onReset,
       builder: (FormFieldState<ValueType> state) {
         return LayoutBuilder(
@@ -366,7 +387,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                     hasFocus: hasFocus,
                     state: state,
                   ),
-                  child: TekInput(
+                  child: TekTextField(
                     size: widget.size,
                     width: widget.width,
                     controller: _controller,
@@ -403,7 +424,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
                     labelStyle: widget.labelStyle,
                     floatingLabelStyle: widget.floatingLabelStyle,
                     floatingLabelBehavior: widget.floatingLabelBehavior,
-                    hintText: widget.type.isSingle ? widget.hintText : null,
+                    hintText: widget.hintText,
                     hintStyle: widget.hintStyle,
                     errorText: widget.errorText ?? state.errorText,
                     errorMaxLines: widget.errorMaxLines,
@@ -442,7 +463,7 @@ class TekInputTypeAheadState<T> extends State<TekInputTypeAhead<T>>
   }
 
   Widget _getSuffixIcon<ValueType>(FormFieldState<ValueType> state) {
-    if (state.value != null) {
+    if (state.value != null && _ableClearValue) {
       return TekButtonInkwell(
         onPressed: () {
           state.didChange(null);

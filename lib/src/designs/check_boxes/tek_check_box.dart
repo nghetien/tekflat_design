@@ -1,5 +1,45 @@
 part of 'check_boxes.dart';
 
+class TekCheckBoxStyle {
+  final Color activeColor;
+  final Color checkColor;
+  final OutlinedBorder shape;
+
+  const TekCheckBoxStyle({
+    required this.checkColor,
+    required this.activeColor,
+    required this.shape,
+  });
+}
+
+enum TekCheckBoxType {
+  radio,
+  check;
+
+  bool get isRadio => this == TekCheckBoxType.radio;
+
+  bool get isCheck => this == TekCheckBoxType.check;
+
+  TekCheckBoxStyle get style {
+    switch (this) {
+      case TekCheckBoxType.radio:
+        return TekCheckBoxStyle(
+          activeColor: TekColors().primary,
+          checkColor: TekColors().primary,
+          shape: const CircleBorder(),
+        );
+      case TekCheckBoxType.check:
+        return TekCheckBoxStyle(
+          activeColor: TekColors().primary,
+          checkColor: TekColors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: TekCorners.cornerBorder3,
+          ),
+        );
+    }
+  }
+}
+
 class TekCheckBox extends StatelessWidget {
   const TekCheckBox({
     Key? key,
@@ -42,30 +82,41 @@ class TekCheckBox extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Checkbox(
-            value: value,
-            onChanged: onChanged,
-            activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.grey,
-            checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.grey,
-            shape: type.style.shape,
-            side: side ??
-                BorderSide(
-                  width: borderWidth ?? context.theme.checkboxTheme.side!.width,
-                  color:
-                      enabled ? mainColor ?? context.theme.checkboxTheme.side!.color : TekColors.grey,
-                ),
-          ),
+          _getCheckBox(context),
           TekHSpace(space ?? TekSpacings().p8),
           titleWidget ??
               Text(
                 title ?? '',
                 style: textStyle ??
                     TekTextStyles.body.copyWith(
-                      color: value ? activeColor ?? TekColors().primary : mainColor,
+                      color: !enabled
+                          ? TekColors.grey
+                          : value
+                              ? activeColor ?? TekColors().primary
+                              : mainColor,
                     ),
               ),
         ],
       ),
+    );
+  }
+
+  Widget _getCheckBox(BuildContext context) {
+    return Checkbox(
+      value: value,
+      onChanged: (value) {
+        if (enabled) onChanged?.call(value);
+      },
+      activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.greyOpacity04,
+      checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.greyOpacity04,
+      shape: type.style.shape,
+      side: side ??
+          BorderSide(
+            width: borderWidth ?? context.theme.checkboxTheme.side!.width,
+            color: enabled
+                ? mainColor ?? context.theme.checkboxTheme.side!.color
+                : TekColors.greyOpacity04,
+          ),
     );
   }
 }

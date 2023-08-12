@@ -114,7 +114,6 @@ class _TekInputPasswordState extends State<TekInputPassword> {
   Widget _getSuffixIcon() {
     if (widget.suffixIcon != null) return widget.suffixIcon!;
     return TekButtonGD(
-      type: TekButtonGDType.icon,
       icon: Icon(
         _isShowPassword ? Icons.visibility_rounded : Icons.visibility_off_rounded,
         color: widget.iconPasswordColor,

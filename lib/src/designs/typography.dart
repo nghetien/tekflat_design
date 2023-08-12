@@ -38,7 +38,7 @@ class TekTypography extends StatelessWidget {
   const TekTypography({
     Key? key,
     required this.text,
-    required this.type,
+    this.type = TekTypographyType.level5,
     this.fontWeight,
     this.fontSize,
     this.color,

@@ -186,7 +186,6 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
   Widget _sortWidget() {
     return TekButtonGD(
       onPressed: _handleChangeSortType,
-      type: TekButtonGDType.customize,
       child: Stack(
         children: <Widget>[
           Padding(
@@ -247,7 +246,6 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
           padding: EdgeInsets.only(right: TekSpacings().p8),
           child: TekButtonGD(
             onPressed: () => _handleChangeShowMenu(!_menuController.isOpen),
-            type: TekButtonGDType.customize,
             child: Icon(
               Icons.filter_list_rounded,
               size: TekIconSizes().s24,

@@ -17,7 +17,7 @@ class TekLoadingController {
     builder: (BuildContext context) =>
         Container(
           decoration: BoxDecoration(
-            borderRadius: TekCorners.cornerBorder8,
+            borderRadius: TekCorners().mainCornerBorder,
             color: context.theme.colorScheme.background.withOpacity(0.65),
           ),
           child: const TekLoadingWidget(),
