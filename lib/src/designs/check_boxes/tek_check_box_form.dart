@@ -56,7 +56,7 @@ class TekCheckBoxForm extends StatelessWidget {
         enabled: enabled,
         builder: (state) => TekCheckBox(
           value: state.value ?? false,
-          onChanged: state.setValue,
+          onChanged: state.didChange,
           activeColor: activeColor,
           checkColor: checkColor,
           space: space,
