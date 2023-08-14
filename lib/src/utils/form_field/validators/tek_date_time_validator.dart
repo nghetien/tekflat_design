@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import './tek_validator_mess_error.dart';
 
 class TekDateTimeValidator {
   const TekDateTimeValidator._();
@@ -98,8 +101,7 @@ class TekDateTimeValidator {
     }
   }
 
-  static bool isDateTime(
-    String str, {
+  static bool isDateTime(String str, {
     String? validator,
   }) {
     try {
@@ -125,4 +127,10 @@ class TekDateTimeValidator {
       return false;
     }
   }
+
+  static FormFieldValidator<DateTime> dateTime({String? errorText}) => (valueCandidate) =>
+      valueCandidate != null ? errorText ?? TekFormValidatorMessageError().dateTime : null;
+
+  static FormFieldValidator<DateTime> timeOfDay({String? errorText}) => (valueCandidate) =>
+      valueCandidate != null ? errorText ?? TekFormValidatorMessageError().timeOfDay : null;
 }

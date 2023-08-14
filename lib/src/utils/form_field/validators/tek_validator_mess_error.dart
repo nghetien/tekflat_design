@@ -26,6 +26,8 @@ class TekFormValidatorMessageError {
   String _dateTime = 'Value must be a valid date';
   String _timeOfDay = 'Value must be a valid time of day';
   String _phone = 'Value must be a valid phone';
+  String Function(String)? _largeThan = (String value) => 'Value must be large than $value';
+  String Function(String)? _lessThan = (String value) => 'Value must be less than $value';
 
   String get email => _email;
 
@@ -63,6 +65,10 @@ class TekFormValidatorMessageError {
 
   String get phone => _phone;
 
+  String Function(String)? get largeThan => _largeThan;
+
+  String Function(String)? get lessThan => _lessThan;
+
   void setEmail(String value) => _email = value;
 
   void setRequired(String value) => _required = value;
@@ -98,4 +104,8 @@ class TekFormValidatorMessageError {
   void setTimeOfDay(String value) => _timeOfDay = value;
 
   void setPhone(String value) => _phone = value;
+
+  void setLargeThan(String Function(String)? value) => _largeThan = value;
+
+  void setLessThan(String Function(String)? value) => _lessThan = value;
 }
