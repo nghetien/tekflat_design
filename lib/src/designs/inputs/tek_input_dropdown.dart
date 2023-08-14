@@ -110,7 +110,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   /// Value & Action
   final String? valueSingle;
   final List<String>? valueMultiple;
-  final Function(T)? onChangedSingle;
+  final Function(T?)? onChangedSingle;
   final Function(T?, List<T>)? onChangedMultiple;
 
   /// Text Field
@@ -332,16 +332,12 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
     }
     if (callOnChanged) {
       if (widget.type.isSingle) {
-        if (valueSingle != null) {
-          widget.onChangedSingle?.call(valueSingle.value);
-        }
+        widget.onChangedSingle?.call(valueSingle?.value);
       } else {
-        if (valueMultiple != null) {
-          widget.onChangedMultiple?.call(
-            valueSingle?.value,
-            valueMultiple.map((e) => e.value).toList(),
-          );
-        }
+        widget.onChangedMultiple?.call(
+          valueSingle?.value,
+          valueMultiple?.map((e) => e.value).toList() ?? [],
+        );
       }
     }
   }

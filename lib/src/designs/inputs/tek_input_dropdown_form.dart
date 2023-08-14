@@ -118,7 +118,7 @@ class TekInputDropdownForm<T> extends StatefulWidget {
   final Function(TekInputDropdownItemModel<T>?)? onDropdownChangedSingle;
   final Function(List<TekInputDropdownItemModel<T>>?)? onDropdownChangedMultiple;
   final Function()? onReset;
-  final Function(T)? onChangedSingle;
+  final Function(T?)? onChangedSingle;
   final Function(T?, List<T>)? onChangedMultiple;
 
   /// Text Field
