@@ -34,6 +34,8 @@ class TekInputPassword extends StatefulWidget {
     this.filled,
     this.prefixIcon,
     this.suffixIcon,
+    this.suffixIconShow,
+    this.suffixIconHide,
     this.contentPadding,
     this.focusedBorder,
     this.enabledBorder,
@@ -85,6 +87,8 @@ class TekInputPassword extends StatefulWidget {
   final bool? filled;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final IconData? suffixIconShow;
+  final IconData? suffixIconHide;
   final EdgeInsets? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
@@ -115,7 +119,9 @@ class _TekInputPasswordState extends State<TekInputPassword> {
     if (widget.suffixIcon != null) return widget.suffixIcon!;
     return TekButtonGD(
       icon: Icon(
-        _isShowPassword ? Icons.visibility_rounded : Icons.visibility_off_rounded,
+        _isShowPassword
+            ? widget.suffixIconShow ?? Icons.visibility_rounded
+            : widget.suffixIconHide ?? Icons.visibility_off_rounded,
         color: widget.iconPasswordColor,
         size: widget.iconPasswordSize,
       ),
