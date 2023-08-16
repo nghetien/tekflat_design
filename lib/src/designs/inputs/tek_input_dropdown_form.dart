@@ -92,6 +92,8 @@ class TekInputDropdownForm<T> extends StatefulWidget {
     this.tagsAbleScroll = false,
     this.ableClearValue = true,
     this.dropdownItemMaxLines = 1,
+    this.dropdownItemAlignment,
+    this.dropdownItemMainAxisAlignment,
   }) : super(key: key);
 
   /// MenuData
@@ -172,6 +174,8 @@ class TekInputDropdownForm<T> extends StatefulWidget {
   final bool tagsAbleScroll;
   final bool ableClearValue;
   final int dropdownItemMaxLines;
+  final AlignmentGeometry? dropdownItemAlignment;
+  final MainAxisAlignment? dropdownItemMainAxisAlignment;
 
   @override
   State<TekInputDropdownForm<T>> createState() => _TekInputDropdownFormState<T>();

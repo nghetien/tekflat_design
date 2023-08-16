@@ -94,6 +94,8 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.tagsAbleScroll = false,
     this.ableClearValue = true,
     this.dropdownItemMaxLines = 1,
+    this.dropdownItemAlignment,
+    this.dropdownItemMainAxisAlignment,
     this.didChangeFormSingle,
     this.didChangeFormMultiple,
     this.enabled = true,
@@ -164,6 +166,8 @@ class TekInputDropdown<T> extends StatefulWidget {
   final bool tagsAbleScroll;
   final bool ableClearValue;
   final int dropdownItemMaxLines;
+  final AlignmentGeometry? dropdownItemAlignment;
+  final MainAxisAlignment? dropdownItemMainAxisAlignment;
   final Function(TekInputDropdownItemModel<T>?)? didChangeFormSingle;
   final Function(List<TekInputDropdownItemModel<T>>?)? didChangeFormMultiple;
   final bool enabled;
@@ -427,8 +431,8 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
                 onPressed: () => _handleSelectItem(
                   item: item,
                 ),
-                mainAxisAlignment: MainAxisAlignment.start,
-                alignment: Alignment.centerLeft,
+                mainAxisAlignment: widget.dropdownItemMainAxisAlignment ?? MainAxisAlignment.start,
+                alignment: widget.dropdownItemAlignment ?? Alignment.centerLeft,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(0)),
                 ),
