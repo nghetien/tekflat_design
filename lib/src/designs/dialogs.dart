@@ -18,14 +18,6 @@ enum TekDialogType {
 class TekDialogs {
   const TekDialogs._();
 
-  static void _popAfterCancel(BuildContext context) {
-    if (TekPlatform.isWeb) {
-      context.popRootNavigator();
-    } else {
-      context.popNavigator();
-    }
-  }
-
   static Future<T?> defaultDialog<T>(
     BuildContext context, {
     double? width,
@@ -154,7 +146,7 @@ class TekDialogs {
                               TekButton(
                                 onPressed: () {
                                   onCancelPressed?.call();
-                                  _popAfterCancel(context);
+                                  popNavigatorMultiPlatform(context);
                                 },
                                 size: TekButtonSize.medium,
                                 text: customizeCancelText ?? 'Cancel',
@@ -165,7 +157,7 @@ class TekDialogs {
                               TekButton(
                                 onPressed: () {
                                   onOkPressed?.call().then((value) {
-                                    if (value == true) _popAfterCancel(context);
+                                    if (value == true) popNavigatorMultiPlatform(context);
                                   });
                                 },
                                 type: TekButtonType.primary,
@@ -184,7 +176,7 @@ class TekDialogs {
                 child: TekButtonGD(
                   onPressed: () {
                     onCancelPressed?.call();
-                    _popAfterCancel(context);
+                    popNavigatorMultiPlatform(context);
                   },
                   icon: Icon(
                     Icons.close_rounded,
@@ -280,7 +272,7 @@ class TekDialogs {
                             if (onClickButtonLeft != null) {
                               onClickButtonLeft();
                             } else {
-                              _popAfterCancel(context);
+                              popNavigatorMultiPlatform(context);
                             }
                           },
                           type: TekButtonType.outline,
@@ -306,7 +298,7 @@ class TekDialogs {
                       onPressed: () {
                         onClickButtonRight?.call().then(
                           (value) {
-                            if (value == true) _popAfterCancel(context);
+                            if (value == true) popNavigatorMultiPlatform(context);
                           },
                         );
                       },

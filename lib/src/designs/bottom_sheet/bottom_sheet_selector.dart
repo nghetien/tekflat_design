@@ -172,7 +172,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   }
 
   void _onBack() {
-    context.popNavigator();
+    popNavigatorMultiPlatform(context);
   }
 
   @override

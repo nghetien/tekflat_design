@@ -7,4 +7,5 @@ export 'is_equal.dart';
 export 'load_env.dart';
 export 'logger.dart';
 export 'platform.dart';
+export 'pop_navigator.dart';
 export 'size_of_device.dart';
