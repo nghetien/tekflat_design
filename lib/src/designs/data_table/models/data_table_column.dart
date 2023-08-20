@@ -25,7 +25,7 @@ class TekFilterHeaderItem<T> {
 class DataTableColumn<T> {
   DataTableColumn({
     required this.key,
-    required this.name,
+    this.name,
     this.width,
     this.maxWidth,
     this.minWidth,
@@ -43,7 +43,7 @@ class DataTableColumn<T> {
   });
 
   final String key;
-  final String name;
+  final String? name;
   final double? width;
   final double? maxWidth;
   final double? minWidth;

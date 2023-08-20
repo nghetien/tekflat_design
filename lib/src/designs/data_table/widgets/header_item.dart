@@ -159,7 +159,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
                 padding: widget.headerOption.padding ??
                     EdgeInsets.symmetric(horizontal: TekSpacings().p8),
                 child: Text(
-                  widget.column.name,
+                  widget.column.name ?? '',
                   textAlign: TextAlign.center,
                   style: TekTextStyles.body.copyWith(
                     fontWeight: FontWeight.bold,

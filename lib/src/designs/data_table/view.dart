@@ -10,7 +10,7 @@ class TekDataTable<T> extends StatefulWidget {
     this.bottomContent,
     this.showerMoreContentIntoRowWidget,
     this.headerIntoRowWidget,
-    required this.handleChangeData,
+    this.handleChangeData,
     this.optionUI,
     this.headerOption,
     this.rowOption,
@@ -26,7 +26,7 @@ class TekDataTable<T> extends StatefulWidget {
   final TekOptionContentTable? bottomContent;
   final TekShowerMoreContentIntoRowWidget<T>? showerMoreContentIntoRowWidget;
   final TekHeaderIntoRowWidget<T>? headerIntoRowWidget;
-  final TekAsyncDataSource<T> handleChangeData;
+  final TekAsyncDataSource<T>? handleChangeData;
   final TekDataTableOptionUI? optionUI;
   final TekDataTableHeaderOption? headerOption;
   final TekDataTableRowOption<T>? rowOption;

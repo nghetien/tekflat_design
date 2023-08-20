@@ -3,13 +3,13 @@ part of '../data_table.dart';
 class TekDataTablePaginationWidget<T> extends StatefulWidget {
   const TekDataTablePaginationWidget({
     Key? key,
-    required this.handleChangeData,
+    this.handleChangeData,
     required this.controller,
     required this.paginationOption,
   }) : super(key: key);
 
   final TekDataTableController<T> controller;
-  final TekAsyncDataSource<T> handleChangeData;
+  final TekAsyncDataSource<T>? handleChangeData;
   final TekDataTablePaginationOption paginationOption;
 
   @override
@@ -27,7 +27,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
     if (widget.controller.additionColumns.contains(TekDataTableAdditionColumn.checkbox)) {
       widget.controller.clearSelected();
     }
-    widget.handleChangeData(
+    widget.handleChangeData?.call(
       currentPage: pagination.currentPage,
       itemsPerPage: pagination.itemsPerPage,
     );
@@ -56,7 +56,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
     widget.controller.setCurrentPage(1);
     widget.controller.setItemsPerPage(itemPerPage);
     widget.controller.setPageNumber(widget.controller.calculatePageNumber(itemPerPage));
-    widget.handleChangeData(
+    widget.handleChangeData?.call(
       currentPage: pagination.currentPage,
       itemsPerPage: pagination.itemsPerPage,
     );

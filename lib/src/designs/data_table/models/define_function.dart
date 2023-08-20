@@ -12,7 +12,7 @@ typedef TekOptionContentTable = Widget Function(
 typedef TekCustomizeTitleWidget = Widget Function(
   BuildContext context,
   String columnKey,
-  String columnName,
+  String? columnName,
   double? width,
   List<TekScreenDevice>? showOnScreens,
 );
@@ -22,7 +22,7 @@ typedef TekTableItemWidget<T> = Widget Function(
   dynamic value,
   T rowData,
   String columnKey,
-  String columnName,
+  String? columnName,
   double? width,
   List<TekScreenDevice>? showOnScreens,
 );
@@ -38,7 +38,7 @@ typedef TekHandleFilterDataFunction<T> = void Function({
 typedef TekCustomizeFilterWidget<T> = Widget Function(
   BuildContext context,
   String columnKey,
-  String columnName,
+  String? columnName,
   bool enableFilter,
   bool isShowMenu,
   ValueChanged<bool> changeFilter,

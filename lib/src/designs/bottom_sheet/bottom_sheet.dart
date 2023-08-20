@@ -129,7 +129,7 @@ class TekBottomSheet {
         hintText: hintText,
         constraints: constraints ??
             BoxConstraints(
-              maxHeight: (maxHeight ?? MediaQuery.of(context).size.height * 0.55) -
+              maxHeight: (maxHeight ?? MediaQuery.sizeOf(context).height * 0.55) -
                   (TekSpacings().mainSpacing * 2 + 28.scaleFontSize) -
                   (onSearchMenuChildren != null ? 70 : 0),
             ),
@@ -140,7 +140,7 @@ class TekBottomSheet {
       clipBehavior: clipBehavior,
       constraints: constraints ??
           BoxConstraints(
-            maxHeight: (maxHeight ?? MediaQuery.of(context).size.height * 0.55),
+            maxHeight: (maxHeight ?? MediaQuery.sizeOf(context).height * 0.55),
           ),
       barrierColor: barrierColor,
       isScrollControlled: isScrollControlled,

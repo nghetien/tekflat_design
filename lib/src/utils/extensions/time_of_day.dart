@@ -7,19 +7,17 @@ extension TekTimeOfDayEx on TimeOfDay? {
 
   TimeOfDay? add(Duration duration) {
     if (this == null) return null;
-    int newMinutes = this!.minute + duration.inMinutes;
-    int newHours = this!.hour + newMinutes ~/ 60;
-    newMinutes %= 60;
-    newHours %= 24;
-    return TimeOfDay(hour: newHours, minute: newMinutes);
+    int newMinutes = this!.minute + duration.inMinutes % 60;
+    int newHours = this!.hour + duration.inMinutes ~/ 60;
+    return TimeOfDay(hour: newHours % 24, minute: newMinutes % 60);
   }
 
   TimeOfDay? subtract(Duration duration) {
     if (this == null) return null;
-    int newMinutes = this!.minute - duration.inMinutes;
-    int newHours = this!.hour + newMinutes ~/ 60;
+    int newMinutes = this!.minute - duration.inMinutes % 60;
+    int newHours = this!.hour - duration.inMinutes ~/ 60;
     newMinutes = newMinutes < 0 ? 60 + newMinutes : newMinutes;
     newHours = newHours < 0 ? 24 + newHours : newHours;
-    return TimeOfDay(hour: newHours % 24, minute: newMinutes);
+    return TimeOfDay(hour: newHours % 24, minute: newMinutes % 60);
   }
 }

@@ -9,9 +9,9 @@ extension TekContextEx on BuildContext {
 
   ThemeData get theme => Theme.of(this);
 
-  double get widthScreen => MediaQuery.of(this).size.width;
+  double get widthScreen => MediaQuery.sizeOf(this).width;
 
-  double get heightScreen => MediaQuery.of(this).size.height;
+  double get heightScreen => MediaQuery.sizeOf(this).height;
 
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);

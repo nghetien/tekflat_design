@@ -111,7 +111,9 @@ class TekDataTableContentWidgetState<T> extends State<TekDataTableContentWidget<
     if (widget.fixedColumn != TekFixedColumn.none &&
         widget.controller.mapIndexToHeightOfEachRow.isNotEmpty &&
         widget.controller.mapIndexToHeightOfEachRow[index] != null) {
-      return widget.controller.mapIndexToHeightOfEachRow[index]!;
+      final height = widget.controller.mapIndexToHeightOfEachRow[index]!;
+      if (height <= 1) return null;
+      return height;
     }
     return null;
   }

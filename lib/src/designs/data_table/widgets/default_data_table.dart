@@ -8,7 +8,7 @@ class TekDefaultDataTableWidget<T> extends StatefulWidget {
     this.bottomContent,
     this.showerMoreContentIntoRowWidget,
     this.headerIntoRowWidget,
-    required this.handleChangeData,
+    this.handleChangeData,
     required this.headerOption,
     required this.rowOption,
     required this.columnOption,
@@ -21,7 +21,7 @@ class TekDefaultDataTableWidget<T> extends StatefulWidget {
   final TekOptionContentTable? bottomContent;
   final TekShowerMoreContentIntoRowWidget<T>? showerMoreContentIntoRowWidget;
   final TekHeaderIntoRowWidget<T>? headerIntoRowWidget;
-  final TekAsyncDataSource<T> handleChangeData;
+  final TekAsyncDataSource<T>? handleChangeData;
   final TekDataTableHeaderOption headerOption;
   final TekDataTableRowOption<T> rowOption;
   final TekDataTableColumnOption columnOption;

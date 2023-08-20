@@ -153,7 +153,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     DateTime date = widget.firstDate?.call() ?? DateTime(DateTime.now().year - 15);
     if (_controller.text.isEmpty) return date;
     final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
-    if (convertFromText != null) {
+    if (convertFromText != null && !widget.autoOpenSelectDate) {
       if (convertFromText.isBefore(date)) return DateTime(convertFromText.year - 15);
     }
     return date;
@@ -163,7 +163,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
     DateTime date = widget.lastDate?.call() ?? DateTime(DateTime.now().year + 15);
     if (_controller.text.isEmpty) return date;
     final convertFromText = _controller.text.toDateTimeWithFormat(_getDateTimeValidator());
-    if (convertFromText != null) {
+    if (convertFromText != null && !widget.autoOpenSelectDate) {
       if (convertFromText.isAfter(date)) return DateTime(convertFromText.year + 15);
     }
     return date;
