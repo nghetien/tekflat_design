@@ -268,15 +268,6 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
     }
   }
 
-  void _onFocusChange<ValueType>({
-    bool? hasFocus,
-    required FormFieldState<ValueType> state,
-  }) {
-    if (hasFocus == null || hasFocus == false) return;
-    if (_menuController.isOpen) return;
-    _menuController.open();
-  }
-
   void _handleSelectItem<ValueType>({
     required FormFieldState<ValueType> state,
     required TekInputDropdownItemModel<T> item,
@@ -382,56 +373,54 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
               style: const MenuStyle(visualDensity: VisualDensity.comfortable),
               menuChildren: _generateMenuChildren(state),
               builder: (context, controller, child) {
-                return Focus(
-                  onFocusChange: (hasFocus) => _onFocusChange<ValueType>(
-                    hasFocus: hasFocus,
-                    state: state,
-                  ),
-                  child: TekTextField(
-                    size: widget.size,
-                    width: widget.width,
-                    controller: _controller,
-                    focusNode: widget.focusNode,
-                    textAlign: widget.textAlign,
-                    textAlignVertical: widget.textAlignVertical,
-                    textInputAction: widget.textInputAction,
-                    keyboardType: widget.keyboardType,
-                    maxLines: widget.maxLines,
-                    minLines: widget.minLines,
-                    maxLength: widget.maxLength,
-                    enabled: widget.enabled,
-                    obscureText: widget.obscureText,
-                    cursorColor: widget.cursorColor,
-                    inputFormatters: widget.inputFormatters,
-                    onChanged: widget.onChanged,
-                    onTap: widget.onTap,
-                    onTapOutside: widget.onTapOutside,
-                    onEditingComplete: widget.onEditingComplete,
-                    onSubmitted: widget.onSubmitted,
-                    isDense: widget.isDense,
-                    filled: widget.filled,
-                    prefixIcon: _getPrefixIcon(state),
-                    suffixIcon: _getSuffixIcon(state),
-                    contentPadding: widget.contentPadding,
-                    focusedBorder: widget.focusedBorder,
-                    enabledBorder: widget.enabledBorder,
-                    disabledBorder: widget.disabledBorder,
-                    errorBorder: widget.errorBorder,
-                    focusedErrorBorder: widget.focusedErrorBorder,
-                    fillColor: widget.fillColor,
-                    hoverColor: widget.hoverColor,
-                    labelText: widget.labelText,
-                    labelStyle: widget.labelStyle,
-                    floatingLabelStyle: widget.floatingLabelStyle,
-                    floatingLabelBehavior: widget.floatingLabelBehavior,
-                    hintText: widget.hintText,
-                    hintStyle: widget.hintStyle,
-                    errorText: widget.errorText ?? state.errorText,
-                    errorMaxLines: widget.errorMaxLines,
-                    errorStyle: widget.errorStyle,
-                    readOnly: true,
-                    ablePrefixIconConstraints: !widget.type.isMulti,
-                  ),
+                return TekTextField(
+                  size: widget.size,
+                  width: widget.width,
+                  controller: _controller,
+                  focusNode: widget.focusNode,
+                  textAlign: widget.textAlign,
+                  textAlignVertical: widget.textAlignVertical,
+                  textInputAction: widget.textInputAction,
+                  keyboardType: widget.keyboardType,
+                  maxLines: widget.maxLines,
+                  minLines: widget.minLines,
+                  maxLength: widget.maxLength,
+                  enabled: widget.enabled,
+                  obscureText: widget.obscureText,
+                  cursorColor: widget.cursorColor,
+                  inputFormatters: widget.inputFormatters,
+                  onChanged: widget.onChanged,
+                  onTap: () {
+                    if (!widget.enabled) return;
+                    _menuController.open();
+                    widget.onTap?.call();
+                  },
+                  onTapOutside: widget.onTapOutside,
+                  onEditingComplete: widget.onEditingComplete,
+                  onSubmitted: widget.onSubmitted,
+                  isDense: widget.isDense,
+                  filled: widget.filled,
+                  prefixIcon: _getPrefixIcon(state),
+                  suffixIcon: _getSuffixIcon(state),
+                  contentPadding: widget.contentPadding,
+                  focusedBorder: widget.focusedBorder,
+                  enabledBorder: widget.enabledBorder,
+                  disabledBorder: widget.disabledBorder,
+                  errorBorder: widget.errorBorder,
+                  focusedErrorBorder: widget.focusedErrorBorder,
+                  fillColor: widget.fillColor,
+                  hoverColor: widget.hoverColor,
+                  labelText: widget.labelText,
+                  labelStyle: widget.labelStyle,
+                  floatingLabelStyle: widget.floatingLabelStyle,
+                  floatingLabelBehavior: widget.floatingLabelBehavior,
+                  hintText: widget.hintText,
+                  hintStyle: widget.hintStyle,
+                  errorText: widget.errorText ?? state.errorText,
+                  errorMaxLines: widget.errorMaxLines,
+                  errorStyle: widget.errorStyle,
+                  readOnly: true,
+                  ablePrefixIconConstraints: !widget.type.isMulti,
                 );
               },
             );

@@ -32,8 +32,10 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget? headerRowWidget =
-        headerIntoRowWidget?.call(rowData, controller.mapKeyToWidthOfEachColumnContent);
+    final Widget? headerRowWidget = headerIntoRowWidget?.call(
+      rowData,
+      controller.mapKeyToWidthOfEachColumnContent,
+    );
     if (fixedColumn != TekFixedColumn.none) {
       return Column(
         children: <Widget>[

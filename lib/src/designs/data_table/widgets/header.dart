@@ -56,6 +56,20 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
 
   Widget _generateHeaderItem() {
     final List<Widget> headers = [];
+    if (widget.tableColumns.isEmpty) {
+      return Container(
+        height:
+            widget.headerOption.heightOfHeaderItem ?? TekDataTableHeaderWidget.defaultHeightHeader,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: TekColors.greyOpacity04,
+              width: 0,
+            ),
+          ),
+        ),
+      );
+    }
     for (int index = 0; index < widget.tableColumns.length; index++) {
       if (isShowInScreen(widget.tableColumns[index].showOnScreens)) {
         headers.add(

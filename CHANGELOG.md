@@ -1,3 +1,5 @@
+## 0.0.5
+* Update DataTable.
 ## 0.0.4
 * Update MediaQuery of Flutter 3.10.
 ## 0.0.3
