@@ -11,5 +11,5 @@ class TekTextFormatter {
       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]'));
 
   static final TextInputFormatter wordsOnly =
-      FilteringTextInputFormatter.allow(RegExp(r'[\wàáảãạèéẻẽẹìíỉĩịòóỏõọùúủũụỳýỷỹỵỨỪỬỮỰÚÙẦẤẨẪẬẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌ ]'));
+      FilteringTextInputFormatter.allow(RegExp(r'[\wÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]'));
 }

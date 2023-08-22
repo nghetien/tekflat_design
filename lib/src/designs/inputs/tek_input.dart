@@ -37,7 +37,7 @@ enum TekInputSize {
       case TekInputSize.large:
         return EdgeInsets.symmetric(
           horizontal: 12.scaleSpacing,
-          vertical: TekPlatform.isWeb ? 17.5.scaleSpacing : 13.5.scaleSpacing,
+          vertical: TekPlatform.isWeb ? 17.5.scaleSpacing : 9.5.scaleSpacing,
         );
       case TekInputSize.medium:
         return EdgeInsets.symmetric(
@@ -72,7 +72,7 @@ enum TekInputSize {
       case TekInputSize.extraLarge:
         return TekTextStyles.titleMedium;
       case TekInputSize.large:
-        return TekTextStyles.body;
+        return TekTextStyles.titleMedium;
       case TekInputSize.medium:
         return TekTextStyles.body;
       case TekInputSize.areaSmall:
@@ -87,7 +87,7 @@ enum TekInputSize {
   TextStyle get hintStyle {
     switch (this) {
       case TekInputSize.extraLarge:
-        return TekTextStyles.body;
+        return TekTextStyles.titleMedium;
       case TekInputSize.large:
         return TekTextStyles.body;
       case TekInputSize.medium:
