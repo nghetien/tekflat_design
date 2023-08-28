@@ -1,3 +1,5 @@
+## 0.0.6
+* Add sort DateTime.
 ## 0.0.5
 * Update DataTable.
 ## 0.0.4
