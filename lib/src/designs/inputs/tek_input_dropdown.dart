@@ -467,7 +467,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               inputFormatters: widget.inputFormatters,
               onTap: () {
                 if (!widget.enabled) return;
-                _menuController.open();
+                if (!widget.readOnly) _menuController.open();
                 widget.onTap?.call();
               },
               onTapOutside: widget.onTapOutside,

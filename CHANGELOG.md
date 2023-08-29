@@ -1,4 +1,6 @@
 ## 0.0.6
+* Add open dropdown and select date only widget.readOnly != true.
+## 0.0.6
 * Add sort DateTime.
 ## 0.0.5
 * Update DataTable.
