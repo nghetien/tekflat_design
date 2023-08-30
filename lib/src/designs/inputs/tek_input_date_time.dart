@@ -367,7 +367,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
       ),
       onTap: () {
         if (!widget.enabled) return;
-        if (widget.autoOpenSelectDate && !widget.readOnly) _onSelectDate();
+        if (widget.autoOpenSelectDate) _onSelectDate();
         widget.onTap?.call();
       },
       onTapOutside: widget.onTapOutside,
