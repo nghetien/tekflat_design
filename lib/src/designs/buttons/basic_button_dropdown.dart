@@ -42,6 +42,7 @@ class TekButtonDropdown extends StatefulWidget {
     this.colorWhenDropdown,
     this.isShowDropdown = false,
     this.colorIconDropdown,
+    this.onPointerDown,
   }) : super(key: key);
 
   final Widget titleButton;
@@ -68,6 +69,7 @@ class TekButtonDropdown extends StatefulWidget {
   final Color? colorWhenDropdown;
   final bool isShowDropdown;
   final Color? colorIconDropdown;
+  final Function(PointerDownEvent)? onPointerDown;
 
   @override
   State<TekButtonDropdown> createState() => _TekButtonDropdownState();
@@ -132,42 +134,45 @@ class _TekButtonDropdownState extends State<TekButtonDropdown>
               : widget.colorWhenDropdown ?? widget.background;
           return Column(
             children: [
-              TekButton(
-                size: widget.size,
-                type: widget.type,
-                onPressed: () {
-                  _toggle();
-                  if (widget.onPressedTitleButton != null) widget.onPressedTitleButton!();
-                },
-                width: widget.width,
-                height: widget.height,
-                background: mainColor,
-                hoverColor: widget.hoverColor,
-                shadowColor: widget.shadowColor,
-                splashFactory: widget.splashFactory,
-                boxShadow: widget.boxShadow,
-                shape: widget.shape,
-                textColor: widget.textColor,
-                fontSize: widget.fontSize,
-                textStyle: widget.textStyle,
-                textAlign: widget.textAlign,
-                maxLines: widget.maxLines,
-                alignment: widget.alignment,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: widget.titleButton,
-                    ),
-                    RotationTransition(
-                      turns: _rotateAnimation,
-                      child: Icon(
-                        Icons.chevron_right,
-                        color: widget.colorIconDropdown,
+              Listener(
+                onPointerDown: widget.onPointerDown,
+                child: TekButton(
+                  size: widget.size,
+                  type: widget.type,
+                  onPressed: () {
+                    _toggle();
+                    if (widget.onPressedTitleButton != null) widget.onPressedTitleButton!();
+                  },
+                  width: widget.width,
+                  height: widget.height,
+                  background: mainColor,
+                  hoverColor: widget.hoverColor,
+                  shadowColor: widget.shadowColor,
+                  splashFactory: widget.splashFactory,
+                  boxShadow: widget.boxShadow,
+                  shape: widget.shape,
+                  textColor: widget.textColor,
+                  fontSize: widget.fontSize,
+                  textStyle: widget.textStyle,
+                  textAlign: widget.textAlign,
+                  maxLines: widget.maxLines,
+                  alignment: widget.alignment,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: widget.titleButton,
                       ),
-                    ),
-                  ],
+                      RotationTransition(
+                        turns: _rotateAnimation,
+                        child: Icon(
+                          Icons.chevron_right,
+                          color: widget.colorIconDropdown,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               ..._listDropdownButton(animationHeight: _animation.value),
@@ -187,26 +192,29 @@ class _TekButtonDropdownState extends State<TekButtonDropdown>
         if (_animation.value > index * _heightButton) {
           return widget.children[index].isButtonDropdown
               ? widget.children[index].child
-              : TekButton(
-                  size: widget.size,
-                  type: widget.type,
-                  onPressed: () => widget.onPressedItem?.call(index),
-                  width: widget.width ?? double.infinity,
-                  height: widget.height,
-                  background: widget.children[index].backgroundColor ?? mainColor,
-                  hoverColor: widget.hoverColor,
-                  shadowColor: widget.shadowColor,
-                  splashFactory: widget.splashFactory,
-                  boxShadow: widget.boxShadow,
-                  shape: widget.shape,
-                  textColor: widget.textColor,
-                  fontSize: widget.fontSize,
-                  textStyle: widget.textStyle,
-                  textAlign: widget.textAlign,
-                  maxLines: widget.maxLines,
-                  alignment: widget.alignment,
-                  mainAxisSize: MainAxisSize.max,
-                  child: widget.children[index].child,
+              : Listener(
+                  onPointerDown: widget.onPointerDown,
+                  child: TekButton(
+                    size: widget.size,
+                    type: widget.type,
+                    onPressed: () => widget.onPressedItem?.call(index),
+                    width: widget.width ?? double.infinity,
+                    height: widget.height,
+                    background: widget.children[index].backgroundColor ?? mainColor,
+                    hoverColor: widget.hoverColor,
+                    shadowColor: widget.shadowColor,
+                    splashFactory: widget.splashFactory,
+                    boxShadow: widget.boxShadow,
+                    shape: widget.shape,
+                    textColor: widget.textColor,
+                    fontSize: widget.fontSize,
+                    textStyle: widget.textStyle,
+                    textAlign: widget.textAlign,
+                    maxLines: widget.maxLines,
+                    alignment: widget.alignment,
+                    mainAxisSize: MainAxisSize.max,
+                    child: widget.children[index].child,
+                  ),
                 );
         }
         return const SizedBox.shrink();

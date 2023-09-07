@@ -14,9 +14,13 @@ class TekExpansion extends StatelessWidget {
     this.collapsedIconColor,
     this.iconColor,
     this.childrenPadding,
+    this.tilePadding,
     this.border,
     this.borderRadius,
     this.expandedCrossAxisAlignment,
+    this.titleColor,
+    this.titleFontWeight,
+    this.initiallyExpanded = false,
   }) : super(key: key);
 
   final String? title;
@@ -29,9 +33,13 @@ class TekExpansion extends StatelessWidget {
   final Color? collapsedIconColor;
   final Color? iconColor;
   final EdgeInsetsGeometry? childrenPadding;
+  final EdgeInsetsGeometry? tilePadding;
   final BoxBorder? border;
   final BorderRadiusGeometry? borderRadius;
   final CrossAxisAlignment? expandedCrossAxisAlignment;
+  final Color? titleColor;
+  final FontWeight? titleFontWeight;
+  final bool initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +55,19 @@ class TekExpansion extends StatelessWidget {
       ),
       child: ExpansionTile(
         key: key,
+        initiallyExpanded: initiallyExpanded,
         title: customTitle ??
             Text(
               title ?? '',
-              style: TekTextStyles.body,
+              style: TekTextStyles.body.copyWith(
+                color: titleColor,
+                fontWeight: titleFontWeight,
+              ),
             ),
         leading: leading,
         trailing: trailing,
         expandedCrossAxisAlignment: expandedCrossAxisAlignment,
+        tilePadding: tilePadding,
         childrenPadding: childrenPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
         collapsedTextColor: collapsedTextColor,
         collapsedIconColor: collapsedIconColor,
