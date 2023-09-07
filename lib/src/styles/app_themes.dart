@@ -92,7 +92,6 @@ class TekThemes {
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.all(TekColors().primary),
       checkColor: MaterialStateProperty.all(TekColors().primary),
       side: const BorderSide(width: TekBorders.med, color: TekColors.grey),
       splashRadius: 0,
@@ -250,7 +249,6 @@ class TekThemes {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     dialogBackgroundColor: TekColors().bgSecondaryThemeDark,
     checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.all(TekColors().primary),
       checkColor: MaterialStateProperty.all(TekColors.black),
       side: const BorderSide(width: TekBorders.med, color: TekColors.grey),
       splashRadius: 0,

@@ -1,3 +1,5 @@
+## 0.0.7
+* Update Flutter 3.13.
 ## 0.0.6
 * Add open dropdown and select date only widget.readOnly != true.
 ## 0.0.6
