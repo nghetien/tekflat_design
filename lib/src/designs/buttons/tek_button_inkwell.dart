@@ -6,6 +6,7 @@ class TekButtonInkwell extends StatelessWidget {
     this.text,
     this.child,
     this.onPressed,
+    this.onHover,
     this.textColor,
     this.textFontSize,
     this.textFontWeight,
@@ -14,6 +15,7 @@ class TekButtonInkwell extends StatelessWidget {
   final String? text;
   final Widget? child;
   final VoidCallback? onPressed;
+  final Function(bool)? onHover;
   final Color? textColor;
   final double? textFontSize;
   final FontWeight? textFontWeight;
@@ -22,6 +24,7 @@ class TekButtonInkwell extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: onPressed,
+        onHover: onHover,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
