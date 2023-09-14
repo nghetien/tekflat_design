@@ -1,3 +1,5 @@
+## 1.0.0
+* Release 1.0.0.
 ## 0.0.8
 * OnHover to TekButtonInkwell.
 ## 0.0.7
