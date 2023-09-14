@@ -37,7 +37,7 @@ enum TekInputSize {
       case TekInputSize.large:
         return EdgeInsets.symmetric(
           horizontal: 12.scaleSpacing,
-          vertical: TekPlatform.isWeb ? 17.5.scaleSpacing : 9.5.scaleSpacing,
+          vertical: TekPlatform.isWeb ? 17.5.scaleSpacing : 12.scaleSpacing,
         );
       case TekInputSize.medium:
         return EdgeInsets.symmetric(

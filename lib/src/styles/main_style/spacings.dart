@@ -35,5 +35,11 @@ class TekSpacings {
 
   double get p18 => 18 * _scale;
 
+  double get p20 => 20 * _scale;
+
+  double get p24 => 24 * _scale;
+
+  double get p28 => 28 * _scale;
+
   double get p32 => 32 * _scale;
 }
