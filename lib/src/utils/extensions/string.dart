@@ -54,4 +54,20 @@ extension TekStringEx on String {
       return null;
     }
   }
+
+  String get convertToSlug  {
+    // Loại bỏ dấu và ký tự không phù hợp
+    String slug = replaceAll(RegExp(r'[^a-zA-Z0-9\s-]'), '');
+
+    // Chuyển thành chữ thường
+    slug = slug.toLowerCase();
+
+    // Thay thế khoảng trắng bằng dấu gạch ngang
+    slug = slug.replaceAll(RegExp(r'\s+'), '-');
+
+    // Loại bỏ các dấu gạch ngang liên tiếp
+    slug = slug.replaceAll(RegExp(r'(-)+'), '-');
+
+    return slug;
+  }
 }

@@ -1,3 +1,5 @@
+## 1.0.2
+* Add convertToSlug.
 ## 1.0.1
 * Add snack bar for app.
 ## 1.0.0
