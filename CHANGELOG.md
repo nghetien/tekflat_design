@@ -1,3 +1,5 @@
+## 1.0.3
+* Add Spaces.
 ## 1.0.2
 * Add convertToSlug.
 ## 1.0.1

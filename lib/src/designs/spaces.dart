@@ -23,6 +23,12 @@ class TekVSpace extends StatelessWidget {
 
   static TekVSpace get p18 => TekVSpace(TekSpacings().p18);
 
+  static TekVSpace get p20 => TekVSpace(TekSpacings().p20);
+
+  static TekVSpace get p24 => TekVSpace(TekSpacings().p24);
+
+  static TekVSpace get p28 => TekVSpace(TekSpacings().p28);
+
   static TekVSpace get p32 => TekVSpace(TekSpacings().p32);
 }
 
@@ -47,6 +53,12 @@ class TekHSpace extends StatelessWidget {
   static TekHSpace get p14 => TekHSpace(TekSpacings().p14);
 
   static TekHSpace get p18 => TekHSpace(TekSpacings().p18);
+
+  static TekHSpace get p20 => TekHSpace(TekSpacings().p20);
+
+  static TekHSpace get p24 => TekHSpace(TekSpacings().p24);
+
+  static TekHSpace get p28 => TekHSpace(TekSpacings().p28);
 
   static TekHSpace get p32 => TekHSpace(TekSpacings().p32);
 }
