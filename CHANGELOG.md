@@ -1,3 +1,5 @@
+## 1.0.4
+* Load file .env.
 ## 1.0.3
 * Add Spaces.
 ## 1.0.2
