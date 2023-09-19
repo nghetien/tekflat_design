@@ -89,7 +89,7 @@ enum TekInputSize {
       case TekInputSize.extraLarge:
         return TekTextStyles.titleMedium;
       case TekInputSize.large:
-        return TekTextStyles.body;
+        return TekTextStyles.titleMedium;
       case TekInputSize.medium:
         return TekTextStyles.body;
       case TekInputSize.areaSmall:

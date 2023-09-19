@@ -1,3 +1,5 @@
+## 1.0.5
+* Update hintText style for TekInput.
 ## 1.0.4
 * Load file .env.
 ## 1.0.3
