@@ -31,7 +31,7 @@ enum TekCheckBoxType {
       case TekCheckBoxType.check:
         return TekCheckBoxStyle(
           activeColor: TekColors().primary,
-          checkColor: TekColors.white,
+          checkColor: TekColors().white,
           shape: const RoundedRectangleBorder(
             borderRadius: TekCorners.cornerBorder3,
           ),
@@ -90,7 +90,7 @@ class TekCheckBox extends StatelessWidget {
                 style: textStyle ??
                     TekTextStyles.body.copyWith(
                       color: !enabled
-                          ? TekColors.grey
+                          ? TekColors().grey
                           : value
                               ? activeColor ?? TekColors().primary
                               : mainColor,
@@ -107,8 +107,8 @@ class TekCheckBox extends StatelessWidget {
       onChanged: (value) {
         if (enabled) onChanged?.call(value);
       },
-      activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors.greyOpacity04,
-      checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors.greyOpacity04,
+      activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors().greyOpacity04,
+      checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors().greyOpacity04,
       fillColor: MaterialStateProperty.resolveWith(
         (states) {
           if (!states.contains(MaterialState.selected)) {
@@ -123,7 +123,7 @@ class TekCheckBox extends StatelessWidget {
             width: borderWidth ?? context.theme.checkboxTheme.side!.width,
             color: enabled
                 ? mainColor ?? context.theme.checkboxTheme.side!.color
-                : TekColors.greyOpacity04,
+                : TekColors().greyOpacity04,
           ),
     );
   }

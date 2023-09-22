@@ -17,7 +17,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.green,
+        color: TekColors().green,
         isOutlined: isOutlined,
       );
 
@@ -35,7 +35,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.red,
+        color: TekColors().red,
         isOutlined: isOutlined,
       );
 
@@ -53,7 +53,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.yellow,
+        color: TekColors().yellow,
         isOutlined: isOutlined,
       );
 
@@ -71,7 +71,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.blue,
+        color: TekColors().blue,
         isOutlined: isOutlined,
       );
 
@@ -89,7 +89,7 @@ class TekTags {
         padding: padding,
         borderRadius: borderRadius,
         textStyle: textStyle,
-        color: TekColors.grey,
+        color: TekColors().grey,
         isOutlined: isOutlined,
       );
 
@@ -117,7 +117,7 @@ class TekTags {
                 value,
                 style: textStyle ??
                     TekTextStyles.label.copyWith(
-                      color: TekColors.white,
+                      color: TekColors().white,
                       height: 0,
                     ),
                 textAlign: TextAlign.center,
@@ -128,7 +128,7 @@ class TekTags {
                 color: color?.withOpacity(0.1),
                 borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
                 border: Border.all(
-                  color: color ?? TekColors.grey,
+                  color: color ?? TekColors().grey,
                   width: TekBorders.thin,
                 ),
               ),

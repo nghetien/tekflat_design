@@ -367,7 +367,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
               borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
             background: isSelected
-                ? widget.backgroundColorSelected ?? TekColors.greenOpacity01
+                ? widget.backgroundColorSelected ?? TekColors().greenOpacity01
                 : Colors.transparent,
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -385,9 +385,9 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
                 ),
                 if (isSelected)
                   widget.iconSelected ??
-                      const Icon(
+                      Icon(
                         Icons.check,
-                        color: TekColors.green,
+                        color: TekColors().green,
                       )
               ],
             ),

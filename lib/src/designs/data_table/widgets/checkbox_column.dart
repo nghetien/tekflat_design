@@ -26,14 +26,14 @@ class TekCheckBoxColumn<T> extends StatelessWidget {
     return Checkbox(
       value: _getValueCheckBoxAll(),
       onChanged: _handleSelectAll,
-      activeColor: TekColors.white,
+      activeColor: TekColors().white,
       checkColor: TekColors().primary,
       shape: const RoundedRectangleBorder(
         borderRadius: TekCorners.cornerBorder3,
       ),
-      side: const BorderSide(
+      side: BorderSide(
         width: TekBorders.med,
-        color: TekColors.white,
+        color: TekColors().white,
       ),
     );
   }

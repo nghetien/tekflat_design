@@ -63,7 +63,7 @@ class TekSkeleton extends StatelessWidget {
               if (title != null) _title(title!),
             ],
           ),
-          if (paragraph != null) TekVSpace.p8,
+          if (paragraph != null && (avatar != null || title != null)) TekVSpace.p8,
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -64,11 +64,11 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
             ? Border(
                 left: BorderSide(
                   width: 0,
-                  color: TekColors.greyOpacity04,
+                  color: TekColors().greyOpacity04,
                 ),
                 right: BorderSide(
                   width: 0,
-                  color: TekColors.greyOpacity04,
+                  color: TekColors().greyOpacity04,
                 ),
               )
             : null,
@@ -133,7 +133,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
           border: Border(
             bottom: BorderSide(
               width: TekBorders.thin,
-              color: TekColors.greyOpacity04,
+              color: TekColors().greyOpacity04,
             ),
           ),
         ),
@@ -159,9 +159,9 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: TekBorders.thin, color: TekColors.greyOpacity04),
-            right: BorderSide(width: TekBorders.thin, color: TekColors.greyOpacity04),
-            left: BorderSide(width: TekBorders.thin, color: TekColors.greyOpacity04),
+            bottom: BorderSide(width: TekBorders.thin, color: TekColors().greyOpacity04),
+            right: BorderSide(width: TekBorders.thin, color: TekColors().greyOpacity04),
+            left: BorderSide(width: TekBorders.thin, color: TekColors().greyOpacity04),
           ),
         ),
         child: Container(
@@ -180,7 +180,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: TekBorders.thin, color: TekColors.greyOpacity04),
+            bottom: BorderSide(width: TekBorders.thin, color: TekColors().greyOpacity04),
           ),
         ),
         child: child,

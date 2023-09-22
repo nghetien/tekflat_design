@@ -33,7 +33,7 @@ class TekToast {
   }) =>
       toast(
         msg: msg,
-        backgroundColor: TekColors.green,
+        backgroundColor: TekColors().green,
         textColor: textColor,
         gravity: gravity,
         toastLength: toastLength,
@@ -49,7 +49,7 @@ class TekToast {
   }) =>
       toast(
         msg: msg,
-        backgroundColor: TekColors.red,
+        backgroundColor: TekColors().red,
         textColor: textColor,
         gravity: gravity,
         toastLength: toastLength,
@@ -65,7 +65,7 @@ class TekToast {
   }) =>
       toast(
         msg: msg,
-        backgroundColor: TekColors.blue,
+        backgroundColor: TekColors().blue,
         textColor: textColor,
         gravity: gravity,
         toastLength: toastLength,
@@ -81,7 +81,7 @@ class TekToast {
   }) =>
       toast(
         msg: msg,
-        backgroundColor: TekColors.yellow,
+        backgroundColor: TekColors().yellow,
         textColor: textColor,
         gravity: gravity,
         toastLength: toastLength,

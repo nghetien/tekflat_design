@@ -36,7 +36,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
           border: Border(
             right: indexColumn < lengthOfColumn - 1
                 ? BorderSide(
-                    color: TekColors.greyOpacity04,
+                    color: TekColors().greyOpacity04,
                     width: TekBorders.thin,
                   )
                 : BorderSide.none,

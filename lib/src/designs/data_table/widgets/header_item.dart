@@ -104,7 +104,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
           border: Border(
             right: widget.index < widget.lengthOfColumn - 1
                 ? BorderSide(
-                    color: TekColors.greyOpacity04,
+                    color: TekColors().greyOpacity04,
                     width: TekBorders.thin,
                   )
                 : BorderSide.none,
@@ -135,7 +135,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
             textAlign: TextAlign.center,
             style: TekTextStyles.body.copyWith(
               fontWeight: FontWeight.bold,
-              color: TekColors.white,
+              color: TekColors().white,
             ),
           ),
         ),
@@ -163,7 +163,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
                   textAlign: TextAlign.center,
                   style: TekTextStyles.body.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: TekColors.white,
+                    color: TekColors().white,
                   ),
                 ),
               ),
@@ -195,8 +195,8 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
               size: TekIconSizes().s24,
               color: (widget.sortType.value == TekDataTableSortType.asc &&
                       widget.sortType.key == widget.column.key)
-                  ? TekColors.white
-                  : TekColors.grey,
+                  ? TekColors().white
+                  : TekColors().grey,
             ),
           ),
           Padding(
@@ -206,8 +206,8 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
               size: TekIconSizes().s24,
               color: (widget.sortType.value == TekDataTableSortType.desc &&
                       widget.sortType.key == widget.column.key)
-                  ? TekColors.white
-                  : TekColors.grey,
+                  ? TekColors().white
+                  : TekColors().grey,
             ),
           )
         ],
@@ -249,7 +249,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
             child: Icon(
               Icons.filter_list_rounded,
               size: TekIconSizes().s24,
-              color: enableFilter ? TekColors.white : TekColors.grey,
+              color: enableFilter ? TekColors().white : TekColors().grey,
             ),
           ),
         );

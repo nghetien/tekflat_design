@@ -43,7 +43,7 @@ class TekDynamicTag extends StatelessWidget {
             vertical: TekSpacings().p4,
           ),
       decoration: BoxDecoration(
-        color: backgroundColor ?? TekColors.greyOpacity01,
+        color: backgroundColor ?? TekColors().greyOpacity01,
         borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
       ),
       child: Row(
@@ -57,7 +57,7 @@ class TekDynamicTag extends StatelessWidget {
           Container(
             padding: iconPadding ?? EdgeInsets.all(2.scaleSpacing),
             decoration: BoxDecoration(
-              color: backgroundColorIcon ?? TekColors.greyOpacity04,
+              color: backgroundColorIcon ?? TekColors().greyOpacity04,
               shape: BoxShape.circle,
             ),
             child: InkWell(

@@ -79,7 +79,7 @@ class TekNetworkImageForm extends StatelessWidget {
             width: width ?? size.size,
             height: height ?? size.size,
             decoration: BoxDecoration(
-              color: TekColors.greyOpacity04,
+              color: TekColors().greyOpacity04,
               border: Border.all(
                 width: borderWidth ?? TekBorders.thin,
                 color: borderColor ?? TekColors().primary,
@@ -98,7 +98,7 @@ class TekNetworkImageForm extends StatelessWidget {
           width: width ?? size.size,
           height: height ?? size.size,
           decoration: BoxDecoration(
-            color: TekColors.greyOpacity01,
+            color: TekColors().greyOpacity01,
             border: Border.all(
               width: borderWidth ?? TekBorders.thin,
               color: borderColor ?? TekColors().primary,
@@ -135,7 +135,7 @@ class TekNetworkImageForm extends StatelessWidget {
                     Icon(
                       Icons.add_a_photo_rounded,
                       size: 40.scaleIconSize,
-                      color: TekColors.grey,
+                      color: TekColors().grey,
                     ),
                   ],
                 ),
@@ -165,7 +165,7 @@ class TekNetworkImageForm extends StatelessWidget {
                     Icon(
                       Icons.error_rounded,
                       size: 40.scaleIconSize,
-                      color: TekColors.grey,
+                      color: TekColors().grey,
                     ),
                   ],
                 ),

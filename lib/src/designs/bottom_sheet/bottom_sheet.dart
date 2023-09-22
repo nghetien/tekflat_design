@@ -7,12 +7,19 @@ import 'package:tekflat_design/src/src.dart';
 
 part 'bottom_sheet_selector.dart';
 
+enum TekBottomSheetHeaderOption {
+  option1,
+  option2,
+}
+
 class TekBottomSheet {
   const TekBottomSheet._();
 
   static Future<T?> customizeBottomSheet<T>(
     BuildContext context, {
     required Widget Function(BuildContext) builder,
+    TekBottomSheetHeaderOption headerOption = TekBottomSheetHeaderOption.option1,
+    double? height,
     Color? backgroundColor,
     double? elevation,
     ShapeBorder? shape,
@@ -33,31 +40,62 @@ class TekBottomSheet {
     return showModalBottomSheet<T>(
       context: context,
       builder: (context) {
-        return Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(TekSpacings().mainSpacing),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: TekTypography(
-                      text: title ?? '',
-                      type: TekTypographyType.level5,
-                      fontWeight: FontWeight.bold,
+        return SizedBox(
+          height: height,
+          child: Column(
+            children: [
+              headerOption == TekBottomSheetHeaderOption.option1
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(TekSpacings().mainSpacing),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: TekTypography(
+                                  text: title ?? '',
+                                  type: TekTypographyType.level5,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TekButtonInkwell(
+                                onPressed: () {},
+                                child: const Icon(Icons.close_rounded),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const TekDivider(),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: TekSpacings().p4,
+                          ),
+                          alignment: Alignment.topCenter,
+                          width: 30,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            borderRadius: TekCorners().mainCornerBorder,
+                            color: TekColors().greyOpacity06,
+                          ),
+                        ),
+                        TekVSpace.mainSpace,
+                        TekTypography(
+                          text: title ?? '',
+                          type: TekTypographyType.level5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        TekVSpace.mainSpace,
+                      ],
                     ),
-                  ),
-                  TekButtonInkwell(
-                    onPressed: () {},
-                    child: const Icon(Icons.close_rounded),
-                  ),
-                ],
-              ),
-            ),
-            const TekDivider(),
-            builder(context),
-          ],
+              builder(context),
+            ],
+          ),
         );
       },
       backgroundColor: backgroundColor,

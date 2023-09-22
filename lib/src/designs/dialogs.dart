@@ -219,10 +219,10 @@ class TekDialogs {
               padding: EdgeInsets.all(TekSpacings().p12),
               decoration: BoxDecoration(
                 color: type == TekDialogType.delete
-                    ? TekColors.red
+                    ? TekColors().red
                     : type == TekDialogType.warning
-                        ? TekColors.yellow
-                        : TekColors.blue,
+                        ? TekColors().yellow
+                        : TekColors().blue,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(TekCorners().mainCorners),
                   topRight: Radius.circular(TekCorners().mainCorners),
@@ -244,7 +244,7 @@ class TekDialogs {
                       Text(
                         title ?? '',
                         textAlign: TextAlign.center,
-                        style: TekTextStyles.titleMedium.copyWith(color: TekColors.white),
+                        style: TekTextStyles.titleMedium.copyWith(color: TekColors().white),
                         maxLines: maxLinesTitle,
                       ),
                 ],
@@ -283,15 +283,15 @@ class TekDialogs {
                           size: TekButtonSize.medium,
                           text: buttonCancel ?? 'Cancel',
                           borderColor: type == TekDialogType.delete
-                              ? TekColors.red
+                              ? TekColors().red
                               : type == TekDialogType.warning
-                                  ? TekColors.yellow
-                                  : TekColors.blue,
+                                  ? TekColors().yellow
+                                  : TekColors().blue,
                           textColor: type == TekDialogType.delete
-                              ? TekColors.red
+                              ? TekColors().red
                               : type == TekDialogType.warning
-                                  ? TekColors.yellow
-                                  : TekColors.blue,
+                                  ? TekColors().yellow
+                                  : TekColors().blue,
                         ),
                       ),
                     ),
@@ -308,10 +308,10 @@ class TekDialogs {
                       },
                       text: buttonText ?? 'OK',
                       background: type == TekDialogType.delete
-                          ? TekColors.red
+                          ? TekColors().red
                           : type == TekDialogType.warning
-                              ? TekColors.yellow
-                              : TekColors.blue,
+                              ? TekColors().yellow
+                              : TekColors().blue,
                     ),
                   ),
                 ],

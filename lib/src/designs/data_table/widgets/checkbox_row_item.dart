@@ -26,7 +26,7 @@ class TekCheckBoxRowItem<T> extends StatelessWidget {
         onChanged: _handleSelectBox,
         hoverColor: Colors.transparent,
         activeColor: TekColors().primary,
-        checkColor: TekColors.white,
+        checkColor: TekColors().white,
         shape: const RoundedRectangleBorder(
           borderRadius: TekCorners.cornerBorder3,
         ),

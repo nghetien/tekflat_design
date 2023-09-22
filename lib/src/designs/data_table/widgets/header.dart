@@ -63,7 +63,7 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: TekColors.greyOpacity04,
+              color: TekColors().greyOpacity04,
               width: 0,
             ),
           ),

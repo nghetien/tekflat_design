@@ -8,6 +8,12 @@ class TekSnackBar {
 
   static final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
 
+  static EdgeInsets _defaultMargin = EdgeInsets.all(TekSpacings().mainSpacing);
+
+  static EdgeInsets get defaultMargin => _defaultMargin;
+
+  static void setDefaultMargin(EdgeInsets value) => _defaultMargin = value;
+
   static void showSnackBar({
     String? message,
     Widget? child,
@@ -29,7 +35,7 @@ class TekSnackBar {
     }
     final defaultSnackBar = SnackBar(
       backgroundColor: backgroundColor ?? TekColors().primary,
-      margin: margin ?? EdgeInsets.all(TekSpacings().mainSpacing),
+      margin: margin ?? defaultMargin,
       padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
       duration: duration ?? const Duration(milliseconds: 3000),
       content: Row(
@@ -39,7 +45,7 @@ class TekSnackBar {
           if (iconData != null) ...[
             Icon(
               iconData,
-              color: TekColors.white,
+              color: TekColors().white,
             ),
             TekHSpace.p8,
           ],
@@ -82,7 +88,7 @@ class TekSnackBar {
       message: message,
       child: child,
       iconData: iconData ?? Icons.check_rounded,
-      backgroundColor: backgroundColor ?? TekColors.green,
+      backgroundColor: backgroundColor ?? TekColors().green,
       margin: margin,
       padding: padding,
       behavior: behavior,
@@ -114,7 +120,7 @@ class TekSnackBar {
       message: message,
       child: child,
       iconData: iconData ?? Icons.error_rounded,
-      backgroundColor: backgroundColor ?? TekColors.red,
+      backgroundColor: backgroundColor ?? TekColors().red,
       margin: margin,
       padding: padding,
       behavior: behavior,
@@ -146,7 +152,7 @@ class TekSnackBar {
       message: message,
       child: child,
       iconData: iconData ?? Icons.warning_rounded,
-      backgroundColor: backgroundColor ?? TekColors.yellow,
+      backgroundColor: backgroundColor ?? TekColors().yellow,
       margin: margin,
       padding: padding,
       behavior: behavior,
@@ -178,7 +184,7 @@ class TekSnackBar {
       message: message,
       child: child,
       iconData: iconData ?? Icons.info_outlined,
-      backgroundColor: backgroundColor ?? TekColors.blue,
+      backgroundColor: backgroundColor ?? TekColors().blue,
       margin: margin,
       padding: padding,
       behavior: behavior,

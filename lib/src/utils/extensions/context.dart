@@ -44,4 +44,42 @@ extension TekContextEx on BuildContext {
           allowSnapshotting: allowSnapshotting,
         ),
       );
+
+  Future<T?> replaceNavigator<T extends Object?>({
+    required Widget page,
+    RouteSettings? settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+    bool allowSnapshotting = true,
+    bool rootNavigator = false,
+  }) =>
+      Navigator.of(this, rootNavigator: rootNavigator).pushReplacement<T, T>(
+        MaterialPageRoute(
+          builder: (context) => page,
+          settings: settings,
+          fullscreenDialog: fullscreenDialog,
+          maintainState: maintainState,
+          allowSnapshotting: allowSnapshotting,
+        ),
+      );
+
+  Future pushUntilNavigator<T extends Object?>({
+    required Widget page,
+    required RoutePredicate predicate,
+    RouteSettings? settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+    bool allowSnapshotting = true,
+    bool rootNavigator = false,
+  }) =>
+      Navigator.of(this, rootNavigator: rootNavigator).pushAndRemoveUntil<T>(
+        MaterialPageRoute(
+          builder: (context) => page,
+          settings: settings,
+          fullscreenDialog: fullscreenDialog,
+          maintainState: maintainState,
+          allowSnapshotting: allowSnapshotting,
+        ),
+        predicate,
+      );
 }

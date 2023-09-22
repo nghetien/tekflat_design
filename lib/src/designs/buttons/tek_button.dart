@@ -110,28 +110,28 @@ enum TekButtonType {
     late Color? textColor;
     switch (this) {
       case TekButtonType.primary:
-        textColor = TekColors.white;
+        textColor = TekColors().white;
         break;
       case TekButtonType.outline:
         textColor = TekColors().primary;
         break;
       case TekButtonType.danger:
-        textColor = TekColors.white;
+        textColor = TekColors().white;
         break;
       case TekButtonType.warning:
-        textColor = TekColors.white;
+        textColor = TekColors().white;
         break;
       case TekButtonType.success:
-        textColor = TekColors.white;
+        textColor = TekColors().white;
         break;
       case TekButtonType.info:
-        textColor = TekColors.white;
+        textColor = TekColors().white;
         break;
       case TekButtonType.none:
         textColor = context.theme.textTheme.titleMedium?.color;
         break;
       case TekButtonType.ghost:
-        textColor = TekColors.grey;
+        textColor = TekColors().grey;
         break;
       case TekButtonType.themeGhost:
         textColor = TekColors().primary;
@@ -158,16 +158,16 @@ enum TekButtonType {
         backgroundColor = Colors.transparent;
         break;
       case TekButtonType.danger:
-        backgroundColor = TekColors.red;
+        backgroundColor = TekColors().red;
         break;
       case TekButtonType.warning:
-        backgroundColor = TekColors.yellow;
+        backgroundColor = TekColors().yellow;
         break;
       case TekButtonType.success:
-        backgroundColor = TekColors.green;
+        backgroundColor = TekColors().green;
         break;
       case TekButtonType.info:
-        backgroundColor = TekColors.blue;
+        backgroundColor = TekColors().blue;
         break;
       case TekButtonType.none:
         backgroundColor = Colors.transparent;
@@ -181,7 +181,7 @@ enum TekButtonType {
     }
     return (disabled || loading)
         ? backgroundColor == Colors.transparent
-            ? TekColors.greyOpacity01
+            ? TekColors().greyOpacity01
             : backgroundColor.withOpacity(0.4)
         : backgroundColor;
   }
@@ -273,7 +273,7 @@ enum TekButtonType {
           borderWidth: borderWidth,
         );
       case TekButtonType.ghost:
-        const borderSizeColor = TekColors.grey;
+        final Color borderSizeColor = TekColors().grey;
         return RoundedRectangleBorder(
           side: BorderSide(
             color: (disabled || loading)

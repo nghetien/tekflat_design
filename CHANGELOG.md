@@ -1,3 +1,5 @@
+## 1.1.0
+* Update TekColor & upgrade dependencies.
 ## 1.0.5
 * Update hintText style for TekInput.
 ## 1.0.4

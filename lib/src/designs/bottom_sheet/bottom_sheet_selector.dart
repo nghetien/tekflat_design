@@ -209,7 +209,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: TekColors.greyOpacity01,
+                    color: TekColors().greyOpacity01,
                     width: TekBorders.med,
                   ),
                 ),
@@ -242,7 +242,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: TekColors.greyOpacity01,
+              color: TekColors().greyOpacity01,
               width: TekBorders.med,
             ),
           ),
@@ -250,7 +250,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         child: widget.type == TekBottomSheetSelectorType.single
             ? Container(
                 color:
-                    _currentSelected?.keyValue == item.keyValue ? TekColors.greenOpacity01 : null,
+                    _currentSelected?.keyValue == item.keyValue ? TekColors().greenOpacity01 : null,
                 padding: EdgeInsets.all(TekSpacings().mainSpacing),
                 child: child,
               )
@@ -322,7 +322,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
                       Icon(
                         Icons.not_interested_rounded,
                         size: TekIconSizes().s24,
-                        color: TekColors.grey,
+                        color: TekColors().grey,
                       ),
                       TekVSpace.mainSpace,
                       const Text('No data'),

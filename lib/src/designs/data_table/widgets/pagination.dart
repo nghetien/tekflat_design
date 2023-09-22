@@ -123,16 +123,16 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
         if (!TekPlatform.isMobile)
           IconButton(
             onPressed: () => _handleChangeDataPageLeft(true),
-            icon: const Icon(
+            icon: Icon(
               Icons.keyboard_double_arrow_left_rounded,
-              color: TekColors.white,
+              color: TekColors().white,
             ),
           ),
         IconButton(
           onPressed: () => _handleChangeDataPageLeft(false),
-          icon: const Icon(
+          icon: Icon(
             Icons.keyboard_arrow_left_rounded,
-            color: TekColors.white,
+            color: TekColors().white,
           ),
         ),
       ],
@@ -152,9 +152,9 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
           text: number > 0 ? number.toString() : '...',
           padding: EdgeInsets.symmetric(horizontal: TekSpacings().p8),
           textStyle: TextStyle(
-            color: number == pagination.currentPage ? TekColors().primary : TekColors.white,
+            color: number == pagination.currentPage ? TekColors().primary : TekColors().white,
           ),
-          background: number == pagination.currentPage ? TekColors.white : TekColors().primary,
+          background: number == pagination.currentPage ? TekColors().white : TekColors().primary,
         ),
       );
 
@@ -194,17 +194,17 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
       children: <Widget>[
         IconButton(
           onPressed: () => _handleChangeDataPageRight(false),
-          icon: const Icon(
+          icon: Icon(
             Icons.keyboard_arrow_right_rounded,
-            color: TekColors.white,
+            color: TekColors().white,
           ),
         ),
         if (!TekPlatform.isMobile)
           IconButton(
             onPressed: () => _handleChangeDataPageRight(true),
-            icon: const Icon(
+            icon: Icon(
               Icons.keyboard_double_arrow_right_rounded,
-              color: TekColors.white,
+              color: TekColors().white,
             ),
           ),
       ],
@@ -246,8 +246,8 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
               padding: EdgeInsets.only(left: TekSpacings().p8),
               child: Text(
                 widget.paginationOption.customizeItemPerPage,
-                style: const TextStyle(
-                  color: TekColors.white,
+                style: TextStyle(
+                  color: TekColors().white,
                 ),
               ),
             ),
@@ -277,8 +277,8 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
                 )
               : '$fromItemStr - $toItemStr of $totalRecords items')
           : '$totalRecords items',
-      style: const TextStyle(
-        color: TekColors.white,
+      style: TextStyle(
+        color: TekColors().white,
       ),
     );
   }

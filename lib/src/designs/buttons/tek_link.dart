@@ -5,7 +5,7 @@ enum TekLinkType {
   noColor;
 
   Color getColor(BuildContext context) =>
-      this == TekLinkType.color ? TekColors.blue : TekColors.grey;
+      this == TekLinkType.color ? TekColors().blue : TekColors().grey;
 }
 
 enum TekLinkSize {
@@ -49,6 +49,7 @@ class TekLink extends StatelessWidget {
     this.textColor,
     this.iconIsRight = false,
     this.fontWeight,
+    this.decoration,
   });
 
   /// Size
@@ -79,6 +80,7 @@ class TekLink extends StatelessWidget {
   final double? textSize;
   final bool iconIsRight;
   final FontWeight? fontWeight;
+  final TextDecoration? decoration;
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +132,7 @@ class TekLink extends StatelessWidget {
               color: disabled ? context.theme.disabledColor : textColor ?? type.getColor(context),
               height: 0,
               fontWeight: fontWeight,
+              decoration: decoration,
             ),
       );
     }

@@ -37,7 +37,7 @@ class TekColors {
   static const Color _defaultBgPrimaryThemeDark = Color(0xFF1F1D2C);
   static const Color _defaultBgSecondaryThemeDark = Color(0xFF262837);
   static const Color _defaultBgPrimaryThemeLight = Color(0xFFF0F2F5);
-  static const Color _defaultBgSecondaryThemeLight = white;
+  static const Color _defaultBgSecondaryThemeLight = _defaultWhite;
 
   Color _bgPrimaryThemeDark = _defaultBgPrimaryThemeDark;
   Color _bgSecondaryThemeDark = _defaultBgSecondaryThemeDark;
@@ -70,24 +70,75 @@ class TekColors {
   Color get cardThemeLight => _bgSecondaryThemeLight;
 
   /// Color
-  static const Color black = Color(0xFF000000);
-  static const Color white = Color(0xFFFFFFFF);
-  static const Color grey = Color(0xFFAAB3AC);
-  static const Color red = Color(0xFFDA4343);
-  static const Color yellow = Color(0xFFFFA940);
-  static const Color blue =  Color(0xFF1990FF);
-  static const Color green = Color(0xFF30CD60);
-  static const Color pink = Color(0xFFc41d7f);
+  static const Color _defaultBlack = Color(0xFF000000);
+  static const Color _defaultWhite = Color(0xFFFFFFFF);
+  static const Color _defaultGrey = Color(0xFFAAB3AC);
+  static const Color _defaultRed = Color(0xFFDA4343);
+  static const Color _defaultYellow = Color(0xFFFFA940);
+  static const Color _defaultBlue = Color(0xFF1990FF);
+  static const Color _defaultGreen = Color(0xFF30CD60);
+  static const Color _defaultPink = Color(0xFFc41d7f);
 
-  static final Color greyOpacity01 = grey.withOpacity(0.1);
-  static final Color greyOpacity02 = grey.withOpacity(0.2);
-  static final Color greyOpacity04 = grey.withOpacity(0.4);
-  static final Color greyOpacity06 = grey.withOpacity(0.6);
-  static final Color greyOpacity08 = grey.withOpacity(0.8);
+  Color _black = _defaultBlack;
+  Color _white = _defaultWhite;
+  Color _grey = _defaultGrey;
+  Color _red = _defaultRed;
+  Color _yellow = _defaultYellow;
+  Color _blue = _defaultBlue;
+  Color _green = _defaultGreen;
+  Color _pink = _defaultPink;
 
-  static final Color greenOpacity01 = green.withOpacity(0.1);
+  Color get black => _black;
+
+  Color get white => _white;
+
+  Color get grey => _grey;
+
+  Color get red => _red;
+
+  Color get yellow => _yellow;
+
+  Color get blue => _blue;
+
+  Color get green => _green;
+
+  Color get pink => _pink;
+
+  void setColorsDefault({
+    Color? black,
+    Color? white,
+    Color? grey,
+    Color? red,
+    Color? yellow,
+    Color? blue,
+    Color? green,
+    Color? pink,
+  }) {
+    _black = black ?? _black;
+    _white = white ?? _white;
+    _grey = grey ?? _grey;
+    _red = red ?? _red;
+    _yellow = yellow ?? _yellow;
+    _blue = blue ?? _blue;
+    _green = green ?? _green;
+    _pink = pink ?? _pink;
+  }
+
+  Color get greyOpacity01 => _grey.withOpacity(0.1);
+
+  Color get greyOpacity02 => _grey.withOpacity(0.2);
+
+  Color get greyOpacity04 => _grey.withOpacity(0.4);
+
+  Color get greyOpacity06 => _grey.withOpacity(0.6);
+
+  Color get greyOpacity08 => _grey.withOpacity(0.8);
+
+  Color get greenOpacity01 => _green.withOpacity(0.1);
 
   Color get primaryOpacity01 => primary.withOpacity(0.1);
+
   Color get primaryOpacity02 => primary.withOpacity(0.2);
+
   Color get primaryOpacity04 => primary.withOpacity(0.4);
 }

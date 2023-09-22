@@ -654,7 +654,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
                               Icon(
                                 Icons.not_interested_rounded,
                                 size: TekIconSizes().s24,
-                                color: TekColors.grey,
+                                color: TekColors().grey,
                               ),
                               TekVSpace.mainSpace,
                               const Text('No data'),

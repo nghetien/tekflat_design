@@ -6,14 +6,14 @@ class TekBadge extends StatelessWidget {
     Key? key,
     required this.child,
     this.count = 0,
-    this.color = TekColors.red,
+    this.color,
     this.top,
     this.right,
   }) : super(key: key);
 
   final Widget child;
   final int count;
-  final Color color;
+  final Color? color;
   final double? top;
   final double? right;
 
@@ -34,13 +34,13 @@ class TekBadge extends StatelessWidget {
               ),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: color,
+                color: color ?? TekColors().red,
                 borderRadius: TekCorners.cornerBorder20,
               ),
               child: Text(
                 count > 999 ? '999+' : count.toString(),
                 style: TekTextStyles.label.copyWith(
-                  color: TekColors.white,
+                  color: TekColors().white,
                   fontWeight: FontWeight.w600,
                 ),
               ),

@@ -49,7 +49,7 @@ class TekExpansion extends StatelessWidget {
         borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
         border: border ??
             Border.all(
-              color: TekColors.greyOpacity04,
+              color: TekColors().greyOpacity04,
               width: TekBorders.thin,
             ),
       ),
