@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import './tek_validator_mess_error.dart';
-import '../formatters/formatters.dart';
 import '../value_transformer/value_transformer.dart';
 
 class TekNumberValidator {

@@ -1,3 +1,5 @@
+## 1.1.1
+* Add tag for bottom sheet.
 ## 1.1.0
 * Update TekColor & upgrade dependencies.
 ## 1.0.5

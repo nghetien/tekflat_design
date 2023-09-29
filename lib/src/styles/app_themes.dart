@@ -80,11 +80,6 @@ class TekThemes {
     cardColor: TekColors().cardThemeLight,
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: TekColors().bgSecondaryThemeLight,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: TekCorners().mainCornerRadius,
-        ),
-      ),
     ),
     iconTheme: IconThemeData(color: TekColors().black),
     textTheme: TextTheme(
@@ -236,11 +231,6 @@ class TekThemes {
     canvasColor: TekColors().bgSecondaryThemeDark,
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: TekColors().bgSecondaryThemeDark,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: TekCorners().mainCornerRadius,
-        ),
-      ),
     ),
     iconTheme: IconThemeData(color: TekColors().white),
     textTheme: TextTheme(

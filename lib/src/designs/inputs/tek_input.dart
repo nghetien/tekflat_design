@@ -190,6 +190,7 @@ class TekInput extends StatelessWidget {
     this.ablePrefixIconConstraints = true,
     this.ableSuffixIconConstraints = true,
     this.readOnly = false,
+    this.autofocus = false,
   })  : assert(
           (initialValue == null && controller == null) ||
               (initialValue != null && controller == null) ||
@@ -250,6 +251,7 @@ class TekInput extends StatelessWidget {
   final bool ableSuffixIconConstraints;
   final bool ablePrefixIconConstraints;
   final bool readOnly;
+  final bool autofocus;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -316,6 +318,7 @@ class TekInput extends StatelessWidget {
           ablePrefixIconConstraints: ablePrefixIconConstraints,
         ),
         name: name ?? '',
+        autofocus: autofocus,
       ),
     );
   }

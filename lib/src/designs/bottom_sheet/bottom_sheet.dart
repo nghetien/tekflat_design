@@ -7,6 +7,8 @@ import 'package:tekflat_design/src/src.dart';
 
 part 'bottom_sheet_selector.dart';
 
+part 'tag_bottom_sheet.dart';
+
 enum TekBottomSheetHeaderOption {
   option1,
   option2,
@@ -36,6 +38,11 @@ class TekBottomSheet {
     AnimationController? transitionAnimationController,
     Offset? anchorPoint,
     String? title,
+    BorderRadius? borderRadius,
+    TekTypographyType? titleType,
+    FontWeight? titleFontWeight,
+    bool? backBtnIsRight,
+    bool? haveDivider,
   }) {
     return showModalBottomSheet<T>(
       context: context,
@@ -44,63 +51,43 @@ class TekBottomSheet {
           height: height,
           child: Column(
             children: [
-              headerOption == TekBottomSheetHeaderOption.option1
-                  ? Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(TekSpacings().mainSpacing),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: TekTypography(
-                                  text: title ?? '',
-                                  type: TekTypographyType.level5,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              TekButtonInkwell(
-                                onPressed: () {},
-                                child: const Icon(Icons.close_rounded),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const TekDivider(),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                            top: TekSpacings().p4,
-                          ),
-                          alignment: Alignment.topCenter,
-                          width: 30,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            borderRadius: TekCorners().mainCornerBorder,
-                            color: TekColors().greyOpacity06,
-                          ),
-                        ),
-                        TekVSpace.mainSpace,
-                        TekTypography(
-                          text: title ?? '',
+              if (headerOption == TekBottomSheetHeaderOption.option1)
+                TagBottomSheet2Widget(
+                  title: title,
+                  titleType: titleType,
+                  titleFontWeight: titleFontWeight,
+                  backBtnIsRight: backBtnIsRight ?? true,
+                  haveDivider: haveDivider ?? true,
+                )
+              else
+                Column(
+                  children: [
+                    const TagBottomSheet1Widget(),
+                    if (title != null && title.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(top: TekSpacings().mainSpacing),
+                        child: TekTypography(
+                          text: title,
                           type: TekTypographyType.level5,
                           fontWeight: FontWeight.bold,
                         ),
-                        TekVSpace.mainSpace,
-                      ],
-                    ),
+                      ),
+                  ],
+                ),
               builder(context),
             ],
           ),
         );
       },
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? context.theme.bottomSheetTheme.backgroundColor,
       elevation: elevation ?? 0,
-      shape: shape,
+      shape: shape ??
+          RoundedRectangleBorder(
+            borderRadius: borderRadius ??
+                BorderRadius.vertical(
+                  top: TekCorners().mainCornerRadius,
+                ),
+          ),
       clipBehavior: clipBehavior,
       constraints: constraints,
       barrierColor: barrierColor,
@@ -134,6 +121,7 @@ class TekBottomSheet {
     AnimationController? transitionAnimationController,
     Offset? anchorPoint,
     String? title,
+    BorderRadius? borderRadius,
     // selector
     TekBottomSheetSelectorType? type,
     List<String>? initSelected,
@@ -172,9 +160,15 @@ class TekBottomSheet {
                   (onSearchMenuChildren != null ? 70 : 0),
             ),
       ),
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? context.theme.bottomSheetTheme.backgroundColor,
       elevation: elevation,
-      shape: shape,
+      shape: shape ??
+          RoundedRectangleBorder(
+            borderRadius: borderRadius ??
+                BorderRadius.vertical(
+                  top: TekCorners().mainCornerRadius,
+                ),
+          ),
       clipBehavior: clipBehavior,
       constraints: constraints ??
           BoxConstraints(
