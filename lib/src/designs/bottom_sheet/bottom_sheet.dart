@@ -6,7 +6,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tekflat_design/src/src.dart';
 
 part 'bottom_sheet_selector.dart';
-
 part 'tag_bottom_sheet.dart';
 
 enum TekBottomSheetHeaderOption {
@@ -20,6 +19,7 @@ class TekBottomSheet {
   static Future<T?> customizeBottomSheet<T>(
     BuildContext context, {
     required Widget Function(BuildContext) builder,
+    bool isCustomize = false,
     TekBottomSheetHeaderOption headerOption = TekBottomSheetHeaderOption.option1,
     double? height,
     Color? backgroundColor,
@@ -49,29 +49,31 @@ class TekBottomSheet {
       builder: (context) {
         return SizedBox(
           height: height,
-          child: Column(
-            children: [
-              if (headerOption == TekBottomSheetHeaderOption.option1)
-                TagBottomSheet2Widget(
-                  title: title,
-                  titleType: titleType,
-                  titleFontWeight: titleFontWeight,
-                  backBtnIsRight: backBtnIsRight ?? true,
-                  haveDivider: haveDivider ?? true,
-                )
-              else
-                Column(
+          child: isCustomize
+              ? builder(context)
+              : Column(
                   children: [
-                    const TagBottomSheet1Widget(),
-                    if (title != null && title.isNotEmpty)
-                      Padding(
-                        padding: EdgeInsets.only(top: TekSpacings().mainSpacing),
-                        child: TekTypography(
-                          text: title,
-                          type: TekTypographyType.level5,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    if (headerOption == TekBottomSheetHeaderOption.option1)
+                      TagBottomSheet2Widget(
+                        title: title,
+                        titleType: titleType,
+                        titleFontWeight: titleFontWeight,
+                        backBtnIsRight: backBtnIsRight ?? true,
+                        haveDivider: haveDivider ?? true,
+                      )
+                    else
+                      Column(
+                        children: [
+                          const TagBottomSheet1Widget(),
+                          if (title != null && title.isNotEmpty)
+                            Padding(
+                              padding: EdgeInsets.only(top: TekSpacings().mainSpacing),
+                              child: TekTypography(
+                                text: title,
+                                type: TekTypographyType.level5,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                   ],
                 ),
               builder(context),

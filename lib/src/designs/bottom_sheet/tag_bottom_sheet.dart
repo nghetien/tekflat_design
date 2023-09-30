@@ -66,8 +66,8 @@ class TagBottomSheet2Widget extends StatelessWidget {
               Align(
                 child: TekTypography(
                   text: title ?? '',
-                  type: titleType ?? TekTypographyType.level5,
-                  fontWeight: titleFontWeight ?? FontWeight.bold,
+                  type: titleType ?? TekTypographyType.level4,
+                  fontWeight: titleFontWeight ?? FontWeight.w500,
                 ),
               ),
               Positioned(

@@ -48,6 +48,8 @@ class TekTextField extends StatelessWidget {
     this.ablePrefixIconConstraints = true,
     this.ableSuffixIconConstraints = true,
     this.readOnly = false,
+    this.autofocus = false,
+    this.expands = false,
   }) : super(key: key);
 
   final TekInputSize size;
@@ -95,6 +97,8 @@ class TekTextField extends StatelessWidget {
   final bool ableSuffixIconConstraints;
   final bool ablePrefixIconConstraints;
   final bool readOnly;
+  final bool expands;
+  final bool autofocus;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -112,8 +116,8 @@ class TekTextField extends StatelessWidget {
           textInputAction: textInputAction,
           textAlignVertical: textAlignVertical,
           keyboardType: keyboardType,
-          maxLines: maxLines ?? size.maxLines,
-          minLines: minLines,
+          maxLines: expands ? null : (maxLines ?? size.maxLines),
+          minLines: expands ? null : minLines,
           maxLength: maxLength,
           enabled: enabled,
           obscureText: obscureText,
@@ -125,6 +129,8 @@ class TekTextField extends StatelessWidget {
           onEditingComplete: onEditingComplete,
           onSubmitted: onSubmitted,
           readOnly: readOnly,
+          expands: expands,
+          autofocus: autofocus,
           decoration: tekInputDecoration(
             context: context,
             size: size,

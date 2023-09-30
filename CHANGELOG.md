@@ -1,3 +1,5 @@
+## 1.1.2
+* Update input and bottom sheet.
 ## 1.1.1
 * Add tag for bottom sheet.
 ## 1.1.0
