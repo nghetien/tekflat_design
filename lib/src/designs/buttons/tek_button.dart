@@ -63,13 +63,13 @@ enum TekButtonSize {
   TextStyle get textStyle {
     switch (this) {
       case extraLarge:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles().titleMedium;
       case large:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case medium:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case small:
-        return TekTextStyles.label;
+        return TekTextStyles().label;
     }
   }
 
@@ -204,6 +204,10 @@ enum TekButtonType {
     );
   }
 
+  static Color _borderColorDefaultOutline = TekColors().primary;
+
+  static void setBorderColorOutlineDefault(Color color) => _borderColorDefaultOutline = color;
+
   OutlinedBorder? getOutlinedBorder({
     required BuildContext context,
     bool disabled = false,
@@ -222,7 +226,7 @@ enum TekButtonType {
           borderWidth: borderWidth,
         );
       case TekButtonType.outline:
-        final borderSizeColor = TekColors().primary;
+        final borderSizeColor = _borderColorDefaultOutline;
         return RoundedRectangleBorder(
           side: BorderSide(
             color: (disabled || loading)

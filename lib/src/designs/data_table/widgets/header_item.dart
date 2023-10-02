@@ -133,7 +133,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
           child: Text(
             'No.',
             textAlign: TextAlign.center,
-            style: TekTextStyles.body.copyWith(
+            style: TekTextStyles().body.copyWith(
               fontWeight: FontWeight.bold,
               color: TekColors().white,
             ),
@@ -161,7 +161,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
                 child: Text(
                   widget.column.name ?? '',
                   textAlign: TextAlign.center,
-                  style: TekTextStyles.body.copyWith(
+                  style: TekTextStyles().body.copyWith(
                     fontWeight: FontWeight.bold,
                     color: TekColors().white,
                   ),

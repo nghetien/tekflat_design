@@ -1,3 +1,5 @@
+## 1.1.3
+* Update TekTypography.
 ## 1.1.2
 * Update input and bottom sheet.
 ## 1.1.1

@@ -96,7 +96,6 @@ class TekDialogs {
                     child: onPressedToTitle == null
                         ? TekTypography(
                             text: title,
-                            type: TekTypographyType.level5,
                             color: TekColors().primary,
                           )
                         : TekButtonGD(
@@ -105,7 +104,6 @@ class TekDialogs {
                             },
                             child: TekTypography(
                               text: title,
-                              type: TekTypographyType.level5,
                               color: TekColors().primary,
                             ),
                           ),
@@ -244,7 +242,7 @@ class TekDialogs {
                       Text(
                         title ?? '',
                         textAlign: TextAlign.center,
-                        style: TekTextStyles.titleMedium.copyWith(color: TekColors().white),
+                        style: TekTextStyles().titleMedium.copyWith(color: TekColors().white),
                         maxLines: maxLinesTitle,
                       ),
                 ],
@@ -257,7 +255,7 @@ class TekDialogs {
                   child: Text(
                     content ?? '',
                     textAlign: TextAlign.center,
-                    style: TekTextStyles.body,
+                    style: TekTextStyles().body,
                     maxLines: maxLinesContent,
                   ),
                 ),

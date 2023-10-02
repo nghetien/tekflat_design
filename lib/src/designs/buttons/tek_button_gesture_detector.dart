@@ -64,7 +64,7 @@ class TekButtonGD extends StatelessWidget {
   Widget? _getText() {
     return Text(
       text ?? "",
-      style: TekTextStyles.body.copyWith(
+      style: TekTextStyles().body.copyWith(
         color: textColor,
         fontSize: textFontSize,
         fontWeight: textFontWeight,

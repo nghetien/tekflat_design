@@ -59,7 +59,7 @@ class TekExpansion extends StatelessWidget {
         title: customTitle ??
             Text(
               title ?? '',
-              style: TekTextStyles.body.copyWith(
+              style: TekTextStyles().body.copyWith(
                 color: titleColor,
                 fontWeight: titleFontWeight,
               ),

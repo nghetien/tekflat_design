@@ -39,7 +39,7 @@ class TekBadge extends StatelessWidget {
               ),
               child: Text(
                 count > 999 ? '999+' : count.toString(),
-                style: TekTextStyles.label.copyWith(
+                style: TekTextStyles().label.copyWith(
                   color: TekColors().white,
                   fontWeight: FontWeight.w600,
                 ),

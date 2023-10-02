@@ -27,7 +27,7 @@ class TekThemes {
       backgroundColor: TekColors().white,
       iconTheme: IconThemeData(color: TekColors().black),
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
-      titleTextStyle: TekTextStyles.titleLarge.copyWith(color: TekColors().white),
+      titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().white),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: TekColors().primary,
@@ -72,9 +72,9 @@ class TekThemes {
           width: TekBorders.thin,
         ),
       ),
-      floatingLabelStyle: TekTextStyles.label.copyWith(color: TekColors().primary),
-      labelStyle: TekTextStyles.label.copyWith(color: TekColors().grey),
-      errorStyle: TekTextStyles.label.copyWith(color: TekColors().red),
+      floatingLabelStyle: TekTextStyles().label.copyWith(color: TekColors().primary),
+      labelStyle: TekTextStyles().label.copyWith(color: TekColors().grey),
+      errorStyle: TekTextStyles().label.copyWith(color: TekColors().red),
     ),
     cardTheme: CardTheme(color: TekColors().cardThemeLight),
     cardColor: TekColors().cardThemeLight,
@@ -83,7 +83,7 @@ class TekThemes {
     ),
     iconTheme: IconThemeData(color: TekColors().black),
     textTheme: TextTheme(
-      titleMedium: TekTextStyles.body.copyWith(color: TekColors().black),
+      titleMedium: TekTextStyles().body.copyWith(color: TekColors().black),
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     checkboxTheme: CheckboxThemeData(
@@ -139,7 +139,7 @@ class TekThemes {
         borderRadius: TekCorners().mainCornerBorder,
         side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
       ),
-      dayStyle: TekTextStyles.body,
+      dayStyle: TekTextStyles().body,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -177,7 +177,7 @@ class TekThemes {
       backgroundColor: TekColors().bgSecondaryThemeDark,
       iconTheme: IconThemeData(color: TekColors().white),
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
-      titleTextStyle: TekTextStyles.titleLarge.copyWith(color: TekColors().white),
+      titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().white),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: TekColors().primary,
@@ -222,9 +222,9 @@ class TekThemes {
           width: TekBorders.thin,
         ),
       ),
-      floatingLabelStyle: TekTextStyles.label.copyWith(color: TekColors().primary),
-      labelStyle: TekTextStyles.label.copyWith(color: TekColors().grey),
-      errorStyle: TekTextStyles.label.copyWith(color: TekColors().red),
+      floatingLabelStyle: TekTextStyles().label.copyWith(color: TekColors().primary),
+      labelStyle: TekTextStyles().label.copyWith(color: TekColors().grey),
+      errorStyle: TekTextStyles().label.copyWith(color: TekColors().red),
     ),
     cardTheme: CardTheme(color: TekColors().cardThemeDark),
     cardColor: TekColors().cardThemeDark,
@@ -234,7 +234,7 @@ class TekThemes {
     ),
     iconTheme: IconThemeData(color: TekColors().white),
     textTheme: TextTheme(
-      titleMedium: TekTextStyles.body.copyWith(color: TekColors().white),
+      titleMedium: TekTextStyles().body.copyWith(color: TekColors().white),
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     dialogBackgroundColor: TekColors().bgSecondaryThemeDark,
@@ -291,7 +291,7 @@ class TekThemes {
         borderRadius: TekCorners().mainCornerBorder,
         side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
       ),
-      dayStyle: TekTextStyles.body,
+      dayStyle: TekTextStyles().body,
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{

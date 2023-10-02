@@ -94,7 +94,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
   }) =>
       Text(
         value != null ? value.toString() : '',
-        style: TekTextStyles.body,
+        style: TekTextStyles().body,
       );
 
   Widget _numberedRowItem() {
@@ -105,7 +105,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
                 indexRow +
                 1)
             .toString(),
-        style: TekTextStyles.body.copyWith(
+        style: TekTextStyles().body.copyWith(
           fontWeight: FontWeight.bold,
         ),
       ),

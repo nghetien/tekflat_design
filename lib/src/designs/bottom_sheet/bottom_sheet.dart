@@ -70,7 +70,6 @@ class TekBottomSheet {
                               padding: EdgeInsets.only(top: TekSpacings().mainSpacing),
                               child: TekTypography(
                                 text: title,
-                                type: TekTypographyType.level5,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

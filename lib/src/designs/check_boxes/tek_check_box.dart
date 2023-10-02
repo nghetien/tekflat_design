@@ -88,7 +88,7 @@ class TekCheckBox extends StatelessWidget {
               Text(
                 title ?? '',
                 style: textStyle ??
-                    TekTextStyles.body.copyWith(
+                    TekTextStyles().body.copyWith(
                       color: !enabled
                           ? TekColors().grey
                           : value

@@ -191,7 +191,6 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
                 Flexible(
                   child: TekTypography(
                     text: widget.title ?? '',
-                    type: TekTypographyType.level5,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

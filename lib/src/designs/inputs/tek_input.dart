@@ -70,34 +70,34 @@ enum TekInputSize {
   TextStyle get textStyle {
     switch (this) {
       case TekInputSize.extraLarge:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles().titleMedium;
       case TekInputSize.large:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles().titleMedium;
       case TekInputSize.medium:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaSmall:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaMedium:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaLarge:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
     }
   }
 
   TextStyle get hintStyle {
     switch (this) {
       case TekInputSize.extraLarge:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles().titleMedium;
       case TekInputSize.large:
-        return TekTextStyles.titleMedium;
+        return TekTextStyles().titleMedium;
       case TekInputSize.medium:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaSmall:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaMedium:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
       case TekInputSize.areaLarge:
-        return TekTextStyles.body;
+        return TekTextStyles().body;
     }
   }
 

@@ -116,7 +116,7 @@ class TekTags {
               child: Text(
                 value,
                 style: textStyle ??
-                    TekTextStyles.label.copyWith(
+                    TekTextStyles().label.copyWith(
                       color: TekColors().white,
                       height: 0,
                     ),
@@ -140,7 +140,7 @@ class TekTags {
               child: Text(
                 value,
                 style: textStyle ??
-                    TekTextStyles.label.copyWith(
+                    TekTextStyles().label.copyWith(
                       color: color,
                       height: 0,
                     ),

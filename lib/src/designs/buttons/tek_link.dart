@@ -118,9 +118,9 @@ class TekLink extends StatelessWidget {
     } else if (text != null) {
       late TextStyle sizeTextStyle;
       if (size == TekLinkSize.small) {
-        sizeTextStyle = TekTextStyles.label;
+        sizeTextStyle = TekTextStyles().label;
       } else {
-        sizeTextStyle = TekTextStyles.body;
+        sizeTextStyle = TekTextStyles().body;
       }
 
       content = Text(

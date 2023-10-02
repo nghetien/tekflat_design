@@ -32,7 +32,7 @@ class TekButtonInkwell extends StatelessWidget {
         splashColor: Colors.transparent,
         child: child ?? Text(
           text ?? "",
-          style: TekTextStyles.body.copyWith(
+          style: TekTextStyles().body.copyWith(
             color: textColor,
             fontSize: textFontSize,
             fontWeight: textFontWeight,
