@@ -1,3 +1,5 @@
+## 1.1.3-1
+* Add DateTime extensions.
 ## 1.1.3
 * Update TekTypography.
 ## 1.1.2
