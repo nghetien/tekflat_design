@@ -15,6 +15,7 @@ class TekTextField extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.maxLength,
+    this.maxLengthEnforcement,
     this.enabled = true,
     this.obscureText = false,
     this.cursorColor,
@@ -99,6 +100,7 @@ class TekTextField extends StatelessWidget {
   final bool readOnly;
   final bool expands;
   final bool autofocus;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -119,6 +121,7 @@ class TekTextField extends StatelessWidget {
           maxLines: expands ? null : (maxLines ?? size.maxLines),
           minLines: expands ? null : minLines,
           maxLength: maxLength,
+          maxLengthEnforcement: maxLengthEnforcement,
           enabled: enabled,
           obscureText: obscureText,
           cursorColor: cursorColor,

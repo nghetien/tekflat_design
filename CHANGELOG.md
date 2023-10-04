@@ -1,3 +1,5 @@
+## 1.1.3-2
+* Add attribute maxLengthEnforcement for TekInput.
 ## 1.1.3-1
 * Add DateTime extensions.
 ## 1.1.3

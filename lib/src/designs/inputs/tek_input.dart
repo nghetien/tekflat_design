@@ -153,6 +153,7 @@ class TekInput extends StatelessWidget {
     this.maxLines,
     this.minLines,
     this.maxLength,
+    this.maxLengthEnforcement,
     this.enabled = true,
     this.obscureText = false,
     this.cursorColor,
@@ -254,6 +255,7 @@ class TekInput extends StatelessWidget {
   final bool readOnly;
   final bool autofocus;
   final bool expands;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -277,6 +279,7 @@ class TekInput extends StatelessWidget {
         maxLines: expands ? null : (maxLines ?? size.maxLines),
         minLines: expands ? null : minLines,
         maxLength: maxLength,
+        maxLengthEnforcement: maxLengthEnforcement,
         enabled: enabled,
         obscureText: obscureText,
         cursorColor: cursorColor,
