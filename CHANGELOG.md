@@ -1,3 +1,5 @@
+## 1.1.3-3
+* Add `barrierDismissible` for TekDialogs and update `TekIconButton`.
 ## 1.1.3-2
 * Add attribute maxLengthEnforcement for TekInput.
 ## 1.1.3-1

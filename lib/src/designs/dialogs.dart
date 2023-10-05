@@ -193,6 +193,7 @@ class TekDialogs {
   static Future<T?> optionDialog<T>(
     BuildContext context, {
     required TekDialogType type,
+    bool barrierDismissible = true,
     Future<bool?> Function()? onClickButtonRight,
     VoidCallback? onClickButtonLeft,
     String? title,
@@ -208,6 +209,7 @@ class TekDialogs {
       defaultDialog<T>(
         context,
         width: width ?? min<double>(context.widthScreen, 420),
+        barrierDismissible: barrierDismissible,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
