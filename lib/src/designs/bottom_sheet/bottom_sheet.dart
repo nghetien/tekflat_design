@@ -43,6 +43,7 @@ class TekBottomSheet {
     FontWeight? titleFontWeight,
     bool? backBtnIsRight,
     bool? haveDivider,
+    MainAxisSize? mainAxisSize,
   }) {
     return showModalBottomSheet<T>(
       context: context,
@@ -52,6 +53,7 @@ class TekBottomSheet {
           child: isCustomize
               ? builder(context)
               : Column(
+                  mainAxisSize: mainAxisSize ?? MainAxisSize.max,
                   children: [
                     if (headerOption == TekBottomSheetHeaderOption.option1)
                       TagBottomSheet2Widget(
@@ -73,11 +75,11 @@ class TekBottomSheet {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                        ],
+                      ),
+                    builder(context),
                   ],
                 ),
-              builder(context),
-            ],
-          ),
         );
       },
       backgroundColor: backgroundColor ?? context.theme.bottomSheetTheme.backgroundColor,

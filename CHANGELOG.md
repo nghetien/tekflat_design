@@ -1,3 +1,5 @@
+## 1.1.3-4
+* Add `MainAxisSize` to `TekBottomSheet`.
 ## 1.1.3-3
 * Add `barrierDismissible` for TekDialogs and update `TekIconButton`.
 ## 1.1.3-2
