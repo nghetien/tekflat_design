@@ -40,6 +40,7 @@ class TekBottomSheetSelectorWidget<T> extends StatefulWidget {
     this.initSearchText,
     this.hintText,
     required this.constraints,
+    this.debounceMilliseconds = 1000,
   });
 
   final String? title;
@@ -59,6 +60,7 @@ class TekBottomSheetSelectorWidget<T> extends StatefulWidget {
   final String? initSearchText;
   final String? hintText;
   final BoxConstraints constraints;
+  final int debounceMilliseconds;
 
   @override
   State<TekBottomSheetSelectorWidget<T>> createState() => _TekBottomSheetSelectorWidgetState<T>();
@@ -68,6 +70,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   late final TextEditingController _searchController;
   final TekLoadingController _loadingController = TekLoadingController();
   final RefreshController _refreshController = RefreshController();
+  late final TekDebounce _debounce;
 
   // init load widget
   bool _isInitLoad = false;
@@ -102,6 +105,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: widget.initSearchText);
+    _debounce = TekDebounce(milliseconds: widget.debounceMilliseconds);
     if (widget.initMenuChildren != null) {
       WidgetsBinding.instance.addPostFrameCallback(
         (_) {
@@ -137,12 +141,9 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
     }
   }
 
-  void _onSubmitted(String? value) {
-    if (value == null || value.isEmpty) {
-      return;
-    }
+  void _handleSearchText(String? value) {
     _loadingController.openAndDismissLoading(
-      () async {
+          () async {
         final result = await widget.onSearchMenuChildren?.call(
           value,
           _menuChildren.map((e) => e.value).toList(),
@@ -150,6 +151,25 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
         _setMenuChildren(result ?? []);
       },
     );
+  }
+
+  void _onSubmitted(String? value) {
+    if(value == null || value.isEmpty) {
+      _setMenuChildren([]);
+      return;
+    }
+    _debounce.dispose();
+    _handleSearchText(value);
+  }
+
+  void _onChange(String? value) {
+    _debounce.run(() {
+      if(value == null || value.isEmpty) {
+        _setMenuChildren([]);
+        return;
+      }
+      _handleSearchText(value);
+    });
   }
 
   void _onSelected(TekBottomSheetSelectorModel<T> item) {
@@ -218,6 +238,8 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
                 controller: _searchController,
                 hintText: widget.hintText,
                 onSubmitted: _onSubmitted,
+                onChanged: _onChange,
+                onTapOutside: (_) => FocusScope.of(context).unfocus(),
                 prefixIcon: const Icon(Icons.search),
                 textInputAction: TextInputAction.search,
               ),
