@@ -1,3 +1,5 @@
+## 1.1.2-2
+* Update search BottomSheet and add debounce.
 ## 1.1.2-1
 * Update search BottomSheet and add debounce.
 ## 1.1.2

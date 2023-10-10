@@ -154,20 +154,12 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   }
 
   void _onSubmitted(String? value) {
-    if(value == null || value.isEmpty) {
-      _setMenuChildren([]);
-      return;
-    }
     _debounce.dispose();
     _handleSearchText(value);
   }
 
   void _onChange(String? value) {
     _debounce.run(() {
-      if(value == null || value.isEmpty) {
-        _setMenuChildren([]);
-        return;
-      }
       _handleSearchText(value);
     });
   }
