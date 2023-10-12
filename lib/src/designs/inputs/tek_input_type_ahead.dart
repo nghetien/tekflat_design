@@ -63,7 +63,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
-    this.readOnly = false,
+    this.readOnly,
     this.ableClearValue = true,
 
     /// Dropdown
@@ -141,7 +141,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
-  final bool readOnly;
+  final bool? readOnly;
   final bool ableClearValue;
 
   /// Dropdown
@@ -419,7 +419,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
                   errorText: widget.errorText ?? state.errorText,
                   errorMaxLines: widget.errorMaxLines,
                   errorStyle: widget.errorStyle,
-                  readOnly: true,
+                  readOnly: widget.readOnly ?? true,
                   ablePrefixIconConstraints: !widget.type.isMulti,
                 );
               },

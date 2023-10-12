@@ -13,6 +13,7 @@ class TekThemes {
       background: TekColors().bgSecondaryThemeLight,
       onBackground: TekColors().bgPrimaryThemeLight,
       error: TekColors().red,
+      secondary: TekColors().primary,
     ),
     scaffoldBackgroundColor: TekColors().bgPrimaryThemeLight,
     primaryColor: TekColors().primary,
@@ -141,6 +142,14 @@ class TekThemes {
       ),
       dayStyle: TekTextStyles().body,
     ),
+    timePickerTheme: TimePickerThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      dialTextStyle: TekTextStyles().body,
+      backgroundColor: TekColors().bgSecondaryThemeLight,
+    ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
@@ -163,6 +172,7 @@ class TekThemes {
       background: TekColors().bgSecondaryThemeDark,
       onBackground: TekColors().bgPrimaryThemeDark,
       error: TekColors().red,
+      secondary: TekColors().primary,
     ),
     scaffoldBackgroundColor: TekColors().bgPrimaryThemeDark,
     primaryColor: TekColors().primary,
@@ -292,6 +302,14 @@ class TekThemes {
         side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
       ),
       dayStyle: TekTextStyles().body,
+    ),
+    timePickerTheme: TimePickerThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: TekCorners().mainCornerBorder,
+        side: BorderSide(color: TekColors().greyOpacity01, width: TekBorders.thin),
+      ),
+      dialTextStyle: TekTextStyles().body,
+      backgroundColor:  const Color(0xFF0D2141),
     ),
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
