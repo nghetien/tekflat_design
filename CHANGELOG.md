@@ -1,3 +1,5 @@
+## 1.1.4
+* Add `TekTimePicker`.
 ## 1.1.3-4
 * Add `MainAxisSize` to `TekBottomSheet`.
 ## 1.1.3-3
