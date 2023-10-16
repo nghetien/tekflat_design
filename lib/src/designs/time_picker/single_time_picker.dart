@@ -31,7 +31,7 @@ class TekSingleTimePickerWidget extends StatefulWidget {
   final String? textAM;
   final String? textPM;
   final TimeOfDay? initialTime;
-  final ValueChanged<TimeOfDay>? onPickTime;
+  final Future Function(TimeOfDay)? onPickTime;
   final double? mainSize;
   final FontWeight? mainWeight;
   final Color? mainColor;
@@ -72,6 +72,7 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
 
   late TimeOfDay _timeOfDay;
   late bool _isAM;
+  bool _buttonLoading = false;
 
   void _setTimeOfDay(TimeOfDay timeOfDay) {
     if (_timeOfDay == timeOfDay) return;
@@ -89,6 +90,8 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
   }
 
   void _setIsAM(bool isAM) => setState(() => _isAM = isAM);
+
+  void _setButtonLoading(bool loading) => setState(() => _buttonLoading = loading);
 
   void _handleChangeByScrollController({
     int? valueHour,
@@ -249,14 +252,27 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
             width: double.infinity,
             fontWeight: FontWeight.w600,
             type: TekButtonType.primary,
-            onPressed: () {
-              widget.onPickTime?.call(
-                TimeOfDay(
-                  hour: _isAM ? _timeOfDay.hour : _timeOfDay.hour + 12,
-                  minute: _timeOfDay.minute,
-                ),
-              );
-              context.popNavigator();
+            loading: _buttonLoading,
+            onPressed: () async {
+              try {
+                _setButtonLoading(true);
+                widget.onPickTime
+                    ?.call(
+                  TimeOfDay(
+                    hour: _isAM ? _timeOfDay.hour : _timeOfDay.hour + 12,
+                    minute: _timeOfDay.minute,
+                  ),
+                )
+                    .then(
+                  (_) {
+                    _setButtonLoading(false);
+                    context.popNavigator();
+                  },
+                );
+              } catch (e) {
+                TekLogger.errorLog("TekSingleTimePickerWidget $e");
+                _setButtonLoading(false);
+              }
             },
           ),
         ],

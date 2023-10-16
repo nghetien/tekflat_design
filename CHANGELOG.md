@@ -1,3 +1,5 @@
+## 1.1.4-1
+* Able loading in `TekTimePicker`.
 ## 1.1.4
 * Add `TekTimePicker`.
 ## 1.1.3-4

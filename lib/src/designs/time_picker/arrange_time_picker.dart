@@ -35,7 +35,7 @@ class TekArrangeTimePickerWidget extends StatefulWidget {
   final TimeOfDay? initEndTime;
   final List<TimeOfDay> startPresets;
   final List<TimeOfDay> endPresets;
-  final Function(TimeOfDay, TimeOfDay) onPickTimes;
+  final Future Function(TimeOfDay, TimeOfDay)? onPickTimes;
   final double? presetSize;
   final FontWeight? presetWeight;
   final Color? presetColor;
@@ -85,6 +85,10 @@ class _TekArrangeTimePickerWidgetState extends State<TekArrangeTimePickerWidget>
     _amPmScrollToController.dispose();
     super.dispose();
   }
+
+  bool _buttonLoading = false;
+
+  void _setButtonLoading(bool loading) => setState(() => _buttonLoading = loading);
 
   late final FixedExtentScrollController _hourScrollFromController;
   late final FixedExtentScrollController _minuteScrollFromController;
@@ -201,18 +205,31 @@ class _TekArrangeTimePickerWidgetState extends State<TekArrangeTimePickerWidget>
             width: double.infinity,
             fontWeight: FontWeight.w600,
             type: TekButtonType.primary,
+            loading: _buttonLoading,
             onPressed: () {
-              widget.onPickTimes(
-                TimeOfDay(
-                  hour: _isAMFrom ? _timeOfDayFrom.hour : _timeOfDayFrom.hour + 12,
-                  minute: _timeOfDayFrom.minute,
-                ),
-                TimeOfDay(
-                  hour: _isAMTo ? _timeOfDayTo.hour : _timeOfDayTo.hour + 12,
-                  minute: _timeOfDayTo.minute,
-                ),
-              );
-              context.popNavigator();
+              try {
+                _setButtonLoading(true);
+                widget.onPickTimes
+                    ?.call(
+                  TimeOfDay(
+                    hour: _isAMFrom ? _timeOfDayFrom.hour : _timeOfDayFrom.hour + 12,
+                    minute: _timeOfDayFrom.minute,
+                  ),
+                  TimeOfDay(
+                    hour: _isAMTo ? _timeOfDayTo.hour : _timeOfDayTo.hour + 12,
+                    minute: _timeOfDayTo.minute,
+                  ),
+                )
+                    .then(
+                  (_) {
+                    _setButtonLoading(false);
+                    context.popNavigator();
+                  },
+                );
+              } catch (e) {
+                TekLogger.errorLog("TekArangeTimePickerWidget $e");
+                _setButtonLoading(false);
+              }
             },
           ),
         ],
