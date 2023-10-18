@@ -23,6 +23,7 @@ class TekArrangeTimePickerWidget extends StatefulWidget {
     this.titleSize,
     this.titleWeight,
     this.titleColor,
+    this.errorText,
   });
 
   final String? fromText;
@@ -45,6 +46,7 @@ class TekArrangeTimePickerWidget extends StatefulWidget {
   final double? titleSize;
   final FontWeight? titleWeight;
   final Color? titleColor;
+  final String? errorText;
 
   @override
   State<TekArrangeTimePickerWidget> createState() => _TekArrangeTimePickerWidgetState();
@@ -208,17 +210,23 @@ class _TekArrangeTimePickerWidgetState extends State<TekArrangeTimePickerWidget>
             loading: _buttonLoading,
             onPressed: () {
               try {
+                final startTime = TimeOfDay(
+                  hour: _isAMFrom ? _timeOfDayFrom.hour : _timeOfDayFrom.hour + 12,
+                  minute: _timeOfDayFrom.minute,
+                );
+                final endTime = TimeOfDay(
+                  hour: _isAMTo ? _timeOfDayTo.hour : _timeOfDayTo.hour + 12,
+                  minute: _timeOfDayTo.minute,
+                );
+                if (startTime.hour > endTime.hour) {
+                  TekToast.error(msg: widget.errorText ?? 'Start time must be before end time');
+                  return;
+                }
                 _setButtonLoading(true);
                 widget.onPickTimes
                     ?.call(
-                  TimeOfDay(
-                    hour: _isAMFrom ? _timeOfDayFrom.hour : _timeOfDayFrom.hour + 12,
-                    minute: _timeOfDayFrom.minute,
-                  ),
-                  TimeOfDay(
-                    hour: _isAMTo ? _timeOfDayTo.hour : _timeOfDayTo.hour + 12,
-                    minute: _timeOfDayTo.minute,
-                  ),
+                  startTime,
+                  endTime,
                 )
                     .then(
                   (_) {

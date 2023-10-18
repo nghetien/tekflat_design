@@ -4,13 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:tekflat_design/src/src.dart';
 
 part 'am_pm.dart';
-
 part 'arrange_time_picker.dart';
-
 part 'hour.dart';
-
 part 'minute.dart';
-
 part 'single_time_picker.dart';
 
 class TekTimePicker {
@@ -87,6 +83,7 @@ class TekTimePicker {
     double? titleSize,
     FontWeight? titleWeight,
     Color? titleColor,
+    String? errorText,
   }) async {
     return TekBottomSheet.customizeBottomSheet(
       context,
@@ -112,6 +109,7 @@ class TekTimePicker {
           titleSize: titleSize,
           titleWeight: titleWeight,
           titleColor: titleColor,
+          errorText: errorText,
         );
       },
       isCustomize: true,

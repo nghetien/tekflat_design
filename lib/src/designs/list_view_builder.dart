@@ -79,24 +79,16 @@ class TekListView<T> extends StatelessWidget {
             mainAxisAlignment: mainAxisAlignment,
             crossAxisAlignment: crossAxisAlignment,
             children: [
-              for (int i = 0; i < itemsInRow.length; i++)
+              for (int i = 0; i < itemsInRow.length; i++) ...[
+                if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainSpacing,
-                    ),
-                    child: itemBuilder(context, startIndex + i, itemsInRow[i]),
-                  ),
+                  child: itemBuilder(context, startIndex + i, itemsInRow[i]),
                 ),
-              for (int i = endIndex; i < (startIndex + numberOfItemsInRow); i++)
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: i == 0 ? 0 : spaceBetweenItemsInRow ?? TekSpacings().mainSpacing,
-                    ),
-                    child: const SizedBox.shrink(),
-                  ),
-                ),
+              ],
+              for (int i = endIndex; i < (startIndex + numberOfItemsInRow); i++) ...[
+                if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
+                const Expanded(child: SizedBox.shrink()),
+              ],
             ],
           );
         },
