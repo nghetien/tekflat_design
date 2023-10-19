@@ -1,3 +1,5 @@
+## 1.1.6-1
+* Update `TekDateTimeEx`.
 ## 1.1.6
 * Update `TekToast` and `TekSnackBar`.
 ## 1.1.5

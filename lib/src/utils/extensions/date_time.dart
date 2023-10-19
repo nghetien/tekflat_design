@@ -34,7 +34,11 @@ extension TekDateTimeEx on DateTime {
 
   String get dayOfMonthOfYear => DateFormat.yMMMEd().format(this);
 
-  String customFormat(String format) => DateFormat(format).format(this);
+  String customFormat(
+    String format, {
+    String? locale,
+  }) =>
+      DateFormat(format, locale).format(this);
 
   String get dayDateMonth => DateFormat('EEE, d/M').format(this);
 }
