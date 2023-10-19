@@ -1,3 +1,5 @@
+## 1.1.6
+* Update `TekToast` and `TekSnackBar`.
 ## 1.1.5
 * Update extension for `context`.
 ## 1.1.4-2
@@ -11,44 +13,44 @@
 ## 1.1.3-3
 * Add `barrierDismissible` for TekDialogs and update `TekIconButton`.
 ## 1.1.3-2
-* Add attribute maxLengthEnforcement for TekInput.
+* Add attribute `maxLengthEnforcement` for `TekInput`.
 ## 1.1.3-1
-* Add DateTime extensions.
+* Add `DateTime` extensions.
 ## 1.1.3
-* Update TekTypography.
+* Update `TekTypography`.
 ## 1.1.2
-* Update input and bottom sheet.
+* Update `input` and `bottom sheet`.
 ## 1.1.1
-* Add tag for bottom sheet.
+* Add `tag` for `bottom sheet`.
 ## 1.1.0
-* Update TekColor & upgrade dependencies.
+* Update `TekColor` & upgrade dependencies.
 ## 1.0.5
-* Update hintText style for TekInput.
+* Update `hintText` style for `TekInput`.
 ## 1.0.4
 * Load file .env.
 ## 1.0.3
-* Add Spaces.
+* Add `Spaces`.
 ## 1.0.2
-* Add convertToSlug.
+* Add `convertToSlug`.
 ## 1.0.1
 * Add snack bar for app.
 ## 1.0.0
 * Release 1.0.0.
 ## 0.0.8
-* OnHover to TekButtonInkwell.
+* OnHover to `TekButtonInkwell`.
 ## 0.0.7
 * Update Flutter 3.13.
 ## 0.0.6
-* Add open dropdown and select date only widget.readOnly != true.
+* Add open `dropdown` and `select date` only widget.readOnly != true.
 ## 0.0.6
-* Add sort DateTime.
+* Add sort `DateTime`.
 ## 0.0.5
-* Update DataTable.
+* Update `DataTable`.
 ## 0.0.4
-* Update MediaQuery of Flutter 3.10.
+* Update `MediaQuery` of `Flutter` 3.10.
 ## 0.0.3
-* Add TekTimeOfDayEx.
+* Add `TekTimeOfDayEx`.
 ## 0.0.2
-* Add TekTextFormatter.
+* Add `TekTextFormatter`.
 ## 0.0.1
 * Initial release.

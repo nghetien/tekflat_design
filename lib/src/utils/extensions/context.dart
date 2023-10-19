@@ -27,6 +27,8 @@ extension TekContextEx on BuildContext {
 
   EdgeInsets get systemGestureInsets => MediaQuery.systemGestureInsetsOf(this);
 
+  ScaffoldMessengerState get scaffoldMessengerState => ScaffoldMessenger.of(this);
+
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 

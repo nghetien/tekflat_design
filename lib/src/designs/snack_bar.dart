@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tekflat_design/src/utils/utils.dart';
 
 import '../styles/styles.dart';
 import 'spaces.dart';
@@ -28,9 +29,14 @@ class TekSnackBar {
     SnackBarAction? action,
     ShapeBorder? shape,
     Duration? duration,
+    BuildContext? context,
   }) {
     if (snackBar != null) {
-      snackBarKey.currentState?.showSnackBar(snackBar);
+      if (context != null) {
+        context.scaffoldMessengerState.showSnackBar(snackBar);
+      } else {
+        snackBarKey.currentState?.showSnackBar(snackBar);
+      }
       return;
     }
     final defaultSnackBar = SnackBar(
@@ -66,7 +72,11 @@ class TekSnackBar {
             borderRadius: TekCorners().mainCornerBorder,
           ),
     );
-    snackBarKey.currentState?.showSnackBar(defaultSnackBar);
+    if (context != null) {
+      context.scaffoldMessengerState.showSnackBar(defaultSnackBar);
+    } else {
+      snackBarKey.currentState?.showSnackBar(defaultSnackBar);
+    }
   }
 
   static void showSuccessSnackBar({
@@ -83,6 +93,7 @@ class TekSnackBar {
     SnackBarAction? action,
     ShapeBorder? shape,
     Duration? duration,
+    BuildContext? context,
   }) {
     showSnackBar(
       message: message,
@@ -98,6 +109,7 @@ class TekSnackBar {
       action: action,
       shape: shape,
       duration: duration,
+      context: context,
     );
   }
 
@@ -115,6 +127,7 @@ class TekSnackBar {
     SnackBarAction? action,
     ShapeBorder? shape,
     Duration? duration,
+    BuildContext? context,
   }) {
     showSnackBar(
       message: message,
@@ -130,6 +143,7 @@ class TekSnackBar {
       action: action,
       shape: shape,
       duration: duration,
+      context: context,
     );
   }
 
@@ -147,6 +161,7 @@ class TekSnackBar {
     SnackBarAction? action,
     ShapeBorder? shape,
     Duration? duration,
+    BuildContext? context,
   }) {
     showSnackBar(
       message: message,
@@ -162,6 +177,7 @@ class TekSnackBar {
       action: action,
       shape: shape,
       duration: duration,
+      context: context,
     );
   }
 
@@ -179,6 +195,7 @@ class TekSnackBar {
     SnackBarAction? action,
     ShapeBorder? shape,
     Duration? duration,
+    BuildContext? context,
   }) {
     showSnackBar(
       message: message,
@@ -194,6 +211,7 @@ class TekSnackBar {
       action: action,
       shape: shape,
       duration: duration,
+      context: context,
     );
   }
 }

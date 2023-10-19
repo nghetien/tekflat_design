@@ -87,4 +87,20 @@ class TekToast {
         toastLength: toastLength,
         timeInSecForIosWeb: timeInSecForIosWeb,
       );
+
+  static Future<bool?> primary({
+    required String msg,
+    Color textColor = Colors.white,
+    ToastGravity? gravity,
+    Toast? toastLength,
+    int? timeInSecForIosWeb,
+  }) =>
+      toast(
+        msg: msg,
+        backgroundColor: TekColors().primary,
+        textColor: textColor,
+        gravity: gravity,
+        toastLength: toastLength,
+        timeInSecForIosWeb: timeInSecForIosWeb,
+      );
 }
