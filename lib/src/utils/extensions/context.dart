@@ -13,6 +13,20 @@ extension TekContextEx on BuildContext {
 
   double get heightScreen => MediaQuery.sizeOf(this).height;
 
+  EdgeInsets get paddingScreen => MediaQuery.paddingOf(this);
+
+  Orientation get orientation => MediaQuery.orientationOf(this);
+
+  double get devicePixelRatio => MediaQuery.devicePixelRatioOf(this);
+
+  double get textScaleFactor => MediaQuery.textScaleFactorOf(this);
+
+  EdgeInsets get viewInsets => MediaQuery.viewInsetsOf(this);
+
+  EdgeInsets get viewPadding => MediaQuery.viewPaddingOf(this);
+
+  EdgeInsets get systemGestureInsets => MediaQuery.systemGestureInsetsOf(this);
+
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 
