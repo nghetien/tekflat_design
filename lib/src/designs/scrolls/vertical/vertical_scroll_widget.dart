@@ -10,6 +10,8 @@ class TekVerticalScrollWidget extends StatefulWidget {
     required this.scrollWidth,
     required this.scrollWidthOnHover,
     this.ratioOfScroll,
+    this.backgroundColor,
+    this.scrollColor,
   }) : super(key: key);
 
   final ScrollController scrollController;
@@ -19,6 +21,9 @@ class TekVerticalScrollWidget extends StatefulWidget {
   final double scrollWidth;
   final double scrollWidthOnHover;
   final double? ratioOfScroll;
+
+  final Color? backgroundColor;
+  final Color? scrollColor;
 
   @override
   State<TekVerticalScrollWidget> createState() => TekVerticalScrollWidgetState();
@@ -170,7 +175,7 @@ class TekVerticalScrollWidgetState extends State<TekVerticalScrollWidget> {
             width: widget.scrollWidthOnHover,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: context.theme.colorScheme.onBackground,
+              color: widget.backgroundColor ?? context.theme.colorScheme.onBackground,
               border: Border(
                 left: BorderSide(
                   color: TekColors().greyOpacity04,
@@ -202,7 +207,7 @@ class TekVerticalScrollWidgetState extends State<TekVerticalScrollWidget> {
                         width: _scrollWidth,
                         height: _scrollHeight,
                         decoration: BoxDecoration(
-                          color: TekColors().greyOpacity04,
+                          color: widget.scrollColor ?? TekColors().greyOpacity04,
                           borderRadius: TekCorners.cornerBorder11,
                         ),
                       ),

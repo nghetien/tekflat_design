@@ -17,6 +17,9 @@ class TekVerticalScroll extends StatefulWidget {
     this.scrollWidgetOnHover = TekScrollConfig.scrollWidthInVerticalOnHover,
     this.ratioOfScroll,
     this.maxScroll,
+
+    this.backgroundColor,
+    this.scrollColor,
     Key? key,
   })  : assert(
           !(child != null && builder != null),
@@ -35,6 +38,9 @@ class TekVerticalScroll extends StatefulWidget {
   final double scrollWidgetOnHover;
   final double? ratioOfScroll;
   final double? maxScroll;
+
+  final Color? backgroundColor;
+  final Color? scrollColor;
 
   @override
   State<TekVerticalScroll> createState() => TekVerticalScrollState();
@@ -124,6 +130,8 @@ class TekVerticalScrollState extends State<TekVerticalScroll> {
                 scrollWidth: widget.scrollWidth,
                 scrollWidthOnHover: widget.scrollWidgetOnHover,
                 ratioOfScroll: widget.ratioOfScroll,
+                backgroundColor: widget.backgroundColor,
+                scrollColor: widget.scrollColor,
               ),
             ),
         ],
@@ -155,6 +163,8 @@ class TekVerticalScrollState extends State<TekVerticalScroll> {
               scrollWidth: widget.scrollWidth,
               scrollWidthOnHover: widget.scrollWidgetOnHover,
               ratioOfScroll: widget.ratioOfScroll,
+              backgroundColor: widget.backgroundColor,
+              scrollColor: widget.scrollColor,
             )
           : null,
     );

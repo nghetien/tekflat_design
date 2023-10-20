@@ -17,6 +17,9 @@ class TekHorizontalScroll extends StatefulWidget {
     this.scrollHeightOnHover = TekScrollConfig.scrollHeightInHorizontalOnHover,
     this.ratioOfScroll,
     this.maxScroll,
+
+    this.backgroundColor,
+    this.scrollColor,
     Key? key,
   })  : assert(
           !(child != null && builder != null),
@@ -35,6 +38,9 @@ class TekHorizontalScroll extends StatefulWidget {
   final double scrollHeightOnHover;
   final double? ratioOfScroll;
   final double? maxScroll;
+
+  final Color? backgroundColor;
+  final Color? scrollColor;
 
   @override
   State<TekHorizontalScroll> createState() => CustomHorizontalState();
@@ -123,6 +129,8 @@ class CustomHorizontalState extends State<TekHorizontalScroll> {
                 scrollHeight: widget.scrollHeight,
                 scrollHeightOnHover: widget.scrollHeightOnHover,
                 ratioOfScroll: widget.ratioOfScroll,
+                backgroundColor: widget.backgroundColor,
+                scrollColor: widget.scrollColor,
               ),
             ),
         ],
@@ -156,6 +164,8 @@ class CustomHorizontalState extends State<TekHorizontalScroll> {
               scrollHeight: widget.scrollHeight,
               scrollHeightOnHover: widget.scrollHeightOnHover,
               ratioOfScroll: widget.ratioOfScroll,
+              backgroundColor: widget.backgroundColor,
+              scrollColor: widget.scrollColor,
             )
           : null,
     );

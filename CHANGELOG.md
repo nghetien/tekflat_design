@@ -1,3 +1,5 @@
+## 1.1.7
+* Add `TekDataTableScrollOption` for `TekDataTable`.
 ## 1.1.6-1
 * Update `TekDateTimeEx`.
 ## 1.1.6

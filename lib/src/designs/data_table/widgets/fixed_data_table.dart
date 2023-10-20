@@ -14,6 +14,7 @@ class TekFixedDataTableWidget<T> extends StatefulWidget {
     required this.columnOption,
     required this.paginationOption,
     required this.checkBoxOption,
+    required this.scrollOption,
   }) : super(key: key);
 
   final TekDataTableController<T> controller;
@@ -27,6 +28,7 @@ class TekFixedDataTableWidget<T> extends StatefulWidget {
   final TekDataTableColumnOption columnOption;
   final TekDataTablePaginationOption paginationOption;
   final TekDataTableCheckBoxOption<T> checkBoxOption;
+  final TekDataTableScrollOption scrollOption;
 
   @override
   State<TekFixedDataTableWidget<T>> createState() => _TekFixedDataTableWidgetState<T>();
@@ -111,6 +113,8 @@ class _TekFixedDataTableWidgetState<T> extends State<TekFixedDataTableWidget<T>>
     return TekVerticalScroll(
       key: _keyVerticalScroll,
       scrollController: _verticalScrollController,
+      backgroundColor: widget.scrollOption.backgroundColor,
+      scrollColor: widget.scrollOption.scrollColor,
       builder: (
         _,
         TekVerticalScrollWrapperContent wrapperVerticalContent,
@@ -123,6 +127,8 @@ class _TekFixedDataTableWidgetState<T> extends State<TekFixedDataTableWidget<T>>
             scrollHeightOnHover: 13,
             maxScroll: constrainsSize.maxWidth,
             scrollController: _horizontalScrollController,
+            backgroundColor: widget.scrollOption.backgroundColor,
+            scrollColor: widget.scrollOption.scrollColor,
             builder: (
               _,
               TekHorizontalScrollWrapperContent wrapperHorizontalContent,

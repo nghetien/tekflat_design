@@ -17,6 +17,7 @@ class TekDataTable<T> extends StatefulWidget {
     this.columnOption,
     this.paginationOption,
     this.checkBoxOption,
+    this.scrollOption,
   }) : super(key: key);
 
   final TekDataTableController<T> controller;
@@ -33,6 +34,7 @@ class TekDataTable<T> extends StatefulWidget {
   final TekDataTableColumnOption? columnOption;
   final TekDataTablePaginationOption? paginationOption;
   final TekDataTableCheckBoxOption<T>? checkBoxOption;
+  final TekDataTableScrollOption? scrollOption;
 
   @override
   TekDataTableState<T> createState() => TekDataTableState<T>();
@@ -46,6 +48,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
   late final TekDataTableColumnOption _columnOption;
   late final TekDataTablePaginationOption _paginationOption;
   late final TekDataTableCheckBoxOption<T> _checkBoxOption;
+  late final TekDataTableScrollOption _scrollOption;
 
   void _handleSetState() {
     if (mounted) setState(() {});
@@ -112,6 +115,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
     _columnOption = widget.columnOption ?? const TekDataTableColumnOption();
     _paginationOption = widget.paginationOption ?? const TekDataTablePaginationOption();
     _checkBoxOption = widget.checkBoxOption ?? const TekDataTableCheckBoxOption();
+    _scrollOption = widget.scrollOption ?? const TekDataTableScrollOption();
     _handleInitState(needToInitPagination: true);
     _webDataTableController.addListener(_handleSetState);
     super.initState();
@@ -179,6 +183,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
         paginationOption: _paginationOption,
         checkBoxOption: _checkBoxOption,
         headerIntoRowWidget: widget.headerIntoRowWidget,
+        scrollOption: _scrollOption,
       );
     }
     return TekDefaultDataTableWidget<T>(
@@ -193,6 +198,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
       paginationOption: _paginationOption,
       checkBoxOption: _checkBoxOption,
       headerIntoRowWidget: widget.headerIntoRowWidget,
+      scrollOption: _scrollOption,
     );
   }
 }
