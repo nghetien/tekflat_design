@@ -92,11 +92,14 @@ class TekDialogs {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing),
+                    padding: headerPadding ?? EdgeInsets.all(TekSpacings().mainSpacing).copyWith(
+                      bottom: TekSpacings().p8,
+                    ),
                     child: onPressedToTitle == null
                         ? TekTypography(
                             text: title,
                             color: TekColors().primary,
+                            type: TekTypographyType.titleMedium,
                           )
                         : TekButtonGD(
                             onPressed: () {
@@ -105,6 +108,7 @@ class TekDialogs {
                             child: TekTypography(
                               text: title,
                               color: TekColors().primary,
+                              type: TekTypographyType.titleMedium,
                             ),
                           ),
                   ),
