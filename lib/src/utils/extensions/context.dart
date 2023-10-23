@@ -31,6 +31,8 @@ extension TekContextEx on BuildContext {
 
   ScaffoldMessengerState get scaffoldMessengerState => ScaffoldMessenger.of(this);
 
+  TextTheme get textTheme => theme.textTheme;
+
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 
