@@ -29,4 +29,10 @@ class TekPlatform {
   static String get operatingSystemName => Platform.operatingSystem;
 
   static String get operatingSystemVersion => Platform.operatingSystemVersion;
+
+  static bool hasNotch(double screenHeight) {
+    if (isWeb) return false;
+    if (screenHeight >= 812) return true;
+    return false;
+  }
 }

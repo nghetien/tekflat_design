@@ -21,6 +21,7 @@ export 'scrolls/scrolls.dart';
 export 'skeleton/skeleton.dart';
 export 'snack_bar.dart';
 export 'spaces.dart';
+export 'sticky_headers/sticky_headers.dart';
 export 'tags/tags.dart';
 export 'time_picker/time_picker.dart';
 export 'toast.dart';

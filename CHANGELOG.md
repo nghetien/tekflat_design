@@ -1,3 +1,5 @@
+## 1.1.8
+* Add `TekStickerHeader`.
 ## 1.1.7-2
 * Update extensions for context.
 ## 1.1.7-1
