@@ -33,7 +33,7 @@ class TekCard extends StatelessWidget {
         margin: margin,
         padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
         decoration: BoxDecoration(
-          color: backgroundColor ?? context.theme.colorScheme.background,
+          color: backgroundColor ?? context.theme.cardColor,
           borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
           border: border ??
               Border.all(

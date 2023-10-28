@@ -22,11 +22,11 @@ class TekThemes {
     hoverColor: TekColors().primaryOpacity01,
     splashColor: TekColors().primaryOpacity01,
     highlightColor: TekColors().primaryOpacity01,
-    dividerColor: Colors.transparent,
+    dividerColor: TekColors().dividerThemeLight,
     fontFamily: TekFonts().defaultFont,
     appBarTheme: AppBarTheme(
       backgroundColor: TekColors().white,
-      iconTheme: IconThemeData(color: TekColors().black),
+      iconTheme: IconThemeData(color: TekColors().iconThemeLight),
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
       titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().white),
     ),
@@ -36,19 +36,19 @@ class TekThemes {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       isDense: true,
-      fillColor: TekColors().white,
-      suffixIconColor: TekColors().black,
+      fillColor: TekColors().inputBgThemeLight,
+      suffixIconColor: TekColors().iconThemeLight,
       enabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors().inputBorderThemeLight,
           width: TekBorders.thin,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors().inputDisabledBorderThemeLight,
           width: TekBorders.thin,
         ),
       ),
@@ -74,7 +74,7 @@ class TekThemes {
         ),
       ),
       floatingLabelStyle: TekTextStyles().label.copyWith(color: TekColors().primary),
-      labelStyle: TekTextStyles().label.copyWith(color: TekColors().grey),
+      labelStyle: TekTextStyles().label.copyWith(color: TekColors().textSecondary),
       errorStyle: TekTextStyles().label.copyWith(color: TekColors().red),
     ),
     cardTheme: CardTheme(color: TekColors().cardThemeLight),
@@ -82,9 +82,9 @@ class TekThemes {
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: TekColors().bgSecondaryThemeLight,
     ),
-    iconTheme: IconThemeData(color: TekColors().black),
+    iconTheme: IconThemeData(color: TekColors().iconThemeLight),
     textTheme: TextTheme(
-      titleMedium: TekTextStyles().body.copyWith(color: TekColors().black),
+      titleMedium: TekTextStyles().body.copyWith(color: TekColors().textPrimaryThemeLight),
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     checkboxTheme: CheckboxThemeData(
@@ -181,11 +181,11 @@ class TekThemes {
     hoverColor: TekColors().primaryOpacity01,
     splashColor: TekColors().primaryOpacity01,
     highlightColor: TekColors().primaryOpacity01,
-    dividerColor: Colors.transparent,
+    dividerColor: TekColors().dividerThemeDark,
     fontFamily: TekFonts().defaultFont,
     appBarTheme: AppBarTheme(
       backgroundColor: TekColors().bgSecondaryThemeDark,
-      iconTheme: IconThemeData(color: TekColors().white),
+      iconTheme: IconThemeData(color: TekColors().iconThemeDark),
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
       titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().white),
     ),
@@ -195,19 +195,19 @@ class TekThemes {
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       isDense: true,
-      fillColor: TekColors().bgPrimaryThemeDark,
-      suffixIconColor: TekColors().white,
+      fillColor: TekColors().inputBgThemeDark,
+      suffixIconColor: TekColors().inputBgThemeDark,
       enabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().bgPrimaryThemeDark,
+          color: TekColors().inputBorderThemeDark,
           width: TekBorders.thin,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: TekCorners().mainCornerBorder,
         borderSide: BorderSide(
-          color: TekColors().greyOpacity04,
+          color: TekColors().inputDisabledBorderThemeDark,
           width: TekBorders.thin,
         ),
       ),
@@ -233,7 +233,7 @@ class TekThemes {
         ),
       ),
       floatingLabelStyle: TekTextStyles().label.copyWith(color: TekColors().primary),
-      labelStyle: TekTextStyles().label.copyWith(color: TekColors().grey),
+      labelStyle: TekTextStyles().label.copyWith(color: TekColors().textSecondary),
       errorStyle: TekTextStyles().label.copyWith(color: TekColors().red),
     ),
     cardTheme: CardTheme(color: TekColors().cardThemeDark),
@@ -242,9 +242,9 @@ class TekThemes {
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: TekColors().bgSecondaryThemeDark,
     ),
-    iconTheme: IconThemeData(color: TekColors().white),
+    iconTheme: IconThemeData(color: TekColors().iconThemeDark),
     textTheme: TextTheme(
-      titleMedium: TekTextStyles().body.copyWith(color: TekColors().white),
+      titleMedium: TekTextStyles().body.copyWith(color: TekColors().textPrimaryThemeDark),
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     dialogBackgroundColor: TekColors().bgSecondaryThemeDark,

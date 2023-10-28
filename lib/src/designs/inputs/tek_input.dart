@@ -87,17 +87,35 @@ enum TekInputSize {
   TextStyle get hintStyle {
     switch (this) {
       case TekInputSize.extraLarge:
-        return TekTextStyles().titleMedium;
+        return TekTextStyles().titleMedium.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
       case TekInputSize.large:
-        return TekTextStyles().titleMedium;
+        return TekTextStyles().titleMedium.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
       case TekInputSize.medium:
-        return TekTextStyles().body;
+        return TekTextStyles().body.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
       case TekInputSize.areaSmall:
-        return TekTextStyles().body;
+        return TekTextStyles().body.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
       case TekInputSize.areaMedium:
-        return TekTextStyles().body;
+        return TekTextStyles().body.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
       case TekInputSize.areaLarge:
-        return TekTextStyles().body;
+        return TekTextStyles().body.copyWith(
+              color: TekColors().textSecondary,
+              fontWeight: FontWeight.w400,
+            );
     }
   }
 

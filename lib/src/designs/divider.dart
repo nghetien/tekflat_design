@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tekflat_design/src/styles/styles.dart';
+import 'package:tekflat_design/tekflat_design.dart';
 
 class TekDivider extends StatelessWidget {
   const TekDivider({
-    this.height = 2,
+    this.height = 1,
     this.border,
     this.borderRadius,
     this.color,
@@ -21,7 +21,7 @@ class TekDivider extends StatelessWidget {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: color ?? TekColors().greyOpacity01,
+          color: color ?? context.theme.dividerColor,
           borderRadius: borderRadius ?? TekCorners.cornerBorder8,
           border: border,
         ),

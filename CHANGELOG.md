@@ -1,3 +1,5 @@
+## 1.2.0
+* Add customize color for `TekColors`.
 ## 1.1.8
 * Add `TekStickerHeader`.
 ## 1.1.7-2
