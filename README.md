@@ -45,20 +45,55 @@ flutter pub add tekflat_design
 
 ## 🔨 Usage
 
+# 1. Sample code
 ```dart
 import 'package:tekflat_design/tekflat_design.dart';
 
 void main() {
     runApp(
-        const FlatterApp(
-            home: Scaffold(
-                body: Center(
-                    child: TekButton(
-                        onPressed: () {},
-                        text: 'Click me'
-                    ),
-                ),
+        const MaterialApp(
+          // TekFlatDesign provide two themes: light and dark
+          // You can use any of them or both
+          // You can also create your own theme
+          theme: TekThemes.light,
+          home: Scaffold(
+            body: Center(
+              child: TekButton(onPressed: () {}, text: 'Click me'),
             ),
+          ),
+        ),
+    );
+}
+```
+# 2. Responsive layout
+```dart
+import 'package:tekflat_design/tekflat_design.dart';
+
+void main() {
+    runApp(
+        const MaterialApp(
+          theme: TekThemes.light,
+          home: TekResponsive.appResBuilder(
+            // You can use any of these devices
+            // This function will init ScreenDevice: desktop, tablet, mobile
+            child: Scaffold(
+              body: TekResponsive.resBuilder(
+                // set up your screen
+                children: Center(
+                  child: TekTypography(text: 'Default Screen'),
+                ),
+                desktop: Center(
+                  child: TekTypography(text: 'Screen on desktop'),
+                ),
+                tablet: Center(
+                  child: TekTypography(text: 'Screen on tablet'),
+                ),
+                mobile: Center(
+                  child: TekTypography(text: 'Screen on mobile'),
+                ),
+              ),
+            ),
+          ),
         ),
     );
 }
