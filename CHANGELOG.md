@@ -1,3 +1,6 @@
+## 1.2.1
+* Add customize `inputDecorationTheme` for `TekDataTablePagination`.
+* Add customize close for `TekInputDropdown`.
 ## 1.2.0
 * Add customize color for `TekColors`.
 ## 1.1.8

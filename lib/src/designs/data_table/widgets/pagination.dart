@@ -218,26 +218,30 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SizedBox(
-          child: TekInputDropdown<int>(
-            width: 75,
-            valueSingle: pagination.itemsPerPage.toString(),
-            contentPadding: EdgeInsets.only(
-              left: TekSpacings().p8,
-              top: TekSpacings().p4,
-              bottom: TekSpacings().p4,
+          child: Theme(
+            data: context.theme
+                .copyWith(inputDecorationTheme: widget.paginationOption.inputDecorationTheme),
+            child: TekInputDropdown<int>(
+              width: 75,
+              valueSingle: pagination.itemsPerPage.toString(),
+              contentPadding: EdgeInsets.only(
+                left: TekSpacings().p8,
+                top: TekSpacings().p4,
+                bottom: TekSpacings().p4,
+              ),
+              menuChildren: [
+                for (final item in pagination.listItemsPerPage)
+                  TekInputDropdownItemModel<int>(
+                    keyValue: item.toString(),
+                    value: item,
+                    label: item.toString(),
+                  ),
+              ],
+              onChangedSingle: (item) {
+                _handleChangeItemPerPage(item);
+              },
+              ableClearValue: false,
             ),
-            menuChildren: [
-              for (final item in pagination.listItemsPerPage)
-                TekInputDropdownItemModel<int>(
-                  keyValue: item.toString(),
-                  value: item,
-                  label: item.toString(),
-                ),
-            ],
-            onChangedSingle: (item) {
-              _handleChangeItemPerPage(item);
-            },
-            ableClearValue: false,
           ),
         ),
         if (TekResponsiveConfig().screenDevice.isDesktop)

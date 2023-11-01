@@ -11,6 +11,7 @@ class TekDataTablePaginationOption {
     this.itemsPerPage,
     this.numberNextPage,
     this.currentPage,
+    this.inputDecorationTheme,
   });
 
   final String customizeItemPerPage;
@@ -22,4 +23,7 @@ class TekDataTablePaginationOption {
   final int? itemsPerPage;
   final int? numberNextPage;
   final int? currentPage;
+
+  // ui
+  final InputDecorationTheme? inputDecorationTheme;
 }
