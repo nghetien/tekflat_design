@@ -1,3 +1,5 @@
+## 1.2.2
+* Able customize Icon for `TekInputDropdown`.
 ## 1.2.1
 * Add customize `inputDecorationTheme` for `TekDataTablePagination`.
 * Add customize close for `TekInputDropdown`.

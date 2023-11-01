@@ -100,6 +100,8 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.didChangeFormMultiple,
     this.enabled = true,
     this.streamController,
+    this.expandIcon,
+    this.closeIcon,
   }) : super(key: key);
 
   /// MenuData
@@ -172,6 +174,8 @@ class TekInputDropdown<T> extends StatefulWidget {
   final Function(List<TekInputDropdownItemModel<T>>?)? didChangeFormMultiple;
   final bool enabled;
   final StreamController<TekInputDropdownStreamState<T>>? streamController;
+  final Icon? expandIcon;
+  final Icon? closeIcon;
 
   @override
   State<TekInputDropdown<T>> createState() => TekInputDropdownState<T>();
@@ -537,19 +541,21 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
         onPressed: () => _setValue(valueSingle: null, valueMultiple: null),
         child: RotationTransition(
           turns: _rotateAnimation,
-          child: Icon(
-            Icons.cancel_rounded,
-            size: TekIconSizes().s20,
-          ),
+          child: widget.closeIcon ??
+              Icon(
+                Icons.cancel_rounded,
+                size: TekIconSizes().s20,
+              ),
         ),
       );
     }
     return RotationTransition(
       turns: _rotateAnimation,
-      child: Icon(
-        Icons.expand_more_rounded,
-        size: TekIconSizes().s24,
-      ),
+      child: widget.expandIcon ??
+          Icon(
+            Icons.expand_more_rounded,
+            size: TekIconSizes().s24,
+          ),
     );
   }
 
