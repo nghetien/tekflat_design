@@ -46,7 +46,7 @@ flutter pub add tekflat_design
 ## 🔨 Usage
 
 ```dart
-import 'package:ant_design_flutter/antdf.dart';
+import 'package:tekflat_design/tekflat_design.dart';
 
 void main() {
     runApp(
