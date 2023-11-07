@@ -132,8 +132,8 @@ class TekColors {
   }
 
   /// The divider color of the app.
-  static const Color _defaultDividerThemeDark = _defaultGrey;
-  static const Color _defaultDividerThemeLight = _defaultGrey;
+  static final Color _defaultDividerThemeDark = _defaultGrey.withOpacity(0.6);
+  static final Color _defaultDividerThemeLight = _defaultGrey.withOpacity(0.6);
 
   Color _dividerThemeDark = _defaultDividerThemeDark;
 

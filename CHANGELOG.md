@@ -1,3 +1,5 @@
+## 1.2.3
+* Able customize `optionDialog`.
 ## 1.2.2
 * Able customize Icon for `TekInputDropdown`.
 ## 1.2.1

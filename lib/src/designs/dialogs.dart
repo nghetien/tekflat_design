@@ -13,6 +13,33 @@ enum TekDialogType {
   delete,
   warning,
   info,
+  primary;
+
+  Color get color {
+    switch (this) {
+      case TekDialogType.delete:
+        return TekColors().red;
+      case TekDialogType.warning:
+        return TekColors().yellow;
+      case TekDialogType.info:
+        return TekColors().blue;
+      case TekDialogType.primary:
+        return TekColors().primary;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case TekDialogType.delete:
+        return Icons.delete;
+      case TekDialogType.warning:
+        return Icons.warning;
+      case TekDialogType.info:
+        return Icons.info;
+      case TekDialogType.primary:
+        return Icons.info;
+    }
+  }
 }
 
 class TekDialogs {
@@ -199,11 +226,13 @@ class TekDialogs {
     required TekDialogType type,
     bool barrierDismissible = true,
     Future<bool?> Function()? onClickButtonRight,
-    VoidCallback? onClickButtonLeft,
+    Future<bool?> Function()? onClickButtonLeft,
     String? title,
     int? maxLinesTitle,
     Widget? customTitle,
     String? content,
+    Color? mainColor,
+    IconData? iconData,
     int? maxLinesContent,
     String? buttonCancel,
     String? buttonText,
@@ -222,11 +251,7 @@ class TekDialogs {
               width: double.infinity,
               padding: EdgeInsets.all(TekSpacings().p12),
               decoration: BoxDecoration(
-                color: type == TekDialogType.delete
-                    ? TekColors().red
-                    : type == TekDialogType.warning
-                        ? TekColors().yellow
-                        : TekColors().blue,
+                color: mainColor ?? type.color,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(TekCorners().mainCorners),
                   topRight: Radius.circular(TekCorners().mainCorners),
@@ -235,11 +260,7 @@ class TekDialogs {
               child: Column(
                 children: [
                   Icon(
-                    type == TekDialogType.delete
-                        ? Icons.delete
-                        : type == TekDialogType.warning
-                            ? Icons.warning
-                            : Icons.info,
+                    iconData ?? type.icon,
                     color: Colors.white,
                     size: TekIconSizes().s24,
                   ),
@@ -271,17 +292,17 @@ class TekDialogs {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  if (type != TekDialogType.info)
+                  if (onClickButtonLeft != null)
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.only(right: TekSpacings().p12),
                         child: TekButton(
                           onPressed: () {
-                            if (onClickButtonLeft != null) {
-                              onClickButtonLeft();
-                            } else {
-                              popNavigatorMultiPlatform(context);
-                            }
+                            onClickButtonLeft.call().then(
+                              (value) {
+                                if (value == true) popNavigatorMultiPlatform(context);
+                              },
+                            );
                           },
                           type: TekButtonType.outline,
                           size: TekButtonSize.medium,
@@ -311,11 +332,7 @@ class TekDialogs {
                         );
                       },
                       text: buttonText ?? 'OK',
-                      background: type == TekDialogType.delete
-                          ? TekColors().red
-                          : type == TekDialogType.warning
-                              ? TekColors().yellow
-                              : TekColors().blue,
+                      background: mainColor ?? type.color,
                     ),
                   ),
                 ],

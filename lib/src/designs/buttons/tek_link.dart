@@ -133,6 +133,7 @@ class TekLink extends StatelessWidget {
               height: 0,
               fontWeight: fontWeight,
               decoration: decoration,
+              fontSize: textSize ?? sizeTextStyle.fontSize,
             ),
       );
     }
