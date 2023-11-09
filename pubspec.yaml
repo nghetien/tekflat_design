@@ -23,6 +23,7 @@ dependencies:
   equatable: ^2.0.5
   shared_preferences: ^2.2.2
   form_builder_validators: ^9.1.0
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:

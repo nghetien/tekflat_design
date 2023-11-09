@@ -1,3 +1,5 @@
+## 1.2.4
+* Add `TekSvgIcon`.
 ## 1.2.3
 * Able customize `optionDialog`.
 ## 1.2.2
