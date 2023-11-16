@@ -1,3 +1,5 @@
+## 1.2.4-1
+* Update init menu children `TekInputTypeAheadForm`.
 ## 1.2.4
 * Add `TekSvgIcon`.
 ## 1.2.3

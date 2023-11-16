@@ -240,6 +240,24 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
       }
     }
 
+    initMenuChildren();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(TekInputTypeAheadForm<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initMenuChildren != oldWidget.initMenuChildren) {
+      initMenuChildren();
+    }
+  }
+
+  void initMenuChildren() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         _loading.openAndDismissLoading(
@@ -252,12 +270,6 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
   }
 
   void _setPopupIsOpen(bool value) {
