@@ -33,6 +33,8 @@ extension TekContextEx on BuildContext {
 
   TextTheme get textTheme => theme.textTheme;
 
+  OverlayState get overlayState => Overlay.of(this);
+
   void popRootNavigator<T extends Object?>([T? result]) =>
       Navigator.of(this, rootNavigator: true).pop<T>(result);
 

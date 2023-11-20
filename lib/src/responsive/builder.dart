@@ -9,8 +9,9 @@ class TekResponsive {
   }) =>
       LayoutBuilder(
         key: key,
-        builder: (_, constraints) {
+        builder: (context, constraints) {
           TekResponsiveConfig().onResponsiveUpdate(constraints.maxWidth);
+          TekOverlaySnackBar.setOverlayState(context.overlayState);
           return child;
         },
       );

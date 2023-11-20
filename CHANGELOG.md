@@ -1,3 +1,5 @@
+## 1.3.0
+* Add `TekOverlaySnackBar`.
 ## 1.2.4-1
 * Update init menu children `TekInputTypeAheadForm`.
 ## 1.2.4
