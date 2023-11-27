@@ -31,6 +31,7 @@ class TekTimePicker {
     double? titleSize,
     FontWeight? titleWeight,
     Color? titleColor,
+    EdgeInsets? paddingDoneButton,
   }) async {
     return TekBottomSheet.customizeBottomSheet(
       context,
@@ -53,6 +54,7 @@ class TekTimePicker {
           titleSize: titleSize,
           titleWeight: titleWeight,
           titleColor: titleColor,
+          paddingDoneButton: paddingDoneButton,
         );
       },
       isCustomize: true,
@@ -61,6 +63,7 @@ class TekTimePicker {
     );
   }
 
+  @Deprecated('Đang hoạt động không đúng. Sử dụng arrangeTimePicker thay thế')
   static Future<T?> arrangeTimePicker<T>(
     BuildContext context, {
     String? fromText,

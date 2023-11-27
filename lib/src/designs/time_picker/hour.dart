@@ -28,10 +28,10 @@ class TimePickerHourWidget extends StatelessWidget {
         diameterRatio: 1.2,
         physics: const FixedExtentScrollPhysics(),
         childDelegate: ListWheelChildBuilderDelegate(
-          childCount: 12,
+          childCount: 24,
           builder: (context, index) {
             return TekTypography(
-              text: (index + 1).toString(),
+              text: index.toString().padLeft(2, '0'),
               type: TekTypographyType.titleLarge,
               color:
                   color ?? (hourScrollController.selectedItem == index ? null : TekColors().grey),
