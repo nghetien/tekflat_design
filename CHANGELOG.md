@@ -1,3 +1,5 @@
+## 1.3.3
+* Update `TekOverlaySnackBar`.
 ## 1.3.2
 * Update `TekOverlaySnackBar`.
 ## 1.3.1

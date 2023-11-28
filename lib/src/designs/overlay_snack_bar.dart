@@ -127,9 +127,9 @@ class TekOverlaySnackBar {
     showTopSnackBar(
       context?.overlayState ?? overlayState ?? _overlayState!,
       content,
-      animationDuration: animationDuration ?? const Duration(milliseconds: 1200),
-      reverseAnimationDuration: reverseAnimationDuration ?? const Duration(milliseconds: 550),
-      displayDuration: displayDuration ?? const Duration(milliseconds: 500),
+      animationDuration: animationDuration ?? Duration.zero,
+      reverseAnimationDuration: reverseAnimationDuration ?? Duration.zero,
+      displayDuration: displayDuration ?? const Duration(milliseconds: 2000),
       onTap: onTap,
       persistent: persistent,
       onAnimationControllerInit: onAnimationControllerInit,

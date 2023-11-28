@@ -43,7 +43,7 @@ class TekSnackBar {
       backgroundColor: backgroundColor ?? TekColors().primary,
       margin: margin ?? defaultMargin,
       padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
-      duration: duration ?? const Duration(milliseconds: 3000),
+      duration: duration ?? const Duration(milliseconds: 2000),
       content: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
