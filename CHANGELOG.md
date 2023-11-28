@@ -1,3 +1,5 @@
+## 1.3.2
+* Update `TekOverlaySnackBar`.
 ## 1.3.1
 * Change from time AM-PM to 24h `TimePicker`.
 ## 1.3.0

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tekflat_design/tekflat_design.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/safe_area_values.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -41,16 +40,15 @@ class TekOverlaySnackBar {
     // SnackBar
     String message = '',
     Widget? icon,
+    IconData? iconData,
+    Color? iconColor,
+    double? iconSize,
     Color? backgroundColor,
     TextStyle? textStyle,
     int? maxLines,
-    int? iconRotationAngle,
     List<BoxShadow>? boxShadow,
     BorderRadius? borderRadius,
-    double? iconPositionTop,
-    double? iconPositionLeft,
-    EdgeInsetsGeometry? messagePadding,
-    double? textScaleFactor,
+    EdgeInsets? messagePadding,
     TextAlign? textAlign,
   }) {
     if (overlayState == null && context == null && _overlayState == null) return;
@@ -58,80 +56,67 @@ class TekOverlaySnackBar {
     Widget? content;
     switch (type) {
       case TekOverlaySnackBarType.info:
-        final CustomSnackBar sample = CustomSnackBar.info(message: message);
-        content = CustomSnackBar.info(
-          message: message,
-          icon: icon ?? sample.icon,
-          textStyle: textStyle ?? sample.textStyle,
-          maxLines: maxLines ?? sample.maxLines,
-          iconRotationAngle: iconRotationAngle ?? sample.iconRotationAngle,
-          iconPositionTop: iconPositionTop ?? sample.iconPositionTop,
-          iconPositionLeft: iconPositionLeft ?? sample.iconPositionLeft,
-          backgroundColor: backgroundColor ?? sample.backgroundColor,
-          boxShadow: boxShadow ?? sample.boxShadow,
-          borderRadius: borderRadius ?? sample.borderRadius,
-          messagePadding: messagePadding ?? sample.messagePadding,
-          textScaleFactor: textScaleFactor ?? sample.textScaleFactor,
-          textAlign: textAlign ?? sample.textAlign,
+        content = _buildSnackBar(
+          text: message,
+          icon: icon,
+          backgroundColor: backgroundColor ?? TekColors().blue,
+          iconData: iconData ?? Icons.info_outline_rounded,
+          iconColor: iconColor,
+          textStyle: textStyle,
+          boxShadow: boxShadow,
+          borderRadius: borderRadius,
+          padding: messagePadding,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          iconSize: iconSize,
         );
         break;
       case TekOverlaySnackBarType.success:
-        final CustomSnackBar sample = CustomSnackBar.success(message: message);
-        content = CustomSnackBar.success(
-          message: message,
-          icon: icon ?? sample.icon,
-          textStyle: textStyle ?? sample.textStyle,
-          maxLines: maxLines ?? sample.maxLines,
-          iconRotationAngle: iconRotationAngle ?? sample.iconRotationAngle,
-          iconPositionTop: iconPositionTop ?? sample.iconPositionTop,
-          iconPositionLeft: iconPositionLeft ?? sample.iconPositionLeft,
-          backgroundColor: backgroundColor ?? sample.backgroundColor,
-          boxShadow: boxShadow ?? sample.boxShadow,
-          borderRadius: borderRadius ?? sample.borderRadius,
-          messagePadding: messagePadding ?? sample.messagePadding,
-          textScaleFactor: textScaleFactor ?? sample.textScaleFactor,
-          textAlign: textAlign ?? sample.textAlign,
+        content = _buildSnackBar(
+          text: message,
+          icon: icon,
+          backgroundColor: backgroundColor ?? TekColors().green,
+          iconData: iconData ?? Icons.check_circle_outline_rounded,
+          iconColor: iconColor,
+          textStyle: textStyle,
+          boxShadow: boxShadow,
+          borderRadius: borderRadius,
+          padding: messagePadding,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          iconSize: iconSize,
         );
         break;
       case TekOverlaySnackBarType.warning:
-        final CustomSnackBar sample = CustomSnackBar.error(message: message);
-        content = CustomSnackBar.error(
-          message: message,
-          icon: icon ??
-              const Icon(
-                Icons.warning_amber_rounded,
-                color: Color(0x15000000),
-                size: 120,
-              ),
-          textStyle: textStyle ?? sample.textStyle,
-          maxLines: maxLines ?? sample.maxLines,
-          iconRotationAngle: iconRotationAngle ?? sample.iconRotationAngle,
-          iconPositionTop: iconPositionTop ?? sample.iconPositionTop,
-          iconPositionLeft: iconPositionLeft ?? sample.iconPositionLeft,
+        content = _buildSnackBar(
+          text: message,
+          icon: icon,
           backgroundColor: backgroundColor ?? TekColors().yellow,
-          boxShadow: boxShadow ?? sample.boxShadow,
-          borderRadius: borderRadius ?? sample.borderRadius,
-          messagePadding: messagePadding ?? sample.messagePadding,
-          textScaleFactor: textScaleFactor ?? sample.textScaleFactor,
-          textAlign: textAlign ?? sample.textAlign,
+          iconData: iconData ?? Icons.warning_amber_rounded,
+          iconColor: iconColor,
+          textStyle: textStyle,
+          boxShadow: boxShadow,
+          borderRadius: borderRadius,
+          padding: messagePadding,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          iconSize: iconSize,
         );
         break;
       case TekOverlaySnackBarType.error:
-        final CustomSnackBar sample = CustomSnackBar.error(message: message);
-        content = CustomSnackBar.error(
-          message: message,
-          icon: icon ?? sample.icon,
-          textStyle: textStyle ?? sample.textStyle,
-          maxLines: maxLines ?? sample.maxLines,
-          iconRotationAngle: iconRotationAngle ?? sample.iconRotationAngle,
-          iconPositionTop: iconPositionTop ?? sample.iconPositionTop,
-          iconPositionLeft: iconPositionLeft ?? sample.iconPositionLeft,
-          backgroundColor: backgroundColor ?? sample.backgroundColor,
-          boxShadow: boxShadow ?? sample.boxShadow,
-          borderRadius: borderRadius ?? sample.borderRadius,
-          messagePadding: messagePadding ?? sample.messagePadding,
-          textScaleFactor: textScaleFactor ?? sample.textScaleFactor,
-          textAlign: textAlign ?? sample.textAlign,
+        content = _buildSnackBar(
+          text: message,
+          icon: icon,
+          backgroundColor: backgroundColor ?? TekColors().red,
+          iconData: iconData ?? Icons.error_outline_rounded,
+          iconColor: iconColor,
+          textStyle: textStyle,
+          boxShadow: boxShadow,
+          borderRadius: borderRadius,
+          padding: messagePadding,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          iconSize: iconSize,
         );
         break;
       case TekOverlaySnackBarType.custom:
@@ -144,7 +129,7 @@ class TekOverlaySnackBar {
       content,
       animationDuration: animationDuration ?? const Duration(milliseconds: 1200),
       reverseAnimationDuration: reverseAnimationDuration ?? const Duration(milliseconds: 550),
-      displayDuration: displayDuration ?? const Duration(milliseconds: 3000),
+      displayDuration: displayDuration ?? const Duration(milliseconds: 500),
       onTap: onTap,
       persistent: persistent,
       onAnimationControllerInit: onAnimationControllerInit,
@@ -159,6 +144,50 @@ class TekOverlaySnackBar {
       ),
       snackBarPosition: snackBarPosition ?? SnackBarPosition.bottom,
       dismissDirection: dismissDirection ?? const [DismissDirection.up],
+    );
+  }
+
+  static Widget _buildSnackBar({
+    EdgeInsets? padding,
+    Color? backgroundColor,
+    BorderRadius? borderRadius,
+    List<BoxShadow>? boxShadow,
+    Widget? icon,
+    IconData? iconData,
+    Color? iconColor,
+    double? iconSize,
+    required String text,
+    TextStyle? textStyle,
+    int? maxLines,
+    TextAlign? textAlign,
+  }) {
+    return Container(
+      padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
+        boxShadow: boxShadow ?? TekShadows.lDown,
+      ),
+      child: Row(
+        children: [
+          icon ??
+              Icon(
+                iconData,
+                color: iconColor ?? TekColors().white,
+                size: iconSize ?? 20.scaleIconSize,
+              ),
+          TekHSpace.p8,
+          Text(
+            text,
+            style: textStyle ??
+                TekTextStyles().titleMedium.copyWith(
+                      color: TekColors().white,
+                    ),
+            maxLines: maxLines,
+            textAlign: textAlign,
+          ),
+        ],
+      ),
     );
   }
 }
