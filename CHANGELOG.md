@@ -1,3 +1,5 @@
+## 1.3.4
+* Update `TekDialog`.
 ## 1.3.3
 * Update `TekOverlaySnackBar`.
 ## 1.3.2

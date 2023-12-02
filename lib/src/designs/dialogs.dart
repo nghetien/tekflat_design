@@ -50,6 +50,7 @@ class TekDialogs {
     double? width,
     double? height,
     bool barrierDismissible = true,
+    bool useRootNavigator = true,
     Color? color,
     BoxShape shape = BoxShape.rectangle,
     BorderRadiusGeometry? borderRadius,
@@ -58,6 +59,7 @@ class TekDialogs {
     return showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
+      useRootNavigator: useRootNavigator,
       builder: (BuildContext context) => Dialog(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -80,6 +82,7 @@ class TekDialogs {
     double? width,
     double? height,
     bool barrierDismissible = true,
+    bool useRootNavigator = true,
     Color? color,
     BoxShape shape = BoxShape.rectangle,
     BorderRadiusGeometry? borderRadius,
@@ -101,6 +104,7 @@ class TekDialogs {
     return showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
+      useRootNavigator: useRootNavigator,
       builder: (BuildContext context) => Dialog(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -225,6 +229,7 @@ class TekDialogs {
     BuildContext context, {
     required TekDialogType type,
     bool barrierDismissible = true,
+    bool useRootNavigator = true,
     Future<bool?> Function()? onClickButtonRight,
     Future<bool?> Function()? onClickButtonLeft,
     String? title,
@@ -243,6 +248,7 @@ class TekDialogs {
         context,
         width: width ?? min<double>(context.widthScreen, 420),
         barrierDismissible: barrierDismissible,
+        useRootNavigator: useRootNavigator,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
