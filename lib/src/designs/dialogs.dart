@@ -90,6 +90,7 @@ class TekDialogs {
     EdgeInsets? contentPadding,
     EdgeInsets? footerPadding,
     required String title,
+        Color? titleColor,
     VoidCallback? onPressedToTitle,
     String? customizeOkText,
     String? customizeCancelText,
@@ -129,7 +130,7 @@ class TekDialogs {
                     child: onPressedToTitle == null
                         ? TekTypography(
                             text: title,
-                            color: TekColors().primary,
+                            color: titleColor ?? TekColors().primary,
                             type: TekTypographyType.titleMedium,
                           )
                         : TekButtonGD(
@@ -138,7 +139,7 @@ class TekDialogs {
                             },
                             child: TekTypography(
                               text: title,
-                              color: TekColors().primary,
+                              color: titleColor ?? TekColors().primary,
                               type: TekTypographyType.titleMedium,
                             ),
                           ),
@@ -213,7 +214,7 @@ class TekDialogs {
                   },
                   icon: Icon(
                     Icons.close_rounded,
-                    color: TekColors().primary,
+                    color: titleColor ?? TekColors().primary,
                     size: TekIconSizes().s24,
                   ),
                 ),
