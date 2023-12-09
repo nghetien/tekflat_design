@@ -1,3 +1,5 @@
+## 1.3.6
+* Update `TekDialog`.
 ## 1.3.5
 * Update `TekDialog`.
 ## 1.3.4

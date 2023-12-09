@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tekflat_design/src/designs/designs.dart';
 import 'package:tekflat_design/src/utils/utils.dart';
 
 import '../styles/styles.dart';
@@ -57,8 +58,9 @@ class TekSnackBar {
           ],
           Expanded(
             child: child ??
-                Text(
-                  message ?? '',
+                TekTypography(
+                  text: message ?? '',
+                  color: TekColors().white,
                 ),
           ),
         ],
