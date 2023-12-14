@@ -40,6 +40,7 @@ class DataTableColumn<T> {
     this.customizeFilter,
     this.defaultTextAlignment,
     this.defaultTextMaxLines,
+    this.defaultTextColor,
   });
 
   final String key;
@@ -58,4 +59,5 @@ class DataTableColumn<T> {
   final TekFilterHeaderItem<T>? customizeFilter;
   final AlignmentGeometry? defaultTextAlignment;
   final int? defaultTextMaxLines;
+  final Color? defaultTextColor;
 }

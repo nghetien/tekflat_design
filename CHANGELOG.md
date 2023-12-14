@@ -1,3 +1,5 @@
+## 1.3.7
+* Update `TekDataTable`, customize header with textColor, backgroundColor, borderColor, borderSize.
 ## 1.3.6
 * Update `TekDialog`.
 ## 1.3.5
