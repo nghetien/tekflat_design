@@ -116,6 +116,8 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
   }
 
   Widget _getWidgetHeaderItem(BuildContext context) {
+    final headerTextColors = widget.headerOption.headerTextColor ?? TekColors().white;
+
     if (widget.column.key == TekDataTableAdditionColumn.checkbox.toString()) {
       return SizedBox(
         width: widget.column.width,
@@ -135,7 +137,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
             textAlign: TextAlign.center,
             style: TekTextStyles().body.copyWith(
               fontWeight: FontWeight.bold,
-              color: TekColors().white,
+              color: headerTextColors,
             ),
           ),
         ),
@@ -163,7 +165,7 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
                   textAlign: TextAlign.center,
                   style: TekTextStyles().body.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: TekColors().white,
+                    color: headerTextColors,
                   ),
                 ),
               ),
