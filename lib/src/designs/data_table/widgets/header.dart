@@ -27,7 +27,8 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
 
   MapEntry<String, TekDataTableSortType> get sortType => _sortType;
 
-  void _setSortType(MapEntry<String, TekDataTableSortType> value) => setState(() => _sortType = value);
+  void _setSortType(MapEntry<String, TekDataTableSortType> value) =>
+      setState(() => _sortType = value);
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -41,7 +42,7 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
     if (widget.fixedColumn == TekFixedColumn.left) {
       return Radius.zero;
     }
-    return widget.headerOption.borderRadius ?? TekCorners().mainCornerRadius;
+    return TekCorners().mainCornerRadius;
   }
 
   Radius _getRadiusLeft() {
@@ -51,7 +52,7 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
     if (widget.fixedColumn == TekFixedColumn.right) {
       return Radius.zero;
     }
-    return widget.headerOption.borderRadius ?? TekCorners().mainCornerRadius;
+    return TekCorners().mainCornerRadius;
   }
 
   Widget _generateHeaderItem() {
@@ -88,13 +89,22 @@ class _TekDataTableHeaderWidgetState<T> extends State<TekDataTableHeaderWidget<T
         );
       }
     }
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
+
+    final borderRadius = widget.headerOption.decoration.borderRadius ??
+        BorderRadius.only(
           topRight: _getRadiusRight(),
           topLeft: _getRadiusLeft(),
-        ),
-        color: TekColors().primary,
+        );
+
+    final color = widget.headerOption.decoration.backgroundColor ?? TekColors().primary;
+
+    final border = widget.headerOption.decoration.border;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: borderRadius,
+        color: color,
+        border: border,
       ),
       child: Row(
         children: headers,
