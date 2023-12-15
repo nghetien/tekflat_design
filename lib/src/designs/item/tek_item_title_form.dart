@@ -9,12 +9,16 @@ class TekItemTitleForm extends StatelessWidget {
     this.heightSpace,
     required this.child,
     this.isRequired = false,
+    this.requiredColor,
+    this.spaceRequired,
   }) : super(key: key);
 
   final String title;
   final double? heightSpace;
   final Widget child;
   final bool isRequired;
+  final Color? requiredColor;
+  final double? spaceRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +42,12 @@ class TekItemTitleForm extends StatelessWidget {
                 if (isRequired)
                   Positioned(
                     top: 0,
-                    right: -15,
+                    right: spaceRequired ?? -15,
                     child: TekTypography(
                       text: "*",
                       type: TekTypographyType.titleMediumMedium,
                       fontWeight: FontWeight.w600,
-                      selectionColor: TekColors().red,
+                      color: requiredColor ?? TekColors().red,
                     ),
                   ),
               ],

@@ -1,3 +1,5 @@
+## 1.3.9
+* Add `FocusNode` to TekInputDropdownSearch.
 ## 1.3.8
 * Add `TekItem`.
 ## 1.3.7

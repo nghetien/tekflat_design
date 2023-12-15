@@ -65,6 +65,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
     this.errorMaxLines,
     this.errorStyle,
     this.maxLinesDropdownItem,
+    this.searchFocusNode,
   }) : super(key: key);
 
   final String? name;
@@ -130,6 +131,7 @@ class TekInputDropdownSearch<T> extends StatefulWidget {
   final int? errorMaxLines;
   final TextStyle? errorStyle;
   final int? maxLinesDropdownItem;
+  final FocusNode? searchFocusNode;
 
   @override
   State<TekInputDropdownSearch<T>> createState() => _TekInputDropdownSearchState<T>();
@@ -141,7 +143,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
   final MenuController _menuController = MenuController();
   late final FocusNode _focusNode;
   late final TextEditingController _searchController;
-  final FocusNode _searchFocusNode = FocusNode();
+  late final FocusNode _searchFocusNode;
   late AnimationController _animationController;
   late Animation<double> _rotateAnimation;
   late List<TekInputDropdownItemModel<T>> _menuChildren;
@@ -185,6 +187,7 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
     _focusNode.addListener(_onFocusChange);
     _searchController = widget.searchController ?? TextEditingController();
     _searchController.addListener(_listenOnChangeInput);
+    _searchFocusNode = widget.searchFocusNode ?? FocusNode();
     if (widget.tagsAbleScroll) _scrollController = ScrollController();
   }
 

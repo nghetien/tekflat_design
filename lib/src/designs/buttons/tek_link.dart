@@ -144,7 +144,7 @@ class TekLink extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (content != null) content,
+          if (content != null) Flexible(child: content),
           if (icon != null) TekHSpace(size.space),
           if (icon != null) icon,
         ],
@@ -156,7 +156,7 @@ class TekLink extends StatelessWidget {
       children: [
         if (icon != null) icon,
         if (icon != null) TekHSpace(size.space),
-        if (content != null) content,
+        if (content != null) Flexible(child: content),
       ],
     );
   }
