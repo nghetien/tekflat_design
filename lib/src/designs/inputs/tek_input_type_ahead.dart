@@ -80,6 +80,9 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
     this.onRefreshMenuChildren,
     this.onLoadingMenuChildren,
     this.initMenuChildren,
+
+    /// Focus
+    this.autoSearchFocus = false,
   }) : super(key: key);
 
   /// Type
@@ -158,6 +161,9 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final Future<List<TekInputDropdownItemModel<T>>> Function()? onLoadingMenuChildren;
   final Future<List<TekInputDropdownItemModel<T>>> Function()? onRefreshMenuChildren;
   final Future<List<TekInputDropdownItemModel<T>>> Function(String)? onSearchMenuChildren;
+
+  /// Focus
+  final bool autoSearchFocus;
 
   @override
   State<TekInputTypeAheadForm<T>> createState() => TekInputTypeAheadFormState<T>();
@@ -607,6 +613,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
         Padding(
           padding: EdgeInsets.all(TekSpacings().p8).copyWith(top: TekSpacings().p4),
           child: TekInput(
+            autofocus: widget.autoSearchFocus,
             focusNode: _searchFocusNode,
             controller: _searchController,
             size: widget.size,
