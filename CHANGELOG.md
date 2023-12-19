@@ -1,3 +1,5 @@
+## 1.3.10
+* Add `autoSearchFocus` to TekInputTypeAheadForm.
 ## 1.3.9
 * Add `FocusNode` to TekInputDropdownSearch.
 ## 1.3.8
