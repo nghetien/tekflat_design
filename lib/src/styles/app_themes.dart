@@ -28,7 +28,7 @@ class TekThemes {
       backgroundColor: TekColors().white,
       iconTheme: IconThemeData(color: TekColors().iconThemeLight),
       systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
-      titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().white),
+      titleTextStyle: TekTextStyles().titleLarge.copyWith(color: TekColors().black),
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: TekColors().primary,

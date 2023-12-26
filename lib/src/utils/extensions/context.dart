@@ -104,4 +104,6 @@ extension TekContextEx on BuildContext {
         ),
         predicate,
       );
+
+  Future<bool> canPopNavigator() => Navigator.of(this).maybePop();
 }

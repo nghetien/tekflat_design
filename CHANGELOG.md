@@ -1,3 +1,5 @@
+## 1.4.1
+* Add component `TekDataTableReorderable`.
 ## 1.3.10
 * Add `autoSearchFocus` to TekInputTypeAheadForm.
 ## 1.3.9
