@@ -1,3 +1,5 @@
+## 1.4.2
+* Add `Alignment` for `TekCard`.
 ## 1.4.1
 * Add component `TekDataTableReorderable`.
 ## 1.3.10
