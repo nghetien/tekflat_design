@@ -54,14 +54,14 @@ class TekIconButton extends StatelessWidget {
 
   Widget get currentIconWidget {
     late Widget currentIcon;
-    if (iconData != null) {
+    if (icon != null) {
+      currentIcon = icon!;
+    } else if (iconData != null) {
       currentIcon = Icon(
         iconData,
         color: color,
         size: iconSize ?? TekIconSizes().s18,
       );
-    } else if (icon != null) {
-      currentIcon = icon!;
     } else {
       currentIcon = Container();
     }
