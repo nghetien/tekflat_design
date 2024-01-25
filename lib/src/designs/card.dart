@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tekflat_design/src/utils/utils.dart';
 import 'package:tekflat_design/src/styles/styles.dart';
+import 'package:tekflat_design/src/utils/utils.dart';
 
 class TekCard extends StatelessWidget {
   const TekCard({
@@ -15,6 +15,7 @@ class TekCard extends StatelessWidget {
     this.border,
     this.boxShadow,
     this.alignment,
+    this.shape,
   }) : super(key: key);
 
   final Widget child;
@@ -27,6 +28,7 @@ class TekCard extends StatelessWidget {
   final BoxBorder? border;
   final List<BoxShadow>? boxShadow;
   final Alignment? alignment;
+  final BoxShape? shape;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -37,13 +39,15 @@ class TekCard extends StatelessWidget {
         alignment: alignment,
         decoration: BoxDecoration(
           color: backgroundColor ?? context.theme.cardColor,
-          borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
+          borderRadius:
+              shape == BoxShape.circle ? null : (borderRadius ?? TekCorners().mainCornerBorder),
           border: border ??
               Border.all(
                 color: Colors.transparent,
                 width: 0,
               ),
           boxShadow: boxShadow,
+          shape: shape ?? BoxShape.rectangle,
         ),
         child: child,
       );

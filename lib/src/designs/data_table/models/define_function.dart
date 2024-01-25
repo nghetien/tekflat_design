@@ -2,7 +2,7 @@ part of '../data_table.dart';
 
 enum TekDataTableSortType { asc, desc, none }
 
-typedef TekShowerMoreContentIntoRowWidget<T> = Widget Function(T rowData);
+typedef TekShowerMoreContentIntoRowWidget<T> = Widget? Function(T rowData);
 
 typedef TekHeaderIntoRowWidget<T> = Widget? Function(T rowData, Map<String, double> widthOfColumns);
 

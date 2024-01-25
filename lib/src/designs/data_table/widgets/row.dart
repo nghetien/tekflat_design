@@ -36,6 +36,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
       rowData,
       controller.mapKeyToWidthOfEachColumnContent,
     );
+    final Widget? showMoreContentRowWidget = showerMoreContentRowWidget?.call(rowData);
     if (fixedColumn != TekFixedColumn.none) {
       return Column(
         children: <Widget>[
@@ -51,9 +52,9 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
               ),
             ),
           ),
-          if (isShowMore)
+          if (isShowMore && showMoreContentRowWidget != null)
             _wrapShowMore(
-              child: showerMoreContentRowWidget!(rowData),
+              child: showMoreContentRowWidget,
             )
         ],
       );
@@ -95,9 +96,9 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
                 ),
               ),
             ),
-            if (isShowMore)
+            if (isShowMore && showMoreContentRowWidget != null)
               _wrapShowMore(
-                child: showerMoreContentRowWidget!(rowData),
+                child: showMoreContentRowWidget,
               )
           ],
         ),
