@@ -479,6 +479,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
           widget.onDropdownChanged?.call(null);
           FocusManager.instance.primaryFocus?.unfocus();
           _menuController.close();
+          widget.onReset?.call();
           setState(() {});
         },
         child: RotationTransition(
