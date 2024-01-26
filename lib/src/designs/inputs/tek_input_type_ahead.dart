@@ -25,7 +25,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
     /// Text Field
     this.size = TekInputSize.medium,
     this.width,
-    this.controller,
+    this.searchController,
     this.focusNode,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -106,7 +106,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   /// Text Field
   final TekInputSize size;
   final double? width;
-  final TextEditingController? controller;
+  final TextEditingController? searchController;
   final FocusNode? focusNode;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -194,7 +194,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
   /// Input & Focus
   final TextEditingController _controller = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
-  final TextEditingController _searchController = TextEditingController();
+  late final TextEditingController _searchController;
 
   /// Dropdown, Loading, Refresh
   final MenuController _menuController = MenuController();
@@ -235,6 +235,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
         curve: Curves.easeInOut,
       ),
     );
+    _searchController = widget.searchController ?? TextEditingController();
 
     /// Lấy init theo model nếu init theo key null
     if (widget.initialValues != null && widget.initialValues!.isNotEmpty) {
