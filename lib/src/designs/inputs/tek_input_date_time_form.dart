@@ -76,6 +76,7 @@ class TekInputDateTimeForm extends StatefulWidget {
     this.currentDatePicker,
     this.initialTime,
     this.ableClearValue = true,
+    this.textStyle,
   }) : super(key: key);
 
   final String name;
@@ -142,6 +143,7 @@ class TekInputDateTimeForm extends StatefulWidget {
   final DateTime? Function()? currentDatePicker;
   final TimeOfDay? initialTime;
   final bool ableClearValue;
+  final TextStyle? textStyle;
 
   @override
   State<TekInputDateTimeForm> createState() => TekInputDateTimeFormState();
