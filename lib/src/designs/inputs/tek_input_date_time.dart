@@ -66,6 +66,7 @@ class TekInputDateTime extends StatefulWidget {
     this.ableClearValue = true,
     this.didChangeForm,
     this.streamController,
+    this.textStyle,
   }) : super(key: key);
 
   final DateTime? value;
@@ -125,6 +126,7 @@ class TekInputDateTime extends StatefulWidget {
   final bool ableClearValue;
   final Function(DateTime?)? didChangeForm;
   final StreamController<TekInputDateTimeStreamState>? streamController;
+  final TextStyle? textStyle;
 
   @override
   State<TekInputDateTime> createState() => TekInputDateTimeState();
@@ -395,6 +397,7 @@ class TekInputDateTimeState extends State<TekInputDateTime> {
       errorMaxLines: widget.errorMaxLines,
       errorStyle: widget.errorStyle,
       readOnly: widget.autoOpenSelectDate,
+      textStyle: widget.textStyle,
     );
   }
 
