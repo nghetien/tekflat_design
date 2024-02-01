@@ -21,11 +21,11 @@ class TekDataTableReorderableHeaderWidget<T> extends StatefulWidget {
 }
 
 class _TekDataTableReorderableHeaderWidgetState<T> extends State<TekDataTableReorderableHeaderWidget<T>> {
-  MapEntry<String, TekDataTableSortType> _sortType = const MapEntry('', TekDataTableSortType.none);
+  MapEntry<String, TekDataTableReorderableSortType> _sortType = const MapEntry('', TekDataTableReorderableSortType.none);
 
-  MapEntry<String, TekDataTableSortType> get sortType => _sortType;
+  MapEntry<String, TekDataTableReorderableSortType> get sortType => _sortType;
 
-  void _setSortType(MapEntry<String, TekDataTableSortType> value) =>
+  void _setSortType(MapEntry<String, TekDataTableReorderableSortType> value) =>
       setState(() => _sortType = value);
 
   @override

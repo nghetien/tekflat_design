@@ -1,15 +1,15 @@
 part of '../data_table_reorderable.dart';
 
-enum TekDataTableSortType { asc, desc, none }
+enum TekDataTableReorderableSortType { asc, desc, none }
 
-typedef TekShowerMoreContentIntoRowWidget<T> = Widget Function(T rowData);
+typedef TekReorderableShowerMoreContentIntoRowWidget<T> = Widget Function(T rowData);
 
-typedef TekHeaderIntoRowWidget<T> = Widget? Function(T rowData, Map<String, double> widthOfColumns);
+typedef TekReorderableHeaderIntoRowWidget<T> = Widget? Function(T rowData, Map<String, double> widthOfColumns);
 
-typedef TekOptionContentTable = Widget Function(
+typedef TekReorderableOptionContentTable = Widget Function(
     List<DataTableReorderableColumn> columns, Map<String, double> widthOfColumns);
 
-typedef TekCustomizeTitleWidget = Widget Function(
+typedef TekReorderableCustomizeTitleWidget = Widget Function(
   BuildContext context,
   String columnKey,
   String? columnName,
@@ -17,7 +17,7 @@ typedef TekCustomizeTitleWidget = Widget Function(
   List<TekScreenDevice>? showOnScreens,
 );
 
-typedef TekTableItemWidget<T> = Widget Function(
+typedef TekReorderableTableItemWidget<T> = Widget Function(
   BuildContext context,
   dynamic value,
   T rowData,
@@ -27,7 +27,7 @@ typedef TekTableItemWidget<T> = Widget Function(
   List<TekScreenDevice>? showOnScreens,
 );
 
-typedef TekHandleFilterDataFunction<T> = void Function({
+typedef TekReorderableHandleFilterDataFunction<T> = void Function({
   required List<T> dataSources,
   int? totalRecords,
   int? currentPage,
@@ -35,7 +35,7 @@ typedef TekHandleFilterDataFunction<T> = void Function({
   int? pageNumber,
 });
 
-typedef TekCustomizeFilterWidget<T> = Widget Function(
+typedef TekReorderableCustomizeFilterWidget<T> = Widget Function(
   BuildContext context,
   String columnKey,
   String? columnName,
@@ -43,16 +43,16 @@ typedef TekCustomizeFilterWidget<T> = Widget Function(
   bool isShowMenu,
   ValueChanged<bool> changeFilter,
   ValueChanged<bool> changeShowMenu,
-  TekHandleFilterDataFunction<T> handleFilterData,
+  TekReorderableHandleFilterDataFunction<T> handleFilterData,
 );
 
-typedef TekSortDataVoid<T> = void Function(
+typedef TekReorderableSortDataVoid<T> = void Function(
   String keyColumn,
-  TekDataTableSortType typeSort,
-  TekHandleFilterDataFunction<T> handleFilterData,
+  TekDataTableReorderableSortType typeSort,
+  TekReorderableHandleFilterDataFunction<T> handleFilterData,
 );
 
-typedef TekAsyncDataSource<T> = void Function({
+typedef TekReorderableAsyncDataSource<T> = void Function({
   required int currentPage,
   required int itemsPerPage,
 });

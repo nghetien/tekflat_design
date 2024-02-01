@@ -21,8 +21,8 @@ class TekDataTableReorderableContentBuilder<T> extends StatelessWidget {
   final TekDataTableReorderableRowOption<T> rowOption;
   final bool Function(int) onShowMore;
   final Function(int, T) onClickContent;
-  final TekShowerMoreContentIntoRowWidget<T>? showerMoreContentRowWidget;
-  final TekHeaderIntoRowWidget<T>? headerIntoRowWidget;
+  final TekReorderableShowerMoreContentIntoRowWidget<T>? showerMoreContentRowWidget;
+  final TekReorderableHeaderIntoRowWidget<T>? headerIntoRowWidget;
   final TekDataTableReorderableCheckBoxOption<T> checkBoxOption;
   final TekReorderableOnReorderVoid<T> onReorder;
   final TekReorderableOnNoReorderVoid<T>? onNoReorder;

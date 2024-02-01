@@ -19,10 +19,10 @@ class TekDataTableReorderableContentWidget<T> extends StatefulWidget {
 
   final List<DataTableReorderableColumn<T>> tableColumns;
   final TekDataTableReorderableController<T> controller;
-  final TekOptionContentTable? topContent;
-  final TekOptionContentTable? bottomContent;
-  final TekShowerMoreContentIntoRowWidget<T>? showerMoreContentRowWidget;
-  final TekHeaderIntoRowWidget<T>? headerIntoRowWidget;
+  final TekReorderableOptionContentTable? topContent;
+  final TekReorderableOptionContentTable? bottomContent;
+  final TekReorderableShowerMoreContentIntoRowWidget<T>? showerMoreContentRowWidget;
+  final TekReorderableHeaderIntoRowWidget<T>? headerIntoRowWidget;
   final TekVerticalScrollState? verticalScrollState;
   final TekDataTableReorderableRowOption<T> rowOption;
   final TekDataTableReorderableCheckBoxOption<T> checkBoxOption;
