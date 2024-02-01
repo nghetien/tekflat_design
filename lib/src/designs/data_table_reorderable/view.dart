@@ -26,11 +26,11 @@ class TekDataTableReorderable<T> extends StatefulWidget {
   final TekDataTableReorderableController<T> controller;
   final List<DataTableReorderableColumn<T>> tableColumns;
   final List<TekDataTableReorderableAdditionColumn> additionColumns;
-  final TekOptionContentTable? topContent;
-  final TekOptionContentTable? bottomContent;
-  final TekShowerMoreContentIntoRowWidget<T>? showerMoreContentIntoRowWidget;
-  final TekHeaderIntoRowWidget<T>? headerIntoRowWidget;
-  final TekAsyncDataSource<T>? handleChangeData;
+  final TekReorderableOptionContentTable? topContent;
+  final TekReorderableOptionContentTable? bottomContent;
+  final TekReorderableShowerMoreContentIntoRowWidget<T>? showerMoreContentIntoRowWidget;
+  final TekReorderableHeaderIntoRowWidget<T>? headerIntoRowWidget;
+  final TekReorderableAsyncDataSource<T>? handleChangeData;
   final TekDataTableReorderableOptionUI? optionUI;
   final TekDataTableReorderableHeaderOption? headerOption;
   final TekDataTableReorderableRowOption<T>? rowOption;

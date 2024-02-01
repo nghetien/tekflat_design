@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tekflat_design/src/designs/data_table_reorderable/data_table_reorderable.dart';
 import 'package:tekflat_design/tekflat_design.dart';
 
 void main() {

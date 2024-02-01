@@ -9,7 +9,7 @@ class TekDataTableReorderablePaginationWidget<T> extends StatefulWidget {
   }) : super(key: key);
 
   final TekDataTableReorderableController<T> controller;
-  final TekAsyncDataSource<T>? handleChangeData;
+  final TekReorderableAsyncDataSource<T>? handleChangeData;
   final TekDataTableReorderablePaginationOption paginationOption;
 
   @override

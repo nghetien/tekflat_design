@@ -19,8 +19,8 @@ class TekDataTableReorderableHeaderItemWidget<T> extends StatefulWidget {
   final DataTableReorderableColumn<T> column;
   final TekDataTableReorderableHeaderOption headerOption;
   final TekDataTableReorderableCheckBoxOption<T> checkBoxOption;
-  final MapEntry<String, TekDataTableSortType> sortType;
-  final ValueChanged<MapEntry<String, TekDataTableSortType>> onSelectSortType;
+  final MapEntry<String, TekDataTableReorderableSortType> sortType;
+  final ValueChanged<MapEntry<String, TekDataTableReorderableSortType>> onSelectSortType;
 
   @override
   State<TekDataTableReorderableHeaderItemWidget<T>> createState() => _TekDataTableReorderableHeaderItemWidgetState<T>();
@@ -40,23 +40,23 @@ class _TekDataTableReorderableHeaderItemWidgetState<T> extends State<TekDataTabl
   void _setIsShowMenu(bool value) => _isShowMenu = value;
 
   void _handleChangeSortType() {
-    late TekDataTableSortType type;
+    late TekDataTableReorderableSortType type;
     if (widget.column.key != widget.sortType.key) {
-      type = TekDataTableSortType.asc;
-      widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableSortType.asc));
+      type = TekDataTableReorderableSortType.asc;
+      widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableReorderableSortType.asc));
     } else {
       switch (widget.sortType.value) {
-        case TekDataTableSortType.none:
-          type = TekDataTableSortType.asc;
-          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableSortType.asc));
+        case TekDataTableReorderableSortType.none:
+          type = TekDataTableReorderableSortType.asc;
+          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableReorderableSortType.asc));
           break;
-        case TekDataTableSortType.asc:
-          type = TekDataTableSortType.desc;
-          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableSortType.desc));
+        case TekDataTableReorderableSortType.asc:
+          type = TekDataTableReorderableSortType.desc;
+          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableReorderableSortType.desc));
           break;
-        case TekDataTableSortType.desc:
-          type = TekDataTableSortType.none;
-          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableSortType.none));
+        case TekDataTableReorderableSortType.desc:
+          type = TekDataTableReorderableSortType.none;
+          widget.onSelectSortType(MapEntry(widget.column.key, TekDataTableReorderableSortType.none));
           break;
       }
     }
@@ -189,7 +189,7 @@ class _TekDataTableReorderableHeaderItemWidgetState<T> extends State<TekDataTabl
             child: Icon(
               Icons.arrow_drop_up_rounded,
               size: TekIconSizes().s24,
-              color: (widget.sortType.value == TekDataTableSortType.asc &&
+              color: (widget.sortType.value == TekDataTableReorderableSortType.asc &&
                       widget.sortType.key == widget.column.key)
                   ? TekColors().white
                   : TekColors().grey,
@@ -200,7 +200,7 @@ class _TekDataTableReorderableHeaderItemWidgetState<T> extends State<TekDataTabl
             child: Icon(
               Icons.arrow_drop_down_rounded,
               size: TekIconSizes().s24,
-              color: (widget.sortType.value == TekDataTableSortType.desc &&
+              color: (widget.sortType.value == TekDataTableReorderableSortType.desc &&
                       widget.sortType.key == widget.column.key)
                   ? TekColors().white
                   : TekColors().grey,

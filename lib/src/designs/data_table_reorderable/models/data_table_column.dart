@@ -11,7 +11,7 @@ class TekFilterHeaderReorderableItem<T> {
   final Offset? offset;
   final double heightPopup;
   final double widthPopup;
-  final TekCustomizeFilterWidget<T> child;
+  final TekReorderableCustomizeFilterWidget<T> child;
 }
 
 class DataTableReorderableColumn<T> {
@@ -40,11 +40,11 @@ class DataTableReorderableColumn<T> {
   final double? maxWidth;
   final double? minWidth;
   final int? flex;
-  final TekCustomizeTitleWidget? customizeTitleWidget;
+  final TekReorderableCustomizeTitleWidget? customizeTitleWidget;
   final List<TekScreenDevice>? showOnScreens;
-  final TekTableItemWidget<T>? customizeItemWidget;
+  final TekReorderableTableItemWidget<T>? customizeItemWidget;
   final bool isShowSort;
-  final TekSortDataVoid<T>? sortDataVoid;
+  final TekReorderableSortDataVoid<T>? sortDataVoid;
   final bool isShowFilter;
   final TekFilterHeaderReorderableItem<T>? customizeFilter;
   final AlignmentGeometry? defaultTextAlignment;
