@@ -70,4 +70,40 @@ extension TekStringEx on String {
 
     return slug;
   }
+
+  String get toLowerCaseNonAccentVietnamese {
+    String str = this;
+    str = str.toLowerCase();
+    str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
+    str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
+    str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
+    str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
+    str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
+    str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+    str = str.replaceAll("đ", "d");
+    str = str.replaceAll("\u0300|\u0301|\u0303|\u0309|\u0323", "");
+    str = str.replaceAll("\u02C6|\u0306|\u031B", "");
+    return str;
+  }
+
+  String get toNonAccentVietnamese {
+    String str = this;
+    str = str.replaceAll("A|Á|À|Ã|Ạ|Â|Ấ|Ầ|Ẫ|Ậ|Ă|Ắ|Ằ|Ẵ|Ặ", "A");
+    str = str.replaceAll("à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ", "a");
+    str = str.replaceAll("E|É|È|Ẽ|Ẹ|Ê|Ế|Ề|Ễ|Ệ", "E");
+    str = str.replaceAll("è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ", "e");
+    str = str.replaceAll("I|Í|Ì|Ĩ|Ị", "I");
+    str = str.replaceAll("ì|í|ị|ỉ|ĩ", "i");
+    str = str.replaceAll("O|Ó|Ò|Õ|Ọ|Ô|Ố|Ồ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ỡ|Ợ", "O");
+    str = str.replaceAll("ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ", "o");
+    str = str.replaceAll("U|Ú|Ù|Ũ|Ụ|Ư|Ứ|Ừ|Ữ|Ự", "U");
+    str = str.replaceAll("ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ", "u");
+    str = str.replaceAll("Y|Ý|Ỳ|Ỹ|Ỵ", "Y");
+    str = str.replaceAll("ỳ|ý|ỵ|ỷ|ỹ", "y");
+    str = str.replaceAll("Đ", "D");
+    str = str.replaceAll("đ", "d");
+    str = str.replaceAll("\u0300|\u0301|\u0303|\u0309|\u0323", "");
+    str = str.replaceAll("\u02C6|\u0306|\u031B", "");
+    return str;
+  }
 }
