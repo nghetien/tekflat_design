@@ -83,6 +83,7 @@ class TekInputDropdown<T> extends StatefulWidget {
     this.errorText,
     this.errorMaxLines,
     this.errorStyle,
+    this.textStyle,
     this.readOnly = false,
 
     /// Dropdown
@@ -157,6 +158,7 @@ class TekInputDropdown<T> extends StatefulWidget {
   final String? errorText;
   final int? errorMaxLines;
   final TextStyle? errorStyle;
+  final TextStyle? textStyle;
   final bool readOnly;
 
   /// Dropdown
@@ -506,6 +508,7 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               errorStyle: widget.errorStyle,
               readOnly: true,
               ablePrefixIconConstraints: !widget.type.isMulti,
+              textStyle: widget.textStyle,
             );
           },
         );
