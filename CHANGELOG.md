@@ -1,3 +1,5 @@
+## 1.4.9
+* Update `TekBottomSheetSelectorModel`
 ## 1.4.2
 * Add `Alignment` for `TekCard`.
 ## 1.4.1

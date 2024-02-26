@@ -36,11 +36,15 @@ class TekBottomSheetSelectorWidget<T> extends StatefulWidget {
     this.onRefreshMenuChildren,
     this.onSearchMenuChildren,
     this.onSelected,
+    this.customItemBuilder,
+    this.customHeader,
+    this.separatorBuilder,
     this.initSelected = const [],
     this.initSearchText,
     this.hintText,
     required this.constraints,
     this.debounceMilliseconds = 1000,
+    this.borderRadius,
   });
 
   final String? title;
@@ -57,10 +61,15 @@ class TekBottomSheetSelectorWidget<T> extends StatefulWidget {
     T,
     List<T>,
   )? onSelected;
+  final Widget Function(int, bool, TekBottomSheetSelectorModel<T>, TekBottomSheetSelectorType)?
+      customItemBuilder;
+  final Widget? customHeader;
+  final Widget Function(BuildContext, int)? separatorBuilder;
   final String? initSearchText;
   final String? hintText;
   final BoxConstraints constraints;
   final int debounceMilliseconds;
+  final BorderRadius? borderRadius;
 
   @override
   State<TekBottomSheetSelectorWidget<T>> createState() => _TekBottomSheetSelectorWidgetState<T>();
@@ -88,7 +97,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   void _setListCurrentSelected(List<TekBottomSheetSelectorModel<T>> value) =>
       setState(() => _listCurrentSelected = value);
 
-  late Map<String, TekBottomSheetSelectorModel<T>> _mapKeyValueToCurrentSelected;
+  Map<String, TekBottomSheetSelectorModel<T>> _mapKeyValueToCurrentSelected = {};
 
   // List item
   List<TekBottomSheetSelectorModel<T>> _menuChildren = [];
@@ -198,41 +207,39 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.theme.colorScheme.background,
+      decoration: BoxDecoration(
+        borderRadius: widget.borderRadius,
+        color: context.theme.colorScheme.background,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: EdgeInsets.all(TekSpacings().mainSpacing),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Flexible(
-                  child: TekTypography(
-                    text: widget.title ?? '',
-                    fontWeight: FontWeight.bold,
+          if (widget.customHeader != null) widget.customHeader!,
+          if (widget.customHeader == null) ...[
+            Padding(
+              padding: EdgeInsets.all(TekSpacings().mainSpacing),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: TekTypography(
+                      text: widget.title ?? '',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                TekButtonInkwell(
-                  onPressed: _onBack,
-                  child: const Icon(Icons.close_rounded),
-                ),
-              ],
+                  TekButtonInkwell(
+                    onPressed: _onBack,
+                    child: const Icon(Icons.close_rounded),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const TekDivider(),
+            const TekDivider(),
+          ],
           if (widget.onSearchMenuChildren != null)
             Container(
               padding: EdgeInsets.all(TekSpacings().mainSpacing),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: TekColors().greyOpacity01,
-                    width: TekBorders.med,
-                  ),
-                ),
-              ),
               child: TekInput(
                 controller: _searchController,
                 hintText: widget.hintText,
@@ -256,6 +263,19 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   }
 
   Widget _viewItemWidget(int index, TekBottomSheetSelectorModel<T> item) {
+    if (widget.customItemBuilder != null) {
+      return TekButtonInkwell(
+        onPressed: () => _onSelected(item),
+        child: widget.customItemBuilder!(
+          index,
+          widget.type == TekBottomSheetSelectorType.single
+              ? _currentSelected?.keyValue == item.keyValue
+              : _mapKeyValueToCurrentSelected.containsKey(item.keyValue),
+          item,
+          widget.type,
+        ),
+      );
+    }
     final child = item.child?.call(item.value, item.keyValue) ?? Text(item.label ?? '');
     return TekButtonInkwell(
       onPressed: () => _onSelected(item),
@@ -298,9 +318,11 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
   }
 
   Widget _listViewWidget() {
-    return ListView.builder(
+    return ListView.separated(
       physics: const ClampingScrollPhysics(),
       itemCount: _menuChildren.length,
+      separatorBuilder: (context, index) =>
+          widget.separatorBuilder?.call(context, index) ?? TekVSpace.p8,
       itemBuilder: (builderContext, index) {
         final item = _menuChildren[index];
         return _viewItemWidget(index, item);

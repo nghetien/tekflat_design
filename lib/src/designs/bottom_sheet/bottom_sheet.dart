@@ -139,6 +139,10 @@ class TekBottomSheet {
       T,
       List<T>,
     )? onSelected,
+    Widget Function(int, bool, TekBottomSheetSelectorModel<T>, TekBottomSheetSelectorType)?
+        customItemBuilder,
+    Widget? customHeader,
+    Widget Function(BuildContext, int)? separatorBuilder,
     String? initSearchText,
     String? hintText,
     double? maxHeight,
@@ -154,7 +158,11 @@ class TekBottomSheet {
         onRefreshMenuChildren: onRefreshMenuChildren,
         onSearchMenuChildren: onSearchMenuChildren,
         onSelected: onSelected,
+        customHeader: customHeader,
+        customItemBuilder: customItemBuilder,
+        separatorBuilder: separatorBuilder,
         initSearchText: initSearchText,
+        borderRadius: borderRadius,
         hintText: hintText,
         constraints: constraints ??
             BoxConstraints(
