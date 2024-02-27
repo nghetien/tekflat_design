@@ -4,23 +4,24 @@ class TekSingleTimePickerWidget extends StatefulWidget {
   const TekSingleTimePickerWidget({
     super.key,
     this.title,
+    this.titleSize,
+    this.titleWeight,
+    this.titleColor,
     this.presetTitle,
-    this.initialTime,
+    this.presetTitleSize,
+    this.presetTitleWeight,
+    this.presetTitleColor,
     this.textDone,
-    this.textAM,
-    this.textPM,
-    this.presets = const [],
+    this.initialTime,
     this.onPickTime,
     this.mainSize,
     this.mainWeight,
     this.mainColor,
+    this.presets = const [],
     this.presetSize,
     this.presetWeight,
     this.presetColor,
-    this.titleSize,
-    this.titleWeight,
-    this.titleColor,
-    this.paddingDoneButton,
+    this.onTimeChanged,
   });
 
   final String? title;
@@ -28,9 +29,10 @@ class TekSingleTimePickerWidget extends StatefulWidget {
   final FontWeight? titleWeight;
   final Color? titleColor;
   final String? presetTitle;
+  final double? presetTitleSize;
+  final FontWeight? presetTitleWeight;
+  final Color? presetTitleColor;
   final String? textDone;
-  final String? textAM;
-  final String? textPM;
   final TimeOfDay? initialTime;
   final Future Function(TimeOfDay)? onPickTime;
   final double? mainSize;
@@ -40,7 +42,7 @@ class TekSingleTimePickerWidget extends StatefulWidget {
   final double? presetSize;
   final FontWeight? presetWeight;
   final Color? presetColor;
-  final EdgeInsets? paddingDoneButton;
+  final Function(TimeOfDay)? onTimeChanged;
 
   @override
   State<TekSingleTimePickerWidget> createState() => _TekSingleTimePickerWidgetState();
@@ -70,10 +72,17 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
 
   late TimeOfDay _timeOfDay;
   bool _buttonLoading = false;
+  bool _enableHourListenerScroll = true;
+  bool _enableMinuteListenerScroll = true;
 
-  void _setTimeOfDay(TimeOfDay timeOfDay) {
+  void _setTimeOfDay(TimeOfDay timeOfDay, {bool onlyUpdate = false}) {
     if (_timeOfDay == timeOfDay) return;
-    setState(() => _timeOfDay = timeOfDay);
+    if (onlyUpdate) {
+      _timeOfDay = timeOfDay;
+    } else {
+      setState(() => _timeOfDay = timeOfDay);
+    }
+    widget.onTimeChanged?.call(timeOfDay);
   }
 
   void _setButtonLoading(bool loading) => setState(() => _buttonLoading = loading);
@@ -87,11 +96,45 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
           hour: valueHour ?? _timeOfDay.hour,
           minute: valueMinute ?? _timeOfDay.minute,
         ),
+        onlyUpdate: (!_enableHourListenerScroll && valueHour != null) ||
+            (!_enableMinuteListenerScroll && valueMinute != null),
       );
 
-  void _handeChangeByPreset(TimeOfDay timeOfDay) {
-    _hourScrollController.jumpToItem(timeOfDay.hour);
-    _minuteScrollController.jumpToItem(timeOfDay.minute);
+  void _handeChangeByPreset(
+    TimeOfDay timeOfDay, {
+    bool onlyJump = true,
+  }) {
+    if (onlyJump) {
+      _hourScrollController.jumpToItem(timeOfDay.hour);
+      _minuteScrollController.jumpToItem(timeOfDay.minute);
+    } else {
+      _enableHourListenerScroll = false;
+      _hourScrollController
+          .animateToItem(
+        timeOfDay.hour,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      )
+          .then(
+        (_) {
+          _enableHourListenerScroll = true;
+          setState(() {});
+        },
+      );
+      _enableMinuteListenerScroll = false;
+      _minuteScrollController
+          .animateToItem(
+        timeOfDay.minute,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      )
+          .then(
+        (_) {
+          _enableMinuteListenerScroll = true;
+          setState(() {});
+        },
+      );
+    }
   }
 
   @override
@@ -102,17 +145,18 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TekTypography(
-                text: widget.title ?? 'Time',
-                fontWeight: widget.titleWeight ?? FontWeight.w700,
-                fontSize: widget.titleSize ?? TekFontSizes().s18,
-                color: widget.titleColor,
-              ),
-            ],
-          ),
+          if (widget.title != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TekTypography(
+                  text: widget.title ?? 'Time',
+                  fontWeight: widget.titleWeight ?? FontWeight.w700,
+                  fontSize: widget.titleSize ?? TekFontSizes().s18,
+                  color: widget.titleColor,
+                ),
+              ],
+            ),
           Stack(
             alignment: Alignment.center,
             children: [
@@ -167,7 +211,10 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
           ),
           if (widget.presets.isNotEmpty) ...[
             TekTypography(
-              text: widget.presetTitle ?? 'Presets',
+              text: widget.presetTitle ?? 'Presets:',
+              fontWeight: widget.presetTitleWeight,
+              fontSize: widget.presetTitleSize,
+              color: widget.presetTitleColor,
             ),
             TekVSpace.p8,
             SizedBox(
@@ -181,7 +228,7 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
                   return TekButtonInkwell(
                     onPressed: () {
                       _setTimeOfDay(item);
-                      _handeChangeByPreset(item);
+                      _handeChangeByPreset(item, onlyJump: false);
                     },
                     child: TekCard(
                       padding: EdgeInsets.symmetric(
@@ -206,26 +253,18 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
               ),
             ),
           ],
-          TekVSpace.mainSpace,
-          Padding(
-            padding: widget.paddingDoneButton ?? EdgeInsets.zero,
-            child: TekButton(
+          if (widget.onPickTime != null) ...[
+            TekVSpace.mainSpace,
+            TekButton(
               text: widget.textDone ?? 'Done',
               width: double.infinity,
               fontWeight: FontWeight.w600,
               type: TekButtonType.primary,
               loading: _buttonLoading,
-              onPressed: () async {
+              onPressed: () {
                 try {
                   _setButtonLoading(true);
-                  widget.onPickTime
-                      ?.call(
-                    TimeOfDay(
-                      hour: _timeOfDay.hour,
-                      minute: _timeOfDay.minute,
-                    ),
-                  )
-                      .then(
+                  widget.onPickTime?.call(_timeOfDay).then(
                     (_) {
                       _setButtonLoading(false);
                       context.popNavigator();
@@ -237,7 +276,8 @@ class _TekSingleTimePickerWidgetState extends State<TekSingleTimePickerWidget> {
                 }
               },
             ),
-          ),
+            TekVSpace(context.viewPadding.bottom),
+          ]
         ],
       ),
     );

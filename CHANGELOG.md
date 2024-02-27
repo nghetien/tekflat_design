@@ -1,3 +1,5 @@
+## 1.5.0
+* Update time_picker.
 ## 1.4.9
 * Update `TekBottomSheetSelectorModel`
 ## 1.4.2
