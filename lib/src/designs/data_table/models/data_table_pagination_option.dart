@@ -12,6 +12,7 @@ class TekDataTablePaginationOption {
     this.numberNextPage,
     this.currentPage,
     this.inputDecorationTheme,
+    this.decoration,
   });
 
   final String customizeItemPerPage;
@@ -26,4 +27,36 @@ class TekDataTablePaginationOption {
 
   // ui
   final InputDecorationTheme? inputDecorationTheme;
+  final TekDataTablePaginationDecoration? decoration;
+}
+
+/// Support setting decoration for header item
+/// [backgroundColor] is background color of pagination
+/// [borderRadius] is border radius of pagination
+/// [border] is border of pagination
+///
+/// If you want to set decoration for pagination, you must set [TekDataTablePaginationOption] for [TekDataTablePaginationDecoration]
+/// and set [TekDataTableHeaderDecoration] for each [DataTableColumn]
+class TekDataTablePaginationDecoration {
+  const TekDataTablePaginationDecoration({
+    this.backgroundColor,
+    this.borderRadius,
+    this.border,
+    this.iconColor,
+    this.itemPerPageColor,
+    this.backgroundColorItemPage,
+    this.textColorItemPage,
+    this.backgroundColorItemPageOnSelected,
+    this.textColorItemPageOnSelected,
+  });
+
+  final Color? backgroundColor;
+  final BorderRadius? borderRadius;
+  final Border? border;
+  final Color? iconColor;
+  final Color? itemPerPageColor;
+  final Color? backgroundColorItemPage;
+  final Color? textColorItemPage;
+  final Color? backgroundColorItemPageOnSelected;
+  final Color? textColorItemPageOnSelected;
 }

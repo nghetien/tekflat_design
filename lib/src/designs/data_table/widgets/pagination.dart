@@ -74,11 +74,13 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
         ),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: TekColors().primary,
-          borderRadius: BorderRadius.only(
-            bottomLeft: widget.paginationOption.borderRadius ?? TekCorners().mainCornerRadius,
-            bottomRight: widget.paginationOption.borderRadius ?? TekCorners().mainCornerRadius,
-          ),
+          color: widget.paginationOption.decoration?.backgroundColor ?? TekColors().primary,
+          borderRadius: widget.paginationOption.decoration?.borderRadius ??
+              BorderRadius.only(
+                bottomLeft: widget.paginationOption.borderRadius ?? TekCorners().mainCornerRadius,
+                bottomRight: widget.paginationOption.borderRadius ?? TekCorners().mainCornerRadius,
+              ),
+          border: widget.paginationOption.decoration?.border,
         ),
         child: widget.paginationOption.isShowPagination
             ? Row(
@@ -125,14 +127,14 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
             onPressed: () => _handleChangeDataPageLeft(true),
             icon: Icon(
               Icons.keyboard_double_arrow_left_rounded,
-              color: TekColors().white,
+              color: widget.paginationOption.decoration?.iconColor ?? TekColors().white,
             ),
           ),
         IconButton(
           onPressed: () => _handleChangeDataPageLeft(false),
           icon: Icon(
             Icons.keyboard_arrow_left_rounded,
-            color: TekColors().white,
+            color: widget.paginationOption.decoration?.iconColor ?? TekColors().white,
           ),
         ),
       ],
@@ -152,9 +154,16 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
           text: number > 0 ? number.toString() : '...',
           padding: EdgeInsets.symmetric(horizontal: TekSpacings().p8),
           textStyle: TextStyle(
-            color: number == pagination.currentPage ? TekColors().primary : TekColors().white,
+            color: number == pagination.currentPage
+                ? (widget.paginationOption.decoration?.textColorItemPageOnSelected ??
+                    TekColors().primary)
+                : (widget.paginationOption.decoration?.textColorItemPage ?? TekColors().white),
           ),
-          background: number == pagination.currentPage ? TekColors().white : TekColors().primary,
+          background: number == pagination.currentPage
+              ? (widget.paginationOption.decoration?.backgroundColorItemPageOnSelected ??
+                  TekColors().white)
+              : (widget.paginationOption.decoration?.backgroundColorItemPage ??
+                  TekColors().primary),
         ),
       );
 
@@ -196,7 +205,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
           onPressed: () => _handleChangeDataPageRight(false),
           icon: Icon(
             Icons.keyboard_arrow_right_rounded,
-            color: TekColors().white,
+            color: widget.paginationOption.decoration?.iconColor ?? TekColors().white,
           ),
         ),
         if (!TekPlatform.isMobile)
@@ -204,7 +213,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
             onPressed: () => _handleChangeDataPageRight(true),
             icon: Icon(
               Icons.keyboard_double_arrow_right_rounded,
-              color: TekColors().white,
+              color: widget.paginationOption.decoration?.iconColor ?? TekColors().white,
             ),
           ),
       ],
@@ -251,7 +260,7 @@ class _TekDataTablePaginationWidgetState extends State<TekDataTablePaginationWid
               child: Text(
                 widget.paginationOption.customizeItemPerPage,
                 style: TextStyle(
-                  color: TekColors().white,
+                  color: widget.paginationOption.decoration?.itemPerPageColor ?? TekColors().white,
                 ),
               ),
             ),

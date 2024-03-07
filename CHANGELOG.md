@@ -1,3 +1,5 @@
+## 1.5.2
+* Add `TekDataTablePaginationDecoration` to `TekDataTablePaginationOption`.
 ## 1.5.0
 * Update time_picker.
 ## 1.4.9
