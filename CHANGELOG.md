@@ -1,3 +1,5 @@
+## 1.6.0
+* Add `TekGradientText` widgets.
 ## 1.5.2
 * Add `TekDataTablePaginationDecoration` to `TekDataTablePaginationOption`.
 ## 1.5.0

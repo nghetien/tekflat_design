@@ -16,6 +16,7 @@ class TekCard extends StatelessWidget {
     this.boxShadow,
     this.alignment,
     this.shape,
+    this.decoration,
   }) : super(key: key);
 
   final Widget child;
@@ -29,6 +30,7 @@ class TekCard extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final Alignment? alignment;
   final BoxShape? shape;
+  final Decoration? decoration;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -37,7 +39,7 @@ class TekCard extends StatelessWidget {
         margin: margin,
         padding: padding ?? EdgeInsets.all(TekSpacings().mainSpacing),
         alignment: alignment,
-        decoration: BoxDecoration(
+        decoration: decoration ?? BoxDecoration(
           color: backgroundColor ?? context.theme.cardColor,
           borderRadius:
               shape == BoxShape.circle ? null : (borderRadius ?? TekCorners().mainCornerBorder),

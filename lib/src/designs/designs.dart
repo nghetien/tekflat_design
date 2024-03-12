@@ -31,3 +31,4 @@ export 'time_picker/time_picker.dart';
 export 'toast.dart';
 export 'typography.dart';
 export 'wrap_scroll_horizontal.dart';
+export 'gradient_text.dart';
