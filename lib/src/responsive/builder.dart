@@ -10,8 +10,12 @@ class TekResponsive {
       LayoutBuilder(
         key: key,
         builder: (context, constraints) {
-          TekResponsiveConfig().onResponsiveUpdate(constraints.maxWidth);
-          TekOverlaySnackBar.setOverlayState(context.overlayState);
+          try {
+            TekResponsiveConfig().onResponsiveUpdate(constraints.maxWidth);
+            TekOverlaySnackBar.setOverlayState(context.overlayState);
+          } catch (e) {
+            TekLogger.errorLog("Error on appResBuilder: $e");
+          }
           return child;
         },
       );
