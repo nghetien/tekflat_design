@@ -1,3 +1,8 @@
+## 1.6.3
+* Update `DataTable`
+- `splitColor`: `TekDataTableHeaderOption` + `TekDataTableRowOption`
+- `defaultTileAligment`: `DataTableColumn`
+- `defaultTitleColor`: `DataTableColumn`
 ## 1.6.0
 * Add `TekGradientText` widgets.
 ## 1.5.2

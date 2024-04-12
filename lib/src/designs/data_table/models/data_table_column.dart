@@ -41,6 +41,8 @@ class DataTableColumn<T> {
     this.defaultTextAlignment,
     this.defaultTextMaxLines,
     this.defaultTextColor,
+    this.defaultTitleAlignment,
+    this.defaultTitleColor,
   });
 
   final String key;
@@ -60,4 +62,6 @@ class DataTableColumn<T> {
   final AlignmentGeometry? defaultTextAlignment;
   final int? defaultTextMaxLines;
   final Color? defaultTextColor;
+  final AlignmentGeometry? defaultTitleAlignment;
+  final Color? defaultTitleColor;
 }

@@ -3,6 +3,7 @@ part of '../data_table.dart';
 class TekDataTableHeaderOption {
   const TekDataTableHeaderOption({
     this.heightOfHeaderItem,
+    this.splitColor,
     this.alignment,
     this.padding,
     this.headerTextColor,
@@ -14,6 +15,7 @@ class TekDataTableHeaderOption {
   final EdgeInsets? padding;
   final TekDataTableHeaderDecoration decoration;
   final Color? headerTextColor;
+  final Color? splitColor;
 }
 
 /// Support setting decoration for header item

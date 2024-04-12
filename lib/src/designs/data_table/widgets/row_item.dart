@@ -36,7 +36,7 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
           border: Border(
             right: indexColumn < lengthOfColumn - 1
                 ? BorderSide(
-                    color: TekColors().greyOpacity04,
+                    color: rowOption.splitColor ?? TekColors().greyOpacity04,
                     width: TekBorders.thin,
                   )
                 : BorderSide.none,
@@ -106,8 +106,8 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
                 1)
             .toString(),
         style: TekTextStyles().body.copyWith(
-          fontWeight: FontWeight.bold,
-        ),
+              fontWeight: FontWeight.bold,
+            ),
       ),
     );
   }
