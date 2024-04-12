@@ -98,13 +98,14 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
       width: widget.fixedColumn == TekFixedColumn.none
           ? widget.controller.mapKeyToWidthOfEachColumnContent[widget.column.key]
           : widget.column.width,
-      height: widget.headerOption.heightOfHeaderItem ?? TekDataTableHeaderWidget.defaultHeightHeader,
+      height:
+          widget.headerOption.heightOfHeaderItem ?? TekDataTableHeaderWidget.defaultHeightHeader,
       child: Container(
         decoration: BoxDecoration(
           border: Border(
             right: widget.index < widget.lengthOfColumn - 1
                 ? BorderSide(
-                    color: TekColors().greyOpacity04,
+                    color: widget.headerOption.splitColor ?? TekColors().greyOpacity04,
                     width: TekBorders.thin,
                   )
                 : BorderSide.none,
@@ -136,9 +137,9 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
             'No.',
             textAlign: TextAlign.center,
             style: TekTextStyles().body.copyWith(
-              fontWeight: FontWeight.bold,
-              color: headerTextColors,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: headerTextColors,
+                ),
           ),
         ),
       );
@@ -156,19 +157,30 @@ class _TekDataTableHeaderItemWidgetState<T> extends State<TekDataTableHeaderItem
                 widthOfRowItem,
                 widget.column.showOnScreens,
               )
-            : Container(
-                alignment: widget.headerOption.alignment ?? Alignment.center,
-                padding: widget.headerOption.padding ??
-                    EdgeInsets.symmetric(horizontal: TekSpacings().p8),
-                child: Text(
-                  widget.column.name ?? '',
-                  textAlign: TextAlign.center,
-                  style: TekTextStyles().body.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: headerTextColors,
+            : Builder(builder: (context) {
+                final title = widget.column.name ?? '',
+                    titleAlignment = widget.column.defaultTitleAlignment ??
+                        widget.headerOption.alignment ??
+                        Alignment.center,
+                    titlePadding = widget.headerOption.padding ??
+                        EdgeInsets.symmetric(horizontal: TekSpacings().p8),
+                    titleColor = widget.column.defaultTitleColor ??
+                        widget.headerOption.headerTextColor ??
+                        headerTextColors;
+
+                return Container(
+                  alignment: titleAlignment,
+                  padding: titlePadding,
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: TekTextStyles().body.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: titleColor,
+                        ),
                   ),
-                ),
-              ),
+                );
+              }),
         if (widget.column.isShowSort || widget.column.isShowFilter)
           Positioned(
             right: 0,
