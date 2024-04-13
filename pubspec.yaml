@@ -1,6 +1,6 @@
 name: tekflat_design
 description: Teko Flat Design.
-version: 1.6.3
+version: 1.6.4
 homepage: https://github.com/nghetien/tekflat_design
 
 environment:
@@ -19,10 +19,10 @@ dependencies:
   shimmer: ^3.0.0
   flutter_dotenv: ^5.1.0
   flutter_form_builder: ^9.2.1
+  form_builder_validators: ^9.1.0
   collection: ^1.17.1 # Update lên là hẹo
   equatable: ^2.0.5
   shared_preferences: ^2.2.2
-  form_builder_validators: ^9.1.0
   flutter_svg: ^2.0.9
   top_snackbar_flutter: ^3.1.0
   reorderables: ^0.6.0

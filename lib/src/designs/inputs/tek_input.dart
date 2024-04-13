@@ -211,6 +211,7 @@ class TekInput extends StatelessWidget {
     this.readOnly = false,
     this.autofocus = false,
     this.expands = false,
+    this.enableSuggestions = true,
   })  : assert(
           (initialValue == null && controller == null) ||
               (initialValue != null && controller == null) ||
@@ -274,6 +275,7 @@ class TekInput extends StatelessWidget {
   final bool autofocus;
   final bool expands;
   final MaxLengthEnforcement? maxLengthEnforcement;
+  final bool enableSuggestions;
 
   EdgeInsets get _paddingContent {
     if (contentPadding != null) return contentPadding!;
@@ -313,6 +315,7 @@ class TekInput extends StatelessWidget {
         onSubmitted: onSubmitted,
         readOnly: readOnly,
         expands: expands,
+        enableSuggestions: true,
         decoration: tekInputDecoration(
           context: context,
           size: size,
