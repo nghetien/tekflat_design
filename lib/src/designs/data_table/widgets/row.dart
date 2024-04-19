@@ -131,7 +131,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
   Widget _wrapContent({required Widget child}) => Container(
         height: height,
         decoration: BoxDecoration(
-          border: Border(
+          border: rowOption.wrapContentBorder ?? Border(
             bottom: BorderSide(
               width: TekBorders.thin,
               color: TekColors().greyOpacity04,

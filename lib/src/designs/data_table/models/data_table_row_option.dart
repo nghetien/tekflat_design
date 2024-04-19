@@ -7,6 +7,7 @@ class TekDataTableRowOption<T> {
     this.onPressRowItem,
     this.bordered = false,
     this.splitColor,
+    this.wrapContentBorder,
   });
 
   final EdgeInsets? paddingOfRowItem;
@@ -14,4 +15,5 @@ class TekDataTableRowOption<T> {
   final Function(T)? onPressRowItem;
   final bool bordered;
   final Color? splitColor;
+  final Border? wrapContentBorder;
 }
