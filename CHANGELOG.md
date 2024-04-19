@@ -1,3 +1,5 @@
+## 1.6.5
+- Add `wrapContentBorder` for row's border of `TekDataTable`.
 ## 1.6.4
 - Fix bug `TekInput` can't enter Vietnamese.
 ## 1.6.3
