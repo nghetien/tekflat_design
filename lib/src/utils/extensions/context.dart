@@ -6,7 +6,6 @@ enum TekContextPushTransitionType {
 }
 
 extension TekContextEx on BuildContext {
-
   ThemeData get theme => Theme.of(this);
 
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
@@ -35,10 +34,17 @@ extension TekContextEx on BuildContext {
 
   OverlayState get overlayState => Overlay.of(this);
 
-  void popRootNavigator<T extends Object?>([T? result]) =>
+  void popRootNavigator<T extends Object?>([T? result]) {
+    if (Navigator.of(this, rootNavigator: true).canPop()) {
       Navigator.of(this, rootNavigator: true).pop<T>(result);
+    }
+  }
 
-  void popNavigator<T extends Object?>([T? result]) => Navigator.pop<T>(this, result);
+  void popNavigator<T extends Object?>([T? result]) {
+    if (Navigator.canPop(this)) {
+      Navigator.pop<T>(this, result);
+    }
+  }
 
   void popUntilNavigator({
     required RoutePredicate predicate,

@@ -1,3 +1,5 @@
+## 1.6.6
+- Update `popRootNavigator` and `popNavigator` with `canPop`
 ## 1.6.5
 - Add `wrapContentBorder` for row's border of `TekDataTable`.
 ## 1.6.4

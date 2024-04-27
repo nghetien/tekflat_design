@@ -552,7 +552,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.6.3"
+    version: "1.6.5"
   term_glyph:
     dependency: transitive
     description:
