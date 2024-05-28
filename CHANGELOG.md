@@ -1,3 +1,5 @@
+## 1.6.9
+* Add `useDefaultColor` to `TekSvgImage`. 
 ## 1.6.7
 * Add `TekSvgImage`
 ## 1.6.6

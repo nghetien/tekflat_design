@@ -8,11 +8,13 @@ class TekSvgImage extends StatelessWidget {
     required this.path,
     this.size,
     this.color,
+    this.useDefaultColor = false,
   });
 
   final String path;
   final double? size;
   final Color? color;
+  final bool useDefaultColor;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,12 @@ class TekSvgImage extends StatelessWidget {
       path,
       width: size,
       height: size,
-      theme: SvgTheme(
-        currentColor: color ?? context.textTheme.titleMedium?.color ?? const Color(0xFF000000),
-      ),
+      theme: useDefaultColor
+          ? null
+          : SvgTheme(
+              currentColor:
+                  color ?? context.textTheme.titleMedium?.color ?? const Color(0xFF000000),
+            ),
     );
   }
 }
