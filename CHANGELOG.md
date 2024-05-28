@@ -1,9 +1,11 @@
+## 1.6.7
+* Add `TekSvgImage`
 ## 1.6.6
-- Update `popRootNavigator` and `popNavigator` with `canPop`
+* Update `popRootNavigator` and `popNavigator` with `canPop`
 ## 1.6.5
-- Add `wrapContentBorder` for row's border of `TekDataTable`.
+* Add `wrapContentBorder` for row's border of `TekDataTable`.
 ## 1.6.4
-- Fix bug `TekInput` can't enter Vietnamese.
+* Fix bug `TekInput` can't enter Vietnamese.
 ## 1.6.3
 * Update `DataTable`
 - `splitColor`: `TekDataTableHeaderOption` + `TekDataTableRowOption`
