@@ -28,6 +28,12 @@ class TekSvgImage extends StatelessWidget {
               currentColor:
                   color ?? context.textTheme.titleMedium?.color ?? const Color(0xFF000000),
             ),
+      colorFilter: useDefaultColor
+          ? null
+          : ColorFilter.mode(
+              color ?? context.textTheme.titleMedium?.color ?? const Color(0xFF000000),
+              BlendMode.srcIn,
+            ),
     );
   }
 }
