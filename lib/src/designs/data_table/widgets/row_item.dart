@@ -95,6 +95,8 @@ class TekDataTableRowItemWidget<T> extends StatelessWidget {
       Text(
         value != null ? value.toString() : '',
         style: TekTextStyles().body,
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
       );
 
   Widget _numberedRowItem() {
