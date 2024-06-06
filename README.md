@@ -132,4 +132,8 @@ We welcome all contributions. You can submit any ideas as [pull requests](https:
 ![Let's fund issues in this repository](./assets/images/git_issues.png)
 
 ## ❤️ Sponsors and Backers
-![https://buymeacoffee.com/nghequyetts](assets/images/Buy-me-a-coffee.png)
+<p align="center">
+  <a href="https://buymeacoffee.com/nghequyetts">
+    <img width="200" src="assets/images/Buy-me-a-coffee.png">
+  </a>
+</p>
