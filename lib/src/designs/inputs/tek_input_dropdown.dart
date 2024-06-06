@@ -501,7 +501,9 @@ class TekInputDropdownState<T> extends State<TekInputDropdown<T>>
               labelStyle: widget.labelStyle,
               floatingLabelStyle: widget.floatingLabelStyle,
               floatingLabelBehavior: widget.floatingLabelBehavior,
-              hintText: widget.type.isSingle ? widget.hintText : null,
+              hintText: widget.type.isSingle
+                  ? widget.hintText
+                  : (_valueMultiple?.isEmpty ?? true ? widget.hintText : null),
               hintStyle: widget.hintStyle,
               errorText: widget.errorText,
               errorMaxLines: widget.errorMaxLines,

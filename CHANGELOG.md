@@ -1,3 +1,5 @@
+## 1.6.12
+* Edit `hintText` for `TekInputDropdown`.
 ## 1.6.10
 * Add `colorFilter` to `TekSvgImage`.
 ## 1.6.9
