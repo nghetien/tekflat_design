@@ -109,9 +109,9 @@ class TekCheckBox extends StatelessWidget {
       },
       activeColor: enabled ? (activeColor ?? type.style.activeColor) : TekColors().greyOpacity04,
       checkColor: enabled ? (checkColor ?? type.style.checkColor) : TekColors().greyOpacity04,
-      fillColor: MaterialStateProperty.resolveWith(
+      fillColor: WidgetStateProperty.resolveWith(
         (states) {
-          if (!states.contains(MaterialState.selected)) {
+          if (!states.contains(WidgetState.selected)) {
             return null;
           }
           return activeColor ?? TekColors().primary;

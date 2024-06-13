@@ -140,7 +140,7 @@ class _TekDataTableReorderableState<T> extends State<TekDataTableReorderable<T>>
       Container(
         decoration: BoxDecoration(
           borderRadius: TekCorners.cornerBorder8,
-          color: context.theme.colorScheme.background,
+          color: context.theme.colorScheme.surface,
         ),
         child: _genContentTable(),
       ),

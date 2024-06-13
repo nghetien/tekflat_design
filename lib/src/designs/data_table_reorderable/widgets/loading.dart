@@ -13,7 +13,7 @@ class TekDataTableReorderableLoadingWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
-        color: context.theme.colorScheme.background.withOpacity(0.5),
+        color: context.theme.colorScheme.surface.withOpacity(0.5),
       ),
       child: const TekLoadingWidget(),
     );

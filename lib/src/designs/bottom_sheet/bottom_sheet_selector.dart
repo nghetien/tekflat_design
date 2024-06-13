@@ -209,7 +209,7 @@ class _TekBottomSheetSelectorWidgetState<T> extends State<TekBottomSheetSelector
     return Container(
       decoration: BoxDecoration(
         borderRadius: widget.borderRadius,
-        color: context.theme.colorScheme.background,
+        color: context.theme.colorScheme.surface,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

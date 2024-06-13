@@ -154,7 +154,7 @@ class TekDataTableState<T> extends State<TekDataTable<T>> {
           Container(
             decoration: BoxDecoration(
               borderRadius: TekCorners.cornerBorder8,
-              color: context.theme.colorScheme.background,
+              color: context.theme.colorScheme.surface,
             ),
             child: _genContentTable(),
           ),

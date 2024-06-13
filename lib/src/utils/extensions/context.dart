@@ -20,7 +20,7 @@ extension TekContextEx on BuildContext {
 
   double get devicePixelRatio => MediaQuery.devicePixelRatioOf(this);
 
-  double get textScaleFactor => MediaQuery.textScaleFactorOf(this);
+  TextScaler get textScaleFactor => MediaQuery.textScalerOf(this);
 
   EdgeInsets get viewInsets => MediaQuery.viewInsetsOf(this);
 

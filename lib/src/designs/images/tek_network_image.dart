@@ -60,7 +60,7 @@ class TekNetworkImage extends StatelessWidget {
 
   Widget _loading(BuildContext context) => Shimmer.fromColors(
         baseColor: Colors.black12,
-        highlightColor: context.theme.colorScheme.background,
+        highlightColor: context.theme.colorScheme.surface,
         child: Container(
           width: width ?? size.size,
           height: height ?? size.size,

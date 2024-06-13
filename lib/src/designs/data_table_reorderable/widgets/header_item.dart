@@ -217,7 +217,7 @@ class _TekDataTableReorderableHeaderItemWidgetState<T> extends State<TekDataTabl
       controller: _menuController,
       alignmentOffset: widget.column.customizeFilter!.offset ?? const Offset(0, 10),
       style: MenuStyle(
-        fixedSize: MaterialStateProperty.all(
+        fixedSize: WidgetStateProperty.all(
           Size(
             widget.column.customizeFilter!.widthPopup,
             widget.column.customizeFilter!.heightPopup,

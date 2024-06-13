@@ -9,9 +9,9 @@ class TekThemes {
     colorScheme: ColorScheme.light(
       primary: TekColors().primary,
       onPrimary: TekColors().white,
-      onSurface: TekColors().black,
-      background: TekColors().bgSecondaryThemeLight,
-      onBackground: TekColors().bgPrimaryThemeLight,
+      // onSurface: TekColors().black,
+      surface: TekColors().bgSecondaryThemeLight,
+      onSurface: TekColors().bgPrimaryThemeLight,
       error: TekColors().red,
       secondary: TekColors().primary,
     ),
@@ -88,16 +88,16 @@ class TekThemes {
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(TekColors().primary),
+      checkColor: WidgetStateProperty.all(TekColors().primary),
       side: BorderSide(width: TekBorders.med, color: TekColors().grey),
       splashRadius: 0,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(TekColors().bgSecondaryThemeLight),
-        foregroundColor: MaterialStateProperty.all(TekColors().black),
-        shape: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(TekColors().bgSecondaryThemeLight),
+        foregroundColor: WidgetStateProperty.all(TekColors().black),
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: TekCorners().mainCornerBorder,
           ),
@@ -114,8 +114,8 @@ class TekThemes {
     ),
     menuTheme: MenuThemeData(
       style: MenuStyle(
-        backgroundColor: MaterialStateProperty.all(TekColors().bgSecondaryThemeLight),
-        surfaceTintColor: MaterialStateProperty.all(TekColors().bgSecondaryThemeLight),
+        backgroundColor: WidgetStateProperty.all(TekColors().bgSecondaryThemeLight),
+        surfaceTintColor: WidgetStateProperty.all(TekColors().bgSecondaryThemeLight),
       ),
     ),
     dialogTheme: DialogTheme(
@@ -167,10 +167,10 @@ class TekThemes {
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
       primary: TekColors().primary,
-      surface: TekColors().bgPrimaryThemeDark,
-      onSurface: TekColors().white,
-      background: TekColors().bgSecondaryThemeDark,
-      onBackground: TekColors().bgPrimaryThemeDark,
+      // surface: TekColors().bgPrimaryThemeDark,
+      // onSurface: TekColors().white,
+      surface: TekColors().bgSecondaryThemeDark,
+      onSurface: TekColors().bgPrimaryThemeDark,
       error: TekColors().red,
       secondary: TekColors().primary,
     ),
@@ -249,16 +249,16 @@ class TekThemes {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     dialogBackgroundColor: TekColors().bgSecondaryThemeDark,
     checkboxTheme: CheckboxThemeData(
-      checkColor: MaterialStateProperty.all(TekColors().black),
+      checkColor: WidgetStateProperty.all(TekColors().black),
       side: BorderSide(width: TekBorders.med, color: TekColors().grey),
       splashRadius: 0,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(TekColors().bgSecondaryThemeDark),
-        foregroundColor: MaterialStateProperty.all(TekColors().white),
-        shape: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(TekColors().bgSecondaryThemeDark),
+        foregroundColor: WidgetStateProperty.all(TekColors().white),
+        shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: TekCorners().mainCornerBorder,
           ),
@@ -275,8 +275,8 @@ class TekThemes {
     ),
     menuTheme: MenuThemeData(
       style: MenuStyle(
-        backgroundColor: MaterialStateProperty.all(TekColors().bgPrimaryThemeDark),
-        surfaceTintColor: MaterialStateProperty.all(TekColors().bgPrimaryThemeDark),
+        backgroundColor: WidgetStateProperty.all(TekColors().bgPrimaryThemeDark),
+        surfaceTintColor: WidgetStateProperty.all(TekColors().bgPrimaryThemeDark),
       ),
     ),
     dialogTheme: DialogTheme(

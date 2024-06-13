@@ -146,7 +146,7 @@ class TekDataTableRowWidget<T> extends StatelessWidget {
                 focusColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
                 splashColor: Colors.transparent,
                 onTap: onPressed,
                 mouseCursor: rowOption.onPressRowItem != null

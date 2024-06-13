@@ -176,7 +176,7 @@ enum TekButtonType {
         backgroundColor = Colors.transparent;
         break;
       case TekButtonType.themeGhost:
-        backgroundColor = context.theme.colorScheme.background;
+        backgroundColor = context.theme.colorScheme.surface;
         break;
     }
     return (disabled || loading)

@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.0 # Update lên là hẹo
+  intl: ^0.19.0 # Update lên là hẹo
   fluttertoast: ^8.2.2
   logger: ^2.0.2+1
   cached_network_image: ^3.3.0
@@ -18,8 +18,8 @@ dependencies:
   mask_text_input_formatter: ^2.5.0
   shimmer: ^3.0.0
   flutter_dotenv: ^5.1.0
-  flutter_form_builder: ^9.2.1
-  form_builder_validators: ^9.1.0
+  flutter_form_builder: ^9.3.0
+  form_builder_validators: ^10.0.1
   collection: ^1.17.1 # Update lên là hẹo
   equatable: ^2.0.5
   shared_preferences: ^2.2.2

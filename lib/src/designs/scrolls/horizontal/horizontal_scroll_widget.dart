@@ -175,7 +175,7 @@ class TekHorizontalScrollWidgetState extends State<TekHorizontalScrollWidget> {
             width: _maxScroll,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: widget.backgroundColor ?? context.theme.colorScheme.onBackground,
+              color: widget.backgroundColor ?? context.theme.colorScheme.onSurface,
               border: Border(
                 top: BorderSide(
                   color: TekColors().greyOpacity04,

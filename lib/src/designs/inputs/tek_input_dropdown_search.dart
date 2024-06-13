@@ -268,14 +268,14 @@ class _TekInputDropdownSearchState<T> extends State<TekInputDropdownSearch<T>>
           controller: _menuController,
           alignmentOffset: widget.offset ?? const Offset(0, 10),
           style: MenuStyle(
-            minimumSize: MaterialStateProperty.all(
+            minimumSize: WidgetStateProperty.all(
               Size(
                 widget.minWidthPopup ?? width,
                 widget.minHeightPopup ??
                     _menuChildren.length * _getSizeDropdownItem.height + 24 + widget.size.height,
               ),
             ),
-            maximumSize: MaterialStateProperty.all(
+            maximumSize: WidgetStateProperty.all(
               Size(
                 widget.maxWidthPopup ?? width,
                 widget.maxHeightPopup ??
