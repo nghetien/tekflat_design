@@ -133,4 +133,4 @@ We welcome all contributions. You can submit any ideas as [pull requests](https:
 
 ## ❤️ Buy me a coffee
 
-![ Buy me a coffee](https://raw.githubusercontent.com/nghetien/tekflat_design/main/assets/images/Buy-me-a-coffee.png)
+[![](https://raw.githubusercontent.com/nghetien/tekflat_design/main/assets/images/Buy-me-a-coffee.png)](https://buymeacoffee.com/nghequyetts)
