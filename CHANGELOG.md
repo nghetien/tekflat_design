@@ -1,3 +1,5 @@
+## 1.6.13
+* Remove `key` from `TekButton`.
 ## 1.6.12
 * Edit `hintText` for `TekInputDropdown`.
 ## 1.6.10

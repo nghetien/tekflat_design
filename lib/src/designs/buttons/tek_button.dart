@@ -229,9 +229,7 @@ enum TekButtonType {
         final borderSizeColor = _borderColorDefaultOutline;
         return RoundedRectangleBorder(
           side: BorderSide(
-            color: (disabled || loading)
-                ? borderSizeColor.withOpacity(0.4)
-                : borderColor ?? borderSizeColor,
+            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderColor ?? borderSizeColor,
             width: borderWidth ?? TekBorders.thin,
           ),
           borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
@@ -280,9 +278,7 @@ enum TekButtonType {
         final Color borderSizeColor = TekColors().grey;
         return RoundedRectangleBorder(
           side: BorderSide(
-            color: (disabled || loading)
-                ? borderSizeColor.withOpacity(0.4)
-                : borderColor ?? borderSizeColor,
+            color: (disabled || loading) ? borderSizeColor.withOpacity(0.4) : borderColor ?? borderSizeColor,
             width: borderWidth ?? TekBorders.thin,
           ),
           borderRadius: borderRadius ?? TekCorners().mainCornerBorder,
@@ -408,7 +404,6 @@ class TekButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(boxShadow: boxShadow),
         child: ElevatedButton(
-          key: key,
           onHover: (value) {
             if (disabled || loading) return;
             onHover?.call(value);
@@ -440,8 +435,7 @@ class TekButton extends StatelessWidget {
             minimumSize: Size.zero,
             foregroundColor: hoverColor,
             splashFactory: splashFactory,
-            enabledMouseCursor:
-                (disabled || loading) ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+            enabledMouseCursor: (disabled || loading) ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
           ),
           child: Padding(
             padding: padding ?? size.padding,
