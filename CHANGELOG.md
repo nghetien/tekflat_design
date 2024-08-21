@@ -1,3 +1,5 @@
+## 1.6.14
+* TekListView add `IntrinsicHeight` for Row.
 ## 1.6.13
 * Remove `key` from `TekButton`.
 ## 1.6.12

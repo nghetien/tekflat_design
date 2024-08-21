@@ -75,21 +75,23 @@ class TekListView<T> extends StatelessWidget {
           final int startIndex = index * numberOfItemsInRow;
           final int endIndex = min(startIndex + numberOfItemsInRow, items.length);
           final List<T> itemsInRow = items.sublist(startIndex, endIndex);
-          return Row(
-            mainAxisAlignment: mainAxisAlignment,
-            crossAxisAlignment: crossAxisAlignment,
-            children: [
-              for (int i = 0; i < itemsInRow.length; i++) ...[
-                if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
-                Expanded(
-                  child: itemBuilder(context, startIndex + i, itemsInRow[i]),
-                ),
+          return IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: mainAxisAlignment,
+              crossAxisAlignment: crossAxisAlignment,
+              children: [
+                for (int i = 0; i < itemsInRow.length; i++) ...[
+                  if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
+                  Expanded(
+                    child: itemBuilder(context, startIndex + i, itemsInRow[i]),
+                  ),
+                ],
+                for (int i = endIndex; i < (startIndex + numberOfItemsInRow); i++) ...[
+                  if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
+                  const Expanded(child: SizedBox.shrink()),
+                ],
               ],
-              for (int i = endIndex; i < (startIndex + numberOfItemsInRow); i++) ...[
-                if (i != 0) SizedBox(width: spaceBetweenItemsInRow ?? TekSpacings().mainSpacing),
-                const Expanded(child: SizedBox.shrink()),
-              ],
-            ],
+            ),
           );
         },
         clipBehavior: clipBehavior,
