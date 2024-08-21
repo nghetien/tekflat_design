@@ -1,3 +1,5 @@
+## 1.6.15
+* Rollback 1.6.14 -> 1.6.13.
 ## 1.6.14
 * TekListView add `IntrinsicHeight` for Row.
 ## 1.6.13
