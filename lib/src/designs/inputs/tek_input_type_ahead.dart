@@ -622,6 +622,13 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
             prefixIcon: const Icon(Icons.search),
             hintText: widget.hintTextSearch,
             onChanged: (_) => _listenOnChangeInput(),
+            suffixIcon: _searchController.text.isNotEmpty
+                ? TekIconButton(
+                    onPressed: _searchController.clear,
+                    iconData: Icons.cancel_rounded,
+                    color: context.theme.primaryColor,
+                  )
+                : null,
           ),
         ),
       Container(
