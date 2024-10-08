@@ -156,7 +156,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final double? minWidthPopup;
   final bool tagsAbleScroll;
   final String? hintTextSearch;
-  final Widget? Function()? noDataWidget;
+  final Widget Function()? noDataWidget;
 
   /// Action
   final Future<List<TekInputDropdownItemModel<T>>> Function()? initMenuChildren;
