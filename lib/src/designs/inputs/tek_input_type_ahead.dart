@@ -156,7 +156,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final double? minWidthPopup;
   final bool tagsAbleScroll;
   final String? hintTextSearch;
-  final Widget? noDataWidget;
+  final Widget? Function()? noDataWidget;
 
   /// Action
   final Future<List<TekInputDropdownItemModel<T>>> Function()? initMenuChildren;
@@ -677,7 +677,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
                     )
                   : _loading.statusLoading
                       ? const SizedBox.shrink()
-                      : widget.noDataWidget ??
+                      : widget.noDataWidget?.call() ??
                           Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
