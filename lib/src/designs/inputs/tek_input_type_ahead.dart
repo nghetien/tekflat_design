@@ -74,6 +74,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
     this.minWidthPopup,
     this.tagsAbleScroll = false,
     this.hintTextSearch,
+    this.noDataWidget,
 
     /// Action
     this.onSearchMenuChildren,
@@ -155,6 +156,7 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final double? minWidthPopup;
   final bool tagsAbleScroll;
   final String? hintTextSearch;
+  final Widget? noDataWidget;
 
   /// Action
   final Future<List<TekInputDropdownItemModel<T>>> Function()? initMenuChildren;
@@ -675,20 +677,21 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
                     )
                   : _loading.statusLoading
                       ? const SizedBox.shrink()
-                      : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.not_interested_rounded,
-                                size: TekIconSizes().s24,
-                                color: TekColors().grey,
-                              ),
-                              TekVSpace.mainSpace,
-                              const Text('No data'),
-                            ],
+                      : widget.noDataWidget ??
+                          Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  Icons.not_interested_rounded,
+                                  size: TekIconSizes().s24,
+                                  color: TekColors().grey,
+                                ),
+                                TekVSpace.mainSpace,
+                                const Text('No data'),
+                              ],
+                            ),
                           ),
-                        ),
             ),
           ),
         ),
