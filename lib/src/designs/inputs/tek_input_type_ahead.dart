@@ -75,6 +75,8 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
     this.tagsAbleScroll = false,
     this.hintTextSearch,
     this.noDataWidget,
+    this.searchFocusNode,
+    this.menuController,
 
     /// Action
     this.onSearchMenuChildren,
@@ -84,6 +86,8 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
 
     /// Focus
     this.autoSearchFocus = false,
+
+    this.isDidUpdateWidget = true,
   }) : super(key: key);
 
   /// Type
@@ -157,6 +161,8 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
   final bool tagsAbleScroll;
   final String? hintTextSearch;
   final Widget Function()? noDataWidget;
+  final FocusNode? searchFocusNode;
+  final MenuController? menuController;
 
   /// Action
   final Future<List<TekInputDropdownItemModel<T>>> Function()? initMenuChildren;
@@ -166,6 +172,8 @@ class TekInputTypeAheadForm<T> extends StatefulWidget {
 
   /// Focus
   final bool autoSearchFocus;
+
+  final bool isDidUpdateWidget;
 
   @override
   State<TekInputTypeAheadForm<T>> createState() => TekInputTypeAheadFormState<T>();
@@ -195,11 +203,11 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
 
   /// Input & Focus
   final TextEditingController _controller = TextEditingController();
-  final FocusNode _searchFocusNode = FocusNode();
+  late final FocusNode _searchFocusNode;
   late final TextEditingController _searchController;
 
   /// Dropdown, Loading, Refresh
-  final MenuController _menuController = MenuController();
+  late final MenuController _menuController;
   final TekLoadingController _loading = TekLoadingController();
   final RefreshController _refreshController = RefreshController();
 
@@ -238,6 +246,8 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
       ),
     );
     _searchController = widget.searchController ?? TextEditingController();
+    _searchFocusNode = widget.searchFocusNode ?? FocusNode();
+    _menuController = widget.menuController ?? MenuController();
 
     /// Lấy init theo model nếu init theo key null
     if (widget.initialValues != null && widget.initialValues!.isNotEmpty) {
@@ -261,6 +271,7 @@ class TekInputTypeAheadFormState<T> extends State<TekInputTypeAheadForm<T>>
   @override
   void didUpdateWidget(TekInputTypeAheadForm<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (!widget.isDidUpdateWidget) return;
     if (widget.initMenuChildren != oldWidget.initMenuChildren) {
       initMenuChildren();
     }
